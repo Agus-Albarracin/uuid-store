@@ -13,6 +13,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    imagen:{
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: false,
+    },
     precio:{
        type: DataTypes.INTEGER,
        allowNull: false,

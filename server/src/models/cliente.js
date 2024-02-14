@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
 
-        nombre: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
 
@@ -24,11 +24,23 @@ module.exports = (sequelize) => {
               isEmail: true, // Validación de formato de correo electrónico
             },
           },
-
-          password: {
-            type: DataTypes.STRING, 
+    
+          googleId:{
+            type: DataTypes.STRING,
             allowNull: false,
           },
+
+          imageUrl:{
+            type: DataTypes.STRING,
+            allowNull: false
+
+          },
+          givenName:{
+            type: DataTypes.STRING,
+            allowNull: false
+          },
+
+          
     }, 
     {timestamps: false}
     )

@@ -8,6 +8,7 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
+      
     },
     nombre: {
       type: DataTypes.STRING,
@@ -32,9 +33,8 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     keyBorradoLogico:{
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
       allowNull: false,
     }
   }, {timestamps: false}

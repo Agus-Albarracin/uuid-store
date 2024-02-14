@@ -4,29 +4,30 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('Carrito', {
-    id:{
+    id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
+      autoIncrement: true, 
     },
     idCliente: {
+      type: DataTypes.INTEGER, 
+      allowNull: false,
+    },
+    cantidades: {
+      type: DataTypes.ARRAY(DataTypes.JSON), 
+      allowNull: false,
+    },
+    preciosUnitarios: {
+      type: DataTypes.ARRAY(DataTypes.JSON), 
+      allowNull: false,
+    },
+    total: {
       type: DataTypes.INTEGER,
-      allowNull: false,
     },
-    cantidades:{
-      type: DataTypes.ARRAY(DataTypes.JSON),
-      allowNull: false,
-    },
-    preciosUnitarios:{
-      type: DataTypes.ARRAY(DataTypes.JSON),
-      allowNull: false,
-    },
-    total:{
-      type: DataTypes.INTEGER,
-    },
-    estadoDelPedido:{
+    estadoDelPedido: {
       type: DataTypes.STRING,
     },
-  }, {timestamps: false}
-  )
+  }, { timestamps: false });
+  
 };

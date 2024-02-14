@@ -13,8 +13,8 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    imagen:{
-      type: DataTypes.ARRAY(DataTypes.STRING),
+    modelo:{
+      type: DataTypes.STRING,
       allowNull: false,
     },
     precio:{
@@ -25,19 +25,11 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    talles:{
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     genero:{
       type: DataTypes.STRING,
     },
     marca:{
       type: DataTypes.STRING,
-    },
-    modelo:{
-      type: DataTypes.STRING,
-      allowNull: false,
     },
   }, {timestamps: false}
   )

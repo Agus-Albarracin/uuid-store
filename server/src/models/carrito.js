@@ -9,26 +9,22 @@ module.exports = (sequelize) => {
       allowNull: false,
       primaryKey: true,
     },
-    idcliente: {
+    idCliente: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    productos:{
-       type: DataTypes.ARRAY(DataTypes.JSON),
-       allowNull: false,
     },
     cantidades:{
       type: DataTypes.ARRAY(DataTypes.JSON),
       allowNull: false,
     },
-    preciosunitarios:{
+    preciosUnitarios:{
       type: DataTypes.ARRAY(DataTypes.JSON),
       allowNull: false,
     },
     total:{
       type: DataTypes.INTEGER,
     },
-    estadodelpedido:{
+    estadoDelPedido:{
       type: DataTypes.STRING,
     },
   }, {timestamps: false}

@@ -31,6 +31,12 @@ module.exports = (sequelize) => {
     marca:{
       type: DataTypes.STRING,
     },
+    keyBorradoLogico:{
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+      allowNull: false,
+    }
   }, {timestamps: false}
   )
 };

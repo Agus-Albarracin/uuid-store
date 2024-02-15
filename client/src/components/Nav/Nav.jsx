@@ -8,23 +8,48 @@ import logo from '../../assets/uuid-logo.png';
 import iconoCarro from '../../assets/carro.png';
 import iconoUser from '../../assets/persona.png';
 
+// componentes
+import MenuCarro from '../MenuCarro/MenuCarro';
+import MenuUser from '../MenuUser/MenuUser';
+
+// hooks
+import { useState } from 'react';
 
 const Nav = () => {
+
+    const [ userDisplay, setUserDisplay ] = useState(false);
+    const [ carroDisplay, setCarroDisplay ] = useState(false);
+
+    const mostrarUser = () => {
+        setUserDisplay(!userDisplay);
+    }
+
+    const mostrarCarro = () => {
+        setCarroDisplay(!carroDisplay);
+    }
+
     return (
         <nav className={styles.nav}>
-            <Link to='/home'> 
+            <Link to='/'> 
                 <img src={logo} alt="logo" className={styles.logo} /> 
             </Link>
 
-            <span>
-                <Link to='/home'> HOME </Link>
+            <div className={styles.links}>
+                <Link to='/'> HOME </Link>
                 <Link to='/productos' > TODOS LOS PRODUCTOS </Link>
-            </span>
+            </div>
 
-            <span>
-                <img src={iconoCarro} alt="carrito de compras" />
-                <img src={iconoUser} alt="icono de usuario" />
-            </span>
+            <div className={styles.menus}>
+                <span>
+                    <img src={iconoCarro} alt="carrito de compras" onClick={mostrarCarro}/>
+                    { carroDisplay && <MenuCarro/> }
+                </span>
+
+                <span>
+                    <img src={iconoUser} alt="icono de usuario" onClick={mostrarUser} />
+                    { userDisplay && <MenuUser/> }
+                </span>
+            </div>
         </nav>
     )
 }

@@ -13,9 +13,9 @@ function App() {
     <div>
       <Nav/>
 
-      <Routes>
+      {/* <Routes>
         <Route path={PATHROUTES.LANDING} element={<Autenticador />}/>
-      </Routes>
+      </Routes> */}
     </div>
 
   )

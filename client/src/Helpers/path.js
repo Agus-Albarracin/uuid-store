@@ -1,6 +1,7 @@
 const PATHROUTES = {
+   LANDING: "/",
    SINGUP: "singup",
-   LANDING: "/"
+   ADMIN: "/admin"
 }
 
 export default PATHROUTES;

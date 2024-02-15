@@ -1,6 +1,6 @@
 import styles from './MenuUser.module.scss'
 
-import Autenticador from '../../Helpers/Auntenticador';
+import Autenticador from '../../../Helpers/Auntenticador';
 
 const MenuUser = () => {
     return (

@@ -1,8 +1,11 @@
-//Routers
+// Routers
 import { Routes, Route } from 'react-router-dom'
-//comps
-import Autenticador from './Helpers/Auntenticador'
-import Nav from './components/Nav/Nav'
+
+// Componentes
+import Nav from './components/Header/Nav/Nav'
+
+// Views
+import Admin from './Views/Admin/Admin'
 
 //PATHROUTES
 import PATHROUTES from './Helpers/path'
@@ -13,9 +16,9 @@ function App() {
     <div>
       <Nav/>
 
-      {/* <Routes>
-        <Route path={PATHROUTES.LANDING} element={<Autenticador />}/>
-      </Routes> */}
+      <Routes>
+        <Route path={PATHROUTES.ADMIN} element={<Admin />}/>
+      </Routes>
     </div>
 
   )

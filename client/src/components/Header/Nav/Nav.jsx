@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import styles from './Nav.module.scss';
 
 // iconos y logos
-import logo from '../../assets/uuid-logo.png';
-import iconoCarro from '../../assets/carro.png';
-import iconoUser from '../../assets/persona.png';
+import logo from '../../../assets/uuid-logo.png';
+import iconoCarro from '../../../assets/carro.png';
+import iconoUser from '../../../assets/persona.png';
 
 // componentes
 import MenuCarro from '../MenuCarro/MenuCarro';

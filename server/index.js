@@ -1,7 +1,7 @@
 const server = require("./src/server");
 const { conn } = require('./src/db.js');
 const PORT = 3001;
-const dbRegisterDEMO = require("./deRegistrerDEMO.js")
+const dbRegisterDEMO = require("./dbRegistrerDEMO.js")
 
 conn.sync({ force: true }).then(
 

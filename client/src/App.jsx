@@ -1,3 +1,6 @@
+// Estilos
+import styles from './App.module.scss'
+
 // Routers
 import { Routes, Route } from 'react-router-dom'
 
@@ -13,7 +16,7 @@ import PATHROUTES from './Helpers/path'
 function App() {
 
   return (
-    <div>
+    <div className={styles.appContainer}>
       <Nav/>
 
       <Routes>

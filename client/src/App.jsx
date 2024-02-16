@@ -5,8 +5,8 @@ import styles from './App.module.scss'
 import { Routes, Route } from 'react-router-dom'
 
 // Componentes
-import Nav from './components/Header/Nav/Nav'
-
+import Nav from './components/Header/Nav/Nav';
+import Productos from './components/Productos/Productos'
 // Views
 import Admin from './Views/Admin/Admin'
 
@@ -20,6 +20,7 @@ function App() {
       <Nav/>
 
       <Routes>
+        <Route path='/productos' element={<Productos />} />
         <Route path={PATHROUTES.ADMIN} element={<Admin />}/>
       </Routes>
     </div>

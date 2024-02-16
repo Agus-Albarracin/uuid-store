@@ -1,9 +1,12 @@
-const { Pruductos, Cliente } = require('../../db');
+const { Productos, Cliente } = require('../../db');
 
 const getProductos = async (req, res) => {
     try {
-        let allProdu = await Pruductos.findAll({
-            include: Cliente,
+        let allProdu = await Productos.findAll({
+            include: [{
+                model: Cliente,
+                as: 'carrito_clientes' // Alias para la relación de Productos -> carrito_cliente
+              }],
             attributes: { exclude: ["createdAt", "updatedAt"] },
         });
         allProdu = allProdu.map(produ => produ.get());

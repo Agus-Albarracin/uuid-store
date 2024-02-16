@@ -40,6 +40,11 @@ module.exports = (sequelize) => {
             allowNull: false
           },
 
+          admin: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+          },
           
     }, 
     {timestamps: false}

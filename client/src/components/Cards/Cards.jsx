@@ -1,17 +1,17 @@
 import Card from "../Card/Card";
 import "./Cards.css";
 
-function Cards({data}) {
+function Cards({ data }) {
+  
+  const productosList = Array.isArray(data) ? data : [];
 
-    const productosList = data;
-
-    return (  
-        <div className="cards-container" >
-            {
-                productosList.map(producto => <Card producto = {producto} key={producto.name}/>)   
-            }
-        </div>
-    );
+  return productosList.length === 0 ? null : (
+    <div className="cards-container">
+      {productosList.map((producto) => (
+        <Card producto={producto} key={producto.name} />
+      ))}
+    </div>
+  );
 }
 
 export default Cards;

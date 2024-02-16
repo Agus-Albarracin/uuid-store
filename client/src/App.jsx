@@ -12,6 +12,7 @@ import Admin from './Views/Admin/Admin'
 
 //PATHROUTES
 import PATHROUTES from './Helpers/path'
+import HomePage from './components/HomePage/HomePage';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
 
       <Routes>
         <Route path='/productos' element={<Productos />} />
+        <Route path={PATHROUTES.LANDING} element={<HomePage />}/>
         <Route path={PATHROUTES.ADMIN} element={<Admin />}/>
       </Routes>
     </div>

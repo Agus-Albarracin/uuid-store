@@ -7,14 +7,7 @@ const Admin = () => {
     const [ view, setView ] = useState('estadisticas')
 
     const handleView = (option) => {
-        const viewMapping = {
-            estadisticas: 'estadisticas',
-            productos: 'productos',
-            crearProducto: 'crearProducto',
-            usuarios: 'usuarios'
-        };
-
-        setView(viewMapping[option]);
+        setView(option);
     }
 
     return (

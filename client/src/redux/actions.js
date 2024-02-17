@@ -1,12 +1,8 @@
-import { GET_PRODUCTOS } from "./action-types";
-import { GET_DETAIL } from "./action-types";
+import { GET_PRODUCTOS, GET_DETAIL, POST_PRODUCTO } from "./action-types";
 
 import axios from "axios";
 
-
-
 const API_BASE_URL = "http://localhost:3001";
-
 
 export const getProductos = () => {
   return async function (dispatch) {
@@ -17,6 +13,7 @@ export const getProductos = () => {
     });
   };
 };
+
 export const getDetail = (id) => {
   return async (dispatch) => {
     try {
@@ -27,7 +24,20 @@ export const getDetail = (id) => {
       });
     } catch (error) {
       console.error("Error fetching product detail:", error);
-      
     }
   };
 };
+
+export const postProducto = (form) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/postproductos`, form);
+      return dispatch({
+        type: POST_PRODUCTO,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}

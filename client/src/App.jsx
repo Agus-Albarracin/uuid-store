@@ -12,10 +12,10 @@ import Footer from './components/Footer/Footer';
 import Admin from './Views/Admin/Admin'
 import Detail from "./Views/Detail/Detail";
 import HomePage from './Views/HomePage/HomePage';
-import Productos from './Views/Productos/Productos'
+import Productos from './Views/Productos/Productos';
 
 //PATHROUTES
-import PATHROUTES from './Helpers/path'
+import PATHROUTES from './Helpers/path';
 
 function App() {
 

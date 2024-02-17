@@ -6,15 +6,16 @@ import { Routes, Route } from 'react-router-dom'
 
 // Componentes
 import Nav from './components/Header/Nav/Nav';
-import Productos from './components/Productos/Productos'
-import Detail from "./components/Detail/Detail";
+import Footer from './components/Footer/Footer';
+
 // Views
 import Admin from './Views/Admin/Admin'
+import Detail from "./Views/Detail/Detail";
+import HomePage from './Views/HomePage/HomePage';
+import Productos from './Views/Productos/Productos'
 
 //PATHROUTES
 import PATHROUTES from './Helpers/path'
-import HomePage from './components/HomePage/HomePage';
-import Footer from './components/Footer/Footer';
 
 function App() {
 
@@ -24,13 +25,14 @@ function App() {
 
       <Routes>
 
-        <Route path="/productos" element={<Productos />} />
         <Route path={PATHROUTES.ADMIN} element={<Admin />} />
-        <Route path="/detail/:id" element={<Detail />} />        
-        <Route path={PATHROUTES.LANDING} element={<HomePage />}/>       
+        <Route path={PATHROUTES.DETAIL} element={<Detail />} />        
+        <Route path={PATHROUTES.HOME} element={<HomePage />}/>       
+        <Route path={PATHROUTES.PRODUCTOS} element={<Productos />} />
 
       </Routes>
-      <Footer></Footer>
+
+      <Footer/>
     </div>
   );
 }

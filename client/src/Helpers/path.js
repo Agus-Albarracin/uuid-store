@@ -1,7 +1,9 @@
 const PATHROUTES = {
-   LANDING: "/",
+   ADMIN: "/admin",
+   DETAIL: "/detail/:id",
+   HOME: "/",
+   PRODUCTOS: "/productos",
    SINGUP: "singup",
-   ADMIN: "/admin"
 }
 
 export default PATHROUTES;

@@ -1,6 +1,6 @@
 import React from 'react';
 import Carrusel from './Carrusel/Carrusel';
-import Cards from '../Cards/Cards';
+import Cards from '../../components/Cards/Cards';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductos } from "../../redux/actions";

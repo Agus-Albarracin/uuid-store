@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
       allowNull: false,
       primaryKey: true,
       
-    },
+    }, 
     nombre: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -28,9 +28,17 @@ module.exports = (sequelize) => {
     },
     genero:{
       type: DataTypes.STRING,
+
     },
     marca:{
       type: DataTypes.STRING,
+      allowNull: false,
+
+    },
+    imagen:{
+      type: DataTypes.STRING,
+      allowNull: false,
+
     },
     keyBorradoLogico:{
       type: DataTypes.INTEGER,

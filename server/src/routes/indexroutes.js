@@ -1,16 +1,19 @@
 const { Router } = require("express");
 //Cliente/Usuario
 const singUpUser = require("../controllers/Users/singUp");
-const productos = require("../controllers/Productos/getProductos");
+//Productos
+const getProdu = require("../controllers/Productos/getProductos");
+const postProdu = require("../controllers/Productos/postProductos")
+//Carrito
 const makePayment = require("../controllers/PasarelaDePagos/makePayment");
 
 const router = Router();
 
 //*Productos
-router.get("/getproductos", productos.getProductos);
-router.get("/getproductos/:id", productos.getProductosById);
+router.get("/getproductos", getProdu.getProductos);
+router.get("/getproductos/:id", getProdu.getProductosById);
 
-// router.post("/postproductos", postProdu)
+router.post("/postproductos", postProdu.postProductos)
 // router.put("/updateproductos", putProdu)
 //deberia aplicar borrado logico?
 // router.delete("/deleteproductos", deleteProdu)

@@ -2,8 +2,8 @@ const {Productos} = require ('../../db');
 
 const postProductos = async(req, res) => {
     try {
-        const { nombre, modelo, precio, stock, genero, marca, imagen, keyBorradoLogico } = req.body;
-        if (!nombre || !modelo|| !precio || !stock || !genero || !marca || !imagen || !keyBorradoLogico ) return res.status(400).json('Faltan datos');
+        const { nombre, modelo, precio, stock, genero, marca, imagen} = req.body;
+        if (!nombre || !modelo|| !precio || !stock || !genero || !marca || !imagen ) return res.status(400).json('Faltan datos');
        
 
         let producto = await Productos.findOrCreate({
@@ -16,8 +16,7 @@ const postProductos = async(req, res) => {
             stock,
             genero,
             marca,
-            imagen,
-            keyBorradoLogico
+            imagen
             }
         });
 

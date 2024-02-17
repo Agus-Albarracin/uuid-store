@@ -44,7 +44,11 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       allowNull: false,
-    }
+    },
+    estado:{ //El estado corresponde a activo o inactivo
+    type: DataTypes.BOOLEAN,
+    default: true
+    },
   }, {timestamps: false}
   )
 };

@@ -11,6 +11,7 @@ const router = Router();
 
 //*Productos
 router.get("/getproductos", getProdu.getProductos);
+router.get("/getproductosON", getProdu.getProductosON)// endpoint para productos activos
 router.get("/getproductos/:id", getProdu.getProductosById);
 
 router.post("/postproductos", postProdu.postProductos)

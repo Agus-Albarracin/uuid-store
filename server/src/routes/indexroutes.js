@@ -1,13 +1,14 @@
 const { Router } = require("express");
 //Cliente/Usuario
 const singUpUser = require("../controllers/Users/singUp");
-const getProdu = require("../controllers/Productos/getProductos");
+const productos = require("../controllers/Productos/getProductos");
 const makePayment = require("../controllers/PasarelaDePagos/makePayment");
 
 const router = Router();
 
 //*Productos
-router.get("/getproductos", getProdu);
+router.get("/getproductos", productos.getProductos);
+router.get("/getproductos/:id", productos.getProductosById);
 
 // router.post("/postproductos", postProdu)
 // router.put("/updateproductos", putProdu)

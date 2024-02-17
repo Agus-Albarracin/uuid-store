@@ -9,7 +9,7 @@ const server = express();
 server.use(morgan("dev"));
 server.use(express.json());
 server.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173'); // Reemplaza con la URL de tu frontend
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Reemplaza con la URL de tu frontend
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     res.setHeader('Access-Control-Allow-Credentials', 'true');

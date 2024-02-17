@@ -4,7 +4,7 @@ import Cards from '../Cards/Cards';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductos } from "../../redux/actions";
-import Footer from './Footer/Footer';
+
 
 // Define el componente HomePage
 const HomePage = () => {
@@ -30,7 +30,7 @@ const HomePage = () => {
     <div>
       <Carrusel></Carrusel>
       <Cards data={recommendedProducts} />
-      <Footer></Footer>
+      
     </div>
   );
 };

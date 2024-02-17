@@ -14,6 +14,7 @@ import Admin from './Views/Admin/Admin'
 //PATHROUTES
 import PATHROUTES from './Helpers/path'
 import HomePage from './components/HomePage/HomePage';
+import Footer from './components/Footer/Footer';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
         <Route path={PATHROUTES.LANDING} element={<HomePage />}/>       
 
       </Routes>
+      <Footer></Footer>
     </div>
   );
 }

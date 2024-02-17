@@ -13,6 +13,7 @@ import Admin from './Views/Admin/Admin'
 
 //PATHROUTES
 import PATHROUTES from './Helpers/path'
+import HomePage from './components/HomePage/HomePage';
 
 function App() {
 
@@ -21,9 +22,12 @@ function App() {
       <Nav />
 
       <Routes>
+
         <Route path="/productos" element={<Productos />} />
         <Route path={PATHROUTES.ADMIN} element={<Admin />} />
-        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/detail/:id" element={<Detail />} />        
+        <Route path={PATHROUTES.LANDING} element={<HomePage />}/>       
+
       </Routes>
     </div>
   );

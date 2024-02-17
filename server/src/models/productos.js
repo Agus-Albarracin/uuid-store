@@ -37,8 +37,7 @@ module.exports = (sequelize) => {
     },
     imagen:{
       type: DataTypes.STRING,
-      allowNull: false,
-
+      // allowNull: false, //cuando esten las imagenes lista se debe activar esta columna.
     },
     keyBorradoLogico:{
       type: DataTypes.INTEGER,
@@ -47,7 +46,8 @@ module.exports = (sequelize) => {
     },
     estado:{ //El estado corresponde a activo o inactivo
     type: DataTypes.BOOLEAN,
-    default: true
+    default: true,
+    allowNull: false,
     },
   }, {timestamps: false}
   )

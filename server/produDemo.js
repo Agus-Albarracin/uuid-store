@@ -7,7 +7,8 @@ const productos = [
       "stock": 50,
       "genero": "Unisex",
       "marca": "Nike",
-      "keyBorradoLogico": 1
+      "keyBorradoLogico": 1,
+      "estado": true
     },
     {
       "id": 2,
@@ -17,7 +18,8 @@ const productos = [
       "stock": 30,
       "genero": "Unisex",
       "marca": "Adidas",
-      "keyBorradoLogico": 2
+      "keyBorradoLogico": 2,
+      "estado": true
     },
     {
       "id": 3,
@@ -27,7 +29,8 @@ const productos = [
       "stock": 40,
       "genero": "Hombre",
       "marca": "Nike",
-      "keyBorradoLogico": 3
+      "keyBorradoLogico": 3,
+      "estado": true
     },
     {
       "id": 4,
@@ -37,7 +40,8 @@ const productos = [
       "stock": 25,
       "genero": "Mujer",
       "marca": "Adidas",
-      "keyBorradoLogico": 4
+      "keyBorradoLogico": 4,
+      "estado": true
     },
     {
       "id": 5,
@@ -47,7 +51,8 @@ const productos = [
       "stock": 20,
       "genero": "Hombre",
       "marca": "Nike",
-      "keyBorradoLogico": 5
+      "keyBorradoLogico": 5,
+      "estado": false
     },
     {
       "id": 6,
@@ -57,7 +62,8 @@ const productos = [
       "stock": 35,
       "genero": "Mujer",
       "marca": "Adidas",
-      "keyBorradoLogico": 6
+      "keyBorradoLogico": 6,
+      "estado": true
     },
     {
       "id": 7,
@@ -67,7 +73,8 @@ const productos = [
       "stock": 15,
       "genero": "Unisex",
       "marca": "Nike",
-      "keyBorradoLogico": 7
+      "keyBorradoLogico": 7,
+      "estado": false
     },
     {
       "id": 8,
@@ -77,7 +84,8 @@ const productos = [
       "stock": 10,
       "genero": "Hombre",
       "marca": "Adidas",
-      "keyBorradoLogico": 8
+      "keyBorradoLogico": 8,
+      "estado": true
     },
     {
       "id": 9,
@@ -87,7 +95,8 @@ const productos = [
       "stock": 5,
       "genero": "Mujer",
       "marca": "Nike",
-      "keyBorradoLogico": 9
+      "keyBorradoLogico": 9,
+      "estado": true
     },
     {
       "id": 10,
@@ -97,7 +106,8 @@ const productos = [
       "stock": 20,
       "genero": "Unisex",
       "marca": "Adidas",
-      "keyBorradoLogico": 10
+      "keyBorradoLogico": 10,
+      "estado": false
     }
   ]
 

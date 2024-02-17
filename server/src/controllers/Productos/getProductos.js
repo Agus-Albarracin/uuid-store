@@ -20,7 +20,7 @@ const getProductosON = async (req, res) => {
     try {
         let allProdu = await Productos.findAll({
             where: {
-                estado: false
+                estado: true
             },
             include: [{
                 model: Cliente,

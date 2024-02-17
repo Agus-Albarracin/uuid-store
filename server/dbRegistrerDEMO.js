@@ -14,6 +14,8 @@ const dbRegisterDEMO = async () => {
         stock: producto.stock,
         genero: producto.genero,
         marca: producto.marca,
+        imagen: producto.imagen,
+        estado: producto.estado,
         keyBorradoLogico: producto.keyBorradoLogico
       };
     });

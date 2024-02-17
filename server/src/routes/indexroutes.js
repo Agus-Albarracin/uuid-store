@@ -1,6 +1,7 @@
 const { Router } = require("express");
 //Cliente/Usuario
 const singUpUser = require("../controllers/Users/singUp");
+const getClient = require("../controllers/Users/getUser")
 //Productos
 const getProdu = require("../controllers/Productos/getProductos");
 const postProdu = require("../controllers/Productos/postProductos")
@@ -20,6 +21,8 @@ router.post("/postproductos", postProdu.postProductos)
 // router.delete("/deleteproductos", deleteProdu)
 
 //*Usuario/Cliente
+// Obtiene todos los clientes
+router.get("/getclientes", getClient.getAllClient) //endpoint para todos los clientes
 // obtiene los datos desde el google
 router.post("/singup", singUpUser);
 // Crea el usuario sin google / complemento del google

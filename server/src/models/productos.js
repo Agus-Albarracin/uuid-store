@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
        allowNull: false,
     },
     stock:{
-      type: DataTypes.INTEGER,
+      type: DataTypes.JSON,
       allowNull: false,
     },
     genero:{
@@ -36,7 +36,7 @@ module.exports = (sequelize) => {
 
     },
     imagen:{
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY(DataTypes.STRING),
       // allowNull: false, //cuando esten las imagenes lista se debe activar esta columna.
     },
     keyBorradoLogico:{

@@ -1,6 +1,7 @@
 const {Productos} = require ('../../db');
+const axios = require('axios')
 
-const postProductos = async(req, res) => {
+const postProductos = async (req, res) => {
     try {
         const { nombre, modelo, precio, stock, genero, marca, imagen, estado } = req.body;
         if (!nombre || !modelo|| !precio || !stock || !genero || !marca || !imagen ) return res.status(400).json('Faltan datos');

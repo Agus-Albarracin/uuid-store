@@ -29,7 +29,7 @@ const Detail = () => {
           <ul className={style.info}>
             <li>Precio: {detail?.precio}</li>
             <li>Modelo: {detail?.modelo}</li>
-            <li>Stock: {detail?.stock}</li>
+            {/* <li>Stock: {detail?.stock}</li> */}
             <li>Genero: {detail?.genero}</li>
             <li>Marca: {detail?.marca}</li>
           </ul>

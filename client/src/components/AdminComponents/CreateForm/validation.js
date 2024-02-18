@@ -19,8 +19,8 @@ const validate = valores => {
         errors.precio = "El precio tiene que ser un número"
     }
 
-    if(valores.imagenes.length === 0){
-        errors.imagenes = "Se debe insertar una imagen como mínimo"
+    if(valores.imagen.length === 0){
+        errors.imagen = "Se debe insertar una imagen como mínimo"
     }
 
     return errors;

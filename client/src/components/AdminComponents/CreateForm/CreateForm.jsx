@@ -1,32 +1,75 @@
+// Formik
 import { useFormik } from "formik";
 import validate from './validation.js';
+
+// estilos
 import styles from './CreateForm.module.scss';
+
+// hooks
 import { useState } from "react";
-import { postProducto } from "../../../redux/actions.js";
 import { useDispatch } from 'react-redux';
+
+// actions
+import { postProducto } from "../../../redux/actions.js";
+
+// Axios
+import axios from "axios";
 
 const CreateForm = () => {
 
     const talles = [ 36, 36.5, 37, 37.5, 38, 38.5, 39, 39.5, 40, 40.5, 41, 41.5, 42, 42.5, 43, 43.5, 44, 44.5, 45, 45.5, 46 ];
 
+    // images contiene las imagenes subidas para hacer una
+    // vista previa antes de enviarlas a cloudinary
     const [ images, setImages ] = useState([]);
-
     const dispatch = useDispatch();
 
+    // handleDrop se ejecuta cuando el usuario suelta una imagen dentro del div
+    // no haría falta modificar el estado de formik porque después al hacer el submit
+    // vamos a sobreescribir la propiedad imagen, pero lo pongo acá para que también
+    // vaya manejando los errores de las imágenes
     const handleDrop = (event) => {
         event.preventDefault();
+
+        // generamos un array a partir de las imagenes que se van agregando
         const newFiles = event.dataTransfer.files;
-        const newImagesArray = Array.from(newFiles).map((file) => file);
+        const newImagesArray = Array.from(newFiles);
+
+        // Actualizar el valor de imagenes en el estado local
         setImages(prevImages => [...prevImages, ...newImagesArray]);
         // Actualizar el valor de imagenes en formik
-        formik.setFieldValue('imagenes', [...formik.values.imagenes, ...newImagesArray]);
-      };
+        formik.setFieldValue('imagen', [...formik.values.imagen, ...newImagesArray]);
+    };
     
+    // removeImage es para borrar imágenes desde la vista previa
     const removeImage = (index) => {
+        // Actualizar el valor de imagenes en el estado global
         setImages(prevImages => prevImages.filter((_, i) => i !== index));
         // Actualizar el valor de imagenes en formik
-        formik.setFieldValue('imagenes', formik.values.imagenes.filter((_, i) => i !== index));
+        formik.setFieldValue('imagen', formik.values.imagen.filter((_, i) => i !== index));
     };
+    
+    // es la función que se ejecuta cuando hacemos el submit de nuestro formulario
+    const onSubmit = async (values) => {
+        const imagesUrls = [];
+
+        // por cada imagen se crea una instancia de FormData para enviar el archivo a cloudinary
+        for(let i = 0; i < images.length; i++){
+            try {
+                const data = new FormData();
+                data.append("file", images[i]);
+                data.append("upload_preset", "ilxmjryu");
+
+                const response = await axios.post(`https://api.cloudinary.com/v1_1/djd7b0upe/image/upload`, data);
+                imagesUrls.push(response.data.secure_url);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        // se hace el dispatch para crear el producto
+        dispatch(postProducto({...values, imagen: imagesUrls}))
+    }
 
     const handleStock = (talle) => {
         formik.setFieldValue('stock', {...formik.values.stock, [talle]: formik.values.stock[talle] + 1 })
@@ -39,7 +82,7 @@ const CreateForm = () => {
             modelo: '',
             precio: '',
             genero: 'masculino',
-            imagenes: [],
+            imagen: [],
             estado: false,
             stock: {
                 36: 0, 
@@ -66,10 +109,7 @@ const CreateForm = () => {
             }
         },
         validate,
-        onSubmit: values => {
-
-            dispatch(postProducto({...values, imagenes: 'berretin', stock: 1}))
-        }
+        onSubmit: (values) => onSubmit(values)
     });
 
     return (
@@ -146,7 +186,7 @@ const CreateForm = () => {
                     </div>
                 ))}
 
-                { formik.errors.imagenes && <div>{formik.errors.imagenes}</div> }
+                { formik.errors.imagen && <div>{formik.errors.imagen}</div> }
             </div>
 
             <div className={styles.talles}>

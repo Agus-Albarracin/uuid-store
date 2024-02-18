@@ -1,8 +1,22 @@
 .menuContainer{
-    width: 100px;
-    height: 150px;
-    background-color: #000;
+    width: 100vw;
+    height: 100vh;
     color: white;
 
     position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+
+    display: flex;
+
+    .fondo{
+        background-color: #0008;
+        width: 70%;
+    }
+
+    .carro{
+        background-color: #fff;
+        width: 30%;
+    }
 }

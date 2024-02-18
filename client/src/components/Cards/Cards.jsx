@@ -9,7 +9,7 @@ function Cards({ data }) {
   return productosList.length === 0 ? null : (
     <div className="cards-container">
       {productosList.map((producto) => (
-        <Card producto={producto} key={producto.name} />
+        <Card producto={producto} key={producto.id} />
       ))}
     </div>
   );

@@ -42,7 +42,7 @@ const Nav = () => {
             <div className={styles.menus}>
                 <span>
                     <img src={iconoCarro} alt="carrito de compras" onClick={mostrarCarro}/>
-                    { carroDisplay && <MenuCarro/> }
+                    { carroDisplay && <MenuCarro setCarroDisplay={setCarroDisplay}/> }
                 </span>
 
                 <span>

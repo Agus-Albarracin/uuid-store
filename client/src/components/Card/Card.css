@@ -15,10 +15,10 @@
 .card-container:hover {
     transform: scale(1.05);
 }
-.card-container a {
+/* .card-container a {
     text-decoration: none;
     color: #333;
-}
+} */
   
 .card-container img {
     max-width: 100%;

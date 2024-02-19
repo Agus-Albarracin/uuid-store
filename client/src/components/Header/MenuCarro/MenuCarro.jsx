@@ -1,9 +1,9 @@
 import styles from './MenuCarro.module.scss'
 
-const MenuCarro = ({ setCarroDisplay }) => {
+const MenuCarro = ({ mostrarCarro }) => {
     return (
         <div className={styles.menuContainer}>
-            <div className={styles.fondo} onClick={() => setCarroDisplay(false)}>
+            <div className={styles.fondo} onClick={() => mostrarCarro(false)}>
                 FONDO
             </div>
 

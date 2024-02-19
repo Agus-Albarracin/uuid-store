@@ -1,11 +1,31 @@
 import styles from './MenuUser.module.scss'
 
-import Autenticador from '../../../Helpers/Auntenticador';
+import { useState } from 'react';
 
-const MenuUser = () => {
+import LogIn from './LogInForm/LogInForm';
+import SignIn from './SignInForm/SignInForm';
+
+const MenuUser = ({ mostrarUser }) => {
+
+    const [ logInOrSignIn, setLogInOrSignIn ] = useState(false);
+
+    const handleView = () => {
+        setLogInOrSignIn(!logInOrSignIn);
+    }
+
     return (
-        <div className={styles.menuContainer}>
-            <Autenticador/>
+        <div className={styles.viewContainer} >
+            <div className={styles.fondo} onClick={mostrarUser}></div>
+            
+            <div className={styles.menuContainer}>
+                {
+                    logInOrSignIn ? (
+                        <LogIn handleView={handleView} />
+                    ) : (
+                        <SignIn handleView={handleView} />
+                    )
+                }
+            </div>
         </div>
     )
 }

@@ -3,7 +3,7 @@ const PATHROUTES = {
    DETAIL: "/detail/:id",
    HOME: "/",
    PRODUCTOS: "/productos",
-   SINGUP: "singup",
+   SIGNUP: "signUp",
 }
 
 export default PATHROUTES;

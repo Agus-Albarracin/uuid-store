@@ -1,10 +1,11 @@
-import { GET_PRODUCTOS, GET_DETAIL, POST_PRODUCTO } from "./action-types";
+import { GET_PRODUCTOS, GET_DETAIL, POST_PRODUCTO, LOGIN } from "./action-types";
 
 const initialState = {
   allProductos: [],
   allProductosAux: [],
   detail: {},
   productCreated: {},
+  actualUser: {},
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -32,6 +33,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         productCreated: payload,
+      }
+    
+    case LOGIN:
+      return {
+        ...state,
+        actualUser: payload
       }
 
     default:

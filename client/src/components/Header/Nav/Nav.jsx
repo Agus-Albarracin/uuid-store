@@ -42,12 +42,12 @@ const Nav = () => {
             <div className={styles.menus}>
                 <span>
                     <img src={iconoCarro} alt="carrito de compras" onClick={mostrarCarro}/>
-                    { carroDisplay && <MenuCarro setCarroDisplay={setCarroDisplay}/> }
+                    { carroDisplay && <MenuCarro mostrarCarro={mostrarCarro}/> }
                 </span>
 
                 <span>
                     <img src={iconoUser} alt="icono de usuario" onClick={mostrarUser} />
-                    { userDisplay && <MenuUser/> }
+                    { userDisplay && <MenuUser mostrarUser={mostrarUser}/> }
                 </span>
             </div>
         </nav>

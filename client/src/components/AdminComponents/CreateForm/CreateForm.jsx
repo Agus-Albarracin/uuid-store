@@ -71,8 +71,10 @@ const CreateForm = () => {
         dispatch(postProducto({...values, imagen: imagesUrls}))
     }
 
-    const handleStock = (talle) => {
-        formik.setFieldValue('stock', {...formik.values.stock, [talle]: formik.values.stock[talle] + 1 })
+    const handleStock = (talle, count) => {
+        if(count === '-' && formik.values.stock[talle] > 0 ) formik.setFieldValue('stock', {...formik.values.stock, [talle]: formik.values.stock[talle] - 1 })
+        
+        if(count === '+') formik.setFieldValue('stock', {...formik.values.stock, [talle]: formik.values.stock[talle] + 1 })
     }
     
     const formik = useFormik({
@@ -194,9 +196,9 @@ const CreateForm = () => {
                     talles.map( ( talle, index) => {
                         return (
                             <div key={index}>
-                                <span onClick={() => handleStock(talle)}> - </span>
+                                <span onClick={() => handleStock(talle, '-')}> - </span>
                                 <span> {talle} </span>
-                                <span onClick={() => handleStock(talle)}> + </span>
+                                <span onClick={() => handleStock(talle, '+')}> + </span>
                                 <span> Cantidad en stock: {formik.values.stock[talle]} </span>
                             </div>
                         )

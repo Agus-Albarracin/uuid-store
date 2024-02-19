@@ -39,11 +39,6 @@ module.exports = (sequelize) => {
       type: DataTypes.JSONB(DataTypes.STRING),
       // allowNull: false, //cuando esten las imagenes lista se debe activar esta columna.
     },
-    keyBorradoLogico:{
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      allowNull: false,
-    },
     estado:{ //El estado corresponde a activo o inactivo
     type: DataTypes.BOOLEAN,
     default: true,

@@ -1,4 +1,4 @@
-const {User} = require("../../db")
+const {Usuario} = require("../../db")
 const nodemailer = require('nodemailer');
 
 
@@ -9,7 +9,7 @@ const singUpUser = async (req, res) => {
         console.log(req.body);
         if (!email || !name || !googleId || !imageUrl || !givenName) return res.status(400).send("Faltan ingresar datos.");
 
-        let [user, seCreoUser] = await User.findOrCreate({
+        let [user, seCreoUser] = await Usuario.findOrCreate({
             where: { email },
             defaults: {
                 email,

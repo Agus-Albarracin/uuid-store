@@ -22,6 +22,10 @@ module.exports = (sequelize) => {
        type: DataTypes.FLOAT,
        allowNull: false,
     },
+    talle:{
+      type: DataTypes.FLOAT,
+      allowNull: true,
+    },
     stock:{
       type: DataTypes.JSONB,
       allowNull: false,

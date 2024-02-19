@@ -1,19 +1,14 @@
 const {Productos} = require ('../../db');
-const axios = require('axios')
 
 const postProductos = async (req, res) => {
     try {
         const { nombre, modelo, precio, stock, genero, marca, imagen, estado } = req.body;
         if (!nombre || !modelo|| !precio || !stock || !genero || !marca || !imagen ) return res.status(400).json('Faltan datos');
-       
-        const allProducts = await Productos.findAll();
-        const id = allProducts.length + 1;
 
-        let [producto, exist] = await Productos.findOrCreate({
+        let [producto, creado] = await Productos.findOrCreate({
 
             where: { nombre },
             defaults: {
-            id,
             nombre,
             modelo,
             precio,
@@ -24,8 +19,9 @@ const postProductos = async (req, res) => {
             estado,
             }
         });
+        if (!creado) { return res.status(400).json({ error: 'El producto ya existe' }) }
 
-        res.status(201).json(producto);
+        return res.status(201).json(producto);
 
 
     } catch (error) {

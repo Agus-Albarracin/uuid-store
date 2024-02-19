@@ -2,13 +2,16 @@ const { Router } = require("express");
 //Cliente/Usuario
 const singUpUser = require("../controllers/Users/singUp");
 const getUser = require("../controllers/Users/getUser");
-const putUser = require("../controllers/Users/putUser")
+const putUser = require("../controllers/Users/putUser");
+const deleteUser = require("../controllers/Users/deleteUser");
 //Productos
 const getProdu = require("../controllers/Productos/getProductos");
 const postProdu = require("../controllers/Productos/postProductos");
 const deleteProdu = require("../controllers/Productos/deleteProductos");
 const putProdu = require("../controllers/Productos/putProductos");
 //Carrito
+
+//MercadoPago
 const makePayment = require("../controllers/PasarelaDePagos/makePayment");
 
 const router = Router();
@@ -35,10 +38,11 @@ router.get("/getuser", getUser.getAllUsers); //endpoint para todos los clientes
 // obtiene los datos desde el google
 router.post("/singup", singUpUser);
 // Crea el usuario sin google / complemento del google
-router.put("/updateUser", putUser.updateUser)
-
-// router.get("/getUser", getUser)
-// router.delete("/deleteUser", deleteUser)
+router.put("/updateuser", putUser.updateUser)
+//borrado definitivo a través de email
+router.delete("/deleteuser", deleteUser.deleteUser)
+//desactivar cuenta temporalmente / implementación de borrado lógico.
+router.put("/updatestateuser", putUser.updateStateUser)
 
 //*Carrito
 // router.get("/getOrden", getOrden)
@@ -46,6 +50,7 @@ router.put("/updateUser", putUser.updateUser)
 // router.put("/updateOrden", putOrden)
 // router.delete("/deleteOrden", deleteOrden)
 
+//*MercadoPago
 router.post("/create_preference", makePayment);
 
 module.exports = router;

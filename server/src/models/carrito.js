@@ -10,18 +10,6 @@ module.exports = (sequelize) => {
       primaryKey: true,
       autoIncrement: true, 
     },
-    idCliente: {
-      type: DataTypes.INTEGER, 
-      allowNull: false,
-    },
-    cantidades: {
-      type: DataTypes.ARRAY(DataTypes.JSONB), 
-      allowNull: false,
-    },
-    preciosUnitarios: {
-      type: DataTypes.ARRAY(DataTypes.JSONB), 
-      allowNull: false,
-    },
     total: {
       type: DataTypes.INTEGER,
     },
@@ -29,5 +17,5 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
   }, { timestamps: false });
-  
+
 };

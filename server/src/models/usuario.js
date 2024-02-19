@@ -44,7 +44,11 @@ module.exports = (sequelize) => {
             allowNull: false,
             defaultValue: false
         },
-
+        estadoInactividad: {
+            type: DataTypes.BOOLEAN,
+            allowNul: true,
+            defaultValue: false,
+        },
         //DATOS DEL CLIENTE PARA COMPLETAR FORMULARIO DEL PERFIL.
         nombre: {
             type: DataTypes.STRING,

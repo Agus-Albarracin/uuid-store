@@ -1,0 +1,13 @@
+.container-side {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .container-side span {
+    margin-bottom: 5px; /* Espacio entre cada etiqueta de texto y select */
+  }
+  
+  .container-side select {
+    margin-bottom: 10px; /* Espacio entre cada select */
+  }
+  

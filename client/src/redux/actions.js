@@ -1,4 +1,4 @@
-import { GET_PRODUCTOS, GET_DETAIL, POST_PRODUCTO, LOGIN } from "./action-types";
+import { GET_PRODUCTOS, GET_DETAIL, POST_PRODUCTO, LOGIN, FILTER_PRODUCTO,FILTER_PRODUCTO2, GET_ORDER } from "./action-types";
 
 import axios from "axios";
 
@@ -42,6 +42,31 @@ export const postProducto = (form) => {
     } catch (error) {
       console.log(error)
     }
+  }
+}
+
+export const filterProducto = (marca) => {
+   
+  return {
+      type: FILTER_PRODUCTO,
+      payload: marca
+  };
+  
+}
+
+export const filterProducto2 = (genero) => {
+   
+  return {
+      type: FILTER_PRODUCTO2,
+      payload: genero
+  };
+  
+}
+
+export const getOrder = (order) => {
+  return {
+      type: GET_ORDER,
+      payload: order
   }
 }
 

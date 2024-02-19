@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductos } from "../../redux/actions";
-
+import SideBar from "../../components/SideBar/SideBar"
 import Cards from "../../components/Cards/Cards";
 
 import "./Productos.css";
@@ -18,9 +18,18 @@ function Productos() {
   }, [dispatch, allProductos.length]);
 
   return (
-    <div className="-container">
-      <Cards data={allProductos} />
-    </div>
+    <>
+      <h2>TODOS LOS PRODUCTOS</h2>
+      <div className="container">
+       
+        <div className="side-container">
+          <SideBar />
+        </div>
+        <div className="cards-container">
+          <Cards data={allProductos} />
+        </div>
+      </div>
+    </>
   );
 }
 

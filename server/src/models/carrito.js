@@ -15,11 +15,11 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     cantidades: {
-      type: DataTypes.ARRAY(DataTypes.JSON), 
+      type: DataTypes.ARRAY(DataTypes.JSONB), 
       allowNull: false,
     },
     preciosUnitarios: {
-      type: DataTypes.ARRAY(DataTypes.JSON), 
+      type: DataTypes.ARRAY(DataTypes.JSONB), 
       allowNull: false,
     },
     total: {

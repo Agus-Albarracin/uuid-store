@@ -17,10 +17,16 @@ router.get("/getproductos", getProdu.getProductos);
 router.get("/getproductosON", getProdu.getProductosON); // endpoint para productos activos
 router.get("/getproductos/:id", getProdu.getProductosById);
 
+//admin
 router.post("/postproductos", postProdu.postProductos);
+
 router.put("/updateproductos/:id", putProdu.updateProductos);
-//deberia aplicar borrado logico?
+
+//esta ruta corresponde a una ruta de borrado lógico, a través del estado: activo o inactivo.
+router.put("/updatestateproductos/:id", putProdu.borradoLogicoProductos);
+//esta ruta corresponde a la ruta para borrado definitivo.
 router.delete("/deleteproductos/:id", deleteProdu.deleteProductos);
+
 
 //*Usuario/Cliente
 // Obtiene todos los clientes

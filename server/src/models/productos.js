@@ -19,11 +19,11 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     precio:{
-       type: DataTypes.INTEGER,
+       type: DataTypes.FLOAT,
        allowNull: false,
     },
     stock:{
-      type: DataTypes.JSON,
+      type: DataTypes.JSONB,
       allowNull: false,
     },
     genero:{
@@ -36,7 +36,7 @@ module.exports = (sequelize) => {
 
     },
     imagen:{
-      type: DataTypes.ARRAY(DataTypes.STRING),
+      type: DataTypes.JSONB(DataTypes.STRING),
       // allowNull: false, //cuando esten las imagenes lista se debe activar esta columna.
     },
     keyBorradoLogico:{

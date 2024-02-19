@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 
 
 
-const singUpClienteInDB = async (req, res) => {
+const singUpUser = async (req, res) => {
     try {
         let { email, name, googleId, imageUrl, givenName } = req.body;
         console.log(req.body);
@@ -63,4 +63,4 @@ function enviarCorreo(destinatario, asunto, mensaje) {
 
 }
 
-module.exports = singUpClienteInDB
+module.exports = { singUpUser }

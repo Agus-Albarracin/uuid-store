@@ -26,11 +26,11 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Productos, Cliente, Carrito } = sequelize.models;
+const { Productos, Usuario, Carrito } = sequelize.models;
 
 // Relación de muchos a muchos entre Productos y Cliente a través de Carrito
-Productos.belongsToMany(Cliente, { through: Carrito, as: 'carrito_clientes' });
-Cliente.belongsToMany(Productos, { through: Carrito, as: 'carrito_productos' });
+Productos.belongsToMany(Usuario, { through: Carrito, as: 'carrito_clientes' });
+Usuario.belongsToMany(Productos, { through: Carrito, as: 'carrito_productos' });
 
 
 module.exports = {

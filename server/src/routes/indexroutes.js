@@ -20,6 +20,7 @@ const router = Router();
 router.get("/getproductos", getProdu.getProductos);
 router.get("/getproductosON", getProdu.getProductosON); // endpoint para productos activos
 router.get("/getproductos/:id", getProdu.getProductosById);
+router.get("/getproductosByName", getProdu.getProductosByName);
 
 //admin
 router.post("/postproductos", postProdu.postProductos);
@@ -31,18 +32,17 @@ router.put("/updatestateproductos/:id", putProdu.borradoLogicoProductos);
 //esta ruta corresponde a la ruta para borrado definitivo.
 router.delete("/deleteproductos/:id", deleteProdu.deleteProductos);
 
-
 //*Usuario/Cliente
 // Obtiene todos los clientes
 router.get("/getuser", getUser.getAllUsers); //endpoint para todos los clientes
 // obtiene los datos desde el google
 router.post("/singup", postUser.singUpUser);
 // Crea el usuario sin google / complemento del google
-router.put("/updateuser", putUser.updateUser)
+router.put("/updateuser", putUser.updateUser);
 //borrado definitivo a través de email
-router.delete("/deleteuser", deleteUser.deleteUser)
+router.delete("/deleteuser", deleteUser.deleteUser);
 //desactivar cuenta temporalmente / implementación de borrado lógico.
-router.put("/updatestateuser", putUser.updateStateUser)
+router.put("/updatestateuser", putUser.updateStateUser);
 
 //*Carrito
 // router.post("/createOrden", postOrden)

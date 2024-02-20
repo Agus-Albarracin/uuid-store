@@ -5,7 +5,7 @@ import { getOrder, getProductos, filterProducto, filterProducto2 } from "../../r
 import './SideBar.css'
 //import { useState } from 'react';
 
-function SideBar(){
+function SideBar({ handleChange, handleSubmit }){
     const dispatch = useDispatch();
     const allProductos = useSelector((state) => state.allProductosAux);
 
@@ -31,6 +31,13 @@ function SideBar(){
 
     return(
         <div className="container-side">
+
+            <div className='search-box'>
+                <form onChange={handleChange}>
+                    <input placeholder='Buscar' />                
+                </form>
+                <button type='submit' onClick={handleSubmit}>Buscar</button>
+           </div>
 
             <span> Marca </span>
             <select onChange={selectProducto}>

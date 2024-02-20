@@ -1,5 +1,6 @@
 import {
   GET_PRODUCTOS,
+  GET_NAME,
   GET_DETAIL,
   POST_PRODUCTO,
   LOGIN,
@@ -30,6 +31,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
         allProductos: payload,
         allProductosAux: payload,
       };
+
+    case GET_NAME:
+
+    return {
+        ...state,
+        allProductos: payload,
+    }
 
     case GET_DETAIL:
       return {

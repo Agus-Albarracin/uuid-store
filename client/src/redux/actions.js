@@ -1,6 +1,7 @@
 import {
   GET_PRODUCTOS,
   GET_DETAIL,
+  GET_NAME,
   POST_PRODUCTO,
   LOGIN,
   SIGNUP,
@@ -23,6 +24,16 @@ export const getProductos = () => {
     });
   };
 };
+
+export const getName = (nombre) => {
+  return async function(dispatch){
+      const response = await axios(`http://localhost:3001/getproductosByName/?nombre=${nombre}`);
+      return dispatch({
+          type: GET_NAME,
+          payload: response.data
+      })
+  }
+}
 
 // TRAER EL DETAIL DE UN PRODUCTO
 export const getDetail = (id) => {

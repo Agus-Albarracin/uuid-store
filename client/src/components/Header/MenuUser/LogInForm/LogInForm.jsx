@@ -1,5 +1,7 @@
 import { useFormik } from 'formik';
 import styles from './LogInForm.module.scss'
+import Autenticador from '../../../../Helpers/Auntenticador';
+
 
 const LogIn = ({ handleView }) => {
 
@@ -32,6 +34,11 @@ const LogIn = ({ handleView }) => {
                     onChange={formik.handleChange}
                     value={formik.values.password} 
                 />
+
+                <div>
+                    <span>O continúa con:</span>
+                    <Autenticador />
+                </div>
 
                 <div className={styles.side}>
                     <span>¿Eres nuevo?</span>

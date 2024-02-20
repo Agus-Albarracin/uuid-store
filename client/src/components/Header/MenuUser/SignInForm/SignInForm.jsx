@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import { validate } from './validate';
-import styles from './SignForm.module.scss';
+import styles from './SignInForm.module.scss';
 import Autenticador from '../../../../Helpers/Auntenticador';
 
 const SignIn = ({ handleView }) => {
@@ -29,6 +29,7 @@ const SignIn = ({ handleView }) => {
                     onChange={formik.handleChange}
                     value={formik.values.nombre} 
                 />
+                { formik.errors.nombre && <span> { formik.errors.nombre } </span> }
 
                 <label htmlFor="apellido"> Apellido </label>
                 <input 
@@ -38,6 +39,7 @@ const SignIn = ({ handleView }) => {
                     onChange={formik.handleChange}
                     value={formik.values.apellido} 
                 />
+                { formik.errors.apellido && <span> { formik.errors.apellido } </span> }
 
                 <label htmlFor="email"> Email</label>
                 <input 
@@ -47,7 +49,8 @@ const SignIn = ({ handleView }) => {
                     onChange={formik.handleChange}
                     value={formik.values.email} 
                 />
-                
+                { formik.errors.email && <span> { formik.errors.email } </span> }
+
                 <label htmlFor="password"> Contraseña </label>
                 <input 
                     id='password'
@@ -56,15 +59,17 @@ const SignIn = ({ handleView }) => {
                     onChange={formik.handleChange}
                     value={formik.values.password} 
                 />
+                { formik.errors.password && <span> { formik.errors.password } </span> }
 
-                <label htmlFor="repetirPassword"> Repetir contraseña </label>
+                <label htmlFor="rPassword"> Repetir contraseña </label>
                 <input 
-                    id='rpassword'
-                    name='rpassword'
+                    id='rPassword'
+                    name='rPassword'
                     type="password"
                     onChange={formik.handleChange}
-                    value={formik.values.repetirPassword} 
+                    value={formik.values.rPassword} 
                 />
+                { formik.errors.rPassword && <span> { formik.errors.rPassword } </span> }
 
                 <hr />
 

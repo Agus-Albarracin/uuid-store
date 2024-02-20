@@ -125,7 +125,7 @@ const CreateForm = () => {
                 value={formik.values.nombre}
                 onBlur={formik.handleBlur}
             />
-            { formik.errors.marca && <div>{formik.errors.marca}</div> }
+            { formik.touched.nombre && formik.errors.marca && <div>{formik.errors.marca}</div> }
 
             <label htmlFor="marca"> Marca </label>
             <input
@@ -136,7 +136,7 @@ const CreateForm = () => {
                 value={formik.values.marca}
                 onBlur={formik.handleBlur}
             />
-            { formik.errors.marca && <div>{formik.errors.marca}</div> }
+            { formik.touched.marca && formik.errors.marca && <div>{formik.errors.marca}</div> }
             
             <label htmlFor="modelo"> Modelo </label>
             <input
@@ -147,7 +147,7 @@ const CreateForm = () => {
                 value={formik.values.modelo}
                 onBlur={formik.handleBlur}
             />
-            { formik.errors.modelo && <div>{formik.errors.modelo}</div> }
+            { formik.touched.modelo && formik.errors.modelo && <div>{formik.errors.modelo}</div> }
             
             <label htmlFor="precio"> Precio </label>
             <input
@@ -158,7 +158,7 @@ const CreateForm = () => {
                 value={formik.values.precio}
                 onBlur={formik.handleBlur}
             />
-            { formik.errors.precio && <div>{formik.errors.precio}</div> }
+            { formik.touched.precio && formik.errors.precio && <div>{formik.errors.precio}</div> }
 
             <label htmlFor="genero"> Genero </label>
             <select 
@@ -188,7 +188,7 @@ const CreateForm = () => {
                     </div>
                 ))}
 
-                { formik.errors.imagen && <div>{formik.errors.imagen}</div> }
+                { formik.touched.imagen && formik.errors.imagen && <div>{formik.errors.imagen}</div> }
             </div>
 
             <div className={styles.talles}>

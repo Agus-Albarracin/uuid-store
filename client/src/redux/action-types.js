@@ -5,3 +5,4 @@ export const FILTER_PRODUCTO = 'FILTER_PRODUCTO';
 export const FILTER_PRODUCTO2 = 'FILTER_PRODUCTO2';
 export const GET_ORDER = 'GET ORDER';
 export const LOGIN = 'LOGIN';
+export const SIGNUP = 'SIGNUP';

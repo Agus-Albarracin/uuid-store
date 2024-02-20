@@ -1,4 +1,13 @@
-import { GET_PRODUCTOS, GET_DETAIL, POST_PRODUCTO, LOGIN, FILTER_PRODUCTO,FILTER_PRODUCTO2, GET_ORDER } from "./action-types";
+import {
+  GET_PRODUCTOS,
+  GET_DETAIL,
+  POST_PRODUCTO,
+  LOGIN,
+  SIGNUP,
+  FILTER_PRODUCTO,
+  FILTER_PRODUCTO2,
+  GET_ORDER,
+} from "./action-types";
 
 import axios from "axios";
 
@@ -40,47 +49,57 @@ export const postProducto = (form) => {
         payload: response.data,
       });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
-}
+  };
+};
 
 export const filterProducto = (marca) => {
-   
   return {
-      type: FILTER_PRODUCTO,
-      payload: marca
+    type: FILTER_PRODUCTO,
+    payload: marca,
   };
-  
-}
+};
 
 export const filterProducto2 = (genero) => {
-   
   return {
-      type: FILTER_PRODUCTO2,
-      payload: genero
+    type: FILTER_PRODUCTO2,
+    payload: genero,
   };
-  
-}
+};
 
 export const getOrder = (order) => {
   return {
-      type: GET_ORDER,
-      payload: order
-  }
-}
+    type: GET_ORDER,
+    payload: order,
+  };
+};
 
 // INICIAR SESION
-export const postUsuario = (form) => {
+export const logIn = (form) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(`${API_BASE_URL}/login`, form);
       return dispatch({
         type: LOGIN,
-        payload: response.data
+        payload: response.data,
       });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
-}
+  };
+};
+
+export const signUp = (form) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/signup`, form);
+      return dispatch({
+        type: LOGIN,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

@@ -1,6 +1,6 @@
 const { Router } = require("express");
 //Cliente/Usuario
-const postUser = require("../controllers/Users/singUp");
+const postUser = require("../controllers/Users/signUp");
 const getUser = require("../controllers/Users/getUser");
 const putUser = require("../controllers/Users/putUser");
 const deleteUser = require("../controllers/Users/deleteUser");
@@ -36,7 +36,7 @@ router.delete("/deleteproductos/:id", deleteProdu.deleteProductos);
 // Obtiene todos los clientes
 router.get("/getuser", getUser.getAllUsers); //endpoint para todos los clientes
 // obtiene los datos desde el google
-router.post("/singup", postUser.singUpUser);
+router.post("/signup", postUser.signUpUser);
 // Crea el usuario sin google / complemento del google
 router.put("/updateuser", putUser.updateUser);
 //borrado definitivo a través de email

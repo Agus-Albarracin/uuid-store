@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from "react-redux"; // Cambiado a useDispatc
 
 import { getDetail } from "../../redux/actions";
 import BotonDet from '../../components/Button/Button';
+import ImageGallery from 'react-image-gallery';
+import "react-image-gallery/styles/css/image-gallery.css"
 
 const Detail = () => {
   const { id } = useParams();
@@ -19,30 +21,45 @@ const Detail = () => {
     //     dispatch(clearDetail());
     // };
   }, [dispatch, id]);
-  const images = [
-    'https://images.pexels.com/photos/1777467/pexels-photo-1777467.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    'https://images.pexels.com/photos/2048548/pexels-photo-2048548.jpeg?auto=compress&cs=tinysrgb&w=600',
-    'https://images.pexels.com/photos/1124466/pexels-photo-1124466.jpeg?auto=compress&cs=tinysrgb&w=600',
-  ];
 
-
+  const img = [{
+    original: 'https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg?auto=compress&cs=tinysrgb&w=600',
+    thumbnail: 'https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg?auto=compress&cs=tinysrgb&w=600'
+  },
+  {
+    original: 'https://images.pexels.com/photos/1461048/pexels-photo-1461048.jpeg?auto=compress&cs=tinysrgb&w=600',
+    thumbnail: 'https://images.pexels.com/photos/1461048/pexels-photo-1461048.jpeg?auto=compress&cs=tinysrgb&w=600'
+  },
+  {
+    original: 'https://images.pexels.com/photos/11135667/pexels-photo-11135667.jpeg?auto=compress&cs=tinysrgb&w=600',
+    thumbnail: 'https://images.pexels.com/photos/11135667/pexels-photo-11135667.jpeg?auto=compress&cs=tinysrgb&w=600'
+  }]
   return (
     <div>
 
       <div className={style.card}>
-        <div className={style.productDetail}>
-          {images.map((url, index) => (
-            <div key={index} className={index % 3 === 2 ? style.largeImage : style.smallImage}>
-              <img src={url} alt={`Product Image ${index + 1}`} />
-            </div>
-          ))}
+        <div className={style.gallery}>
+          <ImageGallery items={img} 
+            showPlayButton={false}
+            showFullscreenButton={false}
+            showIndex={false}
+            showNav={false}
+            showBullets={false}
+            autoPlay={false}
+            thumbnailPosition="left"
+            thumbnailWidth ={1}
+            
+          
+            // showThumbnails={false}
+          />
         </div>
-        <div>
+        <div className={style.description}>
           <BotonDet to={`/productos`}>volver</BotonDet>
           {/* <h1 className={style.name}>{detail?.nombre}</h1> */}
 
           <div className={style.details}>
             <h1 className={style.name}>{detail?.nombre}</h1>
+    
             <table className={style.infoTable}>
               <tbody>
                 <tr>
@@ -69,7 +86,7 @@ const Detail = () => {
             </table>
           </div>
           <BotonDet to={`/#`}>Agregar al carrito</BotonDet>
-  
+
         </div>
 
       </div>

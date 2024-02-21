@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
 
-        name: {
+        nombre: { //podria reemplazarlo por lo que se recibe de google e implementar name para el formulario.
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -24,14 +24,23 @@ module.exports = (sequelize) => {
             },
         },
 
+        password:{
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        rPassword:{
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+
         googleId: {
             type: DataTypes.STRING,
             allowNull: false,
         },
 
-        imageUrl: {
+        imageUrl: { //Se podria quitar
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
 
         givenName: {
@@ -50,10 +59,6 @@ module.exports = (sequelize) => {
             defaultValue: false,
         },
         //DATOS DEL CLIENTE PARA COMPLETAR FORMULARIO DEL PERFIL.
-        nombre: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
 
         apellido: {
             type: DataTypes.STRING,
@@ -103,7 +108,7 @@ module.exports = (sequelize) => {
         notificaciones: { //deberia ser un checkbox que indique que si desea recibir notificaciones de la página.
             type: DataTypes.BOOLEAN,
             default: false,
-            allowNull: false,
+            allowNull: true,
         }
 
     }, { timestamps: false });

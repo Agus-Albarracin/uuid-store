@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 
 function Autenticador() {
   const clientID = "752795540558-hqqmvr2p9bf1c4bkjmh33c3ui0rbdu81.apps.googleusercontent.com"
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || {});
 
   useEffect(() => {
     const start = () => {
@@ -20,16 +20,26 @@ function Autenticador() {
 
   
   const onSuccess = (response) => {
+    const fullName = response.profileObj.name;
+    const partsName = fullName.split(" ");
+    const nombre = partsName[0];
+    const apellido = partsName.slice(1).join(" ");
+    
     const userData = {
+      nombre: nombre,
+      apellido: apellido,
       email: response.profileObj.email,
-      name: response.profileObj.name,
-      googleId: response.profileObj.googleId,
-      imageUrl: response.profileObj.imageUrl,
-      givenName: response.profileObj.givenName
+        googleId: response.profileObj.googleId,
+        imageUrl: response.profileObj.imageUrl,
+        givenName: response.profileObj.givenName
     };
-    setUser(userData)
+    
+    localStorage.setItem("user", JSON.stringify(userData)); // Almacena los datos del usuario en el almacenamiento local
+    setUser(userData);
     console.log("estos son los datos:", userData)
 
+
+     
     singUpUserInDb(userData)
     }
     
@@ -40,7 +50,7 @@ function Autenticador() {
     const singUpUserInDb = async (userData) => {
       console.log("datos de la funcion:", userData)
       try {
-        const response = await axios.post('http://localhost:3001/singup', userData);
+        const response = await axios.post('http://localhost:3001/signup', userData);
   
         console.log('Información del usuario enviada al backend con éxito');
       } catch (error) {
@@ -51,7 +61,7 @@ function Autenticador() {
     return (
     <>
       <div className='loginCont'>
-        <GoogleLogin
+        <GoogleLogin  
           clientId={clientID}
           onSuccess={onSuccess}
           onFailure={onFailure}
@@ -62,7 +72,8 @@ function Autenticador() {
 
       <div className={user ? "profile" : "hidden"}>
         <img src={user.imageUrl} alt="" />
-        <h3>{user.name}</h3>
+        <h3>{user.nombre + " " + user.apellido}</h3>
+
       </div>
     </>
   )

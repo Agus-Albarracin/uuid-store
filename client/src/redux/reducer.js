@@ -8,6 +8,7 @@ import {
   FILTER_PRODUCTO,
   FILTER_PRODUCTO2,
   SIGNUP,
+  LOGOUT,
 } from "./action-types";
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   productCreated: {},
   actualUser: {},
 };
+
 // case CLEAR_DETAIL:
 //   return {
 //     ...state,
@@ -33,11 +35,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case GET_NAME:
-
-    return {
+      return {
         ...state,
         allProductos: payload,
-    }
+      };
 
     case GET_DETAIL:
       return {
@@ -103,11 +104,17 @@ const rootReducer = (state = initialState, { type, payload }) => {
     //     actualUser: payload
     //   }
 
-    // case SIGNUP:
-    //   return {
-    //     ...state,
-    //     actualUser: payload
-    //   }
+    case SIGNUP:
+      return {
+        ...state,
+        actualUser: payload,
+      };
+
+    case LOGOUT:
+      return {
+        ...state,
+        actualUser: payload,
+      };
 
     default:
       return {

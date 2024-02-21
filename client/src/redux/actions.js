@@ -8,6 +8,7 @@ import {
   FILTER_PRODUCTO,
   FILTER_PRODUCTO2,
   GET_ORDER,
+  LOGOUT,
 } from "./action-types";
 
 import axios from "axios";
@@ -26,14 +27,16 @@ export const getProductos = () => {
 };
 
 export const getName = (nombre) => {
-  return async function(dispatch){
-      const response = await axios(`http://localhost:3001/getproductosByName/?nombre=${nombre}`);
-      return dispatch({
-          type: GET_NAME,
-          payload: response.data
-      })
-  }
-}
+  return async function (dispatch) {
+    const response = await axios(
+      `http://localhost:3001/getproductosByName/?nombre=${nombre}`
+    );
+    return dispatch({
+      type: GET_NAME,
+      payload: response.data,
+    });
+  };
+};
 
 // TRAER EL DETAIL DE UN PRODUCTO
 export const getDetail = (id) => {
@@ -106,11 +109,18 @@ export const signUp = (form) => {
     try {
       const response = await axios.post(`${API_BASE_URL}/signup`, form);
       return dispatch({
-        type: LOGIN,
+        type: SIGNUP,
         payload: response.data,
       });
     } catch (error) {
       console.log(error);
     }
+  };
+};
+
+export const logOut = () => {
+  return {
+    type: LOGOUT,
+    payload: {},
   };
 };

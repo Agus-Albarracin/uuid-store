@@ -2,8 +2,12 @@ import { useFormik } from "formik";
 import { validate } from "./validate";
 import styles from "./SignInForm.module.scss";
 import Autenticador from "../../../../Helpers/Auntenticador";
+import { signUp } from "../../../../redux/actions";
+import { useDispatch } from "react-redux";
 
 const SignIn = ({ handleView }) => {
+  const dispatch = useDispatch();
+
   const formik = useFormik({
     initialValues: {
       nombre: "",
@@ -14,7 +18,7 @@ const SignIn = ({ handleView }) => {
     },
     validate,
     onSubmit: (values) => {
-      console.log(values);
+      dispatch(signUp(values));
     },
   });
 

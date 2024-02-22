@@ -35,7 +35,7 @@ const Detail = () => {
     thumbnail: 'https://images.pexels.com/photos/11135667/pexels-photo-11135667.jpeg?auto=compress&cs=tinysrgb&w=600'
   }]
   return (
-    <div>
+    <div >
 
       <div className={style.card}>
         <div className={style.gallery}>
@@ -92,6 +92,7 @@ const Detail = () => {
       </div>
 
     </div>
+    
 
 
   );

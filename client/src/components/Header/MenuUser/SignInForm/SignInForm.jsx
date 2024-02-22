@@ -3,9 +3,9 @@ import { validate } from "./validate";
 import styles from "./SignInForm.module.scss";
 import Autenticador from "../../../../Helpers/Auntenticador";
 import { signUp } from "../../../../redux/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-const SignIn = ({ handleView }) => {
+const SignIn = ({ handleView, mostrarUser }) => {
   const dispatch = useDispatch();
 
   const formik = useFormik({
@@ -19,6 +19,7 @@ const SignIn = ({ handleView }) => {
     validate,
     onSubmit: (values) => {
       dispatch(signUp(values));
+      mostrarUser();
     },
   });
 

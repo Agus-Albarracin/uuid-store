@@ -19,6 +19,11 @@ const MenuUser = ({ mostrarUser }) => {
     setLogInOrSignIn(!logInOrSignIn);
   };
 
+  const handleLogOut = () => {
+    dispatch(logOut());
+    mostrarUser();
+  };
+
   return (
     <div className={styles.viewContainer}>
       {Object.keys(user).length === 0 ? (
@@ -26,9 +31,9 @@ const MenuUser = ({ mostrarUser }) => {
           <div className={styles.fondo} onClick={mostrarUser}></div>
           <div className={styles.menuContainer}>
             {logInOrSignIn ? (
-              <LogIn handleView={handleView} />
+              <LogIn handleView={handleView} mostrarUser={mostrarUser} />
             ) : (
-              <SignIn handleView={handleView} />
+              <SignIn handleView={handleView} mostrarUser={mostrarUser} />
             )}
           </div>
         </div>
@@ -36,7 +41,7 @@ const MenuUser = ({ mostrarUser }) => {
         <div>
           {`${user.nombre}  ${user.apellido}`}
           <span> Mi cuenta </span>
-          <span onClick={() => dispatch(logOut())}> Salir </span>
+          <span onClick={handleLogOut}> Salir </span>
         </div>
       )}
     </div>

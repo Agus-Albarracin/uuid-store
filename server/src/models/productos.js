@@ -1,4 +1,5 @@
 const { DataTypes } = require("sequelize");
+const { v4: uuidv4 } = require('uuid');
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
@@ -11,6 +12,11 @@ module.exports = (sequelize) => {
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
+      },
+      codigo: {
+        type: DataTypes.STRING,
+        defaultValue: () => uuidv4().split('-').join('').slice(0, 6),
+        unique: true,
       },
       nombre: {
         type: DataTypes.STRING,
@@ -30,14 +36,14 @@ module.exports = (sequelize) => {
       },
       stock: {
         type: DataTypes.JSONB,
-        allowNull: false,
+        allowNull: true,
       },
       genero: {
         type: DataTypes.STRING,
       },
       marca: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       imagen: {
         type: DataTypes.JSONB(DataTypes.STRING),
@@ -47,7 +53,7 @@ module.exports = (sequelize) => {
         //El estado corresponde a activo o inactivo
         type: DataTypes.BOOLEAN,
         default: true,
-        allowNull: false,
+        allowNull: true,
       },
     },
     { timestamps: false }

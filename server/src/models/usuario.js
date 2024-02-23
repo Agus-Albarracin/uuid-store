@@ -4,10 +4,11 @@ module.exports = (sequelize) => {
     sequelize.define('Usuario', {
 
         id: {
-            type: DataTypes.UUID,
+            type: DataTypes.JSONB(DataTypes.STRING),
             defaultValue: DataTypes.UUIDV4,
-            primaryKey: true,
             allowNull: false,
+            unique: true,
+            primaryKey: true,
         },
 
         nombre: { //podria reemplazarlo por lo que se recibe de google e implementar name para el formulario.
@@ -15,9 +16,16 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
 
+        
+        apellido: {
+                    type: DataTypes.STRING,
+                    allowNull: true,
+         },
+
         email: {
             type: DataTypes.STRING,
             allowNull: false,
+
             unique: true, // Asegura que el correo electrónico sea único
             validate: {
                 isEmail: true, // Validación de formato de correo electrónico
@@ -59,11 +67,6 @@ module.exports = (sequelize) => {
             defaultValue: false,
         },
         //DATOS DEL CLIENTE PARA COMPLETAR FORMULARIO DEL PERFIL.
-
-        apellido: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
 
         direccion: {
             type: DataTypes.STRING,

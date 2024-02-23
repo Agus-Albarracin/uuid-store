@@ -21,7 +21,7 @@ router.get("/getproductos", getProdu.getProductos);
 router.get("/getproductosON", getProdu.getProductosON); // endpoint para productos activos
 router.get("/getproductos/:id", getProdu.getProductosById);
 router.get("/getproductosByName", getProdu.getProductosByName);
-router.get("/getproductosFilter", getProdu.getProductosFilter);
+// router.get("/getproductosFilter", getProdu.getProductosFilter);
 
 //admin
 router.post("/postproductos", postProdu.postProductos);

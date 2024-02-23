@@ -50,7 +50,7 @@ function Autenticador() {
     const singUpUserInDb = async (userData) => {
       console.log("datos de la funcion:", userData)
       try {
-        const response = await axios.post('http://localhost:3001/signup', userData);
+        const response = await axios.post('http://localhost:3001/signupgoogle', userData);
   
         console.log('Información del usuario enviada al backend con éxito');
       } catch (error) {

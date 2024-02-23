@@ -37,7 +37,9 @@ router.delete("/deleteproductos/:id", deleteProdu.deleteProductos);
 // Obtiene todos los clientes
 router.get("/getuser", getUser.getAllUsers); //endpoint para todos los clientes
 // obtiene los datos desde el google
+router.post("/signupgoogle", postUser.signUpUserGoogle);
 router.post("/signup", postUser.signUpUser);
+
 // Crea el usuario sin google / complemento del google
 router.put("/updateuser", putUser.updateUser);
 //borrado definitivo a través de email

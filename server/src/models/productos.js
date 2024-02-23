@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
       },
       codigo: {
         type: DataTypes.STRING,
-        defaultValue: () => uuidv4().split('-').join('').slice(0, 6),
+        defaultValue: () => uuidv4().split("-").join("").slice(0, 6),
         unique: true,
       },
       nombre: {
@@ -48,6 +48,10 @@ module.exports = (sequelize) => {
       imagen: {
         type: DataTypes.JSONB(DataTypes.STRING),
         // allowNull: false, //cuando esten las imagenes lista se debe activar esta columna.
+      },
+      quantitysold: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
       },
       estado: {
         //El estado corresponde a activo o inactivo

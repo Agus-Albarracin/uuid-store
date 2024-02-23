@@ -10,7 +10,7 @@ const postProdu = require("../controllers/Productos/postProductos");
 const deleteProdu = require("../controllers/Productos/deleteProductos");
 const putProdu = require("../controllers/Productos/putProductos");
 //Carrito
-const postCarrito = require("../controllers/Carrito/postCarrito")
+const postCarrito = require("../controllers/Carrito/postCarrito");
 //MercadoPago
 const makePayment = require("../controllers/PasarelaDePagos/makePayment");
 
@@ -21,7 +21,7 @@ router.get("/getproductos", getProdu.getProductos);
 router.get("/getproductosON", getProdu.getProductosON); // endpoint para productos activos
 router.get("/getproductos/:id", getProdu.getProductosById);
 router.get("/getproductosByName", getProdu.getProductosByName);
-// router.get("/getproductosFilter", getProdu.getProductosFilter);
+router.get("/getproductosFilter", getProdu.getProductosFilter);
 
 //admin
 router.post("/postproductos", postProdu.postProductos);
@@ -46,7 +46,7 @@ router.delete("/deleteuser", deleteUser.deleteUser);
 router.put("/updatestateuser", putUser.updateStateUser);
 
 //*Carrito
-router.post("/createOrden", postCarrito.postOrden)
+router.post("/createOrden", postCarrito.postOrden);
 // router.get("/getOrden", getOrden)
 // router.put("/updateOrden", putOrden)
 // router.delete("/deleteOrden", deleteOrden)

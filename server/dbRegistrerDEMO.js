@@ -1,12 +1,11 @@
-const { Productos, Usuario } = require('./src/db.js'); 
-const produDemo = require("./produDemo.js")
-const usuarioDemo = require("./usuarioDEMO.js")
+const { Productos, Usuario } = require("./src/db.js");
+const produDemo = require("./produDemo.js");
+const usuarioDemo = require("./usuarioDEMO.js");
 
 const dbRegisterDEMO = async () => {
-    
   try {
     const productos = produDemo;
-    const mappedProductos = productos.map(producto => {
+    const mappedProductos = productos.map((producto) => {
       return {
         id: producto.id,
         nombre: producto.nombre,
@@ -18,24 +17,22 @@ const dbRegisterDEMO = async () => {
         imagen: producto.imagen,
         estado: producto.estado,
         codigo: producto.codigo,
-        keyBorradoLogico: producto.keyBorradoLogico
+        keyBorradoLogico: producto.keyBorradoLogico,
       };
     });
 
     // Inserta los productos en la base de datos
     await Productos.bulkCreate(mappedProductos);
-    console.log('Productos cargados a la base de datos correctamente');
+    console.log("Productos cargados a la base de datos correctamente");
   } catch (error) {
-    console.error('Error en la carga de productos:', error);
+    console.error("Error en la carga de productos:", error);
   }
 };
 
-
 const dbRegisterUsuariosDEMO = async () => {
-    
   try {
     const usuarios = usuarioDemo;
-    const mappedUsuarios = usuarios.map(usuario => {
+    const mappedUsuarios = usuarios.map((usuario) => {
       return {
         id: usuario.id,
         nombre: usuario.nombre,
@@ -55,16 +52,16 @@ const dbRegisterUsuariosDEMO = async () => {
         numeroTramite: usuario.numeroTramite,
         telefono: usuario.telefono,
         genero: usuario.genero,
-        notificaciones: usuario.notificaciones
+        notificaciones: usuario.notificaciones,
       };
     });
 
     // Inserta los usuarios en la base de datos
     await Usuario.bulkCreate(mappedUsuarios);
-    console.log('Usuarios cargados a la base de datos correctamente');
+    console.log("Usuarios cargados a la base de datos correctamente");
   } catch (error) {
-    console.error('Error en la carga de usuarios:', error);
+    console.error("Error en la carga de usuarios:", error);
   }
 };
 
-module.exports = {dbRegisterUsuariosDEMO, dbRegisterDEMO}
+module.exports = { dbRegisterUsuariosDEMO, dbRegisterDEMO };

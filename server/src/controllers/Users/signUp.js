@@ -1,87 +1,75 @@
 const { Usuario } = require("../../db");
+const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 
 const signUpUser = async (req, res) => {
-  const {email, nombre, apellido, password, rPassword }= req.body
+  const { email, nombre, apellido, password, rPassword } = req.body;
 
-    try {
-      if (
-        !email ||
-        !nombre ||
-        !apellido ||
-        !password ||
-        !rPassword
-      )
-        return res.status(400).send("Faltan ingresar datos.");
+  try {
+    if (!email || !nombre || !apellido || !password || !rPassword)
+      return res.status(400).send("Faltan ingresar datos.");
 
-      let [user, seCreoUser] = await Usuario.findOrCreate({
-        where: { email },
-        defaults: {
-          nombre,
-          apellido,
-          email,
-          password,
-          rPassword,
-        },
-      });
+    const hash = await bcrypt.hash(password, 10);
 
-      if (!seCreoUser) return res.status(400).send("El usuario ya existe.");
-
-      console.log(user);
-
-      enviarCorreo(
+    let [user, seCreoUser] = await Usuario.findOrCreate({
+      where: { email },
+      defaults: {
+        nombre,
+        apellido,
         email,
-        "Bienvenido",
-        "¡Gracias por autenticarte en nuestro sitio web, esto no ayuda a la protección tuya como de los demás usuarios."
-      );
+        password: hash,
+        rPassword: hash,
+      },
+    });
 
-      return res.status(201).json(user);
-      
-    } catch (error) {
-      return res.status(500).json({ message: error.message });
-    }
-}
+    if (!seCreoUser) return res.status(400).send("El usuario ya existe.");
 
+    enviarCorreo(
+      email,
+      "Bienvenido",
+      "¡Gracias por autenticarte en nuestro sitio web, esto no ayuda a la protección tuya como de los demás usuarios."
+    );
+
+    delete user.dataValues.password;
+    delete user.dataValues.rPassword;
+
+    return res.status(201).json(user);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 
 const signUpUserGoogle = async (req, res) => {
-  const { email, nombre, googleId, imageUrl,  givenName,  apellido} = req.body;
-try{
+  const { email, nombre, googleId, imageUrl, givenName, apellido } = req.body;
+  try {
+    if (!email || !nombre || !apellido || !googleId || !imageUrl || !givenName)
+      return res.status(400).send("Faltan ingresar datos.");
 
-  if (
-    !email ||
-        !nombre ||
-        !apellido ||
-        !googleId ||
-        !imageUrl ||
-        !givenName
-      ) return res.status(400).send("Faltan ingresar datos.");
-
-      let [user, seCreoUser] = await Usuario.findOrCreate({
-        where: { email },
-        defaults: {
-          email,
-          nombre,
-          apellido,
-          googleId,
-          imageUrl,
-          givenName,
-        },
-      });
-      
-      if (!seCreoUser) return res.status(400).send("El usuario ya existe.");
-      
-      enviarCorreo(
+    let [user, seCreoUser] = await Usuario.findOrCreate({
+      where: { email },
+      defaults: {
         email,
-        "Bienvenido",
-        "¡Gracias por autenticarte en nuestro sitio web, esto no ayuda a la protección tuya como de los demás usuarios."
-        );
-        
-        return res.status(201).json(user);
-        
-      } catch (error) {
-      return res.status(500).json({ message: error.message });
-    }
-}
+        nombre,
+        apellido,
+        googleId,
+        imageUrl,
+        givenName,
+      },
+    });
+
+    if (!seCreoUser) return res.status(400).send("El usuario ya existe.");
+
+    enviarCorreo(
+      email,
+      "Bienvenido",
+      "¡Gracias por autenticarte en nuestro sitio web, esto no ayuda a la protección tuya como de los demás usuarios."
+    );
+
+    return res.status(201).json(user);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 
 //Configuración de admin / transporter
 const transporter = nodemailer.createTransport({
@@ -112,4 +100,4 @@ function enviarCorreo(destinatario, asunto, mensaje) {
   });
 }
 
-module.exports = { signUpUserGoogle, signUpUser }
+module.exports = { signUpUserGoogle, signUpUser };

@@ -66,12 +66,6 @@ const getProductosByName = async (req, res) => {
         estado: true,
         nombre: { [Op.iLike]: `%${nombre}%` },
       },
-      include: [
-        {
-          model: Usuario,
-          as: "carrito_clientes",
-        },
-      ],
       attributes: { exclude: ["createdAt", "updatedAt"] },
     });
 

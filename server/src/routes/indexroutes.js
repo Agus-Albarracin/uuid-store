@@ -4,6 +4,7 @@ const postUser = require("../controllers/Users/signUp");
 const getUser = require("../controllers/Users/getUser");
 const putUser = require("../controllers/Users/putUser");
 const deleteUser = require("../controllers/Users/deleteUser");
+const login = require("../controllers/Users/LogIn");
 //Productos
 const getProdu = require("../controllers/Productos/getProductos");
 const postProdu = require("../controllers/Productos/postProductos");
@@ -39,6 +40,7 @@ router.get("/getuser", getUser.getAllUsers); //endpoint para todos los clientes
 // obtiene los datos desde el google
 router.post("/signupgoogle", postUser.signUpUserGoogle);
 router.post("/signup", postUser.signUpUser);
+router.post("/login", login.login);
 
 // Crea el usuario sin google / complemento del google
 router.put("/updateuser", putUser.updateUser);

@@ -25,9 +25,11 @@ const HomePage = () => {
   // console.log(recommendedProducts)
 
   return (
-    <div>
-      <Carrusel></Carrusel>
-      <Cards data={recommendedProducts} />
+    <div className=" mx-auto my-8">
+      <Carrusel />
+      <div className="container mx-auto p-4">
+        <Cards data={recommendedProducts} />
+      </div>
     </div>
   );
 };

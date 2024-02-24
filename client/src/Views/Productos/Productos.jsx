@@ -11,15 +11,15 @@ function Productos() {
   const allProductos = useSelector((state) => state.allProductos);
   const [searchString, setSearchString] = useState("");
 
-  function handleChange(e){
+  function handleChange(e) {
     e.preventDefault();
     setSearchString(e.target.value);
-}
+  }
 
-function handleSubmit(e){
+  function handleSubmit(e) {
     e.preventDefault();
     dispatch(getName(searchString))
-}
+  }
 
   useEffect(() => {
     if (allProductos.length === 0) {
@@ -29,18 +29,16 @@ function handleSubmit(e){
   }, [dispatch, allProductos.length]);
 
   return (
-    <>
-      <h2>TODOS LOS PRODUCTOS</h2>
-      <div className="container">
-       
-        <div className="side-container">
-          <SideBar handleChange={handleChange} handleSubmit={handleSubmit} />
-        </div>
-        <div className="cards-container">
-          <Cards data={allProductos} />
-        </div>
+    <div className="container mx-auto flex flex-col sm:flex-row">
+      <div className="w-full sm:w-1/4">
+        <SideBar handleChange={handleChange} handleSubmit={handleSubmit} />
       </div>
-    </>
+      <div className="w-full sm:w-3/4 p-4 sm:p-8">
+        <Cards data={allProductos} />
+      </div>
+    </div>
+
+
   );
 }
 

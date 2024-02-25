@@ -3,6 +3,7 @@ import Autenticador from "../../../../Helpers/Auntenticador";
 import { signUp } from "../../../../redux/actions";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
+import { validate } from "./validate";
 
 const SignIn = ({ handleView, mostrarUser }) => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const SignIn = ({ handleView, mostrarUser }) => {
       password: "",
       rPassword: "",
     },
+    validate,
     onSubmit: (values) => {
       dispatch(signUp(values));
       mostrarUser();
@@ -38,24 +40,29 @@ const SignIn = ({ handleView, mostrarUser }) => {
       setShowAnimation(false);
       handleView();
     }, 200);
-
-
   };
 
   const handleExitClick = () => {
     setShowAnimation(true);
     setTimeout(() => {
       setShowAnimation(false);
+      mostrarUser();
       // Agrega aquí cualquier lógica adicional que necesites al salir del componente
     }, 200);
   };
 
   return (
-    <div className={`max-w-md mx-auto bg-white p-6 rounded-md shadow-md transition-opacity transform duration-500 ${showAnimation ? 'opacity-0' : 'opacity-100'}`}>
-      <div className="text-2xl font-bold mb-6">REGISTRARSE EN UUID STORE</div>
+    <div
+      className={`max-w-md mx-auto bg-white p-6 rounded-md shadow-md transition-opacity transform duration-500 ${
+        showAnimation ? "opacity-0" : "opacity-100"
+      }`}
+    >
+      <div className="text-2xl font-bold mb-6 text-gray-600">
+        REGISTRARSE EN UUID STORE
+      </div>
       <form onSubmit={formik.handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="nombre" className="block font-semibold">
+          <label htmlFor="nombre" className="text-gray-600 block font-semibold">
             Nombre
           </label>
           <input
@@ -73,7 +80,10 @@ const SignIn = ({ handleView, mostrarUser }) => {
         </div>
 
         <div>
-          <label htmlFor="apellido" className="block font-semibold">
+          <label
+            htmlFor="apellido"
+            className="text-gray-600 block font-semibold"
+          >
             Apellido
           </label>
           <input
@@ -91,7 +101,7 @@ const SignIn = ({ handleView, mostrarUser }) => {
         </div>
 
         <div>
-          <label htmlFor="email" className="block font-semibold">
+          <label htmlFor="email" className="text-gray-600 block font-semibold">
             Email
           </label>
           <input
@@ -109,7 +119,10 @@ const SignIn = ({ handleView, mostrarUser }) => {
         </div>
 
         <div>
-          <label htmlFor="password" className="block font-semibold">
+          <label
+            htmlFor="password"
+            className="text-gray-600 block font-semibold"
+          >
             Contraseña
           </label>
           <input
@@ -127,7 +140,10 @@ const SignIn = ({ handleView, mostrarUser }) => {
         </div>
 
         <div>
-          <label htmlFor="rPassword" className="block font-semibold">
+          <label
+            htmlFor="rPassword"
+            className="text-gray-600 block font-semibold"
+          >
             Repetir contraseña
           </label>
           <input
@@ -153,33 +169,29 @@ const SignIn = ({ handleView, mostrarUser }) => {
 
         <div className="flex items-center justify-between mt-4">
           <span
-            className={`text-blue-500 cursor-pointer ${showAnimation ? "animate-bounce" : ""}`}
+            className={`text-blue-500 cursor-pointer ${
+              showAnimation ? "animate-bounce" : ""
+            }`}
             onClick={handleSignInClick}
           >
             ¿Ya tenés cuenta? ¡Inicia sesión!
           </span>
 
           <div className="mt-8 flex justify-between">
-          <button
-          className="text-red-500 cursor-pointer focus:outline-none"
-          onClick={handleExitClick}
-        >
-          Salir
-        </button>
-        
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
-          >
-            Registrar
-          </button>
+            <button
+              className="text-red-500 cursor-pointer focus:outline-none"
+              onClick={handleExitClick}
+            >
+              Salir
+            </button>
 
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+            >
+              Registrar
+            </button>
           </div>
-          
-
-          
-        
-      
         </div>
       </form>
     </div>

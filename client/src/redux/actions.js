@@ -90,10 +90,12 @@ export const getOrder = (order) => {
 };
 
 // INICIAR SESION
-export const logIn = (form) => {
+export const logIn = ({ email, password }) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/login`, form);
+      const response = await axios.get(
+        `${API_BASE_URL}/login?email=${email}&password=${password}`
+      );
       return dispatch({
         type: LOGIN,
         payload: response.data,

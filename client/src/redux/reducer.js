@@ -98,11 +98,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
         }),
       };
 
-    // case LOGIN:
-    //   return {
-    //     ...state,
-    //     actualUser: payload
-    //   }
+    case LOGIN:
+      return {
+        ...state,
+        actualUser: payload,
+      };
 
     case SIGNUP:
       return {

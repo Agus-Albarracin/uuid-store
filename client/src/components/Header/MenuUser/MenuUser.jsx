@@ -1,13 +1,8 @@
-import styles from "./MenuUser.module.scss";
-
 import { useState } from "react";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { logOut } from "../../../redux/actions";
 import LogIn from "./LogInForm/LogInForm";
 import SignIn from "./SignInForm/SignInForm";
-
-import { logOut } from "../../../redux/actions";
-import { useDispatch } from "react-redux";
 
 const MenuUser = ({ mostrarUser }) => {
   const dispatch = useDispatch();
@@ -24,12 +19,18 @@ const MenuUser = ({ mostrarUser }) => {
     mostrarUser();
   };
 
+  const handleCloseMenu = () => {
+    if (logInOrSignIn) {
+      setLogInOrSignIn(false);
+      mostrarUser();
+    }
+  };
+
   return (
-    <div className={styles.viewContainer}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center" onClick={handleCloseMenu}>
       {Object.keys(user).length === 0 ? (
-        <div>
-          <div className={styles.fondo} onClick={mostrarUser}></div>
-          <div className={styles.menuContainer}>
+        <div className="absolute inset-0 bg-black bg-opacity-50">
+          <div className="bg-white max-w-md p-4 rounded-md mx-auto" onClick={(e) => e.stopPropagation()}>
             {logInOrSignIn ? (
               <LogIn handleView={handleView} mostrarUser={mostrarUser} />
             ) : (
@@ -38,10 +39,14 @@ const MenuUser = ({ mostrarUser }) => {
           </div>
         </div>
       ) : (
-        <div>
-          {`${user.nombre}  ${user.apellido}`}
-          <span> Mi cuenta </span>
-          <span onClick={handleLogOut}> Salir </span>
+        <div className="bg-white p-4 rounded-md" onClick={(e) => e.stopPropagation()}>
+          <div>{`${user.nombre}  ${user.apellido}`}</div>
+          <span className="cursor-pointer text-blue-500 mr-4" onClick={handleView}>
+            Mi cuenta
+          </span>
+          <span className="cursor-pointer text-blue-500" onClick={handleLogOut}>
+            Salir
+          </span>
         </div>
       )}
     </div>

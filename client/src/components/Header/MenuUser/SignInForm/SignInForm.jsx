@@ -1,12 +1,20 @@
 import { useFormik } from "formik";
-import { validate } from "./validate";
-import styles from "./SignInForm.module.scss";
 import Autenticador from "../../../../Helpers/Auntenticador";
 import { signUp } from "../../../../redux/actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 
 const SignIn = ({ handleView, mostrarUser }) => {
   const dispatch = useDispatch();
+  const [showAnimation, setShowAnimation] = useState(true);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setShowAnimation(false);
+    }, 500);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -16,97 +24,162 @@ const SignIn = ({ handleView, mostrarUser }) => {
       password: "",
       rPassword: "",
     },
-    validate,
     onSubmit: (values) => {
       dispatch(signUp(values));
       mostrarUser();
     },
   });
 
+  const handleSignInClick = () => {
+    setShowAnimation(true);
+
+    // Ajusta el tiempo según la duración de tu animación CSS
+    setTimeout(() => {
+      setShowAnimation(false);
+      handleView();
+    }, 200);
+
+
+  };
+
+  const handleExitClick = () => {
+    setShowAnimation(true);
+    setTimeout(() => {
+      setShowAnimation(false);
+      // Agrega aquí cualquier lógica adicional que necesites al salir del componente
+    }, 200);
+  };
+
   return (
-    <div className={styles.logIn}>
-      <div>REGISTRARSE EN UUID STORE</div>
-      <form onSubmit={formik.handleSubmit}>
-        <label htmlFor="nombre"> Nombre </label>
-        <input
-          id="nombre"
-          name="nombre"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.nombre}
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.nombre && formik.errors.nombre && (
-          <span> {formik.errors.nombre} </span>
-        )}
-
-        <label htmlFor="apellido"> Apellido </label>
-        <input
-          id="apellido"
-          name="apellido"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.apellido}
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.apellido && formik.errors.apellido && (
-          <span> {formik.errors.apellido} </span>
-        )}
-
-        <label htmlFor="email"> Email</label>
-        <input
-          id="email"
-          name="email"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.email}
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.email && formik.errors.email && (
-          <span> {formik.errors.email} </span>
-        )}
-
-        <label htmlFor="password"> Contraseña </label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          onChange={formik.handleChange}
-          value={formik.values.password}
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.password && formik.errors.password && (
-          <span> {formik.errors.password} </span>
-        )}
-
-        <label htmlFor="rPassword"> Repetir contraseña </label>
-        <input
-          id="rPassword"
-          name="rPassword"
-          type="password"
-          onChange={formik.handleChange}
-          value={formik.values.rPassword}
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.rPassword && formik.errors.rPassword && (
-          <span> {formik.errors.rPassword} </span>
-        )}
-
-        <hr />
+    <div className={`max-w-md mx-auto bg-white p-6 rounded-md shadow-md transition-opacity transform duration-500 ${showAnimation ? 'opacity-0' : 'opacity-100'}`}>
+      <div className="text-2xl font-bold mb-6">REGISTRARSE EN UUID STORE</div>
+      <form onSubmit={formik.handleSubmit} className="space-y-4">
+        <div>
+          <label htmlFor="nombre" className="block font-semibold">
+            Nombre
+          </label>
+          <input
+            id="nombre"
+            name="nombre"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.nombre}
+            onBlur={formik.handleBlur}
+            className="w-full border rounded px-3 py-2 mt-1"
+          />
+          {formik.touched.nombre && formik.errors.nombre && (
+            <span className="text-red-500">{formik.errors.nombre}</span>
+          )}
+        </div>
 
         <div>
-          <span>O continúa con:</span>
+          <label htmlFor="apellido" className="block font-semibold">
+            Apellido
+          </label>
+          <input
+            id="apellido"
+            name="apellido"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.apellido}
+            onBlur={formik.handleBlur}
+            className="w-full border rounded px-3 py-2 mt-1"
+          />
+          {formik.touched.apellido && formik.errors.apellido && (
+            <span className="text-red-500">{formik.errors.apellido}</span>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="email" className="block font-semibold">
+            Email
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.email}
+            onBlur={formik.handleBlur}
+            className="w-full border rounded px-3 py-2 mt-1"
+          />
+          {formik.touched.email && formik.errors.email && (
+            <span className="text-red-500">{formik.errors.email}</span>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="password" className="block font-semibold">
+            Contraseña
+          </label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            onChange={formik.handleChange}
+            value={formik.values.password}
+            onBlur={formik.handleBlur}
+            className="w-full border rounded px-3 py-2 mt-1"
+          />
+          {formik.touched.password && formik.errors.password && (
+            <span className="text-red-500">{formik.errors.password}</span>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="rPassword" className="block font-semibold">
+            Repetir contraseña
+          </label>
+          <input
+            id="rPassword"
+            name="rPassword"
+            type="password"
+            onChange={formik.handleChange}
+            value={formik.values.rPassword}
+            onBlur={formik.handleBlur}
+            className="w-full border rounded px-3 py-2 mt-1"
+          />
+          {formik.touched.rPassword && formik.errors.rPassword && (
+            <span className="text-red-500">{formik.errors.rPassword}</span>
+          )}
+        </div>
+
+        <hr className="my-4" />
+
+        <div className="flex items-center space-x-2">
+          <span className="text-gray-600">O continúa con:</span>
           <Autenticador />
         </div>
 
-        <div className={styles.side}>
-          <span>¿Ya tenés cuenta?</span>
-          <span onClick={handleView}>¡Inicia sesión!</span>
-        </div>
+        <div className="flex items-center justify-between mt-4">
+          <span
+            className={`text-blue-500 cursor-pointer ${showAnimation ? "animate-bounce" : ""}`}
+            onClick={handleSignInClick}
+          >
+            ¿Ya tenés cuenta? ¡Inicia sesión!
+          </span>
 
-        <div className={styles.buttons}>
-          <span>Cancelar</span>
-          <button type="submit"> Registrar </button>
+          <div className="mt-8 flex justify-between">
+          <button
+          className="text-red-500 cursor-pointer focus:outline-none"
+          onClick={handleExitClick}
+        >
+          Salir
+        </button>
+        
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+          >
+            Registrar
+          </button>
+
+          </div>
+          
+
+          
+        
+      
         </div>
       </form>
     </div>

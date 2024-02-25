@@ -29,17 +29,16 @@ function Productos() {
   }, [dispatch, allProductos.length]);
 
   return (
-    <div className="container mx-auto flex flex-col sm:flex-row">
-      <div className="w-full sm:w-1/4">
+    <div className="flex h-screen overflow-hidden">
+      <div className="w-1/6 bg-gray-200 p-4">
         <SideBar handleChange={handleChange} handleSubmit={handleSubmit} />
       </div>
-      <div className="w-full sm:w-3/4 p-4 sm:p-8">
+      <div className="w-full p-4 overflow-y-auto">
         <Cards data={allProductos} />
       </div>
     </div>
-
-
   );
+  
 }
 
 export default Productos;

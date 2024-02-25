@@ -21,7 +21,7 @@ function Card({ producto }) {
           <div className="flex items-center">
             <p className="mr-2 text-4xl font-semibold text-[#0C78BF]">${precio - precio * 0.2}</p>
             <p className="text-base font-medium text-gray-500 line-through">${precio}</p>
-            <p className="bg-[#FBCE40] p-2 top-0  ml-auto text-2xl font-medium text-white rounded-lg">20% off</p>
+            <p className="bg-[#FBCE40] p-2   ml-auto text-2xl font-bold text-black rounded-lg">20% off</p>
           </div>
         </div>
       </Link>

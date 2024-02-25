@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import styles from './Nav.module.scss';
 
 // iconos y logos
-import logo from '../../../assets/uuid-logo.png';
+import logo from '../../../assets/uuid-logo2.png';
 import iconoCarro from '../../../assets/carro.png';
 import iconoUser from '../../../assets/persona.png';
 
@@ -17,8 +17,8 @@ import { useState } from 'react';
 
 const Nav = () => {
 
-    const [ userDisplay, setUserDisplay ] = useState(false);
-    const [ carroDisplay, setCarroDisplay ] = useState(false);
+    const [userDisplay, setUserDisplay] = useState(false);
+    const [carroDisplay, setCarroDisplay] = useState(false);
 
     const mostrarUser = () => {
         setUserDisplay(!userDisplay);
@@ -29,25 +29,25 @@ const Nav = () => {
     }
 
     return (
-        <nav className={styles.nav}>
-            <Link to='/'> 
-                <img src={logo} alt="logo" className={styles.logo} /> 
+        <nav className={`flex items-center justify-between p-4 bg-[#FF3131] text-white ${styles.nav}`}>
+            <Link to='/'>
+                <img src={logo} alt="logo" className=" h-11" />
             </Link>
 
-            <div className={styles.links}>
-                <Link to='/'> HOME </Link>
-                <Link to='/productos' > TODOS LOS PRODUCTOS </Link>
+            <div className={`hidden md:flex space-x-4 ${styles.links}`}>
+                <Link to='/'>HOME</Link>
+                <Link to='/productos'>TODOS LOS PRODUCTOS</Link>
             </div>
 
-            <div className={styles.menus}>
+            <div className={`flex space-x-4 ${styles.menus}`}>
                 <span>
-                    <img src={iconoCarro} alt="carrito de compras" onClick={mostrarCarro}/>
-                    { carroDisplay && <MenuCarro mostrarCarro={mostrarCarro}/> }
+                    <img src={iconoCarro} alt="carrito de compras" className="cursor-pointer" onClick={mostrarCarro} />
+                    {carroDisplay && <MenuCarro mostrarCarro={mostrarCarro} />}
                 </span>
 
                 <span>
-                    <img src={iconoUser} alt="icono de usuario" onClick={mostrarUser} />
-                    { userDisplay && <MenuUser mostrarUser={mostrarUser}/> }
+                    <img src={iconoUser} alt="icono de usuario" className="cursor-pointer" onClick={mostrarUser} />
+                    {userDisplay && <MenuUser mostrarUser={mostrarUser} />}
                 </span>
             </div>
         </nav>

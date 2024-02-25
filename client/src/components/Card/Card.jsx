@@ -16,12 +16,12 @@ function Card({ producto }) {
       <Link to={`/detail/${id}`} className="block">
         <img className="h-full w-full object-cover object-center" src={images[1]} alt="Imagen 2" />
         <div className="p-6">
-          <h2 className="mb-2 text-xl font-bold text-gray-900">{nombre}</h2>
-          <p className="mb-2 text-base text-gray-700">{modelo}</p>
+          <h2 className="mb-2 text-xl font-bold text-[#0C78BF]">{nombre}</h2>
+          <p className="mb-2 text-lg font-semibold text-[#4CB34D]">{modelo}</p>
           <div className="flex items-center">
-            <p className="mr-2 text-lg font-semibold text-gray-900">{precio - precio * 0.2}</p>
-            <p className="text-base font-medium text-gray-500 line-through">{precio}</p>
-            <p className="ml-auto text-base font-medium text-green-500">20% off</p>
+            <p className="mr-2 text-4xl font-semibold text-[#0C78BF]">${precio - precio * 0.2}</p>
+            <p className="text-base font-medium text-gray-500 line-through">${precio}</p>
+            <p className="bg-[#FBCE40] p-2 top-0  ml-auto text-2xl font-medium text-white rounded-lg">20% off</p>
           </div>
         </div>
       </Link>

@@ -4,16 +4,49 @@ const { Op } = require("sequelize");
 const getProductos = async (req, res) => {
   try {
     let allProdu = await Productos.findAll({
-      include: [
-        {
-          model: Usuario,
-          as: "carrito_clientes", // Alias para la relación de Productos -> carrito_cliente
-        },
-      ],
       attributes: { exclude: ["createdAt", "updatedAt"] },
     });
     allProdu = allProdu.map((produ) => produ.get());
     return res.status(200).json(allProdu);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+const getProductosMasVendidos = async (req, res) => {
+  try {
+    // Obtener productos con quantitysold mayor que 0
+    const masVendidos = await Productos.findAll({
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+      where: {quantitysold: { [Op.gt]: 0 }},
+      order: [["quantitysold", "DESC"]]
+    });
+
+    const cantidadConValor = masVendidos.length;
+
+    // Relleno de productos en caso de que no haya más vendidos.
+    // El 10 representa la cantidad de productos a devolver
+    const faltantes = Math.max(10 - cantidadConValor, 0);
+
+    // Obtener productos con quantitysold igual a 0 o null, ordenados de mayor a menor
+    const randomProdu = await Productos.findAll({
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+      where: {
+        [Op.or]: [
+          { quantitysold: 0 },
+          { quantitysold: null }
+        ]
+      },
+      order: [["quantitysold", "DESC"]],
+      limit: faltantes
+    });
+
+    //Me traigo los valores en caso de que falten.
+    const topProductos = [...masVendidos, ...randomProdu];
+
+    return res.status(200).json(topProductos);
+    
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -25,12 +58,7 @@ const getProductosON = async (req, res) => {
       where: {
         estado: true,
       },
-      include: [
-        {
-          model: Usuario,
-          as: "carrito_clientes", // Alias para la relación de Productos -> carrito_cliente
-        },
-      ],
+
       attributes: { exclude: ["createdAt", "updatedAt"] },
     });
     allProdu = allProdu.map((produ) => produ.get());
@@ -133,6 +161,7 @@ const getProductosFilter = async (req, res) => {
 
 module.exports = {
   getProductos,
+  getProductosMasVendidos,
   getProductosById,
   getProductosON,
   getProductosByName,

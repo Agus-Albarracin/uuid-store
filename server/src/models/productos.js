@@ -54,6 +54,11 @@ module.exports = (sequelize) => {
         default: 0,
         allowNull: true,
       },
+      enDescuento:{
+        type: DataTypes.BOOLEAN,
+        default: false,
+        allowNull: true,
+      },
       estado: {
         //El estado corresponde a activo o inactivo
         type: DataTypes.BOOLEAN,

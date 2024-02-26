@@ -12,7 +12,6 @@ const login = async (req, res) => {
 
     const passwordCorrect =
       user === null ? false : await bcrypt.compare(password, user.password);
-    console.log(passwordCorrect);
 
     if (!user || !passwordCorrect) {
       return res.status(400).send("contraseña o usuario inválido");
@@ -27,8 +26,7 @@ const login = async (req, res) => {
     const token = jwt.sign(payload, JWT_SECRET);
 
     res.json({
-      email: user.email,
-      admin: user.admin,
+      ...user.dataValues,
       token,
     });
   } catch (error) {

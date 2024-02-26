@@ -26,13 +26,18 @@ import { clearMessage } from "./redux/actions";
 function App() {
   const dispatch = useDispatch();
 
-  const message = useSelector(state => state.messageToUser)
+  const user = useSelector((state) => state.actualUser);
+  const message = useSelector((state) => state.messageToUser);
+
+  useEffect(() => {
+    user.token && window.localStorage.setItem("token", user.token);
+  }, [user]);
 
   useEffect(() => {
     setTimeout(() => {
       dispatch(clearMessage());
-    }, 5000)
-  }, [message])
+    }, 5000);
+  }, [message]);
 
   return (
     <div className={styles.appContainer}>
@@ -45,7 +50,7 @@ function App() {
         <Route path={PATHROUTES.PRODUCTOS} element={<Productos />} />
       </Routes>
 
-      { message && <span className={styles.message}> { message } </span> }
+      {message && <span className={styles.message}> {message} </span>}
 
       <Footer />
     </div>

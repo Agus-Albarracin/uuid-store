@@ -5,33 +5,44 @@ const postOrden = async (req, res) => {
     
    const {
        //info del cliente 
-      emailStorage, email, nombre, apellido, dni, numeroTramite, telefono, genero,
-       notificaciones, provincia, direccion, localidad, codigoPostal, total, estadoDelPedido,
+      emailStorage, email, nombre, apellido, dni, numeroTramite, telefono, genero, notificaciones, provincia, direccion,
+      quantitysold, localidad, codigoPostal, total, estadoDelPedido,
        
        //info del producto
        productos } = req.body;
 
 
     try {
-        // Verificar si el usuario existe en la base de datos
+        for (const Allproducto of productos) {
+            const producto = await Productos.findByPk(Allproducto.id);
+            
+            if (!producto) {
+                return res.status(400).json({ message: "No se encontró el producto con ID: " + Allproducto.id });
+            }
+            
+            producto.quantitysold = (producto.quantitysold || 0) + 1;
+            await producto.save();
+        }
+
+
         let usuario = await Usuario.findOne({ where: { email: emailStorage} });
         if (!usuario) {
             return res.status(400).json({ message: "Usuario no encontrado" });
         }
-
+        
         // Crear un nuevo carrito en la base de datos
         const carrito = await Carrito.create({
-            idDeCompra: uuid.v4(), // Generar un ID único para el carrito
+            idDeCompra: uuid.v4(), // este es el id que se tiene que rastrear
             email: email,
-            productosEnCarrito: productos.map(producto => ({ ["Codigo: "]: producto.codigo})),// Suponiendo que productos es un array de objetos con el id del producto
-            total: total, 
+            productosEnCarrito: productos.map(producto => ({ ["Codigo: "]: producto.codigo})),
             estadoDelPedido: estadoDelPedido,
             ProductoId: productos.map(prod => prod.id),
-            UsuarioId: usuario.id
+            UsuarioId: usuario.id,
          });
 
 
          const ticketDeCompra = {
+                  productos,
                   carrito,
                   usuario: {
                       id: usuario.id,

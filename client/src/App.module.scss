@@ -14,3 +14,19 @@
     flex-direction: column;
 }
 
+.message{
+    width: 280px;
+    height: 50px;
+    background-color: #fff;
+
+    position: absolute;
+    z-index: 1000;
+    top: 20px;
+
+    align-self: center;
+
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center ;
+}

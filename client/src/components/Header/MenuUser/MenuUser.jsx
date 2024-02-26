@@ -50,7 +50,7 @@ const MenuUser = ({ mostrarUser }) => {
           className="bg-white p-4 rounded-md"
           onClick={(e) => e.stopPropagation()}
         >
-          <div>{`${user.nombre}  ${user.apellido}`}</div>
+          <div className="text-black">{`${user.nombre}  ${user.apellido}`}</div>
           <span
             className="cursor-pointer text-blue-500 mr-4"
             // onClick={handleView}

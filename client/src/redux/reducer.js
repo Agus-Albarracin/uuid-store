@@ -9,6 +9,8 @@ import {
   FILTER_PRODUCTO2,
   SIGNUP,
   LOGOUT,
+  MESSAGE_TO_USER,
+  CLEAR_MESSAGE,
 } from "./action-types";
 
 const initialState = {
@@ -17,6 +19,7 @@ const initialState = {
   detail: {},
   productCreated: {},
   actualUser: {},
+  messageToUser: '',
 };
 
 // case CLEAR_DETAIL:
@@ -108,6 +111,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         actualUser: payload,
+        messageToUser: 'Usuario creado correctamente!'
       };
 
     case LOGOUT:
@@ -115,6 +119,18 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         actualUser: payload,
       };
+
+    case MESSAGE_TO_USER:
+      return {
+        ...state,
+        messageToUser: payload,
+      }
+
+    case CLEAR_MESSAGE:
+      return {
+        ...state,
+        messageToUser: payload,
+      }
 
     default:
       return {

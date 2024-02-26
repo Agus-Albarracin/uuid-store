@@ -51,6 +51,7 @@ module.exports = (sequelize) => {
       },
       quantitysold: {
         type: DataTypes.INTEGER,
+        default: 0,
         allowNull: true,
       },
       estado: {

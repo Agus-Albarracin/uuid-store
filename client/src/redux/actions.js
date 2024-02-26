@@ -9,6 +9,8 @@ import {
   FILTER_PRODUCTO2,
   GET_ORDER,
   LOGOUT,
+  MESSAGE_TO_USER,
+  CLEAR_MESSAGE
 } from "./action-types";
 
 import axios from "axios";
@@ -17,25 +19,33 @@ const API_BASE_URL = "http://localhost:3001";
 
 // TRAER TODOS LOS PRODUCTOS
 export const getProductos = () => {
-  return async function (dispatch) {
-    const response = await axios(`http://localhost:3001/getproductos`);
-    return dispatch({
-      type: GET_PRODUCTOS,
-      payload: response.data,
-    });
-  };
+  try {
+    return async function (dispatch) {
+      const response = await axios(`http://localhost:3001/getproductos`);
+      return dispatch({
+        type: GET_PRODUCTOS,
+        payload: response.data,
+      });
+    };
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const getName = (nombre) => {
-  return async function (dispatch) {
-    const response = await axios(
-      `http://localhost:3001/getproductosByName/?nombre=${nombre}`
-    );
-    return dispatch({
-      type: GET_NAME,
-      payload: response.data,
-    });
-  };
+  try {
+    return async function (dispatch) {
+      const response = await axios(
+        `http://localhost:3001/getproductosByName/?nombre=${nombre}`
+      );
+      return dispatch({
+        type: GET_NAME,
+        payload: response.data,
+      });
+    };
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // TRAER EL DETAIL DE UN PRODUCTO
@@ -101,7 +111,10 @@ export const logIn = ({ email, password }) => {
         payload: response.data,
       });
     } catch (error) {
-      console.log(error);
+      return dispatch({
+        type: MESSAGE_TO_USER,
+        payload: error.response.data,
+      });
     }
   };
 };
@@ -115,7 +128,10 @@ export const signUp = (form) => {
         payload: response.data,
       });
     } catch (error) {
-      console.log(error);
+      return dispatch({
+        type: MESSAGE_TO_USER,
+        payload: error.response.data,
+      });
     }
   };
 };
@@ -126,3 +142,10 @@ export const logOut = () => {
     payload: {},
   };
 };
+
+export const clearMessage = () => {
+  return {
+    type: CLEAR_MESSAGE,
+    payload: '',
+  }
+}

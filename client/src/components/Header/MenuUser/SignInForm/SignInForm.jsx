@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import Autenticador from "../../../../Helpers/Auntenticador";
 import { signUp } from "../../../../redux/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { validate } from "./validate";
 
@@ -72,7 +72,7 @@ const SignIn = ({ handleView, mostrarUser }) => {
             onChange={formik.handleChange}
             value={formik.values.nombre}
             onBlur={formik.handleBlur}
-            className="w-full border rounded px-3 py-2 mt-1"
+            className="w-full border rounded px-3 py-2 mt-1 text-black"
           />
           {formik.touched.nombre && formik.errors.nombre && (
             <span className="text-red-500">{formik.errors.nombre}</span>
@@ -93,7 +93,7 @@ const SignIn = ({ handleView, mostrarUser }) => {
             onChange={formik.handleChange}
             value={formik.values.apellido}
             onBlur={formik.handleBlur}
-            className="w-full border rounded px-3 py-2 mt-1"
+            className="w-full border rounded px-3 py-2 mt-1 text-black"
           />
           {formik.touched.apellido && formik.errors.apellido && (
             <span className="text-red-500">{formik.errors.apellido}</span>
@@ -111,7 +111,7 @@ const SignIn = ({ handleView, mostrarUser }) => {
             onChange={formik.handleChange}
             value={formik.values.email}
             onBlur={formik.handleBlur}
-            className="w-full border rounded px-3 py-2 mt-1"
+            className="w-full border rounded px-3 py-2 mt-1 text-black"
           />
           {formik.touched.email && formik.errors.email && (
             <span className="text-red-500">{formik.errors.email}</span>
@@ -132,7 +132,7 @@ const SignIn = ({ handleView, mostrarUser }) => {
             onChange={formik.handleChange}
             value={formik.values.password}
             onBlur={formik.handleBlur}
-            className="w-full border rounded px-3 py-2 mt-1"
+            className="w-full border rounded px-3 py-2 mt-1 text-black"
           />
           {formik.touched.password && formik.errors.password && (
             <span className="text-red-500">{formik.errors.password}</span>
@@ -153,7 +153,7 @@ const SignIn = ({ handleView, mostrarUser }) => {
             onChange={formik.handleChange}
             value={formik.values.rPassword}
             onBlur={formik.handleBlur}
-            className="w-full border rounded px-3 py-2 mt-1"
+            className="w-full border rounded px-3 py-2 mt-1 text-black"
           />
           {formik.touched.rPassword && formik.errors.rPassword && (
             <span className="text-red-500">{formik.errors.rPassword}</span>

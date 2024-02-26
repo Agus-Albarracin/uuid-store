@@ -18,20 +18,29 @@ import Productos from "./Views/Productos/Productos";
 import PATHROUTES from "./Helpers/path";
 
 // ADRI: IGNORAR ESTOY HACIENDO PRUEBAS
-// import { useEffect } from "react";
-// import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 // import LogIn from "./components/Header/MenuUser/LogInForm/LogInForm";
+import { clearMessage } from "./redux/actions";
 
 function App() {
   // const user = useSelector((state) => state.actualUser);
   // const isLoged = JSON.parser(localStorage.getItem("user"));
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   // useEffect(() => {
   //   if (isLoged) {
   //     dispatch()
   //   }
   // }, []);
+
+  const message = useSelector(state => state.messageToUser)
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(clearMessage());
+    }, 5000)
+  }, [message])
 
   return (
     <div className={styles.appContainer}>
@@ -43,6 +52,8 @@ function App() {
         <Route path={PATHROUTES.HOME} element={<HomePage />} />
         <Route path={PATHROUTES.PRODUCTOS} element={<Productos />} />
       </Routes>
+
+      { message && <span className={styles.message}> { message } </span> }
 
       <Footer />
     </div>

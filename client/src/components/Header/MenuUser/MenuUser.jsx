@@ -20,6 +20,7 @@ const MenuUser = ({ mostrarUser }) => {
 
   const handleLogOut = () => {
     dispatch(logOut());
+    window.localStorage.removeItem("loggedUser");
     mostrarUser();
   };
 

@@ -6,16 +6,15 @@ const { JWT_SECRET } = process.env;
 
 const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password } = req.query;
 
     const user = await Usuario.findOne({ where: { email: email } });
 
     const passwordCorrect =
       user === null ? false : await bcrypt.compare(password, user.password);
-    console.log(passwordCorrect);
 
     if (!user || !passwordCorrect) {
-      return res.status(401).json({ error: "contraseña o usuario inválido" });
+      return res.status(400).send("contraseña o usuario inválido");
     }
 
     const payload = {
@@ -27,13 +26,12 @@ const login = async (req, res) => {
     const token = jwt.sign(payload, JWT_SECRET);
 
     res.json({
-      email: user.email,
-      admin: user.admin,
+      ...user.dataValues,
       token,
     });
   } catch (error) {
     console.log(error);
-    res.status(400).json({ error: error.message });
+    res.status(400).send(error.message);
   }
 };
 

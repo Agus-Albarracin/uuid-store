@@ -17,30 +17,38 @@ import Productos from "./Views/Productos/Productos";
 //PATHROUTES
 import PATHROUTES from "./Helpers/path";
 
-// ADRI: IGNORAR ESTOY HACIENDO PRUEBAS
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import LogIn from "./components/Header/MenuUser/LogInForm/LogInForm";
+
+// ACTION
 import { clearMessage } from "./redux/actions";
+import { autoLogin } from "./redux/actions";
 
 function App() {
-  // const user = useSelector((state) => state.actualUser);
-  // const isLoged = JSON.parser(localStorage.getItem("user"));
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   if (isLoged) {
-  //     dispatch()
-  //   }
-  // }, []);
+  const user = useSelector((state) => state.actualUser);
+  const message = useSelector((state) => state.messageToUser);
 
-  const message = useSelector(state => state.messageToUser)
+  useEffect(() => {
+    if (user.token) {
+      window.localStorage.setItem("loggedUser", JSON.stringify(user));
+    }
+  }, [user]);
+
+  useEffect(() => {
+    const userJSON = window.localStorage.getItem("loggedUser");
+    if (userJSON) {
+      const user = JSON.parse(userJSON);
+      dispatch(autoLogin(user));
+    }
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
       dispatch(clearMessage());
-    }, 5000)
-  }, [message])
+    }, 5000);
+  }, [message]);
 
   return (
     <div className={styles.appContainer}>
@@ -53,7 +61,7 @@ function App() {
         <Route path={PATHROUTES.PRODUCTOS} element={<Productos />} />
       </Routes>
 
-      { message && <span className={styles.message}> { message } </span> }
+      {message && <span className={styles.message}> {message} </span>}
 
       <Footer />
     </div>

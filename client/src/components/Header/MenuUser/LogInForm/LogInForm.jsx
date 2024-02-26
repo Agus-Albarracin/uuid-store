@@ -1,21 +1,18 @@
+// FORMIK
 import { useFormik } from "formik";
+
+// COMPONENTS
 import Autenticador from "../../../../Helpers/Auntenticador";
+
+// HOOKS
 import { useState, useEffect } from "react";
-import { logIn } from "../../../../redux/actions";
 import { useDispatch } from "react-redux";
 
-const LogIn = ({ handleView }) => {
-  const dispatch = useDispatch();
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    onSubmit: (values) => {
-      dispatch(logIn(values));
-    },
-  });
+// ACTIONS
+import { logIn } from "../../../../redux/actions";
 
+const LogIn = ({ handleView, mostrarUser }) => {
+  const dispatch = useDispatch();
   const [showAnimation, setShowAnimation] = useState(true);
 
   useEffect(() => {
@@ -39,9 +36,21 @@ const LogIn = ({ handleView }) => {
     setShowAnimation(true);
     setTimeout(() => {
       setShowAnimation(false);
+      mostrarUser();
       // Agrega aquí cualquier lógica adicional que necesites al salir del componente
     }, 200);
   };
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: (values) => {
+      dispatch(logIn(values));
+      mostrarUser();
+    },
+  });
 
   return (
     <div
@@ -63,7 +72,7 @@ const LogIn = ({ handleView }) => {
           id="email"
           name="email"
           type="text"
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 border border-gray-300 rounded text-black"
           onChange={formik.handleChange}
           value={formik.values.email}
         />
@@ -78,7 +87,7 @@ const LogIn = ({ handleView }) => {
           id="password"
           name="password"
           type="password"
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 border border-gray-300 rounded text-black"
           onChange={formik.handleChange}
           value={formik.values.password}
         />

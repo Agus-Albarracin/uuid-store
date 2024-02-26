@@ -1,8 +1,17 @@
+// FORMIK
 import { useFormik } from "formik";
+
+// COMPONENTS
 import Autenticador from "../../../../Helpers/Auntenticador";
+
+// ACTIONS
 import { signUp } from "../../../../redux/actions";
-import { useDispatch, useSelector } from "react-redux";
+
+// HOOKS
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+
+// VALIDACION DEL FORMULARIO
 import { validate } from "./validate";
 
 const SignIn = ({ handleView, mostrarUser }) => {
@@ -16,6 +25,25 @@ const SignIn = ({ handleView, mostrarUser }) => {
 
     return () => clearTimeout(timeoutId);
   }, []);
+
+  const handleSignInClick = () => {
+    setShowAnimation(true);
+    
+    // Ajusta el tiempo según la duración de tu animación CSS
+    setTimeout(() => {
+      setShowAnimation(false);
+      handleView();
+    }, 200);
+  };
+  
+  const handleExitClick = () => {
+    setShowAnimation(true);
+    setTimeout(() => {
+      setShowAnimation(false);
+      mostrarUser();
+      // Agrega aquí cualquier lógica adicional que necesites al salir del componente
+    }, 200);
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -31,31 +59,12 @@ const SignIn = ({ handleView, mostrarUser }) => {
       mostrarUser();
     },
   });
-
-  const handleSignInClick = () => {
-    setShowAnimation(true);
-
-    // Ajusta el tiempo según la duración de tu animación CSS
-    setTimeout(() => {
-      setShowAnimation(false);
-      handleView();
-    }, 200);
-  };
-
-  const handleExitClick = () => {
-    setShowAnimation(true);
-    setTimeout(() => {
-      setShowAnimation(false);
-      mostrarUser();
-      // Agrega aquí cualquier lógica adicional que necesites al salir del componente
-    }, 200);
-  };
-
+  
   return (
     <div
-      className={`max-w-md mx-auto bg-white p-6 rounded-md shadow-md transition-opacity transform duration-500 ${
-        showAnimation ? "opacity-0" : "opacity-100"
-      }`}
+    className={`max-w-md mx-auto bg-white p-6 rounded-md shadow-md transition-opacity transform duration-500 ${
+      showAnimation ? "opacity-0" : "opacity-100"
+    }`}
     >
       <div className="text-2xl font-bold mb-6 text-gray-600">
         REGISTRARSE EN UUID STORE

@@ -41,7 +41,7 @@ router.get("/getuser", getUser.getAllUsers); //endpoint para todos los clientes
 // obtiene los datos desde el google
 router.post("/signupgoogle", postUser.signUpUserGoogle);
 router.post("/signup", postUser.signUpUser);
-router.post("/login", login.login);
+router.get("/login", login.login);
 
 // Crea el usuario sin google / complemento del google
 router.put("/updateuser", putUser.updateUser);

@@ -10,7 +10,8 @@ import {
   GET_ORDER,
   LOGOUT,
   MESSAGE_TO_USER,
-  CLEAR_MESSAGE
+  CLEAR_MESSAGE,
+  AUTO_LOGIN,
 } from "./action-types";
 
 import axios from "axios";
@@ -146,6 +147,13 @@ export const logOut = () => {
 export const clearMessage = () => {
   return {
     type: CLEAR_MESSAGE,
-    payload: '',
-  }
-}
+    payload: "",
+  };
+};
+
+export const autoLogin = (user) => {
+  return {
+    type: AUTO_LOGIN,
+    payload: user,
+  };
+};

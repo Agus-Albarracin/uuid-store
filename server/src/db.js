@@ -28,9 +28,6 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 const { Productos, Usuario, Carrito } = sequelize.models;
 
-// Relación de muchos a muchos entre Productos y Cliente a través de Carrito
-Productos.belongsToMany(Usuario, { through: Carrito, as: 'carrito_clientes' });
-Usuario.belongsToMany(Productos, { through: Carrito, as: 'carrito_productos' });
 Usuario.hasMany(Carrito);
 Carrito.belongsTo(Usuario);
 

@@ -36,6 +36,7 @@ const postOrden = async (req, res) => {
             email: email,
             productosEnCarrito: productos.map(producto => ({ ["Codigo: "]: producto.codigo})),
             estadoDelPedido: estadoDelPedido,
+            total: total,
             ProductoId: productos.map(prod => prod.id),
             UsuarioId: usuario.id,
          });

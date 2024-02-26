@@ -1,40 +1,37 @@
+// FORMIK
 import { useFormik } from "formik";
+
+// COMPONENTS
 import Autenticador from "../../../../Helpers/Auntenticador";
+
+// HOOKS
 import { useState, useEffect } from "react";
-import { logIn } from "../../../../redux/actions";
 import { useDispatch } from "react-redux";
 
-const LogIn = ({ handleView }) => {
+// ACTIONS
+import { logIn } from "../../../../redux/actions";
+
+const LogIn = ({ handleView, mostrarUser }) => {
   const dispatch = useDispatch();
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    onSubmit: (values) => {
-      dispatch(logIn(values));
-    },
-  });
-
   const [showAnimation, setShowAnimation] = useState(true);
-
+  
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowAnimation(false);
     }, 500);
-
+    
     return () => clearTimeout(timeoutId);
   }, []);
-
+  
   const handleSignUpClick = () => {
     setShowAnimation(true);
-
+    
     setTimeout(() => {
       setShowAnimation(false);
       handleView();
     }, 200);
   };
-
+  
   const handleExitClick = () => {
     setShowAnimation(true);
     setTimeout(() => {
@@ -43,6 +40,17 @@ const LogIn = ({ handleView }) => {
     }, 200);
   };
 
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: (values) => {
+      dispatch(logIn(values));
+      mostrarUser();
+    },
+  });
+  
   return (
     <div
       className={`w-full max-w-md mx-auto p-4 bg-white shadow-md rounded-md transition-opacity transform duration-500 ${
@@ -63,7 +71,7 @@ const LogIn = ({ handleView }) => {
           id="email"
           name="email"
           type="text"
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 border border-gray-300 rounded text-black"
           onChange={formik.handleChange}
           value={formik.values.email}
         />
@@ -78,7 +86,7 @@ const LogIn = ({ handleView }) => {
           id="password"
           name="password"
           type="password"
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 border border-gray-300 rounded text-black"
           onChange={formik.handleChange}
           value={formik.values.password}
         />

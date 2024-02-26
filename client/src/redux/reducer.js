@@ -105,6 +105,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         actualUser: payload,
+        messageToUser: 'Sesión iniciada correctamente!'
       };
 
     case SIGNUP:

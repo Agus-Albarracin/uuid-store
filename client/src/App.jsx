@@ -17,22 +17,14 @@ import Productos from "./Views/Productos/Productos";
 //PATHROUTES
 import PATHROUTES from "./Helpers/path";
 
-// ADRI: IGNORAR ESTOY HACIENDO PRUEBAS
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import LogIn from "./components/Header/MenuUser/LogInForm/LogInForm";
+
+// ACTION
 import { clearMessage } from "./redux/actions";
 
 function App() {
-  // const user = useSelector((state) => state.actualUser);
-  // const isLoged = JSON.parser(localStorage.getItem("user"));
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   if (isLoged) {
-  //     dispatch()
-  //   }
-  // }, []);
 
   const message = useSelector(state => state.messageToUser)
 

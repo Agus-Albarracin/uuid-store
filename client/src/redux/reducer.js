@@ -11,6 +11,7 @@ import {
   LOGOUT,
   MESSAGE_TO_USER,
   CLEAR_MESSAGE,
+  AUTO_LOGIN,
 } from "./action-types";
 
 const initialState = {
@@ -19,7 +20,7 @@ const initialState = {
   detail: {},
   productCreated: {},
   actualUser: {},
-  messageToUser: '',
+  messageToUser: "",
 };
 
 // case CLEAR_DETAIL:
@@ -105,14 +106,14 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         actualUser: payload,
-        messageToUser: 'Sesión iniciada correctamente!'
+        messageToUser: "Sesión iniciada correctamente!",
       };
 
     case SIGNUP:
       return {
         ...state,
         actualUser: payload,
-        messageToUser: 'Usuario creado correctamente!'
+        messageToUser: "Usuario creado correctamente!",
       };
 
     case LOGOUT:
@@ -125,13 +126,19 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         messageToUser: payload,
-      }
+      };
 
     case CLEAR_MESSAGE:
       return {
         ...state,
         messageToUser: payload,
-      }
+      };
+
+    case AUTO_LOGIN:
+      return {
+        ...state,
+        actualUser: payload,
+      };
 
     default:
       return {

@@ -8,5 +8,6 @@ export const GET_ORDER = "GET ORDER";
 export const LOGIN = "LOG_IN";
 export const SIGNUP = "SIGN_UP";
 export const LOGOUT = "LOG_OUT";
-export const MESSAGE_TO_USER = "MESSAGE_TO_USER"
+export const MESSAGE_TO_USER = "MESSAGE_TO_USER";
 export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
+export const AUTO_LOGIN = "AUTO_LOGIN";

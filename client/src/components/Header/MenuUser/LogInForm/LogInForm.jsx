@@ -14,28 +14,29 @@ import { logIn } from "../../../../redux/actions";
 const LogIn = ({ handleView, mostrarUser }) => {
   const dispatch = useDispatch();
   const [showAnimation, setShowAnimation] = useState(true);
-  
+
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowAnimation(false);
     }, 500);
-    
+
     return () => clearTimeout(timeoutId);
   }, []);
-  
+
   const handleSignUpClick = () => {
     setShowAnimation(true);
-    
+
     setTimeout(() => {
       setShowAnimation(false);
       handleView();
     }, 200);
   };
-  
+
   const handleExitClick = () => {
     setShowAnimation(true);
     setTimeout(() => {
       setShowAnimation(false);
+      mostrarUser();
       // Agrega aquí cualquier lógica adicional que necesites al salir del componente
     }, 200);
   };
@@ -50,7 +51,7 @@ const LogIn = ({ handleView, mostrarUser }) => {
       mostrarUser();
     },
   });
-  
+
   return (
     <div
       className={`w-full max-w-md mx-auto p-4 bg-white shadow-md rounded-md transition-opacity transform duration-500 ${

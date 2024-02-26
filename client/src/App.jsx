@@ -22,6 +22,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 // ACTION
 import { clearMessage } from "./redux/actions";
+import { autoLogin } from "./redux/actions";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,8 +31,18 @@ function App() {
   const message = useSelector((state) => state.messageToUser);
 
   useEffect(() => {
-    user.token && window.localStorage.setItem("token", user.token);
+    if (user.token) {
+      window.localStorage.setItem("loggedUser", JSON.stringify(user));
+    }
   }, [user]);
+
+  useEffect(() => {
+    const userJSON = window.localStorage.getItem("loggedUser");
+    if (userJSON) {
+      const user = JSON.parse(userJSON);
+      dispatch(autoLogin(user));
+    }
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {

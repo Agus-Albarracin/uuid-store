@@ -14,7 +14,7 @@ const getProductos = async (req, res) => {
 };
 
 
-const getProductosMasVendidos = async (req, res) => {
+const getProductosSeleccionados = async (req, res) => {
   try {
     // Obtener productos con quantitysold mayor que 0
     const masVendidos = await Productos.findAll({
@@ -46,7 +46,7 @@ const getProductosMasVendidos = async (req, res) => {
     const topProductos = [...masVendidos, ...randomProdu];
 
     return res.status(200).json(topProductos);
-    
+
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -161,7 +161,7 @@ const getProductosFilter = async (req, res) => {
 
 module.exports = {
   getProductos,
-  getProductosMasVendidos,
+  getProductosSeleccionados,
   getProductosById,
   getProductosON,
   getProductosByName,

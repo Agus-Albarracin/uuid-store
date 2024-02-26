@@ -19,7 +19,7 @@ const router = Router();
 
 //*Productos
 router.get("/getproductos", getProdu.getProductos);
-router.get("/getproductosmv", getProdu.getProductosMasVendidos);
+router.get("/getproductosmv", getProdu.getProductosSeleccionados);
 router.get("/getproductosON", getProdu.getProductosON); // endpoint para productos activos
 router.get("/getproductos/:id", getProdu.getProductosById);
 router.get("/getproductosByName", getProdu.getProductosByName);

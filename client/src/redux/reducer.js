@@ -5,22 +5,27 @@ import {
   POST_PRODUCTO,
   LOGIN,
   GET_ORDER,
-  FILTER_PRODUCTO,
+  FILTER_MARCA,
   FILTER_PRODUCTO2,
+  FILTER_MODELO,
   SIGNUP,
   LOGOUT,
   MESSAGE_TO_USER,
   CLEAR_MESSAGE,
   AUTO_LOGIN,
+  ADD_TO_CART,
+  REMOVE_TO_CART,
 } from "./action-types";
 
 const initialState = {
+  allProductosHome: [],
   allProductos: [],
   allProductosAux: [],
   detail: {},
   productCreated: {},
   actualUser: {},
   messageToUser: "",
+  cart: [],
 };
 
 // case CLEAR_DETAIL:
@@ -34,6 +39,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case GET_PRODUCTOS:
       return {
         ...state,
+        allProductosHome: payload,
         allProductos: payload,
         allProductosAux: payload,
       };
@@ -56,7 +62,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         productCreated: payload,
       };
 
-    case FILTER_PRODUCTO:
+    case FILTER_MARCA:
       const copyCont = [...state.allProductosAux];
       if (payload === "All") {
         return {
@@ -92,6 +98,24 @@ const rootReducer = (state = initialState, { type, payload }) => {
         allProductos: filteredGenero,
       };
 
+      case FILTER_MODELO:
+        const copyCont3 = [...state.allProductosAux];
+        if (payload === "All") {
+          return {
+            ...state,
+            allProductos: copyCont3,
+          };
+        }
+  
+        let filteredModelo = copyCont3.filter(function (filtroCont) {
+          return filtroCont.modelo === payload;
+        });
+  
+        return {
+          ...state,
+          allProductos: filteredModelo,
+        };
+
     case GET_ORDER:
       let ordenAlf = [...state.allProductos];
 
@@ -101,6 +125,20 @@ const rootReducer = (state = initialState, { type, payload }) => {
           return payload === "As" ? a.precio - b.precio : b.precio - a.precio;
         }),
       };
+
+    case ADD_TO_CART:
+        return {
+          ...state,
+          cart: [...state.cart, payload],
+        };
+
+      case REMOVE_TO_CART:
+        const cart = state.cart.filter(item => item.id !== payload);
+        console.log('Nuevo estado del carrito:', cart); // Agrega este console.log
+        return {
+          ...state,
+          cart: cart
+        };
 
     case LOGIN:
       return {
@@ -144,7 +182,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
       };
+      
   }
+
+  
 };
 
 export default rootReducer;

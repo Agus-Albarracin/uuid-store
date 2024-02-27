@@ -8,7 +8,7 @@ import { getProductos } from "../../redux/actions";
 // Define el componente HomePage
 const HomePage = () => {
   const dispatch = useDispatch();
-  const allProductos = useSelector((state) => state.allProductos);
+  const allProductos = useSelector((state) => state.allProductosHome);
 
   useEffect(() => {
     if (allProductos.length === 0) {

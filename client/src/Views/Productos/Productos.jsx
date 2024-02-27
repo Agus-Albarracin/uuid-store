@@ -29,8 +29,8 @@ function Productos() {
   }, [dispatch, allProductos.length]);
 
   return (
-    <div className="flex h-screen overflow-hidden">
-      <div className="w-1/6 bg-gray-200 p-4">
+    <div className="flex flex-col md:flex-row h-screen overflow-hidden">
+      <div className="w-full md:w-1/6 bg-gray-200 p-4">
         <SideBar handleChange={handleChange} handleSubmit={handleSubmit} />
       </div>
       <div className="w-full p-4 overflow-y-auto">
@@ -38,7 +38,7 @@ function Productos() {
       </div>
     </div>
   );
-  
+
 }
 
 export default Productos;

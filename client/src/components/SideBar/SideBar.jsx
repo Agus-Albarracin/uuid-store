@@ -1,21 +1,44 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOrder, getProductos, filterProducto, filterProducto2 } from '../../redux/actions';
+import { getOrder, getProductos, filterMarca, filterProducto2, filterModelo } from '../../redux/actions';
 import './SideBar.css';
 
 function SideBar({ handleChange, handleSubmit }) {
   const dispatch = useDispatch();
   const allProductos = useSelector((state) => state.allProductosAux);
 
-  function selectProducto(e) {
-    dispatch(filterProducto(e.target.value, e.target.name));
+  const [selectedMarca, setSelectedMarca] = useState(""); // Estado para la marca seleccionada
+  const [filteredModelos, setFilteredModelos] = useState([]); // Estado para los modelos filtrados
+  const [selectedPrecio, setSelectedPrecio] = useState(""); // Estado para el precio seleccionado
+
+  const allMarcas = [...new Set(allProductos.map(prod => prod.marca))];
+  const allModelos = [...new Set(allProductos.map(prod => prod.modelo))];
+
+  function selectedfilterMarca(e) {
+    const marca = e.target.value;
+    setSelectedMarca(marca); // Actualiza la marca seleccionada
+    setSelectedPrecio(""); // Reinicia el precio seleccionado
+
+    if (marca === "All") {
+      setFilteredModelos(allModelos);
+    } else {
+      const modelosByMarca = allProductos.filter(prod => prod.marca === marca).map(prod => prod.modelo);
+      setFilteredModelos([...new Set(modelosByMarca)]);
+    }
+
+    dispatch(filterMarca(e.target.value, e.target.name));
   }
 
-  function selectProducto2(e) {
-    dispatch(filterProducto2(e.target.value, e.target.name));
+  function selectedfilterModelo(e) {
+    const modelo = e.target.value;
+    if (modelo === "All") {
+      setSelectedMarca(""); // Reinicia la marca seleccionada
+    }
+    dispatch(filterModelo(modelo, e.target.name));
   }
 
   function selectOrd(e) {
+    setSelectedPrecio(e.target.value);
     dispatch(getOrder(e.target.value));
   }
 
@@ -49,32 +72,34 @@ function SideBar({ handleChange, handleSubmit }) {
         <select
           id="marca"
           className="border rounded p-2 w-full focus:outline-none focus:border-blue-500"
-          onChange={selectProducto}
+          onChange={selectedfilterMarca}
+          value={selectedMarca}
         >
           <option value="" hidden></option>
           <option value="All">All</option>
-          {allProductos.map((prod) => (
-            <option key={prod.id} value={prod.marca}>
-              {prod.marca}
+          {allMarcas.map((marca, index) => (
+            <option key={index} value={marca}>
+              {marca}
             </option>
           ))}
         </select>
       </div>
 
       <div className="mb-4">
-        <label htmlFor="genero" className="block font-bold mb-2">
-          Género
+        <label htmlFor="modelo" className="block font-bold mb-2">
+          Modelo
         </label>
         <select
-          id="genero"
+          id="modelo"
           className="border rounded p-2 w-full focus:outline-none focus:border-blue-500"
-          onChange={selectProducto2}
+          onChange={selectedfilterModelo}
+          disabled={!selectedMarca}
         >
           <option value="" hidden></option>
           <option value="All">All</option>
-          {allProductos.map((prod) => (
-            <option key={prod.id} value={prod.genero}>
-              {prod.genero}
+          {filteredModelos.map((modelo, index) => (
+            <option key={index} value={modelo}>
+              {modelo}
             </option>
           ))}
         </select>
@@ -88,10 +113,11 @@ function SideBar({ handleChange, handleSubmit }) {
           id="precio"
           className="border rounded p-2 w-full focus:outline-none focus:border-blue-500"
           onChange={selectOrd}
+          value={selectedPrecio}
         >
           <option value="" hidden></option>
-          <option value="As">Mayor Precio</option>
-          <option value="Ds">Menor Precio</option>
+          <option value="As">Menor Precio</option>
+          <option value="Ds">Mayor Precio</option>
         </select>
       </div>
     </div>

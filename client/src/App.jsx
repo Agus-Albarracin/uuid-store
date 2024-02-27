@@ -14,6 +14,7 @@ import User from "./Views/User/DataUser";
 import Detail from "./Views/Detail/Detail";
 import HomePage from "./Views/HomePage/HomePage";
 import Productos from "./Views/Productos/Productos";
+import ConfirmacionDeCompra from "./Views/ConfirmacionDeCompra/ConfirmacionDeCompra";
 
 //PATHROUTES
 import PATHROUTES from "./Helpers/path";
@@ -61,6 +62,7 @@ function App() {
         <Route path={PATHROUTES.DETAIL} element={<Detail />} />
         <Route path={PATHROUTES.HOME} element={<HomePage />} />
         <Route path={PATHROUTES.PRODUCTOS} element={<Productos />} />
+        <Route path={PATHROUTES.CONFIRMACION} element={<ConfirmacionDeCompra/>} />
       </Routes>
 
       {message && <span className={styles.message}> {message} </span>}

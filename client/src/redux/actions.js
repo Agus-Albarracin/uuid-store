@@ -5,13 +5,16 @@ import {
   POST_PRODUCTO,
   LOGIN,
   SIGNUP,
-  FILTER_PRODUCTO,
+  FILTER_MARCA,
   FILTER_PRODUCTO2,
+  FILTER_MODELO,
   GET_ORDER,
   LOGOUT,
   MESSAGE_TO_USER,
   CLEAR_MESSAGE,
   AUTO_LOGIN,
+  ADD_TO_CART,
+  REMOVE_TO_CART,
 } from "./action-types";
 
 import axios from "axios";
@@ -79,17 +82,26 @@ export const postProducto = (form) => {
   };
 };
 
-export const filterProducto = (marca) => {
+export const filterMarca = (marca) => {
   return {
-    type: FILTER_PRODUCTO,
+    type: FILTER_MARCA,
     payload: marca,
   };
 };
+
+
 
 export const filterProducto2 = (genero) => {
   return {
     type: FILTER_PRODUCTO2,
     payload: genero,
+  };
+};
+
+export const filterModelo = (modelo) => {
+  return {
+    type: FILTER_MODELO,
+    payload: modelo,
   };
 };
 
@@ -157,3 +169,15 @@ export const autoLogin = (user) => {
     payload: user,
   };
 };
+
+//BOTON DE DETAIL
+
+export const addToCart = (product) => ({
+  type: ADD_TO_CART,
+  payload: product,
+});
+
+export const removeToCart = (product) => ({
+  type: REMOVE_TO_CART,
+  payload: product,
+});

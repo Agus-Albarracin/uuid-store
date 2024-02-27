@@ -43,8 +43,14 @@ const loginGoogle = async (req, res) => {
     const user = await Usuario.findOne({ where: { email } });
 
     if (!user) {
-      return res.status(404).json({ message: "Usuario no encontrado. Por favor, regístrate." });
+      return res.status(404).send("Usuario no encontrado. Por favor, regístrate." );
     }
+
+    const payload = {
+      id: user.id,
+      username: user.email,
+      admin: user.admin,
+    };
 
     const token = jwt.sign(payload, JWT_SECRET); //No estoy seguro de esto, deberia devolverte el toquen?
 

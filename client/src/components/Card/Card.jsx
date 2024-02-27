@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import styles from './Card.module.scss';
 
 function Card({ producto }) {
   const images = [
@@ -9,12 +10,14 @@ function Card({ producto }) {
     'https://images.pexels.com/photos/11135667/pexels-photo-11135667.jpeg?auto=compress&cs=tinysrgb&w=600',
   ];
 
-  const { id, nombre, modelo, precio } = producto;
+  const { id, nombre, modelo, precio, imagen } = producto;
 
   return (
     <div className="max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl overflow-hidden rounded-lg bg-gray-200 shadow-md duration-300 hover:scale-105 hover:shadow-lg mb-4">
       <Link to={`/detail/${id}`} className="block">
-        <img className="h-full w-full object-cover object-center" src={images[1]} alt="Imagen 2" />
+        <div className={styles.imgContainer}>
+          <img className="h-full w-full object-cover object-center" src={imagen ? imagen[0] : images[1]} alt="Imagen 2" />
+        </div>
         <div className="p-6">
           <h2 className="mb-2 text-xl font-bold text-[#0C78BF]">{nombre}</h2>
           <p className="mb-2 text-lg font-semibold text-[#4CB34D]">{modelo}</p>

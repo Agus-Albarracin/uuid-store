@@ -1,6 +1,9 @@
 const { Usuario } = require("../../db");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+const { JWT_SECRET } = process.env;
 
 const signUpUser = async (req, res) => {
   const { email, nombre, apellido, password, rPassword } = req.body;
@@ -30,12 +33,20 @@ const signUpUser = async (req, res) => {
       "¡Gracias por autenticarte en nuestro sitio web, esto no ayuda a la protección tuya como de los demás usuarios."
     );
 
+    const payload = {
+      id: user.id,
+      username: user.email,
+      admin: user.admin,
+    };
+
+    const token = jwt.sign(payload, JWT_SECRET);
+
     delete user.dataValues.password;
     delete user.dataValues.rPassword;
 
-    return res.status(201).json(user);
+    return res.status(201).json({...user.dataValues, token});
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).send(error.message);
   }
 };
 
@@ -65,9 +76,17 @@ const signUpUserGoogle = async (req, res) => {
       "¡Gracias por autenticarte en nuestro sitio web, esto no ayuda a la protección tuya como de los demás usuarios."
     );
 
-    return res.status(201).json(user);
+    const payload = {
+      id: user.id,
+      username: user.email,
+      admin: user.admin,
+    };
+
+    const token = jwt.sign(payload, JWT_SECRET);
+
+    return res.status(201).json({...user.dataValues, token});
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).send(error.message);
   }
 };
 

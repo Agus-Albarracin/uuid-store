@@ -4,8 +4,9 @@ import GoogleLogin from "react-google-login";
 import axios from "axios";
 //hooks
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
-function Autenticador() {
+function Autenticador({ mostrarUser, logInWhitGoogle, signUpWhitGoogle }) {
   const clientID =
     "752795540558-hqqmvr2p9bf1c4bkjmh33c3ui0rbdu81.apps.googleusercontent.com";
   const [user, setUser] = useState(
@@ -20,6 +21,8 @@ function Autenticador() {
     };
     gapi.load("client:auth2", start);
   }, []);
+
+  const dispatch = useDispatch();
 
   const onSuccess = (response) => {
     const fullName = response.profileObj.name;
@@ -36,7 +39,7 @@ function Autenticador() {
       givenName: response.profileObj.givenName,
     };
 
-    localStorage.setItem("loggedUser", JSON.stringify(userData)); // Almacena los datos del usuario en el almacenamiento local
+    // localStorage.setItem("loggedUser", JSON.stringify(userData)); // Almacena los datos del usuario en el almacenamiento local
     setUser(userData);
     console.log("estos son los datos:", userData);
 
@@ -48,20 +51,30 @@ function Autenticador() {
   };
 
   const singUpUserInDb = async (userData) => {
-    console.log("datos de la funcion:", userData);
-    try {
-      const response = await axios.post(
-        "http://localhost:3001/signupgoogle",
-        userData
-      );
 
-      console.log("Información del usuario enviada al backend con éxito");
-    } catch (error) {
-      console.error(
-        "Error al enviar información del usuario al backend:",
-        error.message
-      );
-    }
+    logInWhitGoogle === undefined 
+      ? dispatch(signUpWhitGoogle(userData))
+      : dispatch(logInWhitGoogle(userData))
+
+    mostrarUser();
+
+
+    // console.log("datos de la funcion:", userData);
+    // try {
+    //   const response = await axios.post(
+    //     "http://localhost:3001/signupgoogle",
+    //     userData
+    //   );
+
+    //   mostrarUser();
+
+    //   console.log("Información del usuario enviada al backend con éxito");
+    // } catch (error) {
+    //   console.error(
+    //     "Error al enviar información del usuario al backend:",
+    //     error.message
+    //   );
+    // }
   };
 
   return (

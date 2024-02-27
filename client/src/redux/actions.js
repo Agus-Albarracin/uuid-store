@@ -15,6 +15,8 @@ import {
   AUTO_LOGIN,
   ADD_TO_CART,
   REMOVE_TO_CART,
+  LOG_IN_GOOGLE,
+  SIGN_UP_GOOGLE,
 } from "./action-types";
 
 import axios from "axios";
@@ -132,6 +134,45 @@ export const logIn = ({ email, password }) => {
   };
 };
 
+// REGISTRARSE CON GOOGLE
+
+export const signUpWhitGoogle = (googleData) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/signupgoogle`, googleData);
+      return dispatch({
+        type: SIGN_UP_GOOGLE,
+        payload: response.data,
+      })
+    } catch (error) {
+      return dispatch({
+        type: MESSAGE_TO_USER,
+        payload: error.response.data,
+      });
+    }
+  }
+}
+
+// INICIAR SESION CON GOOGLE
+export const logInWhitGoogle = ({ email }) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/loginGoogle?email=${email}`);
+      return dispatch({
+        type: LOG_IN_GOOGLE,
+        payload: response.data,
+      })
+    } catch (error) {
+      console.log(error);
+      return dispatch({
+        type: MESSAGE_TO_USER,
+        payload: error.response.data,
+      });
+    }
+  }
+}
+
+// REGISTRO
 export const signUp = (form) => {
   return async (dispatch) => {
     try {
@@ -181,3 +222,4 @@ export const removeToCart = (product) => ({
   type: REMOVE_TO_CART,
   payload: product,
 });
+

@@ -15,6 +15,8 @@ import {
   AUTO_LOGIN,
   ADD_TO_CART,
   REMOVE_TO_CART,
+  LOG_IN_GOOGLE,
+  SIGN_UP_GOOGLE
 } from "./action-types";
 
 const initialState = {
@@ -177,6 +179,20 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         actualUser: payload,
       };
+
+    case LOG_IN_GOOGLE:
+      return {
+        ...state,
+        actualUser: payload,
+        messageToUser: "Sesión iniciada correctamente!",
+      }
+
+    case SIGN_UP_GOOGLE:
+      return {
+        ...state,
+        actualUser: payload,
+        messageToUser: "Usuario creado correctamente!",
+      }
 
     default:
       return {

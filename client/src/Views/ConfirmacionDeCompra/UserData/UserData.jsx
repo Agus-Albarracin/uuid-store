@@ -1,10 +1,10 @@
-import { useSelector } from "react-redux";
 import { useFormik } from 'formik';
 import validate from "./validate";
 
 const UserData = () => {
 
-    const user = useSelector(state => state.actualUser);
+    const userJSON = window.localStorage.getItem('loggedUser');
+    const user = JSON.parse(userJSON);
 
     const formik = useFormik({
         initialValues: {
@@ -12,6 +12,7 @@ const UserData = () => {
             apellido: user.apellido,
             email: user.email,
             dni: user.dni ? user.dni : "",
+            telefono: user.telefono ? user.telefono : "",
         },
         validate,
         onSubmit: (values) => console.log(values)
@@ -27,7 +28,7 @@ const UserData = () => {
                 name="nombre"
                 type="text" 
                 value={formik.values.nombre}
-                onChange={formik.onChange}
+                onChange={formik.handleChange}
                 onBlur={formik.onBlur}
             />
 
@@ -37,7 +38,7 @@ const UserData = () => {
                 name="apellido"
                 type="text" 
                 value={formik.values.apellido}
-                onChange={formik.onChange}
+                onChange={formik.handleChange}
                 onBlur={formik.onBlur}
             />
 
@@ -47,7 +48,7 @@ const UserData = () => {
                 name="email"
                 type="text" 
                 value={formik.values.email}
-                onChange={formik.onChange}
+                onChange={formik.handleChange}
                 onBlur={formik.onBlur}
             />
 
@@ -57,10 +58,21 @@ const UserData = () => {
                 name="dni"
                 type="text" 
                 value={formik.values.dni}
-                onChange={formik.onChange}
+                onChange={formik.handleChange}
                 onBlur={formik.onBlur}
             />
 
+            <label htmlFor="telefono"> Telefono </label>
+            <input 
+                id="telefono"
+                name="telefono"
+                type="text" 
+                value={formik.values.telefono}
+                onChange={formik.handleChange}
+                onBlur={formik.onBlur}
+            />
+
+            <button type="submit">Enviar</button>
         </form>
     )
 };

@@ -9,7 +9,7 @@ function Autenticador() {
   const clientID =
     "752795540558-hqqmvr2p9bf1c4bkjmh33c3ui0rbdu81.apps.googleusercontent.com";
   const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || {}
+    JSON.parse(localStorage.getItem("loggedUser")) || {}
   );
 
   useEffect(() => {
@@ -36,7 +36,7 @@ function Autenticador() {
       givenName: response.profileObj.givenName,
     };
 
-    localStorage.setItem("user", JSON.stringify(userData)); // Almacena los datos del usuario en el almacenamiento local
+    localStorage.setItem("loggedUser", JSON.stringify(userData)); // Almacena los datos del usuario en el almacenamiento local
     setUser(userData);
     console.log("estos son los datos:", userData);
 

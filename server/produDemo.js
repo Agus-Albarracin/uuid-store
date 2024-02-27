@@ -15,7 +15,7 @@ const productos =
     "nombre": "Superstar",
     "modelo": "Superstar",
     "precio": 80,
-    "stock": {"36":0,"37":10,"38":15,"39":20,"40":0,"41":0,"42":0,"43":0,"44":0,"45":50,"46":55},
+    "stock": {"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0},
     "genero": "Unisex",
     "marca": "Adidas",
     "keyBorradoLogico": 2,

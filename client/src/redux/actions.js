@@ -13,6 +13,8 @@ import {
   MESSAGE_TO_USER,
   CLEAR_MESSAGE,
   AUTO_LOGIN,
+  ADD_TO_CART,
+  REMOVE_TO_CART,
 } from "./action-types";
 
 import axios from "axios";
@@ -167,3 +169,15 @@ export const autoLogin = (user) => {
     payload: user,
   };
 };
+
+//BOTON DE DETAIL
+
+export const addToCart = (product) => ({
+  type: ADD_TO_CART,
+  payload: product,
+});
+
+export const removeToCart = (product) => ({
+  type: REMOVE_TO_CART,
+  payload: product,
+});

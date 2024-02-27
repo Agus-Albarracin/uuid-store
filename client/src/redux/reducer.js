@@ -13,6 +13,8 @@ import {
   MESSAGE_TO_USER,
   CLEAR_MESSAGE,
   AUTO_LOGIN,
+  ADD_TO_CART,
+  REMOVE_TO_CART,
 } from "./action-types";
 
 const initialState = {
@@ -23,6 +25,7 @@ const initialState = {
   productCreated: {},
   actualUser: {},
   messageToUser: "",
+  cart: [],
 };
 
 // case CLEAR_DETAIL:
@@ -123,6 +126,20 @@ const rootReducer = (state = initialState, { type, payload }) => {
         }),
       };
 
+    case ADD_TO_CART:
+        return {
+          ...state,
+          cart: [...state.cart, payload],
+        };
+
+      case REMOVE_TO_CART:
+        const cart = state.cart.filter(item => item.id !== payload);
+        console.log('Nuevo estado del carrito:', cart); // Agrega este console.log
+        return {
+          ...state,
+          cart: cart
+        };
+
     case LOGIN:
       return {
         ...state,
@@ -165,7 +182,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
       };
+      
   }
+
+  
 };
 
 export default rootReducer;

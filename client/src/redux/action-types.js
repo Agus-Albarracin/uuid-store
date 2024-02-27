@@ -12,3 +12,5 @@ export const LOGOUT = "LOG_OUT";
 export const MESSAGE_TO_USER = "MESSAGE_TO_USER";
 export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
 export const AUTO_LOGIN = "AUTO_LOGIN";
+export const ADD_TO_CART = "ADD_TO_CART"
+export const REMOVE_TO_CART = "REMOVE_TO_CART"

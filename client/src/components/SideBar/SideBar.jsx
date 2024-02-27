@@ -6,6 +6,8 @@ import './SideBar.css';
 function SideBar({ handleChange, handleSubmit }) {
   const dispatch = useDispatch();
   const allProductos = useSelector((state) => state.allProductosAux);
+  
+  const uniqueMarcas = [...new Set(allProductos.map(prod => prod.marca))];
 
   function selectProducto(e) {
     dispatch(filterProducto(e.target.value, e.target.name));
@@ -47,18 +49,17 @@ function SideBar({ handleChange, handleSubmit }) {
           Marca
         </label>
         <select
-          id="marca"
-          className="border rounded p-2 w-full focus:outline-none focus:border-blue-500"
-          onChange={selectProducto}
-        >
-          <option value="" hidden></option>
-          <option value="All">All</option>
-          {allProductos.map((prod) => (
-            <option key={prod.id} value={prod.marca}>
-              {prod.marca}
-            </option>
-          ))}
-        </select>
+         id="marca"
+         className="border rounded p-2 w-full focus:outline-none focus:border-blue-500"
+         onChange={selectProducto}>
+        <option value="" hidden></option>
+        <option value="All">All</option>
+        {uniqueMarcas.map((marca, index) => (
+          <option key={index} value={marca}>
+            {marca}
+          </option>
+        ))}
+      </select>
       </div>
 
       <div className="mb-4">

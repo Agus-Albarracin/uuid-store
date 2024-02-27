@@ -51,21 +51,21 @@ function DataUser(){
 
                 {view === 'info' && (
                     <article className="contenedor2">
-                        <h1> INFORMACION PERSONAL </h1>
+                        <h1> -INFORMACION PERSONAL- </h1>
                         <InfoUser />
                     </article>
                 )}
 
                 {view === 'compras' && (
                     <article className="contenedor2">
-                        <h2> MIS COMPRAS </h2>
+                        <h2> -MIS COMPRAS- </h2>
                         <MisCompras />
                     </article>
                 )}
 
                 {view === 'direcciones' && (
                     <article className="contenedor2">
-                        <h2> MIS DIRECCIONES </h2>
+                        <h2> -MIS DIRECCIONES- </h2>
                         <MisDirecciones />
                     </article>
                 )}

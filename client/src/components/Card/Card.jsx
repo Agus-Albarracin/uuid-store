@@ -24,10 +24,10 @@ function Card({ producto }) {
             <p className="bg-[#FBCE40] p-2   ml-auto text-2xl font-bold text-black rounded-lg">20% off</p>
           </div>
         </div>
+        <button className="w-full p-3 bg-red-500 text-white font-bold hover:bg-red-700">
+          COMPRAR
+        </button>
       </Link>
-      <button className="w-full p-3 bg-red-500 text-white font-bold hover:bg-red-700">
-        Añadir al carrito
-      </button>
     </div>
   );
 }

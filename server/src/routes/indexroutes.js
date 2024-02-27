@@ -13,6 +13,7 @@ const putProdu = require("../controllers/Productos/putProductos");
 //Carrito
 const postCarrito = require("../controllers/Carrito/postCarrito");
 const deleteCarrito = require("../controllers/Carrito/deleteCarrito");
+
 //MercadoPago
 const makePayment = require("../controllers/PasarelaDePagos/makePayment");
 
@@ -43,6 +44,7 @@ router.get("/getuser", getUser.getAllUsers); //endpoint para todos los clientes
 router.post("/signupgoogle", postUser.signUpUserGoogle);
 router.post("/signup", postUser.signUpUser);
 router.get("/login", login.login);
+router.get("/loginGoogle", login.loginGoogle); // nuevo endpoint para el login desde google
 
 // Crea el usuario sin google / complemento del google
 router.put("/updateuser", putUser.updateUser);
@@ -54,7 +56,6 @@ router.put("/updatestateuser", putUser.updateStateUser);
 //*Carrito
 router.post("/createOrden", postCarrito.postOrden);
 // router.get("/getOrden", getOrden)
-// router.put("/updateOrden", putOrden)
 router.delete("/deleteOrden", deleteCarrito.deleteCarrito)
 
 //*MercadoPago

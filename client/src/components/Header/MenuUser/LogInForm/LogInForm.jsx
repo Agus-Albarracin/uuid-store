@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 // ACTIONS
-import { logIn } from "../../../../redux/actions";
+import { logIn, logInWhitGoogle } from "../../../../redux/actions";
 
 const LogIn = ({ handleView, mostrarUser }) => {
   const dispatch = useDispatch();
@@ -94,7 +94,7 @@ const LogIn = ({ handleView, mostrarUser }) => {
 
         <div className="mt-4 flex items-center">
           <span className="text-sm mr-2">O continúa con:</span>
-          <Autenticador />
+          <Autenticador mostrarUser={mostrarUser} logInWhitGoogle={logInWhitGoogle} />
         </div>
 
         <div className="mt-6 flex items-center text-sm">

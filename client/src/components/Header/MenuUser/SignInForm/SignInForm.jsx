@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import Autenticador from "../../../../Helpers/Auntenticador";
 
 // ACTIONS
-import { signUp } from "../../../../redux/actions";
+import { signUp, signUpWhitGoogle } from "../../../../redux/actions";
 
 // HOOKS
 import { useState, useEffect } from "react";
@@ -173,7 +173,7 @@ const SignIn = ({ handleView, mostrarUser }) => {
 
         <div className="flex items-center space-x-2">
           <span className="text-gray-600">O continúa con:</span>
-          <Autenticador />
+          <Autenticador mostrarUser={mostrarUser} signUpWhitGoogle={signUpWhitGoogle} />
         </div>
 
         <div className="flex items-center justify-between mt-4">

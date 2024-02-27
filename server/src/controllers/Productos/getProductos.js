@@ -145,6 +145,12 @@ const getProductosFilter = async (req, res) => {
       options.where.marca = { [Op.iLike]: `%${marca}%` };
     }
 
+    const { modelo } = req.query;
+
+    if (modelo) {
+      options.where.modelo = { [Op.iLike]: `%${modelo}%` };
+    }
+
     //FILTRADO POR GENERO
     const { genero } = req.query;
 

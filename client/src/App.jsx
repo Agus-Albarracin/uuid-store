@@ -10,6 +10,7 @@ import Footer from "./components/Footer/Footer";
 
 // Views
 import Admin from "./Views/Admin/Admin";
+import User from "./Views/User/DataUser";
 import Detail from "./Views/Detail/Detail";
 import HomePage from "./Views/HomePage/HomePage";
 import Productos from "./Views/Productos/Productos";
@@ -56,6 +57,7 @@ function App() {
 
       <Routes>
         <Route path={PATHROUTES.ADMIN} element={<Admin />} />
+        <Route path={PATHROUTES.USER} element={<User />} />
         <Route path={PATHROUTES.DETAIL} element={<Detail />} />
         <Route path={PATHROUTES.HOME} element={<HomePage />} />
         <Route path={PATHROUTES.PRODUCTOS} element={<Productos />} />

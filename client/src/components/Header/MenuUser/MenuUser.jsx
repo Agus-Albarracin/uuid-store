@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logOut } from "../../../redux/actions";
 import LogIn from "./LogInForm/LogInForm";
 import SignIn from "./SignInForm/SignInForm";
+import { Link } from "react-router-dom";
 
 const MenuUser = ({ mostrarUser }) => {
   const dispatch = useDispatch();
@@ -52,12 +53,15 @@ const MenuUser = ({ mostrarUser }) => {
           onClick={(e) => e.stopPropagation()}
         >
           <div className="text-black">{`${user.nombre}  ${user.apellido}`}</div>
-          <span
-            className="cursor-pointer text-blue-500 mr-4"
-            // onClick={handleView}
-          >
-            Mi cuenta
-          </span>
+          <Link to='/user'> 
+            <span
+              className="cursor-pointer text-blue-500 mr-4"
+              // onClick={handleView}
+            >
+              Mi cuenta
+            </span>
+           
+          </Link>
           <span className="cursor-pointer text-blue-500" onClick={handleLogOut}>
             Salir
           </span>

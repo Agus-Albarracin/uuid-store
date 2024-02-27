@@ -7,7 +7,8 @@ function SideBar({ handleChange, handleSubmit }) {
   const dispatch = useDispatch();
   const allProductos = useSelector((state) => state.allProductosAux);
   
-  const uniqueMarcas = [...new Set(allProductos.map(prod => prod.marca))];
+  const allMarcas = [...new Set(allProductos.map(prod => prod.marca))];
+  const allGeneros = [...new Set(allProductos.map(produ => produ.genero))]
 
   function selectProducto(e) {
     dispatch(filterProducto(e.target.value, e.target.name));
@@ -54,7 +55,7 @@ function SideBar({ handleChange, handleSubmit }) {
          onChange={selectProducto}>
         <option value="" hidden></option>
         <option value="All">All</option>
-        {uniqueMarcas.map((marca, index) => (
+        {allMarcas.map((marca, index) => (
           <option key={index} value={marca}>
             {marca}
           </option>
@@ -73,11 +74,11 @@ function SideBar({ handleChange, handleSubmit }) {
         >
           <option value="" hidden></option>
           <option value="All">All</option>
-          {allProductos.map((prod) => (
-            <option key={prod.id} value={prod.genero}>
-              {prod.genero}
-            </option>
-          ))}
+          {allGeneros.map((marca, index) => (
+          <option key={index} value={marca}>
+            {marca}
+          </option>
+        ))}
         </select>
       </div>
 
@@ -91,8 +92,8 @@ function SideBar({ handleChange, handleSubmit }) {
           onChange={selectOrd}
         >
           <option value="" hidden></option>
-          <option value="As">Mayor Precio</option>
-          <option value="Ds">Menor Precio</option>
+          <option value="As">Menor Precio</option>
+          <option value="Ds">Mayor Precio</option>
         </select>
       </div>
     </div>

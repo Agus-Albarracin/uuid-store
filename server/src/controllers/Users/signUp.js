@@ -35,7 +35,7 @@ const signUpUser = async (req, res) => {
 
     return res.status(201).json(user);
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).send(error.message);
   }
 };
 
@@ -67,7 +67,7 @@ const signUpUserGoogle = async (req, res) => {
 
     return res.status(201).json(user);
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).send(error.message);
   }
 };
 

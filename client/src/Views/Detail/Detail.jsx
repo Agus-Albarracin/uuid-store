@@ -4,7 +4,7 @@ import { useParams, Link } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux"; // Cambiado a useDispatch
 
-import { getDetail } from "../../redux/actions";
+import { getDetail, addToCart } from "../../redux/actions";
 // import BotonDet from '../../components/Button/Button';
 // import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css"
@@ -33,7 +33,10 @@ const Detail = () => {
     // };
   }, [dispatch, id]);
 
-
+  const handleAddToCart = () => {
+    dispatch(addToCart(detail)); 
+    console.log(detail)
+  };
 
   return (
 
@@ -142,7 +145,8 @@ const Detail = () => {
                 </svg>
               </div>
 
-              <button type="button" className="h-14 px-6 py-2 font-semibold rounded-xl bg-red-500 hover:bg-red-400 text-white">
+              <button type="button" className="h-14 px-6 py-2 font-semibold rounded-xl bg-red-500 hover:bg-red-400 text-white" 
+              onClick={handleAddToCart}>
                 Add to Cart
               </button>
             </div>

@@ -35,4 +35,28 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { login };
+// logInGoogle tiene que devolver todo.
+const loginGoogle = async (req, res) => {
+  try {
+    const { email } = req.query;
+
+    const user = await Usuario.findOne({ where: { email } });
+
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado. Por favor, regístrate." });
+    }
+
+    const token = jwt.sign(payload, JWT_SECRET); //No estoy seguro de esto, deberia devolverte el toquen?
+
+    res.status(200).json({
+      ...user.dataValues, //DataValues devuelve todos los valores del registro del usuario que pases por email!
+      token,//Si tiene un token generado te lo envio en el json manquina.
+    });
+  } catch (error) { 
+    
+    return res.status(400).send(error.message);
+  }
+};
+
+
+module.exports = { login, loginGoogle };

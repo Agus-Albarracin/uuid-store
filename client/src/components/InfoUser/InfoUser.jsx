@@ -1,11 +1,17 @@
+import { useSelector } from "react-redux";
 
 function InfoUser(){
-    return(
 
+    const user = useSelector((state) => state.actualUser);
+    return(
         <div>
-            MI INFO
+            <h1> Nombre: {user.nombre} </h1>
+            <h1> Apellido: {user.apellido} </h1>
+            
+            <h1> Email: {user.email} </h1>
+            
         </div>
     )
 }
 
-export default InfoUser ;
+export default InfoUser;

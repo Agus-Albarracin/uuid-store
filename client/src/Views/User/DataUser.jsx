@@ -1,13 +1,14 @@
 import { useSelector } from "react-redux";
 import { useState } from 'react';
 import InfoUser from "../../components/InfoUser/InfoUser";
-import Compras from "../../components/Compras/Compras";
+import MisCompras from "../../components/MisCompras/MisCompras";
+import MisDirecciones from "../../components/MisDireciones/MisDirecciones";
 import "./DataUser.css"
 
 function DataUser(){
 
     const user = useSelector((state) => state.actualUser);
-    const [ view, setView ] = useState('')
+    const [view, setView] = useState('estadisticas')
 
     const handleView = (option) => {
         setView(option);
@@ -16,48 +17,60 @@ function DataUser(){
     return(
         <div>
             <div className="contenedor">
+                <div className="contenedor3">
                 <div className="card1">
                     
                     <h1>{user.nombre}</h1>
-                    <h3>{user.email}</h3>                
+                    <h3>{user.email}</h3>    
+
                 </div>
 
                 
-                <div className="card">
-                    <span onClick={() => handleView('info')}>
-                        Info Personal
-                    </span>
+                <div className="card" onClick={() => handleView('info')}>
+                    <span >
+                        Informacion Personal
+                    </span>              
                 </div>
                     
                 
               
-                <div className="card">
-                    <span onClick={() => handleView('compras')}>
-                        Compras
+                <div className="card" onClick={() => handleView('compras')}>
+                    <span >
+                        Mis Compras
                     </span>
-                </div>
+                    
+                </div>                 
                  
                 
-                <div className="card">Mis Direcciones</div>
+                <div className="card" onClick={() => handleView('direcciones')}>
+                    <span >
+                        Mis Direcciones
+                    </span>
+                </div>
+                </div>
 
-
-                {
-                    view === 'info'
-                        &&
-                    <article>
-                        <h2> Info Personal </h2>
+                {view === 'info' && (
+                    <article className="contenedor2">
+                        <h1> INFORMACION PERSONAL </h1>
                         <InfoUser />
                     </article>
-                }
+                )}
 
-                {
-                    view === 'compras'
-                        &&
-                    <article>
-                        <h2> Mis Compras </h2>
-                        <Compras />
+                {view === 'compras' && (
+                    <article className="contenedor2">
+                        <h2> MIS COMPRAS </h2>
+                        <MisCompras />
                     </article>
-                }
+                )}
+
+                {view === 'direcciones' && (
+                    <article className="contenedor2">
+                        <h2> MIS DIRECCIONES </h2>
+                        <MisDirecciones />
+                    </article>
+                )}
+
+                
 
             </div>
         </div>

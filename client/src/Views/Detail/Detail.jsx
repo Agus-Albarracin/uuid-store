@@ -59,11 +59,15 @@ const Detail = () => {
         <div className="flex flex-col md:flex-row -mx-4">
           <div className="md:flex-1 px-4">
             <div className={`h-64 md:h-80 rounded-lg bg-gray-100 mb-4 flex items-center justify-center`}>
-              <img src={images[image - 1]} alt={`Image ${image}`} className="w-full h-full object-cover" />
+              {detail.imagen ? (
+                <img src={detail.imagen[image - 1]} alt={`Image ${image}`} className="w-full h-full object-cover" />
+              ) : (
+                <img src={images[image - 1]} alt={`Image ${image}`} className="w-full h-full object-cover" />
+              )}
             </div>
 
             <div className="flex -mx-2 mb-4">
-              {images.map((img, i) => (
+              {(detail.imagen || images).map((img, i) => (
                 <div key={i} className="flex-1 px-2">
                   <button onClick={() => changeImage(i + 1)} className={`focus:outline-none w-full rounded-lg h-24 md:h-32 bg-gray-100 flex items-center justify-center ${image === i + 1 ? 'ring-2 ring-indigo-300 ring-inset' : ''}`}>
                     <img src={img} alt={`Thumbnail ${i + 1}`} className="w-full h-full object-cover rounded-lg" />
@@ -91,12 +95,21 @@ const Detail = () => {
             <table className="table-auto border-collapse w-full bg-white shadow-md mb-4">
               <tbody>
                 <tr className="border-b">
-                  <td className="py-2 px-4 font-semibold text-red-500">Stock:</td>
-                  <td className="py-2 px-4">{detail?.stock}</td>
-                </tr>
-                <tr className="border-b">
-                  <td className="py-2 px-4 font-semibold text-red-500">Género:</td>
-                  <td className="py-2 px-4">{detail?.genero}</td>
+                  <td className="py-2 px-4 font-semibold text-red-500">Tallas disponibles:</td>
+                  {typeof detail.stock === 'object' ? (
+                    // Si es un objeto, mostramos solo los dos primeros elementos del objeto
+                    Object.entries(detail.stock)
+                      ?.slice(0, 2)
+                      .map(([talle]) => (
+                        <tr className="border-b" key={talle}>
+                          <td className="py-2 px-4">{talle}</td>
+
+                        </tr>
+                      ))
+                  ) : (
+                    // Si no es un objeto, mostramos el valor directamente
+                    <td className="py-2 px-4">{detail?.stock}</td>
+                  )}
                 </tr>
               </tbody>
             </table>
@@ -105,14 +118,23 @@ const Detail = () => {
             <div className="flex py-4 space-x-4">
               <div className="relative">
                 <div className="text-center left-0 pt-2 right-0 absolute block text-xs uppercase text-gray-400 tracking-wide font-semibold">
-                  <span className="ml-auto">UND</span>
+                  <span className="ml-auto">TALLAS</span>
                 </div>
                 <select className="cursor-pointer appearance-none rounded-xl border border-gray-200 pl-4 pr-8 h-14 ml-2 flex items-end pb-1 w-auto sm:w-32">
-                  <option className="text-center">1</option>
-                  <option className="text-center">2</option>
-                  <option className="text-center">3</option>
-                  <option className="text-center">4</option>
-                  <option className="text-center">5</option>
+                  {typeof detail.stock === 'object' ? (
+                    Object.entries(detail.stock).map(([talle]) => (
+                      <option key={detail.stock[1]} className="text-center">{talle}</option>
+                    ))
+                  ) : (
+                    <>
+                      <option className="text-center">41</option>
+                      <option className="text-center">42</option>
+                      <option className="text-center">43</option>
+                      <option className="text-center">44</option>
+                      <option className="text-center">45</option>
+                    </>
+                  )}
+
                 </select>
 
                 <svg className="w-5 h-5 text-gray-400 absolute right-0 bottom-0 mb-2 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

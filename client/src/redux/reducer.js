@@ -5,8 +5,9 @@ import {
   POST_PRODUCTO,
   LOGIN,
   GET_ORDER,
-  FILTER_PRODUCTO,
+  FILTER_MARCA,
   FILTER_PRODUCTO2,
+  FILTER_MODELO,
   SIGNUP,
   LOGOUT,
   MESSAGE_TO_USER,
@@ -15,6 +16,7 @@ import {
 } from "./action-types";
 
 const initialState = {
+  allProductosHome: [],
   allProductos: [],
   allProductosAux: [],
   detail: {},
@@ -34,6 +36,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case GET_PRODUCTOS:
       return {
         ...state,
+        allProductosHome: payload,
         allProductos: payload,
         allProductosAux: payload,
       };
@@ -56,7 +59,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         productCreated: payload,
       };
 
-    case FILTER_PRODUCTO:
+    case FILTER_MARCA:
       const copyCont = [...state.allProductosAux];
       if (payload === "All") {
         return {
@@ -91,6 +94,24 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         allProductos: filteredGenero,
       };
+
+      case FILTER_MODELO:
+        const copyCont3 = [...state.allProductosAux];
+        if (payload === "All") {
+          return {
+            ...state,
+            allProductos: copyCont3,
+          };
+        }
+  
+        let filteredModelo = copyCont3.filter(function (filtroCont) {
+          return filtroCont.modelo === payload;
+        });
+  
+        return {
+          ...state,
+          allProductos: filteredModelo,
+        };
 
     case GET_ORDER:
       let ordenAlf = [...state.allProductos];

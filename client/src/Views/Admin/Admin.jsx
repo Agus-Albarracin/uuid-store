@@ -3,72 +3,63 @@ import { useState } from 'react';
 import CreateForm from '../../components/AdminComponents/CreateForm/CreateForm';
 
 const Admin = () => {
-    
-    const [ view, setView ] = useState('estadisticas')
+
+    const [view, setView] = useState('estadisticas')
 
     const handleView = (option) => {
         setView(option);
     }
 
     return (
-        <section>
-            <h2> Hola, Admin </h2>
+        <section className="p-4">
+            {/* <h2 className="text-3xl font-bold mb-4">Hola, Admin</h2> */}
 
-            <div className={styles.sections}>
-                <span onClick={() => handleView('estadisticas')}>
+            <div className="flex flex-col space-y-4">
+                <span className="cursor-pointer text-blue-500 hover:underline" onClick={() => handleView('estadisticas')}>
                     Estadísticas
                 </span>
 
-                <span onClick={() => handleView('crearProducto')}>
+                <span className="cursor-pointer text-blue-500 hover:underline" onClick={() => handleView('crearProducto')}>
                     Crear un producto
                 </span>
 
-                <span onClick={() => handleView('productos')}>
+                <span className="cursor-pointer text-blue-500 hover:underline" onClick={() => handleView('productos')}>
                     Todos los productos
                 </span>
 
-                <span onClick={() => handleView('usuarios')}>
+                <span className="cursor-pointer text-blue-500 hover:underline" onClick={() => handleView('usuarios')}>
                     Todos los usuarios
                 </span>
 
-                <hr />
+                <hr className="border-t my-4" />
             </div>
 
-            {
-                view === 'estadisticas' 
-                    && 
-                <article>
-                    <h2> Estadísticas de la tienda </h2>
+            {view === 'estadisticas' && (
+                <article className="mt-4">
+                    <h2 className="text-xl font-semibold">Estadísticas de la tienda</h2>
                 </article>
-            }
+            )}
 
-            {
-                view === 'crearProducto'
-                    &&
-                <article>
-                    <h2> Crear un producto </h2>
-                    <CreateForm/>
+            {view === 'crearProducto' && (
+                <article className="mt-4">
+                    <h2 className="text-xl font-semibold">Crear un producto</h2>
+                    <CreateForm />
                 </article>
-            }
+            )}
 
-            {
-                view === 'productos'
-                    &&
-                <article>
-                    <h2> Todos los productos </h2>
+            {view === 'productos' && (
+                <article className="mt-4">
+                    <h2 className="text-xl font-semibold">Todos los productos</h2>
                 </article>
-            }
+            )}
 
-            {
-                view === 'usuarios'
-                    &&
-                <article>
-                    <h2> Todos los usuarios </h2>
+            {view === 'usuarios' && (
+                <article className="mt-4">
+                    <h2 className="text-xl font-semibold">Todos los usuarios</h2>
                 </article>
-                
-            }
-
+            )}
         </section>
+
     )
 }
 

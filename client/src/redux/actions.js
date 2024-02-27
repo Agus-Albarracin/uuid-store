@@ -213,13 +213,17 @@ export const autoLogin = (user) => {
 
 //BOTON DE DETAIL
 
-export const addToCart = (product) => ({
-  type: ADD_TO_CART,
-  payload: product,
-});
+export const addToCart = (product) => {
+  console.log(product);
+  return {
+    type: ADD_TO_CART,
+    payload: product
+  };
+};
 
-export const removeToCart = (product) => ({
-  type: REMOVE_TO_CART,
-  payload: product,
-});
-
+export const removeToCart = (productIndex) => {
+  return {
+    type: REMOVE_TO_CART,
+    payload: productIndex
+  };
+};

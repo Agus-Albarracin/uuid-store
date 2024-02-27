@@ -16,7 +16,7 @@ import {
   ADD_TO_CART,
   REMOVE_TO_CART,
   LOG_IN_GOOGLE,
-  SIGN_UP_GOOGLE
+  SIGN_UP_GOOGLE,
 } from "./action-types";
 
 const initialState = {
@@ -100,23 +100,23 @@ const rootReducer = (state = initialState, { type, payload }) => {
         allProductos: filteredGenero,
       };
 
-      case FILTER_MODELO:
-        const copyCont3 = [...state.allProductosAux];
-        if (payload === "All") {
-          return {
-            ...state,
-            allProductos: copyCont3,
-          };
-        }
-  
-        let filteredModelo = copyCont3.filter(function (filtroCont) {
-          return filtroCont.modelo === payload;
-        });
-  
+    case FILTER_MODELO:
+      const copyCont3 = [...state.allProductosAux];
+      if (payload === "All") {
         return {
           ...state,
-          allProductos: filteredModelo,
+          allProductos: copyCont3,
         };
+      }
+
+      let filteredModelo = copyCont3.filter(function (filtroCont) {
+        return filtroCont.modelo === payload;
+      });
+
+      return {
+        ...state,
+        allProductos: filteredModelo,
+      };
 
     case GET_ORDER:
       let ordenAlf = [...state.allProductos];
@@ -127,20 +127,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
           return payload === "As" ? a.precio - b.precio : b.precio - a.precio;
         }),
       };
-
-    case ADD_TO_CART:
-        return {
-          ...state,
-          cart: [...state.cart, payload],
-        };
-
-      case REMOVE_TO_CART:
-        const cart = state.cart.filter(item => item.id !== payload);
-        console.log('Nuevo estado del carrito:', cart); // Agrega este console.log
-        return {
-          ...state,
-          cart: cart
-        };
 
     case LOGIN:
       return {
@@ -185,23 +171,34 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         actualUser: payload,
         messageToUser: "Sesión iniciada correctamente!",
-      }
+      };
 
     case SIGN_UP_GOOGLE:
       return {
         ...state,
         actualUser: payload,
         messageToUser: "Usuario creado correctamente!",
-      }
+      };
+
+    case ADD_TO_CART:
+      return {
+        ...state,
+        cart: [...state.cart, payload],
+        messageToUser: "Producto agregado al carrito!"
+      };
+
+    case REMOVE_TO_CART:
+    const cartFilter = state.cart.filter(item => item.id !== payload.id)
+      return {
+        ...state,
+        cart: cartFilter,
+      };
 
     default:
       return {
         ...state,
       };
-      
   }
-
-  
 };
 
 export default rootReducer;

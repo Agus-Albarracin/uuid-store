@@ -7,11 +7,9 @@ const MenuCarro = ({ mostrarCarro }) => {
     // Obtener el estado del carrito desde Redux
     const cart = useSelector(state => state.cart);
     const dispatch = useDispatch();
-    
 
-    const quitarProducto = (id) => {
-        console.log('Producto a quitar:', id)
-        dispatch(removeToCart(id)); // Despachar la acción para eliminar el producto del carrito
+    const quitarProducto = (item) => {
+        dispatch(removeToCart(item)); // Despachar la acción para eliminar el producto del carrito
     };
 
     const calcularTotal = () => {
@@ -30,14 +28,14 @@ const MenuCarro = ({ mostrarCarro }) => {
                 <div className="w-64 bg-white p-4">
                     <div className="font-bold text-red-600 text-xl mb-4">CARRITO</div>
 
-                    {cart.map(produ => (
+                    {cart.map((produ) => (
                         <div key={uuidv4()} className={styles.cartItem}>
                             <img src={produ.imagen} alt={produ.nombre} className={styles.cartItemImage} />
                             <div className={styles.cartItemDetails}>
                                 <div>{produ.nombre}</div>
                                 <div>Precio: {produ.precio}</div>
                             </div>
-                            <button onClick={() => quitarProducto(produ.id)} className="text-red-500 font-bold mt-2">Quitar</button>
+                            <button onClick={() => quitarProducto(produ)} className="text-red-500 font-bold mt-2">Quitar</button>
                         </div>
                     ))}
                     <div className="mt-4 font-bold">Total: ${calcularTotal()}</div>

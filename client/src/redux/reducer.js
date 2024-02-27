@@ -17,6 +17,7 @@ import {
   REMOVE_TO_CART,
   LOG_IN_GOOGLE,
   SIGN_UP_GOOGLE,
+  AUTO_SET_CARRO
 } from "./action-types";
 
 const initialState = {
@@ -193,6 +194,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         cart: cartFilter,
       };
+
+    case AUTO_SET_CARRO:
+      return {
+        ...state,
+        cart: payload
+      }
 
     default:
       return {

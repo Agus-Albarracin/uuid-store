@@ -17,6 +17,7 @@ import {
   REMOVE_TO_CART,
   LOG_IN_GOOGLE,
   SIGN_UP_GOOGLE,
+  AUTO_SET_CARRO,
 } from "./action-types";
 
 import axios from "axios";
@@ -227,3 +228,10 @@ export const removeToCart = (productIndex) => {
     payload: productIndex
   };
 };
+
+export const autoSetCarro = (carro) => {
+  return {
+    type: AUTO_SET_CARRO,
+    payload: carro
+  }
+}

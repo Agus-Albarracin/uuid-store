@@ -39,7 +39,10 @@ const Detail = () => {
   }
 
   const handleAddToCart = () => {
-    if(talleSeleccionado) dispatch(addToCart({ ...detail, talle: talleSeleccionado }));
+    if(talleSeleccionado){
+      dispatch(addToCart({ ...detail, talle: talleSeleccionado }));
+    }
+    
   };
 
   return (

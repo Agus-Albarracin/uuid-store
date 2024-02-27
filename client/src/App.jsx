@@ -19,17 +19,18 @@ import ConfirmacionDeCompra from "./Views/ConfirmacionDeCompra/ConfirmacionDeCom
 //PATHROUTES
 import PATHROUTES from "./Helpers/path";
 
-import { useEffect } from "react";
+import { useEffect, useReducer } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // ACTION
 import { clearMessage } from "./redux/actions";
-import { autoLogin } from "./redux/actions";
+import { autoLogin, autoSetCarro } from "./redux/actions";
 
 function App() {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.actualUser);
+  const cart = useSelector(state => state.cart);
   const message = useSelector((state) => state.messageToUser);
 
   useEffect(() => {
@@ -45,6 +46,19 @@ function App() {
       dispatch(autoLogin(user));
     }
   }, []);
+
+  useEffect(() => {
+    if(cart.length > 0) window.localStorage.setItem('cart', JSON.stringify(cart))
+  }, [cart])
+
+  useEffect(() => {
+    const cartJSON = window.localStorage.getItem('cart');
+
+    if(cartJSON){
+      const cartAct = JSON.parse(cartJSON);
+      dispatch(autoSetCarro(cartAct));
+    }
+  }, [])
 
   useEffect(() => {
     setTimeout(() => {

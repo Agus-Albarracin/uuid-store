@@ -39,7 +39,7 @@ const Detail = () => {
   }
 
   const handleAddToCart = () => {
-    if(talleSeleccionado){
+    if(talleSeleccionado && talleSeleccionado !== 'sinStock'){
       dispatch(addToCart({ ...detail, talle: talleSeleccionado }));
     }
     
@@ -205,7 +205,7 @@ const Detail = () => {
                           </option>
                         ))
                     ) : (
-                      <option className="text-center">SIN STOCK</option>
+                      <option value='sinStock' className="text-center">SIN STOCK</option>
                     )
                   ) : (
                     (null, "error en cargar el stock")

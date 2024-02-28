@@ -1,10 +1,12 @@
 import { useState } from "react";
 
 import UserData from "./UserData/UserData";
+import DireccionDeEnvio from "./DireccionDeEnvio/DireccionDeEnvio";
 
 const ConfirmacionDeCompra = () => {
 
     const [ view, setView ] = useState(1);
+    const [ userBuyData, setUserBuyData ] = useState({})
 
     const handleView = (option) => {
         setView(option);
@@ -24,11 +26,11 @@ const ConfirmacionDeCompra = () => {
 
             <div>
                 {
-                    view === 1 && <UserData/>
+                    view === 1 && <UserData setUserBuyData={setUserBuyData} setView={setView}/>
                 }
 
                 {
-                    view === 2 && <div> como </div>
+                    view === 2 && <DireccionDeEnvio setUserBuyData={setUserBuyData} setView={setView}/>
                 }
 
                 {

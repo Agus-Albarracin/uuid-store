@@ -1,10 +1,15 @@
 import { useFormik } from 'formik';
 import validate from "./validate";
 
-const UserData = () => {
+const UserData = ({ setUserBuyData, setView }) => {
 
     const userJSON = window.localStorage.getItem('loggedUser');
     const user = JSON.parse(userJSON);
+
+    const handleSubmitAndView = (values) => {
+        setUserBuyData(actualState => { return {...actualState, ...values} })
+        setView(actualView => actualView + 1)
+    }
 
     const formik = useFormik({
         initialValues: {
@@ -15,11 +20,11 @@ const UserData = () => {
             telefono: user.telefono ? user.telefono : "",
         },
         validate,
-        onSubmit: (values) => console.log(values)
+        onSubmit: (values) => handleSubmitAndView(values)
     })
 
     return (
-        <form>
+        <form onSubmit={formik.handleSubmit}>
             <h2>TUS DATOS PERSONALES</h2>
 
             <label htmlFor="nombre"> Nombre </label>
@@ -31,6 +36,7 @@ const UserData = () => {
                 onChange={formik.handleChange}
                 onBlur={formik.onBlur}
             />
+            { formik.errors.nombre && <span> { formik.errors.nombre } </span> }
 
             <label htmlFor="apellido"> Apellido </label>
             <input 
@@ -41,6 +47,7 @@ const UserData = () => {
                 onChange={formik.handleChange}
                 onBlur={formik.onBlur}
             />
+            { formik.errors.apellido && <span> { formik.errors.apellido } </span> }            
 
             <label htmlFor="email"> Email </label>
             <input 
@@ -51,6 +58,7 @@ const UserData = () => {
                 onChange={formik.handleChange}
                 onBlur={formik.onBlur}
             />
+            { formik.errors.email && <span> { formik.errors.email } </span> }
 
             <label htmlFor="dni"> DNI </label>
             <input 
@@ -61,6 +69,7 @@ const UserData = () => {
                 onChange={formik.handleChange}
                 onBlur={formik.onBlur}
             />
+            { formik.errors.dni && <span> { formik.errors.dni } </span> }
 
             <label htmlFor="telefono"> Telefono </label>
             <input 
@@ -71,6 +80,7 @@ const UserData = () => {
                 onChange={formik.handleChange}
                 onBlur={formik.onBlur}
             />
+            { formik.errors.telefono && <span> { formik.errors.telefono } </span> }
 
             <button type="submit">Enviar</button>
         </form>

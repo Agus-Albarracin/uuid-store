@@ -64,7 +64,7 @@ const MenuCarro = ({ mostrarCarro }) => {
           <div className="font-bold text-red-600 text-xl mb-4">CARRITO</div>
 
           {cart.map((produ) => (
-            <div key={uuidv4()} className={styles.cartItem}>
+            <div key={produ.uuid} className={styles.cartItem}>
               <img
                 src={produ.imagen}
                 alt={produ.nombre}
@@ -75,7 +75,7 @@ const MenuCarro = ({ mostrarCarro }) => {
                 <div>Precio: {produ.precio}</div>
               </div>
               <button
-                onClick={() => quitarProducto(produ)}
+                onClick={() => quitarProducto(produ.uuid)}
                 className="text-red-500 font-bold mt-2"
               >
                 Quitar

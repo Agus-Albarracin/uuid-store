@@ -1,6 +1,6 @@
 require("dotenv").config();
 const { MercadoPagoConfig, Preference } = require("mercadopago");
-const { TOKEN_MP } = process.env;
+const { TOKEN_MP, KEY_Makepayment} = process.env;
 
 const client = new MercadoPagoConfig({ accessToken: TOKEN_MP });
 
@@ -15,9 +15,9 @@ const makePayment = async (req, res) => {
     const body = {
       items,
       back_urls: {
-        success: "http://127.0.0.1:5174/",
-        failure: "http://127.0.0.1:5174/",
-        pending: "http://127.0.0.1:5174/",
+        success: KEY_Makepayment,
+        failure: KEY_Makepayment,
+        pending: KEY_Makepayment,
       },
       auto_return: "approved",
     };

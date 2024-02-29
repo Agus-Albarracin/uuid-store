@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import UserData from "./UserData/UserData";
 import DireccionDeEnvio from "./DireccionDeEnvio/DireccionDeEnvio";
+import MetodoDeEnvio from "./MetodoDeEnvio/MetodoDeEnvio";
+import Confirmacion from "./Confirmacion/Confirmacion";
 
 const ConfirmacionDeCompra = () => {
 
@@ -34,11 +36,11 @@ const ConfirmacionDeCompra = () => {
                 }
 
                 {
-                    view === 3 && <div> estas </div>
+                    view === 3 && <MetodoDeEnvio setUserBuyData={setUserBuyData} setView={setView}/>
                 }
 
                 {
-                    view === 4 && <div> estas </div>
+                    view === 4 && <Confirmacion userBuyData={userBuyData} />
                 }
             </div>
         </section>

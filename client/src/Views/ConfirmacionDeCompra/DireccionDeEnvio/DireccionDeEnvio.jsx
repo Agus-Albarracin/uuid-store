@@ -31,8 +31,9 @@ const DireccionDeEnvio = ({ setUserBuyData, setView }) => {
                 name="direccion"
                 value={formik.values.direccion}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
             />
-            { formik.errors.direccion && <span> { formik.errors.direccion } </span> }
+            { formik.touched.direccion && formik.errors.direccion && <span> { formik.errors.direccion } </span> }
 
             <label htmlFor="localidad"> Localidad </label>
             <input 
@@ -41,9 +42,10 @@ const DireccionDeEnvio = ({ setUserBuyData, setView }) => {
                 name="localidad"
                 value={formik.values.localidad}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
             />
 
-            { formik.errors.localidad && <span> { formik.errors.localidad } </span> }
+            { formik.touched.localidad && formik.errors.localidad && <span> { formik.errors.localidad } </span> }
 
             <label htmlFor="provincia"> Provincia </label>
             <input 
@@ -52,9 +54,10 @@ const DireccionDeEnvio = ({ setUserBuyData, setView }) => {
                 name="provincia"
                 value={formik.values.provincia}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
             />
 
-            { formik.errors.provincia && <span> { formik.errors.provincia } </span> }
+            { formik.touched.provincia && formik.errors.provincia && <span> { formik.errors.provincia } </span> }
 
             <label htmlFor="codigoPostal"> Código postal </label>
             <input 
@@ -63,9 +66,10 @@ const DireccionDeEnvio = ({ setUserBuyData, setView }) => {
                 name="codigoPostal"
                 value={formik.values.codigoPostal}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
             />
 
-            { formik.errors.codigoPostal && <span> { formik.errors.codigoPostal } </span> }
+            { formik.touched.codigoPostal && formik.errors.codigoPostal && <span> { formik.errors.codigoPostal } </span> }
 
             <button type="submit"> Enviar </button>
 

@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux"; // Cambiado a useDispatch
 
 import { getDetail, addToCart } from "../../redux/actions";
+import { v4 as uuidv4 } from "uuid";
 // import BotonDet from '../../components/Button/Button';
 // import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
@@ -39,12 +40,13 @@ const Detail = () => {
   }
 
   const handleAddToCart = () => {
-    if(talleSeleccionado && talleSeleccionado !== 'sinStock'){
-      dispatch(addToCart({ ...detail, talle: talleSeleccionado }));
-    }
-    
-  };
 
+    if(talleSeleccionado) {
+      const uuid = uuidv4();
+      dispatch(addToCart({ ...detail, talle: talleSeleccionado, uuid: uuid }));
+    }
+
+  };
   return (
     <div className="py-6 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -189,7 +189,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case REMOVE_TO_CART:
-    const cartFilter = state.cart.filter(item => item.id !== payload.id)
+    const cartFilter = state.cart.filter(item => item.uuid !== payload)
       return {
         ...state,
         cart: cartFilter,

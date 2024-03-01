@@ -1,13 +1,19 @@
 import { useFormik } from 'formik';
 import validate from "./validate";
 
-const UserData = ({ setUserBuyData, setView }) => {
+const UserData = ({ userBuyData, setUserBuyData, setView }) => {
 
     const userJSON = window.localStorage.getItem('loggedUser');
     const user = JSON.parse(userJSON);
 
+    const actualFormJSON = window.localStorage.getItem('actualForm');
+    const actualForm = JSON.parse(actualFormJSON);
+
     const handleSubmitAndView = (values) => {
         setUserBuyData(actualState => { return {...actualState, ...values} })
+
+        window.localStorage.setItem('actualForm', JSON.stringify({...userBuyData, ...values}));
+
         setView(actualView => actualView + 1)
     }
 
@@ -16,8 +22,8 @@ const UserData = ({ setUserBuyData, setView }) => {
             nombre: user.nombre,
             apellido: user.apellido,
             email: user.email,
-            dni: user.dni ? user.dni : "",
-            telefono: user.telefono ? user.telefono : "",
+            dni: user.dni ? user.dni : actualForm.dni ? actualForm.dni : "",
+            telefono: user.telefono ? user.telefono : actualForm.telefono ? actualForm.telefono : "",
         },
         validate,
         onSubmit: (values) => handleSubmitAndView(values)

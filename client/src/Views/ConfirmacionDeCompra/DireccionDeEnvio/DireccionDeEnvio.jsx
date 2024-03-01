@@ -1,22 +1,28 @@
 import { useFormik } from "formik";
 import validate from "./validate";
 
-const DireccionDeEnvio = ({ setUserBuyData, setView }) => {
+const DireccionDeEnvio = ({ userBuyData, setUserBuyData, setView }) => {
 
     const userJSON = window.localStorage.getItem('loggedUser');
     const user = JSON.parse(userJSON);
 
+    const actualFormJSON = window.localStorage.getItem('actualForm');
+    const actualForm = JSON.parse(actualFormJSON);
+
     const handleSubmitAndView = (values) => {
-        setUserBuyData(actualState => { return {...actualState, ...values} })
+        setUserBuyData(actualState => { return {...actualState, ...values} });
+
+        window.localStorage.setItem('actualForm', JSON.stringify({...userBuyData, ...values}));
+
         setView(actualView => actualView + 1)
     }
 
     const formik = useFormik({
         initialValues: {
-            provincia: user.provincia ? user.provincia : "",
-            localidad: user.localidad ? user.localidad : "",
-            direccion: user.direccion ? user.direccion : "",
-            codigoPostal: user.codigoPostal ? user.codigoPostal : "",
+            provincia: user.provincia ? user.provincia : actualForm.provincia ? actualForm.provincia : "",
+            localidad: user.localidad ? user.localidad : actualForm.localidad ? actualForm.localidad : "",
+            direccion: user.direccion ? user.direccion : actualForm.direccion ? actualForm.direccion : "",
+            codigoPostal: user.codigoPostal ? user.codigoPostal : actualForm.codigoPostal ? actualForm.codigoPostal : "",
         },
         validate,
         onSubmit: (values) => handleSubmitAndView(values)

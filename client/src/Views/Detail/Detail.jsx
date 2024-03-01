@@ -37,15 +37,13 @@ const Detail = () => {
 
   const handleTalle = (event) => {
     setTalleSeleccionado(event.target.value);
-  }
+  };
 
   const handleAddToCart = () => {
-
-    if(talleSeleccionado) {
+    if (talleSeleccionado && talleSeleccionado !== "sinStock") {
       const uuid = uuidv4();
       dispatch(addToCart({ ...detail, talle: talleSeleccionado, uuid: uuid }));
     }
-
   };
   return (
     <div className="py-6 bg-white">
@@ -193,8 +191,15 @@ const Detail = () => {
                 <div className="text-center left-0 pt-2 right-0 absolute block text-xs uppercase text-gray-400 tracking-wide font-semibold">
                   <span className="ml-auto">Tallas</span>
                 </div>
-                <select value={talleSeleccionado} onChange={handleTalle} className="cursor-pointer appearance-none rounded-xl border border-gray-200 pl-4 pr-8 h-14 ml-2 flex items-end pb-1 w-auto sm:w-32">
-                  <option value={undefined} className="text-center"> Talle </option>
+                <select
+                  value={talleSeleccionado}
+                  onChange={handleTalle}
+                  className="cursor-pointer appearance-none rounded-xl border border-gray-200 pl-4 pr-8 h-14 ml-2 flex items-end pb-1 w-auto sm:w-32"
+                >
+                  <option value={undefined} className="text-center">
+                    {" "}
+                    Talle{" "}
+                  </option>
                   {typeof detail.stock === "object" ? (
                     Object.entries(detail.stock).filter(
                       ([talle, cantidad]) => cantidad > 0
@@ -202,12 +207,18 @@ const Detail = () => {
                       Object.entries(detail.stock)
                         .filter(([talle, cantidad]) => cantidad > 0)
                         .map(([talle], index) => (
-                          <option value={talle} key={index} className="text-center">
+                          <option
+                            value={talle}
+                            key={index}
+                            className="text-center"
+                          >
                             {talle}
                           </option>
                         ))
                     ) : (
-                      <option value='sinStock' className="text-center">SIN STOCK</option>
+                      <option value="sinStock" className="text-center">
+                        SIN STOCK
+                      </option>
                     )
                   ) : (
                     (null, "error en cargar el stock")

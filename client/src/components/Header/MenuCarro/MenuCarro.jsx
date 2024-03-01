@@ -3,7 +3,7 @@ import styles from "./MenuCarro.module.scss";
 import { removeToCart } from "../../../redux/actions";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 
 const MenuCarro = ({ mostrarCarro }) => {
@@ -50,6 +50,10 @@ const MenuCarro = ({ mostrarCarro }) => {
     }
   };
 
+  useEffect(() => {
+    window.localStorage.setItem('cart', JSON.stringify(cart))
+  }, [cart.length])
+
   return (
     <div className={styles.menuContainer}>
       <div
@@ -63,8 +67,8 @@ const MenuCarro = ({ mostrarCarro }) => {
         <div className="w-64 bg-white p-4">
           <div className="font-bold text-red-600 text-xl mb-4">CARRITO</div>
 
-          {cart.map((produ) => (
-            <div key={produ.uuid} className={styles.cartItem}>
+          {cart.map((produ, index) => (
+            <div key={index} className={styles.cartItem}>
               <img
                 src={produ.imagen}
                 alt={produ.nombre}

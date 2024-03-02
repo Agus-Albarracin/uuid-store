@@ -13,6 +13,7 @@ const putProdu = require("../controllers/Productos/putProductos");
 //Carrito
 const postCarrito = require("../controllers/Carrito/postCarrito");
 const deleteCarrito = require("../controllers/Carrito/deleteCarrito");
+const getCarritos = require("../controllers/Carrito/getCarritos")
 
 //MercadoPago
 const makePayment = require("../controllers/PasarelaDePagos/makePayment");
@@ -55,7 +56,9 @@ router.put("/updatestateuser", putUser.updateStateUser);
 
 //*Carrito
 router.post("/createOrden", postCarrito.postOrden);
-// router.get("/getOrden", getOrden)
+router.post("/getCarritosPrueba", postCarrito.postOrden);
+
+router.get("/getOrden", getCarritos.getCarritos)
 router.delete("/deleteOrden", deleteCarrito.deleteCarrito)
 
 //*MercadoPago

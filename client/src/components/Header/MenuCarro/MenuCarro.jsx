@@ -6,13 +6,26 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 
-const MenuCarro = ({ mostrarCarro }) => {
+const MenuCarro = ({ mostrarCarro, emailLocalStorage  }) => {
   // Obtener el estado del carrito desde Redux
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
+  const [email, setEmail] = useState('');
+
+  useEffect(() => {
+    // Obtener el objeto del usuario almacenado en localStorage
+    const storedUser = JSON.parse(window.localStorage.getItem('user'));
+  
+    // Verificar si se encontró el usuario y si tiene la propiedad email
+    if (storedUser && storedUser.email) {
+      // Obtener y establecer el email del usuario
+      setEmail(storedUser.email);
+    }
+  }, []);
+
   const quitarProducto = (item) => {
-    dispatch(removeToCart(item)); // Despachar la acción para eliminar el producto del carrito
+    dispatch(removeToCart(item)); 
   };
 
   const calcularTotal = () => {
@@ -47,6 +60,40 @@ const MenuCarro = ({ mostrarCarro }) => {
     const id = await createPreference();
     if (id) {
       setPreferenceId(id);
+      
+      
+      try {
+        //CHEKEO DE SI CAPTURA EL VALOR DESDE EL LOCALSTORAGE
+        console.log("Datos a enviar:", {
+          email,
+        });
+
+        await axios.post("http://localhost:3001/createOrden", {
+          // Datos del cliente
+          emailStorage: email,
+          email: email, 
+          nombre: 'John', 
+          apellido: 'Doe', 
+          dni: '12345678',
+          numeroTramite: 'ABCD1234',
+          telefono: '123456789', 
+          genero: 'Masculino', 
+          notificaciones: true, 
+          provincia: 'Buenos Aires', 
+          direccion: 'Calle Falsa 123',
+          localidad: 'Springfield', 
+          codigoPostal: '1234', 
+          
+          // Información del producto
+          productos: cart, // Carrito de compras
+          
+          // Información del pedido
+          total: calcularTotal(), // Total de la compra
+          estadoDelPedido: 'Pendiente', // Estado del pedido
+        });
+      } catch (error) {
+        console.error("Error al enviar la solicitud al controlador:", error);
+      }
     }
   };
 

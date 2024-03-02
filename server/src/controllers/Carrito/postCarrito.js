@@ -26,14 +26,14 @@ const postOrden = async (req, res) => {
 
 
         let usuario = await Usuario.findOne({ where: { email: emailStorage} });
-        if (!usuario) {
-            return res.status(400).json({ message: "Usuario no encontrado" });
-        }
+        // if (!usuario) {
+        //     return res.status(400).json({ message: "Usuario no encontrado" });
+        // }
         
         // Crear un nuevo carrito en la base de datos
         const carrito = await Carrito.create({
             idDeCompra: uuid.v4(), // este es el id que se tiene que rastrear
-            email: email,
+            // email: email,
             productosEnCarrito: productos.map(producto => ({ ["Codigo: "]: producto.codigo})),
             estadoDelPedido: estadoDelPedido,
             total: total,
@@ -60,7 +60,7 @@ const postOrden = async (req, res) => {
                   }
               };
 
-        return res.status(201).json(ticketDeCompra);
+        return res.status(200).json(ticketDeCompra);
     } catch (error) {
         console.error("Error al crear la orden de compra:", error);
         res.status(500).json({ message: "Error interno del servidor" });

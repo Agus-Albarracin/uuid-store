@@ -17,13 +17,15 @@ import {
   REMOVE_TO_CART,
   LOG_IN_GOOGLE,
   SIGN_UP_GOOGLE,
-  AUTO_SET_CARRO
+  AUTO_SET_CARRO,
+  GET_USERS,
 } from "./action-types";
 
 const initialState = {
   allProductosHome: [],
   allProductos: [],
   allProductosAux: [],
+  allUsers: [],
   detail: {},
   productCreated: {},
   actualUser: {},
@@ -46,6 +48,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
         allProductos: payload,
         allProductosAux: payload,
       };
+
+      case GET_USERS:
+        return {
+          ...state,
+          allUsers: payload,
+          
+        };
 
     case GET_NAME:
       return {

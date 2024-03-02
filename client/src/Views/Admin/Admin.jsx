@@ -1,6 +1,8 @@
 import styles from './Admin.module.scss';
 import { useState } from 'react';
 import CreateForm from '../../components/AdminComponents/CreateForm/CreateForm';
+import OrdenCompra from '../../components/AdminComponents/OrdenCompra/OrdenCompra';
+import AllUsers from '../../components/AdminComponents/AllUsers/AllUsers';
 
 const Admin = () => {
 
@@ -31,6 +33,10 @@ const Admin = () => {
                     Todos los usuarios
                 </span>
 
+                <span className="cursor-pointer text-blue-500 hover:underline" onClick={() => handleView('ordenCompra')}>
+                    Ordenes de Compra
+                </span>
+
                 <hr className="border-t my-4" />
             </div>
 
@@ -47,6 +53,13 @@ const Admin = () => {
                 </article>
             )}
 
+            {view === 'ordenCompra' && (
+                <article className="mt-4">
+                    <h2 className="text-xl font-semibold"> Ordenes de Compra </h2>
+                    <OrdenCompra />
+                </article>
+            )}
+
             {view === 'productos' && (
                 <article className="mt-4">
                     <h2 className="text-xl font-semibold">Todos los productos</h2>
@@ -55,7 +68,8 @@ const Admin = () => {
 
             {view === 'usuarios' && (
                 <article className="mt-4">
-                    <h2 className="text-xl font-semibold">Todos los usuarios</h2>
+                    <h2 className="text-xl font-semibold"> Todos los usuarios </h2>
+                    <AllUsers />
                 </article>
             )}
         </section>

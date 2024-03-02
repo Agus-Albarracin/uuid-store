@@ -18,6 +18,7 @@ import {
   LOG_IN_GOOGLE,
   SIGN_UP_GOOGLE,
   AUTO_SET_CARRO,
+  GET_USERS,
 } from "./action-types";
 
 import axios from "axios";
@@ -234,4 +235,20 @@ export const autoSetCarro = (carro) => {
     type: AUTO_SET_CARRO,
     payload: carro
   }
+}
+
+export const allUsers = () => {
+  
+    try {
+      return async function (dispatch) {
+        const response = await axios(`http://localhost:3001/getuser`);
+        return dispatch({
+          type: GET_PRODUCTOS,
+          payload: response.data,
+        });
+      };
+    } catch (error) {
+      console.log(error);
+    }
+  
 }

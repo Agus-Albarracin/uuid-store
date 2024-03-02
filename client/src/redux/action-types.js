@@ -17,3 +17,4 @@ export const AUTO_LOGIN = "AUTO_LOGIN";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_TO_CART = "REMOVE_TO_CART";
 export const AUTO_SET_CARRO = "AUTO_SET_CARRO";
+export const GET_USERS = "GET_USERS";

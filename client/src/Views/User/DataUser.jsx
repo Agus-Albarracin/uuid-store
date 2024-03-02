@@ -8,6 +8,7 @@ import "./DataUser.css"
 function DataUser(){
 
     const user = useSelector((state) => state.actualUser);
+    
     const [view, setView] = useState('estadisticas')
 
     const handleView = (option) => {

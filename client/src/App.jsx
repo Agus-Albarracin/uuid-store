@@ -15,11 +15,12 @@ import Detail from "./Views/Detail/Detail";
 import HomePage from "./Views/HomePage/HomePage";
 import Productos from "./Views/Productos/Productos";
 import ConfirmacionDeCompra from "./Views/ConfirmacionDeCompra/ConfirmacionDeCompra";
+import CompraConfirmada from "./Views/CompraConfirmada/CompraConfirmada";
 
 //PATHROUTES
 import PATHROUTES from "./Helpers/path";
 
-import { useEffect, useReducer } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // ACTION
@@ -30,7 +31,7 @@ function App() {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.actualUser);
-  const cart = useSelector(state => state.cart);
+  const cart = useSelector((state) => state.cart);
   const message = useSelector((state) => state.messageToUser);
 
   useEffect(() => {
@@ -48,17 +49,17 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if(cart.length > 0) window.localStorage.setItem('cart', JSON.stringify(cart))
-  }, [cart])
+    if (cart.length > 0)
+      window.localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   useEffect(() => {
-    const cartJSON = window.localStorage.getItem('cart');
-
-    if(cartJSON){
+    const cartJSON = window.localStorage.getItem("cart");
+    if (cartJSON) {
       const cartAct = JSON.parse(cartJSON);
       dispatch(autoSetCarro(cartAct));
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
@@ -76,7 +77,8 @@ function App() {
         <Route path={PATHROUTES.DETAIL} element={<Detail />} />
         <Route path={PATHROUTES.HOME} element={<HomePage />} />
         <Route path={PATHROUTES.PRODUCTOS} element={<Productos />} />
-        <Route path={PATHROUTES.CONFIRMACION} element={<ConfirmacionDeCompra/>} />
+        <Route path={PATHROUTES.CONFIRMACION} element={<ConfirmacionDeCompra />}/>
+        <Route path={PATHROUTES.SUCCESS} element={<CompraConfirmada />} />
       </Routes>
 
       {message && <span className={styles.message}> {message} </span>}

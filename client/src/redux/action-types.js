@@ -1,5 +1,6 @@
 export const GET_PRODUCTOS = "GET_PRODUCTOS";
 export const GET_DETAIL = "GET_DETAIL";
+export const CLEAR_DETAIL = "CLEAR_DETAIL";
 export const GET_NAME = "GET_NAME";
 export const POST_PRODUCTO = "POST_PRODUCTO";
 export const FILTER_MARCA = "FILTER_MARCA";
@@ -18,3 +19,4 @@ export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_TO_CART = "REMOVE_TO_CART";
 export const AUTO_SET_CARRO = "AUTO_SET_CARRO";
 export const GET_USERS = "GET_USERS";
+export const CREATE_TICKET = "CREATE_TICKET";

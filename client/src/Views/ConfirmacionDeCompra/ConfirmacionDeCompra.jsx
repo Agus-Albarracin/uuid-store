@@ -12,6 +12,8 @@ const ConfirmacionDeCompra = () => {
   const carritoJSON = window.localStorage.getItem("cart");
   const carrito = JSON.parse(carritoJSON);
 
+  const userJSON = window.localStorage.getItem("user");
+
   const navigate = useNavigate();
 
   const [view, setView] = useState(1);
@@ -33,7 +35,7 @@ const ConfirmacionDeCompra = () => {
   };
 
   useEffect(() => {
-    if (carrito.length === 0) navigate("/");
+    if (userJSON && carrito.length === 0) navigate("/");
     window.localStorage.setItem("actualForm", JSON.stringify(userBuyData));
   }, []);
 

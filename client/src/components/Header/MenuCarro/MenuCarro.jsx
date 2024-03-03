@@ -1,12 +1,23 @@
-import { useSelector, useDispatch } from "react-redux";
+// ESTILOS
 import styles from "./MenuCarro.module.scss";
-import { removeToCart } from "../../../redux/actions";
-import { v4 as uuidv4 } from "uuid";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 
-const MenuCarro = ({ mostrarCarro, emailLocalStorage  }) => {
+// AXIOS
+import axios from "axios";
+
+// HOOKS
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+// ACTIONS
+import { removeToCart } from "../../../redux/actions";
+
+// COMPONENTS
+import RedirectButton from "./RedirectButton/RedirectButton";
+
+import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
+import { v4 as uuidv4 } from "uuid";
+
+const MenuCarro = ({ mostrarCarro, mostrarUser, emailLocalStorage  }) => {
   // Obtener el estado del carrito desde Redux
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -111,47 +122,55 @@ const MenuCarro = ({ mostrarCarro, emailLocalStorage  }) => {
       <div
         className={`${styles.carro} absolute inset-y-0 right-0 max-w-full flex`}
       >
-        <div className="w-64 bg-white p-4">
+        <div className="w-auto bg-white p-4">
           <div className="font-bold text-red-600 text-xl mb-4">CARRITO</div>
 
           {cart.map((produ, index) => (
-            <div key={index} className={styles.cartItem}>
+            <div key={index} className={`${styles.cartItem} flex items-center justify-between border-b py-2`} >
               <img
-                src={produ.imagen}
+                src={produ.imagen[0]}
                 alt={produ.nombre}
-                className={styles.cartItemImage}
+                className="w-24  object-cover rounded"
               />
-              <div className={styles.cartItemDetails}>
-                <div>{produ.nombre}</div>
-                <div>Precio: {produ.precio}</div>
+              <div className="flex-1 ml-4">
+                <div className="font-semibold">{produ.nombre}</div>
+                <div>Precio: ${produ.precio}</div>
               </div>
               <button
                 onClick={() => quitarProducto(produ.uuid)}
-                className="text-red-500 font-bold mt-2"
+                className="text-red-500 font-bold ml-4"
               >
                 Quitar
               </button>
             </div>
           ))}
+
           <div className="mt-4 font-bold">Total: ${calcularTotal()}</div>
+
           <button
-            className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700"
+            className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700 mt-4"
             onClick={handleBuy}
           >
             Pagar
           </button>
+
           {preferenceId && (
             <Wallet initialization={{ preferenceId: preferenceId }} />
           )}
+
           <button
-            className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700"
+            className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700 mt-2"
             onClick={() => mostrarCarro(false)}
           >
             Cerrar Carrito
           </button>
+
+          <RedirectButton mostrarCarro={mostrarCarro} mostrarUser={mostrarUser} />
+
         </div>
       </div>
     </div>
+
   );
 };
 

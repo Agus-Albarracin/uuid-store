@@ -41,12 +41,12 @@ const Nav = () => {
 
             <div className={`flex space-x-4 ${styles.menus}`}>
                 <span>
-                    <img src={iconoCarro} alt="carrito de compras" className="cursor-pointer" onClick={mostrarCarro} />
+                    <img src={iconoCarro} alt="carrito de compras" className="cursor-pointer w-8" onClick={mostrarCarro} />
                     {carroDisplay && <MenuCarro mostrarCarro={mostrarCarro} />}
                 </span>
 
                 <span>
-                    <img src={iconoUser} alt="icono de usuario" className="cursor-pointer" onClick={mostrarUser} />
+                    <img src={iconoUser} alt="icono de usuario" className="cursor-pointer w-8" onClick={mostrarUser} />
                     {userDisplay && <MenuUser mostrarUser={mostrarUser} />}
                 </span>
             </div>

@@ -1,11 +1,12 @@
 const PATHROUTES = {
+  HOME: "/",
   ADMIN: "/admin",
   USER: "/user",
   DETAIL: "/detail/:id",
-  HOME: "/",
   PRODUCTOS: "/productos",
-  SIGNUP: "signUp",
+  SIGNUP: "/signUp",
   CONFIRMACION: "confirmacionDeCompra",
+  SUCCESS: "/success",
 };
 
 export default PATHROUTES;

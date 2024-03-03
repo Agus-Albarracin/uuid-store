@@ -10,7 +10,7 @@ const MenuCarro = ({ mostrarCarro }) => {
   // Obtener el estado del carrito desde Redux
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-
+  
   const quitarProducto = (item) => {
     dispatch(removeToCart(item)); // Despachar la acción para eliminar el producto del carrito
   };
@@ -50,6 +50,8 @@ const MenuCarro = ({ mostrarCarro }) => {
     }
   };
 
+  console.log(cart)
+ 
   return (
     <div className={styles.menuContainer}>
       <div
@@ -60,40 +62,44 @@ const MenuCarro = ({ mostrarCarro }) => {
       <div
         className={`${styles.carro} absolute inset-y-0 right-0 max-w-full flex`}
       >
-        <div className="w-64 bg-white p-4">
+        <div className="w-auto bg-white p-4">
           <div className="font-bold text-red-600 text-xl mb-4">CARRITO</div>
 
-          {cart.map((produ) => (
-            <div key={produ.uuid} className={styles.cartItem}>
+          {cart.map((producto) => (
+            <div key={producto.uuid} className={`${styles.cartItem} flex items-center justify-between border-b py-2`}>
               <img
-                src={produ.imagen}
-                alt={produ.nombre}
-                className={styles.cartItemImage}
+                src={producto.imagen[0]}
+                alt={producto.nombre}
+                className="w-24  object-cover rounded"
               />
-              <div className={styles.cartItemDetails}>
-                <div>{produ.nombre}</div>
-                <div>Precio: {produ.precio}</div>
+              <div className="flex-1 ml-4">
+                <div className="font-semibold">{producto.nombre}</div>
+                <div>Precio: ${producto.precio}</div>
               </div>
               <button
-                onClick={() => quitarProducto(produ.uuid)}
-                className="text-red-500 font-bold mt-2"
+                onClick={() => quitarProducto(producto.uuid)}
+                className="text-red-500 font-bold ml-4"
               >
                 Quitar
               </button>
             </div>
           ))}
+
           <div className="mt-4 font-bold">Total: ${calcularTotal()}</div>
+
           <button
-            className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700"
+            className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700 mt-4"
             onClick={handleBuy}
           >
             Pagar
           </button>
+
           {preferenceId && (
             <Wallet initialization={{ preferenceId: preferenceId }} />
           )}
+
           <button
-            className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700"
+            className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700 mt-2"
             onClick={() => mostrarCarro(false)}
           >
             Cerrar Carrito
@@ -101,6 +107,7 @@ const MenuCarro = ({ mostrarCarro }) => {
         </div>
       </div>
     </div>
+
   );
 };
 

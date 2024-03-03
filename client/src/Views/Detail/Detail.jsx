@@ -14,7 +14,7 @@ const Detail = () => {
   const dispatch = useDispatch(); // Cambiado a useDispatch
   const detail = useSelector((state) => state.detail);
 
-  const [talleSeleccionado, setTalleSeleccionado] = useState(undefined);
+
 
   const [image, setImage] = useState(1);
   const images = [
@@ -35,15 +35,31 @@ const Detail = () => {
     // };
   }, [dispatch, id]);
 
-  const handleTalle = (event) => {
-    setTalleSeleccionado(event.target.value);
-  }
+  // const handleTalle = (event) => {
+  //   setTalleSeleccionado(event.target.value);
+  // }
+
+
+
+  const [tallaSeleccionada, setTallaSeleccionada] = useState(null);
+  const handleSeleccionarTalla = (talla) => {
+    setTallaSeleccionada(talla === tallaSeleccionada ? null : talla);
+  };
+
+  // --------estrellas
+  const [rating, setRating] = useState(0);
+
+  const handleRating = (value) => {
+    setRating(value);
+    // agregar la lógica para enviar la calificación al servidor
+    console.log(`Calificación: ${value}`);
+  };
 
   const handleAddToCart = () => {
 
-    if(talleSeleccionado) {
+    if (tallaSeleccionada) {
       const uuid = uuidv4();
-      dispatch(addToCart({ ...detail, talle: talleSeleccionado, uuid: uuid }));
+      dispatch(addToCart({ ...detail, talle: tallaSeleccionada, uuid: uuid }));
     }
 
   };
@@ -118,9 +134,8 @@ const Detail = () => {
                 <div key={i} className="flex-1 px-2">
                   <button
                     onClick={() => changeImage(i + 1)}
-                    className={`focus:outline-none w-full rounded-lg h-24 md:h-32 bg-gray-100 flex items-center justify-center ${
-                      image === i + 1 ? "ring-2 ring-indigo-300 ring-inset" : ""
-                    }`}
+                    className={`focus:outline-none w-full rounded-lg h-24 md:h-32 bg-gray-100 flex items-center justify-center ${image === i + 1 ? "ring-2 ring-indigo-300 ring-inset" : ""
+                      }`}
                   >
                     <img
                       src={img}
@@ -135,6 +150,18 @@ const Detail = () => {
           <div className="md:flex-1 px-4">
             <h2 className="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl">
               {detail?.nombre}
+              <div className="flex items-center">
+                {[1, 2, 3, 4, 5].map((value) => (
+                  <button
+                    key={value}
+                    onClick={() => handleRating(value)}
+                    className={`focus:outline-none ${value <= rating ? 'text-yellow-500' : 'text-gray-300'} text-3xl`}
+                  >
+                    {/* Utilizando caracteres Unicode para las estrellas */}
+                    {value <= rating ? '\u2605' : '\u2606'}
+                  </button>
+                ))}
+              </div>
             </h2>
             <p className="text-gray-500 text-sm">
               Por{" "}
@@ -188,19 +215,63 @@ const Detail = () => {
               enim, libero blanditiis expedita cupiditate a est.
             </p>
 
+            <div>
+              <p><b>Selecciona tu talla:</b></p>
+              <div className="flex-wrap space-x-2">
+                {typeof detail.stock === "object" ? (
+                  Object.entries(detail.stock).filter(([_, cantidad]) => cantidad > 0).length > 0 ? (
+                    Object.entries(detail.stock)
+                      .filter(([_, cantidad]) => cantidad > 0)
+                      .map(([talle], index) => (
+                        <button
+                          key={index}
+                          className={`py-2 px-4 m-1 focus:outline-none border border-gray-300 rounded-md transition duration-300 ease-in-out ${talle === tallaSeleccionada
+                            ? 'bg-blue-500 text-white'
+                            : 'bg-transparent text-gray-700 hover:bg-gray-200'
+                            }`}
+                          onClick={() => handleSeleccionarTalla(talle)}
+                        >
+                          {talle}
+                        </button>
+                      ))
+                  ) : (
+                    <button
+                      className="py-2 px-4 border border-gray-300 text-gray-700 rounded-md cursor-not-allowed opacity-50"
+                      disabled
+                    >
+                      SIN STOCK
+                    </button>
+                  )
+                ) : (
+                  <button
+                    className="py-2 px-4 border border-red-500 text-red-500 rounded-md cursor-not-allowed opacity-50"
+                    disabled
+                  >
+                    Error en cargar el stock
+                  </button>
+                )}
+              </div>
+
+
+
+              {tallaSeleccionada && (
+                <p>Talla seleccionada: {tallaSeleccionada}</p>
+              )}
+            </div>
+
             <div className="flex py-4 space-x-4">
               <div className="relative">
-                <div className="text-center left-0 pt-2 right-0 absolute block text-xs uppercase text-gray-400 tracking-wide font-semibold">
+                {/* <div className="text-center left-0 pt-2 right-0 absolute block text-xs uppercase text-gray-400 tracking-wide font-semibold">
                   <span className="ml-auto">Tallas</span>
-                </div>
-                <select value={talleSeleccionado} onChange={handleTalle} className="cursor-pointer appearance-none rounded-xl border border-gray-200 pl-4 pr-8 h-14 ml-2 flex items-end pb-1 w-auto sm:w-32">
+                </div> */}
+                {/* <select value={talleSeleccionado} onChange={handleTalle} className="cursor-pointer appearance-none rounded-xl border border-gray-200 pl-4 pr-8 h-14 ml-2 flex items-end pb-1 w-auto sm:w-32">
                   <option value={undefined} className="text-center"> Talle </option>
                   {typeof detail.stock === "object" ? (
                     Object.entries(detail.stock).filter(
-                      ([talle, cantidad]) => cantidad > 0
+                      ([cantidad]) => cantidad > 0
                     ).length > 0 ? (
                       Object.entries(detail.stock)
-                        .filter(([talle, cantidad]) => cantidad > 0)
+                        .filter(([cantidad]) => cantidad > 0)
                         .map(([talle], index) => (
                           <option value={talle} key={index} className="text-center">
                             {talle}
@@ -212,9 +283,9 @@ const Detail = () => {
                   ) : (
                     (null, "error en cargar el stock")
                   )}
-                </select>
+                </select> */}
 
-                <svg
+                {/* <svg
                   className="w-5 h-5 text-gray-400 absolute right-0 bottom-0 mb-2 mr-2"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -227,7 +298,7 @@ const Detail = () => {
                     strokeWidth="2"
                     d="M8 9l4-4 4 4m0 6l-4 4-4-4"
                   />
-                </svg>
+                </svg> */}
               </div>
 
               <button

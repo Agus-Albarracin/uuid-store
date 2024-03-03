@@ -2,6 +2,7 @@ import {
   GET_PRODUCTOS,
   GET_NAME,
   GET_DETAIL,
+  CLEAR_DETAIL,
   POST_PRODUCTO,
   LOGIN,
   GET_ORDER,
@@ -17,25 +18,23 @@ import {
   REMOVE_TO_CART,
   LOG_IN_GOOGLE,
   SIGN_UP_GOOGLE,
-  AUTO_SET_CARRO
+  AUTO_SET_CARRO,
+  GET_USERS,
+  CREATE_TICKET,
 } from "./action-types";
 
 const initialState = {
   allProductosHome: [],
   allProductos: [],
   allProductosAux: [],
+  allUsers: [],
   detail: {},
   productCreated: {},
   actualUser: {},
   messageToUser: "",
   cart: [],
+  compraActual: {},
 };
-
-// case CLEAR_DETAIL:
-//   return {
-//     ...state,
-//     detail: {},
-//   };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -47,6 +46,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
         allProductosAux: payload,
       };
 
+    case GET_USERS:
+      return {
+        ...state,
+        allUsers: payload,
+      };
+
     case GET_NAME:
       return {
         ...state,
@@ -54,6 +59,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case GET_DETAIL:
+      return {
+        ...state,
+        detail: payload,
+      };
+
+    case CLEAR_DETAIL:
       return {
         ...state,
         detail: payload,
@@ -185,11 +196,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         cart: [...state.cart, payload],
-        messageToUser: "Producto agregado al carrito!"
+        messageToUser: "Producto agregado al carrito!",
       };
 
     case REMOVE_TO_CART:
-    const cartFilter = state.cart.filter(item => item.uuid !== payload)
+      const cartFilter = state.cart.filter((item) => item.uuid !== payload);
       return {
         ...state,
         cart: cartFilter,
@@ -198,8 +209,14 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case AUTO_SET_CARRO:
       return {
         ...state,
-        cart: payload
-      }
+        cart: payload,
+      };
+
+    case CREATE_TICKET:
+      return {
+        ...state,
+        compraActual: payload,
+      };
 
     default:
       return {

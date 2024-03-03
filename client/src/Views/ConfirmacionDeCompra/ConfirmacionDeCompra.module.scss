@@ -1,0 +1,21 @@
+.container {
+  .carrito {
+    width: 300px;
+    height: 300px;
+    border: 3px solid #000;
+  }
+
+  .producto {
+    width: 250px;
+    height: 100px;
+    border: 3px solid #000;
+  }
+}
+
+.noDisponible {
+  color: #000;
+}
+
+.disponible {
+  color: #5555ff;
+}

@@ -1,6 +1,7 @@
 import {
   GET_PRODUCTOS,
   GET_DETAIL,
+  CLEAR_DETAIL,
   GET_NAME,
   POST_PRODUCTO,
   LOGIN,
@@ -18,6 +19,8 @@ import {
   LOG_IN_GOOGLE,
   SIGN_UP_GOOGLE,
   AUTO_SET_CARRO,
+  GET_USERS,
+  CREATE_TICKET,
 } from "./action-types";
 
 import axios from "axios";
@@ -70,6 +73,13 @@ export const getDetail = (id) => {
   };
 };
 
+export const clearDetail = () => {
+  return {
+    type: CLEAR_DETAIL,
+    payload: {},
+  };
+};
+
 // CREAR UN PRODUCTO
 export const postProducto = (form) => {
   return async (dispatch) => {
@@ -91,8 +101,6 @@ export const filterMarca = (marca) => {
     payload: marca,
   };
 };
-
-
 
 export const filterProducto2 = (genero) => {
   return {
@@ -140,29 +148,34 @@ export const logIn = ({ email, password }) => {
 export const signUpWhitGoogle = (googleData) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/signupgoogle`, googleData);
+      const response = await axios.post(
+        `${API_BASE_URL}/signupgoogle`,
+        googleData
+      );
       return dispatch({
         type: SIGN_UP_GOOGLE,
         payload: response.data,
-      })
+      });
     } catch (error) {
       return dispatch({
         type: MESSAGE_TO_USER,
         payload: error.response.data,
       });
     }
-  }
-}
+  };
+};
 
 // INICIAR SESION CON GOOGLE
 export const logInWhitGoogle = ({ email }) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/loginGoogle?email=${email}`);
+      const response = await axios.get(
+        `${API_BASE_URL}/loginGoogle?email=${email}`
+      );
       return dispatch({
         type: LOG_IN_GOOGLE,
         payload: response.data,
-      })
+      });
     } catch (error) {
       console.log(error);
       return dispatch({
@@ -170,8 +183,8 @@ export const logInWhitGoogle = ({ email }) => {
         payload: error.response.data,
       });
     }
-  }
-}
+  };
+};
 
 // REGISTRO
 export const signUp = (form) => {
@@ -218,20 +231,50 @@ export const addToCart = (product) => {
   console.log(product);
   return {
     type: ADD_TO_CART,
-    payload: product
+    payload: product,
   };
 };
 
 export const removeToCart = (productIndex) => {
   return {
     type: REMOVE_TO_CART,
-    payload: productIndex
+    payload: productIndex,
   };
 };
 
 export const autoSetCarro = (carro) => {
   return {
     type: AUTO_SET_CARRO,
-    payload: carro
+    payload: carro,
+  };
+};
+
+export const allUsers = () => {
+  try {
+    return async function (dispatch) {
+      const response = await axios(`http://localhost:3001/getuser`);
+      return dispatch({
+        type: GET_USERS,
+        payload: response.data,
+      });
+    };
+  } catch (error) {
+    console.log(error);
   }
-}
+};
+
+// CREAR TICKET DE COMPRA
+
+export const createTicket = (data) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/createOrden`, data);
+      return dispatch({
+        type: CREATE_TICKET,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

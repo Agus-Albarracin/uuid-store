@@ -3,6 +3,7 @@ import { useState } from 'react';
 import CreateForm from '../../components/AdminComponents/CreateForm/CreateForm';
 import OrdenCompra from '../../components/AdminComponents/OrdenCompra/OrdenCompra';
 import AllUsers from '../../components/AdminComponents/AllUsers/AllUsers';
+import AllProducts from '../../components/AdminComponents/AllProducts/AllProducts';
 
 const Admin = () => {
 
@@ -23,6 +24,10 @@ const Admin = () => {
 
                 <span className="cursor-pointer text-blue-500 hover:underline" onClick={() => handleView('crearProducto')}>
                     Crear un producto
+                </span>
+
+                <span className="cursor-pointer text-blue-500 hover:underline" onClick={() => handleView('crearCategoria')}>
+                    Crear un categoria
                 </span>
 
                 <span className="cursor-pointer text-blue-500 hover:underline" onClick={() => handleView('productos')}>
@@ -53,6 +58,13 @@ const Admin = () => {
                 </article>
             )}
 
+            {view === 'crearProducto' && (
+                <article className="mt-4">
+                    <h2 className="text-xl font-semibold">Crear un producto</h2>
+                    <CreateForm />
+                </article>
+            )}
+
             {view === 'ordenCompra' && (
                 <article className="mt-4">
                     <h2 className="text-xl font-semibold"> Ordenes de Compra </h2>
@@ -63,6 +75,7 @@ const Admin = () => {
             {view === 'productos' && (
                 <article className="mt-4">
                     <h2 className="text-xl font-semibold">Todos los productos</h2>
+                    <AllProducts></AllProducts>
                 </article>
             )}
 

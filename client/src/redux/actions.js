@@ -30,6 +30,7 @@ export const getProductos = () => {
   try {
     return async function (dispatch) {
       const response = await axios(`http://localhost:3001/getproductos`);
+      console.log("Actions",response)
       return dispatch({
         type: GET_PRODUCTOS,
         payload: response.data,

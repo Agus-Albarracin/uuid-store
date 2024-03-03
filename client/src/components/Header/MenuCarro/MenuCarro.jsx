@@ -126,18 +126,18 @@ const MenuCarro = ({ mostrarCarro, mostrarUser, emailLocalStorage  }) => {
           <div className="font-bold text-red-600 text-xl mb-4">CARRITO</div>
 
           {cart.map((produ, index) => (
-            <div key={index} className={styles.cartItem}>
+            <div key={index} className={`${styles.cartItem} flex items-center justify-between border-b py-2`} >
               <img
-                src={producto.imagen[0]}
-                alt={producto.nombre}
+                src={produ.imagen[0]}
+                alt={produ.nombre}
                 className="w-24  object-cover rounded"
               />
               <div className="flex-1 ml-4">
-                <div className="font-semibold">{producto.nombre}</div>
-                <div>Precio: ${producto.precio}</div>
+                <div className="font-semibold">{produ.nombre}</div>
+                <div>Precio: ${produ.precio}</div>
               </div>
               <button
-                onClick={() => quitarProducto(producto.uuid)}
+                onClick={() => quitarProducto(produ.uuid)}
                 className="text-red-500 font-bold ml-4"
               >
                 Quitar

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Confirmacion = ({ userBuyData }) => {
   return (
     <div>
@@ -18,9 +20,13 @@ const Confirmacion = ({ userBuyData }) => {
         <span> {userBuyData.codigoPostal} </span>
         <span> {userBuyData.metodoDeEnvio} </span>
       </div>
-    </div>
 
-    // ACA VA EL BOTON PARA HACER EL PAGO
+      {/* ACA VA EL BOTON PARA HACER EL PAGO */}
+
+      <Link to='/success'>
+        simular confirmar
+      </Link>
+    </div>
   );
 };
 

@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux"; // Cambiado a useDispatch
 
-import { getDetail, addToCart } from "../../redux/actions";
+import { getDetail, clearDetail, addToCart } from "../../redux/actions";
 import { v4 as uuidv4 } from "uuid";
 // import BotonDet from '../../components/Button/Button';
 // import ImageGallery from 'react-image-gallery';
@@ -29,10 +29,7 @@ const Detail = () => {
 
   useEffect(() => {
     dispatch(getDetail(id));
-    // return () => {
-    //     console.log(detail);
-    //     dispatch(clearDetail());
-    // };
+    return () => dispatch(clearDetail());
   }, [dispatch, id]);
 
   const handleTalle = (event) => {

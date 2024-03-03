@@ -1,12 +1,23 @@
-import { useSelector, useDispatch } from "react-redux";
+// ESTILOS
 import styles from "./MenuCarro.module.scss";
-import { removeToCart } from "../../../redux/actions";
-import { v4 as uuidv4 } from "uuid";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 
-const MenuCarro = ({ mostrarCarro, emailLocalStorage  }) => {
+// AXIOS
+import axios from "axios";
+
+// HOOKS
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+// ACTIONS
+import { removeToCart } from "../../../redux/actions";
+
+// COMPONENTS
+import RedirectButton from "./RedirectButton/RedirectButton";
+
+import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
+import { v4 as uuidv4 } from "uuid";
+
+const MenuCarro = ({ mostrarCarro, mostrarUser, emailLocalStorage  }) => {
   // Obtener el estado del carrito desde Redux
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -149,6 +160,9 @@ const MenuCarro = ({ mostrarCarro, emailLocalStorage  }) => {
           >
             Cerrar Carrito
           </button>
+
+          <RedirectButton mostrarCarro={mostrarCarro} mostrarUser={mostrarUser} />
+
         </div>
       </div>
     </div>

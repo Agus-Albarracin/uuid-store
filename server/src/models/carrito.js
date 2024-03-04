@@ -28,6 +28,9 @@
       },
       ProductoId: {
         type: DataTypes.JSONB(DataTypes.STRING), // Por ejemplo, aquí establece el tipo de dato como UUID
+      },
+      ticketDeCompra:{
+        type: DataTypes.JSONB(DataTypes.STRING),
       }
     }, { timestamps: false });
 

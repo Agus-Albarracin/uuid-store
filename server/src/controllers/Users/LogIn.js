@@ -1,6 +1,7 @@
 const { Usuario } = require("../../db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
 require("dotenv").config();
 const { JWT_SECRET } = process.env;
 
@@ -23,7 +24,7 @@ const login = async (req, res) => {
       admin: user.admin,
     };
 
-    const token = jwt.sign(payload, JWT_SECRET);
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "2min" });
 
     res.json({
       ...user.dataValues,
@@ -43,7 +44,9 @@ const loginGoogle = async (req, res) => {
     const user = await Usuario.findOne({ where: { email } });
 
     if (!user) {
-      return res.status(404).send("Usuario no encontrado. Por favor, regístrate." );
+      return res
+        .status(404)
+        .send("Usuario no encontrado. Por favor, regístrate.");
     }
 
     const payload = {
@@ -52,17 +55,80 @@ const loginGoogle = async (req, res) => {
       admin: user.admin,
     };
 
-    const token = jwt.sign(payload, JWT_SECRET); //No estoy seguro de esto, deberia devolverte el toquen?
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "2min" }); //No estoy seguro de esto, deberia devolverte el toquen?
 
     res.status(200).json({
       ...user.dataValues, //DataValues devuelve todos los valores del registro del usuario que pases por email!
-      token,//Si tiene un token generado te lo envio en el json manquina.
+      token, //Si tiene un token generado te lo envio en el json manquina.
     });
-  } catch (error) { 
-    
+  } catch (error) {
     return res.status(400).send(error.message);
   }
 };
 
+const mailPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
 
-module.exports = { login, loginGoogle };
+    const user = await Usuario.findOne({ where: { email } });
+
+    if (!user) {
+      return res
+        .status(404)
+        .send("Usuario no encontrado. Por favor, regístrate.");
+    }
+
+    const payload = {
+      id: user.id,
+    };
+
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "10min" });
+    const link = `http://localhost:3000/recovery?${token}`;
+    await Usuario.update({ recoveryToken: token }, { where: { id: user.id } });
+
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: "megaboy93mile@gmail.com",
+        pass: "qptx luvm sxdj jeio",
+      },
+    });
+
+    const info = await transporter.sendMail({
+      from: "megaboy93mile@gmail.com",
+      to: `${user.email}`,
+      subject: "Cambio de contraseña",
+      html: `<b>Ingresa a este link para cambiar la contraseña:${link}</b>`,
+    });
+
+    res.status(200).json(token);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const cambioPassword = async (req, res) => {
+  try {
+    const { token, newPassword } = req.body;
+    const payload = jwt.verify(token, JWT_SECRET);
+
+    const user = await Usuario.findOne({ where: { id: payload.id } });
+
+    if (user.recoveryToken !== token) {
+      res.status(400).json({ error: "error token" });
+    }
+
+    const hash = await bcrypt.hash(newPassword, 10);
+    await Usuario.update(
+      { recoveryToken: null, password: hash, rPassword: hash },
+      { where: { id: user.id } }
+    );
+    res.status(200).json({ message: "password changed" });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+module.exports = { login, loginGoogle, mailPassword, cambioPassword };

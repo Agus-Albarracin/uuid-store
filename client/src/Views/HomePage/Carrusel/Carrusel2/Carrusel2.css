@@ -1,0 +1,21 @@
+/* Carrusel2.css */
+.carrusel-container {
+  position: relative;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+}
+
+.arrow.left {
+  left: 1000px; /* Ajusta la posición izquierda según sea necesario */
+}
+
+.arrow.right {
+  right: 10px; /* Ajusta la posición derecha según sea necesario */
+}

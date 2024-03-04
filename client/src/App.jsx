@@ -37,6 +37,7 @@ function App() {
   useEffect(() => {
     if (user.token) {
       window.localStorage.setItem("loggedUser", JSON.stringify(user));
+      console.log(user.token);
     }
   }, [user]);
 
@@ -55,6 +56,10 @@ function App() {
 
   useEffect(() => {
     const cartJSON = window.localStorage.getItem("cart");
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     if (cartJSON) {
       const cartAct = JSON.parse(cartJSON);
       dispatch(autoSetCarro(cartAct));
@@ -77,8 +82,15 @@ function App() {
         <Route path={PATHROUTES.DETAIL} element={<Detail />} />
         <Route path={PATHROUTES.HOME} element={<HomePage />} />
         <Route path={PATHROUTES.PRODUCTOS} element={<Productos />} />
+<<<<<<< Updated upstream
         <Route path={PATHROUTES.CONFIRMACION} element={<ConfirmacionDeCompra />}/>
         <Route path={PATHROUTES.SUCCESS} element={<CompraConfirmada />} />
+=======
+        <Route
+          path={PATHROUTES.CONFIRMACION}
+          element={<ConfirmacionDeCompra />}
+        />
+>>>>>>> Stashed changes
       </Routes>
 
       {message && <span className={styles.message}> {message} </span>}

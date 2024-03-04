@@ -5,8 +5,8 @@ const postOrden = async (req, res) => {
     
    const {
        //info del cliente 
-      emailStorage, email, nombre, apellido, dni, numeroTramite, telefono, genero, notificaciones, provincia, direccion,
-      quantitysold, localidad, codigoPostal, total, estadoDelPedido,
+      emailStorage, email, nombre, apellido, dni, numeroTramite, telefono, notificaciones, provincia, direccion,
+      localidad, codigoPostal, total, estadoDelPedido,
        
        //info del producto
        productos } = req.body;
@@ -47,16 +47,16 @@ const postOrden = async (req, res) => {
                   carrito,
                   usuario: {
                       id: usuario.id,
-                      nombre: usuario.nombre,
-                      apellido: usuario.apellido,
-                      email: usuario.email,
-                      dni: usuario.dni,
-                      numeroTramite: usuario.numeroTramite,
-                      telefono: usuario.telefono,
-                      provincia: usuario.provincia,
-                      direccion: usuario.direccion,
-                      localidad: usuario.localidad,
-                      codigoPostal: usuario.codigoPostal
+                      nombre: nombre,
+                      apellido: apellido,
+                      email: email,
+                      dni: dni,
+                      numeroTramite: numeroTramite,
+                      telefono: telefono,
+                      provincia: provincia,
+                      direccion: direccion,
+                      localidad: localidad,
+                      codigoPostal: codigoPostal
                   }
               };
 

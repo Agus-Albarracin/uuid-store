@@ -12,7 +12,7 @@ const ConfirmacionDeCompra = () => {
   const carritoJSON = window.localStorage.getItem("cart");
   const carrito = JSON.parse(carritoJSON);
 
-  const userJSON = window.localStorage.getItem("user");
+  const userJSON = window.localStorage.getItem("loggedUser");
 
   const navigate = useNavigate();
 

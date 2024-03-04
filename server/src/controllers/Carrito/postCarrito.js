@@ -6,7 +6,7 @@ const postOrden = async (req, res) => {
    const {
        //info del cliente 
       emailStorage, email, nombre, apellido, dni, numeroTramite, telefono, notificaciones, provincia, direccion,
-      localidad, codigoPostal, total, estadoDelPedido,
+      localidad, codigoPostal, total, estadoDelPedido, metodoDeEnvio,
        
        //info del producto
        productos } = req.body;
@@ -51,12 +51,12 @@ const postOrden = async (req, res) => {
                       apellido: apellido,
                       email: email,
                       dni: dni,
-                      numeroTramite: numeroTramite,
                       telefono: telefono,
                       provincia: provincia,
                       direccion: direccion,
                       localidad: localidad,
-                      codigoPostal: codigoPostal
+                      codigoPostal: codigoPostal,
+                      metodoDeEnvio: metodoDeEnvio,
                   }
               };
 

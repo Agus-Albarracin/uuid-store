@@ -1,6 +1,5 @@
 import React from "react";
 import Carrusel from "./Carrusel/Carrusel";
-import CarruselHorizontal from "./Carrusel/Carrusel2/Carrusel2";
 import Cards from "../../components/Cards/Cards";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,10 +25,9 @@ const HomePage = () => {
   // console.log(recommendedProducts)
 
   return (
-    <div>
+    <div >
       <Carrusel />
-      <CarruselHorizontal />
-      <div>
+      <div >
         <Cards data={recommendedProducts} />
       </div>
     </div>

@@ -53,21 +53,13 @@ router.put("/updateuser", putUser.updateUser);
 router.delete("/deleteuser", deleteUser.deleteUser);
 //desactivar cuenta temporalmente / implementación de borrado lógico.
 router.put("/updatestateuser", putUser.updateStateUser);
-//cambio de contraseña
-router.post("/recovery", login.mailPassword);
-router.post("/change-password", login.cambioPassword);
 
 //*Carrito
 router.post("/createOrden", postCarrito.postOrden);
-<<<<<<< Updated upstream
 router.post("/getCarritosPrueba", postCarrito.postOrden);
 
 router.get("/getOrden", getCarritos.getCarritos)
 router.delete("/deleteOrden", deleteCarrito.deleteCarrito)
-=======
-// router.get("/getOrden", getOrden)
-router.delete("/deleteOrden", deleteCarrito.deleteCarrito);
->>>>>>> Stashed changes
 
 //*MercadoPago
 router.post("/create_preference", makePayment);

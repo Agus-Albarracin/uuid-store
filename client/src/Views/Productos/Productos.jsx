@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductos, getName } from "../../redux/actions";
-import SideBar from "../../components/SideBar/SideBar";
+import SideBar from "../../components/SideBar/SideBar"
 import Cards from "../../components/Cards/Cards";
-import Paginado from "../../components/Paginado/Paginado";
 
 import "./Productos.css";
 
@@ -19,12 +18,13 @@ function Productos() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(getName(searchString));
+    dispatch(getName(searchString))
   }
 
   useEffect(() => {
     if (allProductos.length === 0) {
       dispatch(getProductos());
+
     }
   }, [dispatch, allProductos.length]);
 
@@ -34,11 +34,11 @@ function Productos() {
         <SideBar handleChange={handleChange} handleSubmit={handleSubmit} />
       </div>
       <div className="w-full p-4 overflow-y-auto">
-        <Paginado />
         <Cards data={allProductos} />
       </div>
     </div>
   );
+
 }
 
 export default Productos;

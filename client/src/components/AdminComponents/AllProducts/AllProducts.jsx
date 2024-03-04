@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getProductos } from '../../../redux/actions';
+import { getProductos, } from '../../../redux/actions';
 
 const AllProducts = () => {
     const dispatch = useDispatch();
@@ -43,7 +43,11 @@ const AllProducts = () => {
                             <td>{Object.values(producto.stock).some((value) => value !== 0) ? 'true' : 'false'}</td>
                             <td>{producto.genero}</td>
                             <td>{producto.marca}</td>
-                            <td>{producto.imagen}</td>
+                            <td>
+                                {producto.imagen ? (
+                                    <img src={producto.imagen} alt={producto.nombre} style={{ }} />
+                                ) : null}
+                            </td>
                             <td>{producto.descuento}</td>
                             <td>{producto.estado}</td>
                             <td><button>Editar</button></td>

@@ -1,5 +1,7 @@
 const { Carrito, Usuario, Productos } = require("../../db");
 const uuid = require('uuid');
+const nodemailer = require("nodemailer");
+
 
 const postOrden = async (req, res) => {
     
@@ -60,11 +62,59 @@ const postOrden = async (req, res) => {
                   }
               };
 
+              const contenidoCorreo = `
+              Detalles del ticket de compra:
+              Productos: ${ticketDeCompra.producto.nombre}
+              Usuario: ${ticketDeCompra.usuario.nombre} ${ticketDeCompra.usuario.apellido}
+              Email: ${ticketDeCompra.usuario.email}
+              DNI: ${ticketDeCompra.usuario.dni}
+              Teléfono: ${ticketDeCompra.usuario.telefono}
+              Provincia: ${ticketDeCompra.usuario.provincia}
+              Dirección: ${ticketDeCompra.usuario.direccion}
+              Localidad: ${ticketDeCompra.usuario.localidad}
+              Código Postal: ${ticketDeCompra.usuario.codigoPostal}
+              Método de Envío: ${ticketDeCompra.usuario.metodoDeEnvio}
+          `;
+          
+          // Llama a la función enviarCorreo
+          enviarCorreo(email, "Gracias por su compra! Ya la hemos confirmado y estamos en procesandola. Pronto se hara el despacho.", contenidoCorreo);
+
         return res.status(200).json(ticketDeCompra);
+
+        
     } catch (error) {
         console.error("Error al crear la orden de compra:", error);
         res.status(500).json({ message: "Error interno del servidor" });
     }
 };
+
+//Configuración de admin / transporter
+const transporter = nodemailer.createTransport({
+    service: "Outlook",
+    auth: {
+      user: "uuidstore@outlook.com",
+      pass: "Henry!123",
+    },
+  });
+  
+  // Función para enviar el correo electrónico.
+  function enviarCorreo(destinatario, asunto, mensaje) {
+    // Opciones del correo electrónico
+    const mailOptions = {
+      from: "uuidstore@outlook.com",
+      to: destinatario,
+      subject: asunto,
+      text: mensaje,
+    };
+  
+    // Enviar el correo electrónico
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log("Error al enviar el correo electrónico:", error);
+      } else {
+        console.log("Correo electrónico enviado:", info.response);
+      }
+    });
+  }
 
 module.exports = { postOrden };

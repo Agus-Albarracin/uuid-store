@@ -63,8 +63,13 @@ const postOrden = async (req, res) => {
               };
 
               const contenidoCorreo = `
+              GRACIAS POR SU COMPRA!\n
+              SE HA CONFIRMADO \n
+              Y LA ESTAMOS PROCESANDO.\n
+              \n
               Detalles del ticket de compra:
-              Productos: ${ticketDeCompra.producto.nombre}
+              \n
+              Productos: ${ticketDeCompra.productos.nombre}
               Usuario: ${ticketDeCompra.usuario.nombre} ${ticketDeCompra.usuario.apellido}
               Email: ${ticketDeCompra.usuario.email}
               DNI: ${ticketDeCompra.usuario.dni}
@@ -74,10 +79,15 @@ const postOrden = async (req, res) => {
               Localidad: ${ticketDeCompra.usuario.localidad}
               Código Postal: ${ticketDeCompra.usuario.codigoPostal}
               Método de Envío: ${ticketDeCompra.usuario.metodoDeEnvio}
+              \n
+              uuid.
           `;
           
+          carrito.ticketDeCompra =  JSON.stringify(ticketDeCompra)
+          await carrito.save()
+          
           // Llama a la función enviarCorreo
-          enviarCorreo(email, "Gracias por su compra! Ya la hemos confirmado y estamos en procesandola. Pronto se hara el despacho.", contenidoCorreo);
+          enviarCorreo(email, "Gracias por su compra!", contenidoCorreo);
 
         return res.status(200).json(ticketDeCompra);
 

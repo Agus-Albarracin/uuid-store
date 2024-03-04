@@ -1,6 +1,7 @@
 const { Usuario } = require("../../db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
 require("dotenv").config();
 const { JWT_SECRET, PASS_MAIL } = process.env;
 

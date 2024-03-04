@@ -13,7 +13,7 @@ const putProdu = require("../controllers/Productos/putProductos");
 //Carrito
 const postCarrito = require("../controllers/Carrito/postCarrito");
 const deleteCarrito = require("../controllers/Carrito/deleteCarrito");
-const getCarritos = require("../controllers/Carrito/getCarritos")
+const getCarritos = require("../controllers/Carrito/getCarritos");
 
 //MercadoPago
 const makePayment = require("../controllers/PasarelaDePagos/makePayment");
@@ -53,13 +53,16 @@ router.put("/updateuser", putUser.updateUser);
 router.delete("/deleteuser", deleteUser.deleteUser);
 //desactivar cuenta temporalmente / implementación de borrado lógico.
 router.put("/updatestateuser", putUser.updateStateUser);
+//cambio de contraseña
+router.post("/recovery", login.mailPassword);
+router.post("/change-password", login.cambioPassword);
 
 //*Carrito
 router.post("/createOrden", postCarrito.postOrden);
 router.post("/getCarritosPrueba", postCarrito.postOrden);
 
-router.get("/getOrden", getCarritos.getCarritos)
-router.delete("/deleteOrden", deleteCarrito.deleteCarrito)
+router.get("/getOrden", getCarritos.getCarritos);
+router.delete("/deleteOrden", deleteCarrito.deleteCarrito);
 
 //*MercadoPago
 router.post("/create_preference", makePayment);

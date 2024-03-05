@@ -30,11 +30,10 @@ function OrdenCompra(){
                     <tbody>
                         { orders.map ( (order) => {
                             <tr key={order.idDeCompra}>
-                                <td>{order.ProdusctoId}</td>
-                                <td>{order.UsuarioId}</td>
-                                <td>{order.estadoDelPedido}</td>
+                                <td>{order.productos}</td>
+                                <td>{order.userData}</td>
+                                <td>{order.datosDeEnvio}</td>
                                 <td><button> Eliminar </button></td>
-                                
                             </tr>
                             }
 

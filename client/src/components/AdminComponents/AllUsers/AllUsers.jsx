@@ -33,7 +33,6 @@ const AllUsers = () => {
                                 
                             </tr>
                             }
-
                         )}
                                            
                     </tbody>

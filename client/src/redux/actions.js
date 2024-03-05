@@ -285,8 +285,8 @@ export const createTicket = (data) => {
 export const getOrdenes = () => {
   try {
     return async function (dispatch) {
-      const response = await axios.post(`http://localhost:3001/getCarritosPrueba`);
-      console.log("Actions",response)
+      const response = await axios.post(`http://localhost:3001/getOrden`);
+      //console.log("Actions",response)
       return dispatch({
         type: GET_PRODUCTOS,
         payload: response.data,

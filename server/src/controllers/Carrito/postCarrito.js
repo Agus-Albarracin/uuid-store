@@ -69,7 +69,7 @@ const postOrden = async (req, res) => {
               \n
               Detalles del ticket de compra:
               \n
-              Productos: ${ticketDeCompra.productos.nombre}
+              Productos: ${ticketDeCompra.productos.map(produ => produ.nombre + "")}
               Usuario: ${ticketDeCompra.usuario.nombre} ${ticketDeCompra.usuario.apellido}
               Email: ${ticketDeCompra.usuario.email}
               DNI: ${ticketDeCompra.usuario.dni}

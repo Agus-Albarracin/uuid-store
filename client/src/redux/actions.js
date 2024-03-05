@@ -25,13 +25,14 @@ import {
 
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:3001";
+const API_BASE_URL = "";
+axios.defaults.baseURL = "http://localhost:3001";
 
 // TRAER TODOS LOS PRODUCTOS
 export const getProductos = () => {
   try {
     return async function (dispatch) {
-      const response = await axios(`http://localhost:3001/getproductos`);
+      const response = await axios(`/getproductos`);
       console.log("Actions",response)
       return dispatch({
         type: GET_PRODUCTOS,
@@ -47,7 +48,7 @@ export const getName = (nombre) => {
   try {
     return async function (dispatch) {
       const response = await axios(
-        `http://localhost:3001/getproductosByName/?nombre=${nombre}`
+        `/getproductosByName/?nombre=${nombre}`
       );
       return dispatch({
         type: GET_NAME,
@@ -63,7 +64,7 @@ export const getName = (nombre) => {
 export const getDetail = (id) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/getproductos/${id}`);
+      const response = await axios.get(`/getproductos/${id}`);
       return dispatch({
         type: GET_DETAIL,
         payload: response.data,
@@ -85,7 +86,7 @@ export const clearDetail = () => {
 export const postProducto = (form) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/postproductos`, form);
+      const response = await axios.post(`/postproductos`, form);
       return dispatch({
         type: POST_PRODUCTO,
         payload: response.data,
@@ -129,7 +130,7 @@ export const logIn = ({ email, password }) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `${API_BASE_URL}/login?email=${email}&password=${password}`
+        `/login?email=${email}&password=${password}`
       );
       return dispatch({
         type: LOGIN,
@@ -150,7 +151,7 @@ export const signUpWhitGoogle = (googleData) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        `${API_BASE_URL}/signupgoogle`,
+        `/signupgoogle`,
         googleData
       );
       return dispatch({
@@ -171,7 +172,7 @@ export const logInWhitGoogle = ({ email }) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `${API_BASE_URL}/loginGoogle?email=${email}`
+        `/loginGoogle?email=${email}`
       );
       return dispatch({
         type: LOG_IN_GOOGLE,
@@ -191,7 +192,7 @@ export const logInWhitGoogle = ({ email }) => {
 export const signUp = (form) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/signup`, form);
+      const response = await axios.post(`/signup`, form);
       return dispatch({
         type: SIGNUP,
         payload: response.data,
@@ -253,7 +254,7 @@ export const autoSetCarro = (carro) => {
 export const allUsers = () => {
   try {
     return async function (dispatch) {
-      const response = await axios(`http://localhost:3001/getuser`);
+      const response = await axios(`/getuser`);
       return dispatch({
         type: GET_USERS,
         payload: response.data,
@@ -269,7 +270,7 @@ export const allUsers = () => {
 export const createTicket = (data) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/createOrden`, data);
+      const response = await axios.post(`/createOrden`, data);
       return dispatch({
         type: CREATE_TICKET,
         payload: response.data,

@@ -17,6 +17,10 @@ import Productos from "./Views/Productos/Productos";
 import ConfirmacionDeCompra from "./Views/ConfirmacionDeCompra/ConfirmacionDeCompra";
 import CompraConfirmada from "./Views/CompraConfirmada/CompraConfirmada";
 
+//Axios
+import axios from "axios";
+axios.defaults.baseURL = "http://localhost:3001";
+
 //PATHROUTES
 import PATHROUTES from "./Helpers/path";
 

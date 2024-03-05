@@ -23,25 +23,25 @@ const DireccionDeEnvio = ({ userBuyData, setUserBuyData, setView }) => {
 
   const formik = useFormik({
     initialValues: {
-      provincia: user.provincia
-        ? user.provincia
-        : actualForm.provincia
+      provincia: actualForm.provincia
         ? actualForm.provincia
+        : user.provincia
+        ? user.provincia
         : "",
-      localidad: user.localidad
-        ? user.localidad
-        : actualForm.localidad
+      localidad: actualForm.localidad
         ? actualForm.localidad
+        : user.localidad
+        ? user.localidad
         : "",
-      direccion: user.direccion
-        ? user.direccion
-        : actualForm.direccion
+      direccion: actualForm.direccion
         ? actualForm.direccion
+        : user.direccion
+        ? user.direccion
         : "",
-      codigoPostal: user.codigoPostal
-        ? user.codigoPostal
-        : actualForm.codigoPostal
+      codigoPostal: actualForm.codigoPostal
         ? actualForm.codigoPostal
+        : user.codigoPostal
+        ? user.codigoPostal
         : "",
     },
     validate,

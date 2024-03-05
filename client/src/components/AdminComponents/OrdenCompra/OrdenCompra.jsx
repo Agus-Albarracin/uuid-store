@@ -1,6 +1,18 @@
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from 'react';
+import { getOrdenes } from "../../../redux/actions";
+
 import "./OrdenCompra.css"
 
 function OrdenCompra(){
+
+    const orders = useSelector((state) => state.allOrdenes);
+    const dispatch = useDispatch();
+
+    useEffect(() =>{
+        dispatch(getOrdenes())
+    },[])
     return(
         <div>
            
@@ -11,23 +23,22 @@ function OrdenCompra(){
                         <th> N° de Orden</th>
                         <th> Producto </th>
                         <th> Usuario </th>
-                        <th> Direccion </th>
                         <th> Estado </th>
                     </tr>
                     </thead>
                     
                     <tbody>
-                    
-                    <tr>
-                        <td>Celda 1</td>
-                        <td>Celda 2</td>
-                        <td>Celda 3</td>
-                    </tr>
-                    <tr>
-                        <td>Celda 4</td>
-                        <td>Celda 5</td>
-                        <td>Celda 6</td>
-                    </tr>
+                        { orders.map ( (order) => {
+                            <tr key={order.idDeCompra}>
+                                <td>{order.ProdusctoId}</td>
+                                <td>{order.UsuarioId}</td>
+                                <td>{order.estadoDelPedido}</td>
+                                <td><button> Eliminar </button></td>
+                                
+                            </tr>
+                            }
+
+                        )}
                     </tbody>
                 </table>
             </div>

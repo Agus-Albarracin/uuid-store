@@ -1,10 +1,17 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from 'react';
+import { allUsers } from "../../../redux/actions";
 
 
 const AllUsers = () => {
-
+    
     const users = useSelector((state) => state.allUsers);
+    const dispatch = useDispatch();
+
+    useEffect(() =>{
+        dispatch(allUsers())
+    },[])
 
     return (
         <div className="contenedor-table">
@@ -19,7 +26,7 @@ const AllUsers = () => {
                     
                     <tbody>
                         { users.map ( (user) => {
-                            <tr>
+                            <tr key={user.id}>
                                 <td>{user.nombre}</td>
                                 <td>{user.email}</td>
                                 <td><button> Eliminar </button></td>

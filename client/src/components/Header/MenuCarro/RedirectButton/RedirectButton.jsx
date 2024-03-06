@@ -17,7 +17,8 @@ const RedirectButton = ({ mostrarUser, mostrarCarro }) => {
     }
 
     return (
-        <button  className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700 mt-2" onClick={handleRedirect}>
+        
+        <button className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700 mt-2" onClick={handleRedirect}>
             Confirmar compra
         </button>
     )

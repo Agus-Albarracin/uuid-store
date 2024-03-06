@@ -3,6 +3,8 @@ import { useParams, Link } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux"; // Cambiado a useDispatch
 
+import ProductReview from "../../components/ProductReview/ProductReview";
+
 import { getDetail, clearDetail, addToCart } from "../../redux/actions";
 import { v4 as uuidv4 } from "uuid";
 
@@ -46,13 +48,14 @@ const Detail = () => {
   };
 
   // --------estrellas
-  const [rating, setRating] = useState(0);
+  // const [rating, setRating] = useState(0);
 
-  const handleRating = (value) => {
-    setRating(value);
-    // agregar la lógica para enviar la calificación al servidor
-    console.log(`Calificación: ${value}`);
-  };
+  // const handleRating = (value) => {
+  //   setRating(value);
+    
+  //   console.log(`Calificación: ${value}`);
+  // };
+
 
   const handleAddToCart = () => {
 
@@ -151,18 +154,18 @@ const Detail = () => {
             <div className="md:flex-1 px-4">
               <h2 className="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl">
                 {detail?.nombre}
-                <div className="flex items-center">
+                {/* <div className="flex items-center">
                   {[1, 2, 3, 4, 5].map((value) => (
                     <button
                       key={value}
                       onClick={() => handleRating(value)}
                       className={`focus:outline-none ${value <= rating ? 'text-yellow-500' : 'text-gray-300'} text-3xl`}
                     >
-                      {/* Utilizando caracteres Unicode para las estrellas */}
+                      
                       {value <= rating ? '\u2605' : '\u2606'}
                     </button>
                   ))}
-                </div>
+                </div> */}
               </h2>
               <p className="text-gray-500 text-sm">
                 Por{" "}
@@ -189,27 +192,7 @@ const Detail = () => {
                   </p>
                 </div>
               </div>
-              {/* <table className="table-auto border-collapse w-full bg-white shadow-md mb-4">
-              <tbody>
-                <tr className="border-b">
-                  <td className="py-2 px-4 font-semibold text-red-500">Tallas disponibles:</td>
-                  {typeof detail.stock === 'object' ? (
-                    // Si es un objeto, mostramos solo los dos primeros elementos del objeto
-                    Object.entries(detail.stock)
-                      ?.slice(0, 2)
-                      .map(([talle]) => (
-                        <tr className="border-b" key={talle}>
-                          <td className="py-2 px-4">{talle}</td>
-
-                        </tr>
-                      ))
-                  ) : (
-                    // Si no es un objeto, mostramos el valor directamente
-                    <td className="py-2 px-4">{detail?.stock}</td>
-                  )}
-                </tr>
-              </tbody>
-            </table> */}
+      
               <p className="text-gray-500">
                 Lorem ipsum, dolor sit, amet consectetur adipisicing elit. Vitae
                 exercitationem porro saepe ea harum corrupti vero id laudantium
@@ -262,50 +245,9 @@ const Detail = () => {
 
               <div className="flex py-4 space-x-4">
                 <div className="relative">
-                  {/* <div className="text-center left-0 pt-2 right-0 absolute block text-xs uppercase text-gray-400 tracking-wide font-semibold">
-                  <span className="ml-auto">Tallas</span>
-                </div> */}
-                  {/* <select value={talleSeleccionado} onChange={handleTalle} className="cursor-pointer appearance-none rounded-xl border border-gray-200 pl-4 pr-8 h-14 ml-2 flex items-end pb-1 w-auto sm:w-32">
-                  <option value={undefined} className="text-center"> Talle </option>
-                  {typeof detail.stock === "object" ? (
-                    Object.entries(detail.stock).filter(
-                      ([cantidad]) => cantidad > 0
-                    ).length > 0 ? (
-                      Object.entries(detail.stock)
-                        .filter(([cantidad]) => cantidad > 0)
-                        .map(([talle], index) => (
-                          <option
-                            value={talle}
-                            key={index}
-                            className="text-center"
-                          >
-                            {talle}
-                          </option>
-                        ))
-                    ) : (
-                      <option value="sinStock" className="text-center">
-                        SIN STOCK
-                      </option>
-                    )
-                  ) : (
-                    (null, "error en cargar el stock")
-                  )}
-                </select> */}
+       
 
-                  {/* <svg
-                  className="w-5 h-5 text-gray-400 absolute right-0 bottom-0 mb-2 mr-2"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-                  />
-                </svg> */}
+
                 </div>
 
                 <button
@@ -319,6 +261,7 @@ const Detail = () => {
             </div>
           </div>
         </div>
+        <ProductReview ></ProductReview>
       </div>
     );
   };

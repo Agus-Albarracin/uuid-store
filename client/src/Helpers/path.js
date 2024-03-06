@@ -7,6 +7,7 @@ const PATHROUTES = {
   SIGNUP: "/signUp",
   CONFIRMACION: "confirmacionDeCompra",
   SUCCESS: "/success",
+  DETALLESDECOMPRA: "/success/:idDeCompra",
 };
 
 export default PATHROUTES;

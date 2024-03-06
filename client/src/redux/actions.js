@@ -35,7 +35,6 @@ export const getProductos = () => {
   try {
     return async function (dispatch) {
       const response = await axios(`/getproductos`);
-      console.log("Actions",response)
       return dispatch({
         type: GET_PRODUCTOS,
         payload: response.data,
@@ -49,9 +48,7 @@ export const getProductos = () => {
 export const getName = (nombre) => {
   try {
     return async function (dispatch) {
-      const response = await axios(
-        `/getproductosByName/?nombre=${nombre}`
-      );
+      const response = await axios(`/getproductosByName/?nombre=${nombre}`);
       return dispatch({
         type: GET_NAME,
         payload: response.data,
@@ -152,10 +149,7 @@ export const logIn = ({ email, password }) => {
 export const signUpWhitGoogle = (googleData) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(
-        `/signupgoogle`,
-        googleData
-      );
+      const response = await axios.post(`/signupgoogle`, googleData);
       return dispatch({
         type: SIGN_UP_GOOGLE,
         payload: response.data,
@@ -173,9 +167,7 @@ export const signUpWhitGoogle = (googleData) => {
 export const logInWhitGoogle = ({ email }) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(
-        `/loginGoogle?email=${email}`
-      );
+      const response = await axios.get(`/loginGoogle?email=${email}`);
       return dispatch({
         type: LOG_IN_GOOGLE,
         payload: response.data,

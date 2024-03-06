@@ -3,7 +3,7 @@ const {Carrito} = require("../../db")
 const getCarritos = async (req, res) =>{
 
     try{
-    let allCarritos = await Carrito.findAll()
+    let allCarritos = await Carrito.findAll();
     if(allCarritos.length < 1) return res.status(400).json("No se han realizados compras aún")
 
     allCarritos = allCarritos.map((carrito) => carrito.get());

@@ -22,6 +22,7 @@ import {
   GET_USERS,
   CREATE_TICKET,
   GET_ORDENES,
+  DELETE_USERS,
 } from "./action-types";
 
 import axios from "axios";
@@ -257,6 +258,21 @@ export const allUsers = () => {
     console.log(error);
   }
 };
+
+// DELETE USER
+export const deleteUser = (email) => {
+  try {
+    return async function (dispatch) {
+      const response = await axios.delete("/deleteuser", { data: { email } });
+      return dispatch({
+        type: DELETE_USERS,
+        payload: email,
+      });
+    };
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 // CREAR TICKET DE COMPRA
 

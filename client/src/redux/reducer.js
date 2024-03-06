@@ -22,6 +22,7 @@ import {
   GET_USERS,
   CREATE_TICKET,
   GET_ORDENES,
+  DELETE_USERS,
 } from "./action-types";
 
 const initialState = {
@@ -53,6 +54,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         allUsers: payload,
       };
+
+      case DELETE_USERS:
+        const updatedUsers = state.allUsers.filter((user) => user.email !== payload);
+        return {
+          ...state,
+          allUsers: updatedUsers,
+        }
 
     case GET_NAME:
       return {
@@ -225,6 +233,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
          ...state,
          allOrdenes: payload,
       };
+
+
 
     default:
       return {

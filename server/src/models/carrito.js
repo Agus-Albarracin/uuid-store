@@ -14,9 +14,11 @@ module.exports = (sequelize) => {
       },
       total: {
         type: DataTypes.INTEGER,
+        allowNull: false,
       },
       estadoDelPedido: {
         type: DataTypes.STRING,
+        allowNull: false,
       },
       productos: {
         type: DataTypes.ARRAY(DataTypes.JSONB),

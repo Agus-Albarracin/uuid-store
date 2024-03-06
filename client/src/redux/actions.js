@@ -25,6 +25,7 @@ import {
   DELETE_USERS,
   ADMIN_USERS,
   ESTADO_ORDEN,
+  DELETE_PRODUCTO,
 } from "./action-types";
 
 import axios from "axios";
@@ -335,3 +336,10 @@ export const putStateOrdens = (idDeCompra, email, ordenState) => {
 
   }catch(error){ console.log(error) }
 }
+
+export const deleteProducto = (id) => {
+  return {
+      type: DELETE_PRODUCTO,
+      payload: id
+  };
+};

@@ -24,3 +24,4 @@ export const GET_ORDENES = "GET_ORDENES";
 export const DELETE_USERS = "DELETE_USERS";
 export const ADMIN_USERS = "ADMIN_USERS";
 export const ESTADO_ORDEN = "ESTADO_ORDEN";
+export const DELETE_PRODUCTO = "DELETE_PRODUCTO";

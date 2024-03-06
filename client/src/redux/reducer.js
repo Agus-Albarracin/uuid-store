@@ -23,6 +23,7 @@ import {
   CREATE_TICKET,
   GET_ORDENES,
   DELETE_USERS,
+  DELETE_PRODUCTO,
 } from "./action-types";
 
 const initialState = {
@@ -232,6 +233,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
          ...state,
          allOrdenes: payload,
+      };
+
+    case DELETE_PRODUCTO:
+      return {
+          ...state,
+          allProductos: state.allProductos.filter(producto => producto.id !== payload)
       };
 
 

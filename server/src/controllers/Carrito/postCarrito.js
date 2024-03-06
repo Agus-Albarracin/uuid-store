@@ -3,7 +3,7 @@ const uuid = require("uuid");
 const nodemailer = require("nodemailer");
 
 const postOrden = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
 
   const {
     // datos del cliente
@@ -23,77 +23,78 @@ const postOrden = async (req, res) => {
   } = req.body;
 
   try {
-    let total = 0;
+    if (emailStorage) {
+      let total = 0;
 
-    productos.forEach(async (produ) => {
-      let producto = await Productos.findByPk(produ.id);
-      producto.quantitysold = (producto.quantitysold || 0) + 1;
-      producto.stock[produ.talle] -= 1;
-      total += produ.precio;
-      await producto.save();
-    });
+      productos.forEach(async (produ) => {
+        let producto = await Productos.findByPk(produ.id);
+        // producto.quantitysold = (producto.quantitysold || 0) + 1;
+        producto.stock[produ.talle] -= 1;
+        total += produ.precio;
+        await producto.save();
+      });
 
-    let usuario = await Usuario.findOne({ where: { email: emailStorage } });
+      let usuario = await Usuario.findOne({ where: { email: emailStorage } });
 
-    const carrito = await Carrito.create({
-      idDeCompra: uuid.v4(),
+      const carrito = await Carrito.create({
+        idDeCompra: uuid.v4(),
+        UsuarioId: usuario.id,
 
-      estadoDelPedido: 'pendiente',
+        estadoDelPedido: "pendiente",
 
-      productos,
+        productos,
 
-      total,
+        total,
 
-      userData: {
-        idDelUsuario: usuario.id, //id de la cuenta a la que se atribuye la compra
-        //datos que corresponden a la compra (no necesariamente los del usuario)
-        nombre,
-        apellido,
-        dni,
-        telefono,
-      },
+        userData: {
+          //datos que corresponden a la compra (no necesariamente los del usuario)
+          nombre,
+          apellido,
+          dni,
+          telefono,
+        },
 
-      datosDeEnvio: {
-        provincia,
-        direccion,
-        localidad,
-        codigoPostal,
-      },
-    });
+        datosDeEnvio: {
+          provincia,
+          direccion,
+          localidad,
+          codigoPostal,
+        },
+      });
 
-    console.log(usuario.compras);
-    console.log(carrito.dataValues);
+      usuario.compras.push(carrito.dataValues);
+      await usuario.save();
 
-    usuario.compras = [...usuario.compras, carrito.dataValues];
-    await usuario.save();
+      const contenidoCorreo = `
+        GRACIAS POR SU COMPRA!\n
+        SE HA CONFIRMADO \n
+        Y LA ESTAMOS PROCESANDO.\n
+        \n
+        Detalles del ticket de compra:
+        \n
+        Productos: ${carrito.productos.map((produ) => produ.nombre + "")}
+        Usuario: ${carrito.userData.nombre} ${carrito.userData.apellido}
+        Email: ${carrito.userData.email}
+        DNI: ${carrito.userData.dni}
+        Teléfono: ${carrito.userData.telefono}
+        Provincia: ${carrito.datosDeEnvio.provincia}
+        Dirección: ${carrito.datosDeEnvio.direccion}
+        Localidad: ${carrito.datosDeEnvio.localidad}
+        Código Postal: ${carrito.datosDeEnvio.codigoPostal}
+        Método de Envío: ${carrito.datosDeEnvio.metodoDeEnvio}
+        \n
+        uuid.
 
-    // const contenidoCorreo = `
-    //   GRACIAS POR SU COMPRA!\n
-    //   SE HA CONFIRMADO \n
-    //   Y LA ESTAMOS PROCESANDO.\n
-    //   \n
-    //   Detalles del ticket de compra:
-    //   \n
-    //   Productos: ${ticketDeCompra.productos.map((produ) => produ.nombre + "")}
-    //   Usuario: ${ticketDeCompra.usuario.nombre} ${ticketDeCompra.usuario.apellido}
-    //   Email: ${ticketDeCompra.usuario.email}
-    //   DNI: ${ticketDeCompra.usuario.dni}
-    //   Teléfono: ${ticketDeCompra.usuario.telefono}
-    //   Provincia: ${ticketDeCompra.usuario.provincia}
-    //   Dirección: ${ticketDeCompra.usuario.direccion}
-    //   Localidad: ${ticketDeCompra.usuario.localidad}
-    //   Código Postal: ${ticketDeCompra.usuario.codigoPostal}
-    //   Método de Envío: ${ticketDeCompra.usuario.metodoDeEnvio}
-    //   \n
-    //   uuid.
-    //   `;
+        Podes seguir estado de tu compra en el siguiente link: http://localhost:5173/success/${carrito.idDeCompra}
+      `;
 
-    // enviarCorreo(email, "Gracias por su compra!", contenidoCorreo);
+      enviarCorreo(email, "Gracias por su compra!", contenidoCorreo);
 
-    res.status(200).json(carrito);
+      res.status(200).json(carrito);
+    }
   } catch (error) {
-    console.error("Error al crear la orden de compra:", error);
-    res.status(500).json({ message: "Error interno del servidor" });
+    console.log(error);
+    res.status(500).json(error);
   }
 };
 

@@ -52,6 +52,7 @@ const postOrden = async (req, res) => {
           apellido,
           dni,
           telefono,
+          email,
         },
 
         datosDeEnvio: {

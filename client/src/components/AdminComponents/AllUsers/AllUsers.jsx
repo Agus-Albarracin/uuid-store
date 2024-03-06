@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { allUsers, deleteUser } from "../../../redux/actions";
+import { allUsers, deleteUser, accessAdminUser } from "../../../redux/actions";
 
 const AllUsers = () => {
   const users = useSelector((state) => state.allUsers);
@@ -14,6 +14,11 @@ const AllUsers = () => {
   const handleDeleteUser = (email) => {
     console.log("Correo electrónico del usuario a eliminar:", email);
     dispatch(deleteUser(email)); 
+  };
+
+  const handleAdminUser = (email) => {
+    console.log(`Se ha modificado el acceso admin del mail ${email}`);
+    dispatch(accessAdminUser(email)); 
   };
 
   return (
@@ -34,6 +39,8 @@ const AllUsers = () => {
               <td>{user.email}</td>
               <td>
                 <button onClick={() => handleDeleteUser(user.email)}>Eliminar</button>
+                <button onClick={() => handleAdminUser(user.email)}>Admin</button>
+
               </td>
             </tr>
           ))}

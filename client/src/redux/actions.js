@@ -23,6 +23,7 @@ import {
   CREATE_TICKET,
   GET_ORDENES,
   DELETE_USERS,
+  ADMIN_USERS,
 } from "./action-types";
 
 import axios from "axios";
@@ -261,18 +262,32 @@ export const allUsers = () => {
 
 // DELETE USER
 export const deleteUser = (email) => {
-  try {
-    return async function (dispatch) {
+  return async function (dispatch) {
+
+    try {
       const response = await axios.delete("/deleteuser", { data: { email } });
       return dispatch({
         type: DELETE_USERS,
         payload: email,
       });
-    };
-  } catch (error) {
-    console.log(error);
-  }
+
+    } catch (error) {console.log(error); }
+
+  };
 }
+
+export const accessAdminUser = (email) => {
+  return async function () {
+    try {
+      const response = await axios.put("/adminaccess", { email });
+
+    } catch (error) {
+      console.error("Error al acceder al usuario administrador:", error);
+    }
+  };
+};
+
+
 
 // CREAR TICKET DE COMPRA
 

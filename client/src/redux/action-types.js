@@ -22,3 +22,4 @@ export const GET_USERS = "GET_USERS";
 export const CREATE_TICKET = "CREATE_TICKET";
 export const GET_ORDENES = "GET_ORDENES";
 export const DELETE_USERS = "DELETE_USERS";
+export const ADMIN_USERS = "ADMIN_USERS";

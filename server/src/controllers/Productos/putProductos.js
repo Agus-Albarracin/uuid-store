@@ -3,7 +3,7 @@ const { Productos } = require("../../db");
 const updateProductos = async (req, res) => {
   try {
     const { id } = req.params;
-    const { nombre, modelo, precio, stock, genero, marca, imagen } = req.body;
+    const { nombre, modelo, precio, stock, genero, marca, imagen, comentarios, calificacion} = req.body;
     if (!id) return res.status(400).json('Se necesita un id para poder modificar el producto');
 
     const producto = await Productos.findByPk(id);
@@ -18,6 +18,8 @@ const updateProductos = async (req, res) => {
     producto.genero = genero;
     producto.marca = marca;
     producto.imagen = imagen;
+    producto.comentarios = comentarios;
+    producto.calificacion = calificacion;
 
     await producto.save();
 

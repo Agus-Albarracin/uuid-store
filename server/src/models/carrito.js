@@ -18,6 +18,7 @@ module.exports = (sequelize) => {
       },
       estadoDelPedido: {
         type: DataTypes.STRING,
+        defaultValue: "pendiente",
         allowNull: false,
       },
       productos: {
@@ -33,6 +34,6 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
     },
-    { timestamps: false }
+    { timestamps: true }
   );
 };

@@ -16,6 +16,11 @@ import HomePage from "./Views/HomePage/HomePage";
 import Productos from "./Views/Productos/Productos";
 import ConfirmacionDeCompra from "./Views/ConfirmacionDeCompra/ConfirmacionDeCompra";
 import CompraConfirmada from "./Views/CompraConfirmada/CompraConfirmada";
+import DetallesDeCompra from "./Views/DetallesDeCompra/DetallesDeCompra";
+
+//Axios
+import axios from "axios";
+axios.defaults.baseURL = "http://localhost:3001";
 
 //PATHROUTES
 import PATHROUTES from "./Helpers/path";
@@ -77,8 +82,9 @@ function App() {
         <Route path={PATHROUTES.DETAIL} element={<Detail />} />
         <Route path={PATHROUTES.HOME} element={<HomePage />} />
         <Route path={PATHROUTES.PRODUCTOS} element={<Productos />} />
-        <Route path={PATHROUTES.CONFIRMACION} element={<ConfirmacionDeCompra />}/>
+        <Route path={PATHROUTES.CONFIRMACION} element={<ConfirmacionDeCompra />} />
         <Route path={PATHROUTES.SUCCESS} element={<CompraConfirmada />} />
+        <Route path={PATHROUTES.DETALLESDECOMPRA} element={<DetallesDeCompra/>} />
       </Routes>
 
       {message && <span className={styles.message}> {message} </span>}

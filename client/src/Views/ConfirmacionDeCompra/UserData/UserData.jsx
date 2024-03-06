@@ -26,8 +26,16 @@ const UserData = ({ userBuyData, setUserBuyData, setView }) => {
       nombre: user.nombre,
       apellido: user.apellido,
       email: user.email,
-      dni: user.dni ? user.dni : actualForm ? actualForm.dni : "",
-      telefono: user.telefono ? user.telefono : actualForm ? actualForm.telefono : "",
+      dni: actualForm
+        ? actualForm.dni 
+        : user.dni 
+        ? user.dni 
+        : "",
+      telefono: actualForm
+        ? actualForm.telefono 
+        : user.telefono 
+        ? user.telefono 
+        : "",
     },
     validate,
     onSubmit: (values) => handleSubmitAndView(values),

@@ -2,7 +2,9 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+axios.defaults.baseURL = "http://localhost:3001"
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
+
 
 const Confirmacion = ({ userBuyData }) => {
   const cart = useSelector((state) => state.cart);
@@ -16,7 +18,7 @@ const Confirmacion = ({ userBuyData }) => {
   const createPreference = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/create_preference",
+        "/create_preference",
         { cart }
       );
       const { id } = response.data;
@@ -37,7 +39,7 @@ const Confirmacion = ({ userBuyData }) => {
           email,
         });
 
-        await axios.post("http://localhost:3001/createOrden", {
+        await axios.post("/createOrden", {
           // Datos del cliente
           emailStorage: email,
           email: email,

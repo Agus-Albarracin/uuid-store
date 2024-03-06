@@ -21,18 +21,20 @@ import {
   AUTO_SET_CARRO,
   GET_USERS,
   CREATE_TICKET,
+  GET_ORDENES,
+  DELETE_USERS,
 } from "./action-types";
 
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:3001";
+const API_BASE_URL = "";
+axios.defaults.baseURL = "http://localhost:3001";
 
 // TRAER TODOS LOS PRODUCTOS
 export const getProductos = () => {
   try {
     return async function (dispatch) {
-      const response = await axios(`http://localhost:3001/getproductos`);
-      console.log("Actions",response)
+      const response = await axios(`/getproductos`);
       return dispatch({
         type: GET_PRODUCTOS,
         payload: response.data,
@@ -46,9 +48,7 @@ export const getProductos = () => {
 export const getName = (nombre) => {
   try {
     return async function (dispatch) {
-      const response = await axios(
-        `http://localhost:3001/getproductosByName/?nombre=${nombre}`
-      );
+      const response = await axios(`/getproductosByName/?nombre=${nombre}`);
       return dispatch({
         type: GET_NAME,
         payload: response.data,
@@ -63,7 +63,7 @@ export const getName = (nombre) => {
 export const getDetail = (id) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/getproductos/${id}`);
+      const response = await axios.get(`/getproductos/${id}`);
       return dispatch({
         type: GET_DETAIL,
         payload: response.data,
@@ -85,7 +85,7 @@ export const clearDetail = () => {
 export const postProducto = (form) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/postproductos`, form);
+      const response = await axios.post(`/postproductos`, form);
       return dispatch({
         type: POST_PRODUCTO,
         payload: response.data,
@@ -129,7 +129,7 @@ export const logIn = ({ email, password }) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `${API_BASE_URL}/login?email=${email}&password=${password}`
+        `/login?email=${email}&password=${password}`
       );
       return dispatch({
         type: LOGIN,
@@ -149,10 +149,7 @@ export const logIn = ({ email, password }) => {
 export const signUpWhitGoogle = (googleData) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(
-        `${API_BASE_URL}/signupgoogle`,
-        googleData
-      );
+      const response = await axios.post(`/signupgoogle`, googleData);
       return dispatch({
         type: SIGN_UP_GOOGLE,
         payload: response.data,
@@ -170,9 +167,7 @@ export const signUpWhitGoogle = (googleData) => {
 export const logInWhitGoogle = ({ email }) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(
-        `${API_BASE_URL}/loginGoogle?email=${email}`
-      );
+      const response = await axios.get(`/loginGoogle?email=${email}`);
       return dispatch({
         type: LOG_IN_GOOGLE,
         payload: response.data,
@@ -191,7 +186,7 @@ export const logInWhitGoogle = ({ email }) => {
 export const signUp = (form) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/signup`, form);
+      const response = await axios.post(`/signup`, form);
       return dispatch({
         type: SIGNUP,
         payload: response.data,
@@ -253,7 +248,7 @@ export const autoSetCarro = (carro) => {
 export const allUsers = () => {
   try {
     return async function (dispatch) {
-      const response = await axios(`http://localhost:3001/getuser`);
+      const response = await axios(`/getuser`);
       return dispatch({
         type: GET_USERS,
         payload: response.data,
@@ -264,12 +259,27 @@ export const allUsers = () => {
   }
 };
 
+// DELETE USER
+export const deleteUser = (email) => {
+  try {
+    return async function (dispatch) {
+      const response = await axios.delete("/deleteuser", { data: { email } });
+      return dispatch({
+        type: DELETE_USERS,
+        payload: email,
+      });
+    };
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 // CREAR TICKET DE COMPRA
 
 export const createTicket = (data) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/createOrden`, data);
+      const response = await axios.post(`/createOrden`, data);
       return dispatch({
         type: CREATE_TICKET,
         payload: response.data,
@@ -278,4 +288,19 @@ export const createTicket = (data) => {
       console.log(error);
     }
   };
+};
+
+export const getOrdenes = () => {
+  try {
+    return async function (dispatch) {
+      const response = await axios.post(`http://localhost:3001/getOrden`);
+      //console.log("Actions",response)
+      return dispatch({
+        type: GET_PRODUCTOS,
+        payload: response.data,
+      });
+    };
+  } catch (error) {
+    console.log(error);
+  }
 };

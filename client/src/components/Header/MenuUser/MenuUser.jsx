@@ -53,14 +53,13 @@ const MenuUser = ({ mostrarUser }) => {
           onClick={(e) => e.stopPropagation()}
         >
           <div className="text-black">{`${user.nombre}  ${user.apellido}`}</div>
-          <Link to='/user'> 
+          <Link to="/user">
             <span
               className="cursor-pointer text-blue-500 mr-4"
-              // onClick={handleView}
+              onClick={handleCloseMenu}
             >
               Mi cuenta
             </span>
-           
           </Link>
           <span className="cursor-pointer text-blue-500" onClick={handleLogOut}>
             Salir

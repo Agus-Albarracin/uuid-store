@@ -1,42 +1,46 @@
 import React from "react";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { allUsers, deleteUser } from "../../../redux/actions";
 
 const AllUsers = () => {
+  const users = useSelector((state) => state.allUsers);
+  const dispatch = useDispatch();
 
-    const users = useSelector((state) => state.allUsers);
+  useEffect(() => {
+    dispatch(allUsers());
+  }, []);
 
-    return (
-        <div className="contenedor-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th> Nombre </th>
-                            <th> Email </th>
-                            <th> Accion </th>
-                        </tr>
-                    </thead>
-                    
-                    <tbody>
-                        { users.map ( (user) => {
-                            <tr>
-                                <td>{user.nombre}</td>
-                                <td>{user.email}</td>
-                                <td><button> Eliminar </button></td>
-                                
-                            </tr>
-                            }
+  const handleDeleteUser = (email) => {
+    console.log("Correo electrónico del usuario a eliminar:", email);
+    dispatch(deleteUser(email)); 
+  };
 
-                        )}
-                                           
-                    </tbody>
-                    
-                </table>
-                
-            </div>
-            
-    )
-    
-}
+  return (
+    <div className="contenedor-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {users.map((user) => (
+            <tr key={user.id}>
+              <td>{user.nombre}</td>
+              <td>{user.email}</td>
+              <td>
+                <button onClick={() => handleDeleteUser(user.email)}>Eliminar</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
 export default AllUsers;

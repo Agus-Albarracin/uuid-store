@@ -74,11 +74,6 @@ module.exports = (sequelize) => {
       },
       //DATOS DEL CLIENTE PARA COMPLETAR FORMULARIO DEL PERFIL.
 
-      apellido: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-
       direccion: {
         type: DataTypes.STRING,
         allowNull: true,
@@ -124,6 +119,12 @@ module.exports = (sequelize) => {
         type: DataTypes.BOOLEAN,
         default: false,
         allowNull: true,
+      },
+
+      compras: {
+        type: DataTypes.JSONB,
+        allowNull: true,
+        defaultValue: [],
       },
     },
     { timestamps: false }

@@ -21,6 +21,8 @@ import {
   AUTO_SET_CARRO,
   GET_USERS,
   CREATE_TICKET,
+  GET_ORDENES,
+  DELETE_USERS,
 } from "./action-types";
 
 const initialState = {
@@ -34,6 +36,7 @@ const initialState = {
   messageToUser: "",
   cart: [],
   compraActual: {},
+  allOrdenes:[],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -51,6 +54,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         allUsers: payload,
       };
+
+      case DELETE_USERS:
+        const updatedUsers = state.allUsers.filter((user) => user.email !== payload);
+        return {
+          ...state,
+          allUsers: updatedUsers,
+        }
 
     case GET_NAME:
       return {
@@ -217,6 +227,14 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         compraActual: payload,
       };
+
+    case GET_ORDENES:
+      return {
+         ...state,
+         allOrdenes: payload,
+      };
+
+
 
     default:
       return {

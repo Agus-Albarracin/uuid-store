@@ -65,6 +65,14 @@ module.exports = (sequelize) => {
         default: true,
         allowNull: true,
       },
+      comentarios: {
+        type: DataTypes.ARRAY(DataTypes.JSONB),
+        allowNull: true,
+      },
+      calificacion: {
+        type: DataTypes.ARRAY(DataTypes.INTEGER),
+        allowNull: true,
+      },
     },
     { timestamps: false }
   );

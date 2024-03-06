@@ -21,6 +21,7 @@ import {
   AUTO_SET_CARRO,
   GET_USERS,
   CREATE_TICKET,
+  GET_ORDENES,
 } from "./action-types";
 
 const initialState = {
@@ -34,6 +35,7 @@ const initialState = {
   messageToUser: "",
   cart: [],
   compraActual: {},
+  allOrdenes:[],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -216,6 +218,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         compraActual: payload,
+      };
+
+    case GET_ORDENES:
+      return {
+         ...state,
+         allOrdenes: payload,
       };
 
     default:

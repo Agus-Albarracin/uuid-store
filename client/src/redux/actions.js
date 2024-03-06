@@ -21,6 +21,7 @@ import {
   AUTO_SET_CARRO,
   GET_USERS,
   CREATE_TICKET,
+  GET_ORDENES,
 } from "./action-types";
 
 import axios from "axios";
@@ -279,4 +280,19 @@ export const createTicket = (data) => {
       console.log(error);
     }
   };
+};
+
+export const getOrdenes = () => {
+  try {
+    return async function (dispatch) {
+      const response = await axios.post(`http://localhost:3001/getOrden`);
+      //console.log("Actions",response)
+      return dispatch({
+        type: GET_PRODUCTOS,
+        payload: response.data,
+      });
+    };
+  } catch (error) {
+    console.log(error);
+  }
 };

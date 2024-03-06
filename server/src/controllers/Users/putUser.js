@@ -3,7 +3,7 @@ const { Usuario } = require ('../../db');
 const updateUser = async (req, res) => {
     try {
         const { nombre, apellido, dni, numeroTramite, telefono, genero, notificaciones,
-             provincia, direccion, localidad, codigoPostal } = req.body;
+             provincia, direccion, localidad, codigoPostal, email} = req.body;
 
         const usuario = await Usuario.findOne({where: {email}});
         if (!usuario) { return res.status(404).json({ error: "El usuario no existe." });}
@@ -51,4 +51,25 @@ const updateStateUser = async (req, res) => {
     }
 }
 
-module.exports = { updateUser, updateStateUser };
+const updateAdminUser = async (req, res) => {
+    try {
+        const { email, admin} = req.body;
+
+        const usuario = await Usuario.findOne({where: {email}});
+        if (!usuario) { return res.status(404).json({ error: "El usuario no existe." });}
+
+
+            usuario.admin = admin;
+            
+
+            await usuario.save();
+
+    return res.status(200).json({ message: "Se ha dado acceso admin al usuario:", usuario});
+
+
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+}
+
+module.exports = { updateUser, updateStateUser, updateAdminUser };

@@ -24,6 +24,7 @@ import {
   GET_ORDENES,
   DELETE_USERS,
   ADMIN_USERS,
+  ESTADO_ORDEN,
 } from "./action-types";
 
 import axios from "axios";
@@ -308,10 +309,9 @@ export const createTicket = (data) => {
 export const getOrdenes = () => {
   try {
     return async function (dispatch) {
-      const response = await axios.post(`http://localhost:3001/getOrden`);
-      //console.log("Actions",response)
+      const response = await axios.get(`/getOrden`);
       return dispatch({
-        type: GET_PRODUCTOS,
+        type: GET_ORDENES,
         payload: response.data,
       });
     };
@@ -319,3 +319,19 @@ export const getOrdenes = () => {
     console.log(error);
   }
 };
+
+export const putStateOrdens = (idDeCompra, email, ordenState) => {
+  try{
+
+    return async function (dispatch) {
+
+      const response = await axios.put("/stateOrden", {idDeCompra, email, estadoDelPedido: ordenState});
+      return dispatch({
+        type: ESTADO_ORDEN,
+        payload: response.data
+      })
+      
+    };
+
+  }catch(error){ console.log(error) }
+}

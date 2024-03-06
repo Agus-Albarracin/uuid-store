@@ -23,3 +23,4 @@ export const CREATE_TICKET = "CREATE_TICKET";
 export const GET_ORDENES = "GET_ORDENES";
 export const DELETE_USERS = "DELETE_USERS";
 export const ADMIN_USERS = "ADMIN_USERS";
+export const ESTADO_ORDEN = "ESTADO_ORDEN";

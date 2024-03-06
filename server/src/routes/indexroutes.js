@@ -53,6 +53,8 @@ router.put("/updateuser", putUser.updateUser);
 router.delete("/deleteuser", deleteUser.deleteUser);
 //desactivar cuenta temporalmente / implementación de borrado lógico.
 router.put("/updatestateuser", putUser.updateStateUser);
+router.put("/adminaccess", putUser.updateAdminUser);
+
 //cambio de contraseña
 router.post("/recovery", login.mailPassword);
 router.post("/change-password", login.cambioPassword);

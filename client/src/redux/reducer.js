@@ -42,6 +42,7 @@ const initialState = {
   cart: [],
   compraActual: {},
   allOrdenes: [],
+  token: {},
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -271,6 +272,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         compraActual: payload,
+      };
+
+    case ENVIAR_MAIL_PASSWORD:
+      return {
+        ...state,
+        actualUser: { ...actualUser, recoveryToken: payload },
+        token: payload,
       };
 
     default:

@@ -17,6 +17,8 @@ import Productos from "./Views/Productos/Productos";
 import ConfirmacionDeCompra from "./Views/ConfirmacionDeCompra/ConfirmacionDeCompra";
 import CompraConfirmada from "./Views/CompraConfirmada/CompraConfirmada";
 import DetallesDeCompra from "./Views/DetallesDeCompra/DetallesDeCompra";
+import EnvioMailCambioPassword from "./Views/EnvioMailCambioPassword/EnvioMailCambioPassword";
+import CambioDePassword from "./Views/CambioPassword/CambioPassword";
 
 //Axios
 import axios from "axios";
@@ -54,8 +56,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (cart)
-      window.localStorage.setItem("cart", JSON.stringify(cart));
+    if (cart) window.localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
   useEffect(() => {
@@ -82,9 +83,23 @@ function App() {
         <Route path={PATHROUTES.DETAIL} element={<Detail />} />
         <Route path={PATHROUTES.HOME} element={<HomePage />} />
         <Route path={PATHROUTES.PRODUCTOS} element={<Productos />} />
-        <Route path={PATHROUTES.CONFIRMACION} element={<ConfirmacionDeCompra />} />
+        <Route
+          path={PATHROUTES.CONFIRMACION}
+          element={<ConfirmacionDeCompra />}
+        />
         <Route path={PATHROUTES.SUCCESS} element={<CompraConfirmada />} />
-        <Route path={PATHROUTES.DETALLESDECOMPRA} element={<DetallesDeCompra/>} />
+        <Route
+          path={PATHROUTES.DETALLESDECOMPRA}
+          element={<DetallesDeCompra />}
+        />
+        <Route
+          path={PATHROUTES.ENVIOMAILPASSWORD}
+          element={<EnvioMailCambioPassword />}
+        />
+        <Route
+          path={PATHROUTES.CAMBIOPASSWORD}
+          element={<CambioDePassword />}
+        />
       </Routes>
 
       {message && <span className={styles.message}> {message} </span>}

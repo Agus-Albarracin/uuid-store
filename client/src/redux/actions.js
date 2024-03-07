@@ -30,6 +30,8 @@ import {
   GET_DETALLE_DE_COMPRA,
   CLEAR_DETALLE_DE_COMPRA,
   DELETE_PRODUCTO,
+  ENVIAR_MAIL_PASSWORD,
+  CAMBIAR_PASSWORD,
 } from "./action-types";
 
 import axios from "axios";
@@ -379,4 +381,34 @@ export const clearDetalleDeCompra = () => {
     type: CLEAR_DETALLE_DE_COMPRA,
     payload: {},
   };
+};
+
+//CAMBIO DE PASSWORD
+
+export const enviarMailPassword = (email) => {
+  try {
+    return async function (dispatch) {
+      const response = await axios.post("/recovery", { email });
+      return dispatch({
+        type: ENVIAR_MAIL_PASSWORD,
+        payload: response.data,
+      });
+    };
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const cambiarPassword = (token, newPassword) => {
+  try {
+    return async function (dispatch) {
+      await axios.post(`/change-password?${token}`, { token, newPassword });
+      return dispatch({
+        type: CAMBIAR_PASSWORD,
+        payload: { token, newPassword },
+      });
+    };
+  } catch (error) {
+    console.log(error.message);
+  }
 };

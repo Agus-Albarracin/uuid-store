@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getProductos, } from '../../../redux/actions';
+import { getProductos, deleteProducto } from '../../../redux/actions';
 
 const AllProducts = () => {
     const dispatch = useDispatch();
@@ -12,6 +12,10 @@ const AllProducts = () => {
 
     const productos = useSelector((state) => state.allProductos);
     console.log(productos);
+
+    const handleDelete = (id) => {
+        dispatch(deleteProducto(id));
+    };
 
     return (
         <div className="contenedor-table">
@@ -30,6 +34,7 @@ const AllProducts = () => {
                         <th>Descuento</th>
                         <th>Estado</th>
                         <th>Editar</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,6 +56,7 @@ const AllProducts = () => {
                             <td>{producto.descuento}</td>
                             <td>{producto.estado}</td>
                             <td><button>Editar</button></td>
+                            <td><button onClick={() => handleDelete(producto.id)}>Eliminar</button></td>
                         </tr>
                     ))}
                 </tbody>

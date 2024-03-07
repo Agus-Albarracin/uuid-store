@@ -29,6 +29,7 @@ import {
   CLEAR_COMPRA,
   GET_DETALLE_DE_COMPRA,
   CLEAR_DETALLE_DE_COMPRA,
+  DELETE_PRODUCTO,
 } from "./action-types";
 
 import axios from "axios";
@@ -352,23 +353,9 @@ export const putStateOrdens = (idDeCompra, email, ordenState) => {
   }
 };
 
-export const getDetalleDeCompra = (id) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.get(`/getOrdenbyid?idDeCompra=${id}`);
-      return dispatch({
-        type: GET_DETALLE_DE_COMPRA,
-        payload: response.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-export const clearDetalleDeCompra = () => {
+export const deleteProducto = (id) => {
   return {
-    type: CLEAR_DETALLE_DE_COMPRA,
-    payload: {},
+    type: DELETE_PRODUCTO,
+    payload: id,
   };
 };

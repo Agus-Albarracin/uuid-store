@@ -54,7 +54,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (cart.length > 0)
+    if (cart)
       window.localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 

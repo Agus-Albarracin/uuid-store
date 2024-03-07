@@ -23,6 +23,10 @@ import {
   CREATE_TICKET,
   GET_ORDENES,
   DELETE_USERS,
+  CLEAR_CART,
+  CLEAR_COMPRA,
+  GET_DETALLE_DE_COMPRA,
+  CLEAR_DETALLE_DE_COMPRA,
 } from "./action-types";
 
 const initialState = {
@@ -36,7 +40,7 @@ const initialState = {
   messageToUser: "",
   cart: [],
   compraActual: {},
-  allOrdenes:[],
+  allOrdenes: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -55,12 +59,14 @@ const rootReducer = (state = initialState, { type, payload }) => {
         allUsers: payload,
       };
 
-      case DELETE_USERS:
-        const updatedUsers = state.allUsers.filter((user) => user.email !== payload);
-        return {
-          ...state,
-          allUsers: updatedUsers,
-        }
+    case DELETE_USERS:
+      const updatedUsers = state.allUsers.filter(
+        (user) => user.email !== payload
+      );
+      return {
+        ...state,
+        allUsers: updatedUsers,
+      };
 
     case GET_NAME:
       return {
@@ -228,13 +234,35 @@ const rootReducer = (state = initialState, { type, payload }) => {
         compraActual: payload,
       };
 
-    case GET_ORDENES:
+    case CLEAR_COMPRA:
       return {
-         ...state,
-         allOrdenes: payload,
+        ...state,
+        compraActual: payload,
       };
 
+    case GET_ORDENES:
+      return {
+        ...state,
+        allOrdenes: payload,
+      };
 
+    case CLEAR_CART:
+      return {
+        ...state,
+        cart: payload,
+      };
+
+    case GET_DETALLE_DE_COMPRA:
+      return {
+        ...state,
+        compraActual: payload,
+      };
+
+    case CLEAR_DETALLE_DE_COMPRA:
+      return {
+        ...state,
+        compraActual: payload,
+      };
 
     default:
       return {

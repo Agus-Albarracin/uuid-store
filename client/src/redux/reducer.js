@@ -30,6 +30,7 @@ import {
   DELETE_PRODUCTO,
   UPDATE_PRODUCTO,
   ENVIAR_MAIL_PASSWORD,
+  CAMBIAR_PASSWORD,
 } from "./action-types";
 
 const initialState = {
@@ -283,16 +284,21 @@ const rootReducer = (state = initialState, { type, payload }) => {
         token: payload,
       };
 
+
     case UPDATE_PRODUCTO:
       return {
         ...state,
         allProductos: payload,
       };
 
-    default:
+    case CAMBIAR_PASSWORD:
       return {
         ...state,
+        messageToUser: payload,
       };
+
+    default:
+      return state;
   }
 };
 

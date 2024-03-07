@@ -364,10 +364,19 @@ export const deleteProducto = (id) => {
 };
 
 
-export const updateProducto = (id) => {
-  return {
-      type: UPDATE_PRODUCTO,
-      payload: null
+export const updateProducto = (formData) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(`/updateproductos/${formData.id}`, formData);
+      
+      dispatch({
+        type: UPDATE_PRODUCTO,
+        payload: response.data // Puedes ajustar esto según la respuesta de tu API
+      });
+    } catch (error) {
+      // Manejo de errores aquí
+      console.error('Error al actualizar el producto:', error);
+    }
   };
 };
 

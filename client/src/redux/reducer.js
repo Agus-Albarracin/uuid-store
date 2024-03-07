@@ -283,6 +283,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
         token: payload,
       };
 
+    case UPDATE_PRODUCTO:
+      return {
+        ...state,
+        allProductos: payload,
+      };
+
     default:
       return {
         ...state,

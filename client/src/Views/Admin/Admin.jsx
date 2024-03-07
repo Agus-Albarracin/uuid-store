@@ -1,18 +1,32 @@
 import styles from './Admin.module.scss';
 import { useState } from 'react';
+import { useDispatch } from "react-redux";
 import CreateForm from '../../components/AdminComponents/CreateForm/CreateForm';
 import OrdenCompra from '../../components/AdminComponents/OrdenCompra/OrdenCompra';
 import AllUsers from '../../components/AdminComponents/AllUsers/AllUsers';
 import AllProducts from '../../components/AdminComponents/AllProducts/AllProducts';
 import SideBar from '../../components/SideBar/SideBar';
+import { getName } from "../../redux/actions";
 
 const Admin = () => {
+    const dispatch = useDispatch();
+    const [searchString, setSearchString] = useState("");
 
     const [view, setView] = useState('estadisticas')
 
     const handleView = (option) => {
         setView(option);
     }
+
+    function handleChange(e) {
+        e.preventDefault();
+        setSearchString(e.target.value);
+      }
+    
+      function handleSubmit(e) {
+        e.preventDefault();
+        dispatch(getName(searchString))
+      }
 
     return (
         <section className="p-4">
@@ -69,7 +83,7 @@ const Admin = () => {
             {view === 'productos' && (
                 <article className="mt-4">
                     <h2 className="text-xl font-semibold">Todos los productos</h2>
-                    <SideBar></SideBar>
+                    <SideBar handleChange={handleChange} handleSubmit={handleSubmit}  ></SideBar>
                     <AllProducts></AllProducts>
 
                 </article>

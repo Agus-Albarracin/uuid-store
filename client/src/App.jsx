@@ -20,7 +20,6 @@ import DetallesDeCompra from "./Views/DetallesDeCompra/DetallesDeCompra";
 
 //Axios
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3001";
 
 //PATHROUTES
 import PATHROUTES from "./Helpers/path";

@@ -359,3 +359,24 @@ export const deleteProducto = (id) => {
     payload: id,
   };
 };
+
+export const getDetalleDeCompra = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/getOrdenbyid?idDeCompra=${id}`);
+      return dispatch({
+        type: GET_DETALLE_DE_COMPRA,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const clearDetalleDeCompra = () => {
+  return {
+    type: CLEAR_DETALLE_DE_COMPRA,
+    payload: {},
+  };
+};

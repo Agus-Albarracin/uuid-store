@@ -36,7 +36,7 @@ import {
 } from "./action-types";
 
 import axios from "axios";
-const BACK_URL = import.meta.env.VITE_VERCEL_deploy_baseURL
+const BACK_URL = import.meta.env.VITE_VERCEL_
 process.env.VITE_VERCEL_
 
 const API_BASE_URL = "";

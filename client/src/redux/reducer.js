@@ -23,6 +23,10 @@ import {
   CREATE_TICKET,
   GET_ORDENES,
   DELETE_USERS,
+  CLEAR_CART,
+  CLEAR_COMPRA,
+  GET_DETALLE_DE_COMPRA,
+  CLEAR_DETALLE_DE_COMPRA,
   DELETE_PRODUCTO,
   UPDATE_PRODUCTO,
 } from "./action-types";
@@ -39,6 +43,7 @@ const initialState = {
   cart: [],
   compraActual: {},
   allOrdenes: [],
+  token: {},
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -58,11 +63,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case DELETE_USERS:
-      const updatedUsers = state.allUsers.filter((user) => user.email !== payload);
+      const updatedUsers = state.allUsers.filter(
+        (user) => user.email !== payload
+      );
       return {
         ...state,
         allUsers: updatedUsers,
-      }
+      };
 
     case GET_NAME:
       return {
@@ -230,6 +237,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
         compraActual: payload,
       };
 
+    case CLEAR_COMPRA:
+      return {
+        ...state,
+        compraActual: payload,
+      };
+
     case GET_ORDENES:
       return {
         ...state,
@@ -239,16 +252,35 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case DELETE_PRODUCTO:
       return {
         ...state,
-        allProductos: state.allProductos.filter(producto => producto.id !== payload)
+        allProductos: state.allProductos.filter(
+          (producto) => producto.id !== payload
+        ),
       };
 
-    case UPDATE_PRODUCTO:
+    case CLEAR_CART:
       return {
         ...state,
-        allProductos: payload,
+        cart: payload,
       };
 
+    case GET_DETALLE_DE_COMPRA:
+      return {
+        ...state,
+        compraActual: payload,
+      };
 
+    case CLEAR_DETALLE_DE_COMPRA:
+      return {
+        ...state,
+        compraActual: payload,
+      };
+
+    case ENVIAR_MAIL_PASSWORD:
+      return {
+        ...state,
+        actualUser: { ...actualUser, recoveryToken: payload },
+        token: payload,
+      };
 
     default:
       return {

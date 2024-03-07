@@ -65,38 +65,84 @@ const MenuCarro = ({ mostrarCarro, mostrarUser, emailLocalStorage }) => {
 
   return (
     <div className={styles.menuContainer}>
-
-      <div className={`${styles.fondo} fixed inset-0 bg-black opacity-100`} onClick={() => mostrarCarro(false)}></div>
-      <div className={`${styles.carro} absolute inset-y-0 right-0 max-w-full flex`}>
-        <button className="bg-gray-800 text-white hover:bg-gray-700" onClick={() => mostrarCarro(false)}>&nbsp;&nbsp;&larr;&nbsp;&nbsp;</button>
+      <div
+        className={`${styles.fondo} fixed inset-0 bg-black opacity-100`}
+        onClick={() => mostrarCarro(false)}
+      ></div>
+      <div
+        className={`${styles.carro} absolute inset-y-0 right-0 max-w-full flex`}
+      >
+        <button
+          className="bg-gray-800 text-white hover:bg-gray-700"
+          onClick={() => mostrarCarro(false)}
+        >
+          &nbsp;&nbsp;&larr;&nbsp;&nbsp;
+        </button>
         <div className="w-auto bg-white p-4">
           <div className="font-bold text-red-600 text-xl  mb-4">MI COMPRA</div>
           {cart.map((produ, index) => (
-            <div key={index} className={`${styles.cartItem} flex items-center justify-between border-b py-2`}>
-              <img src={produ.imagen[0]} alt={produ.nombre} className="w-24  object-cover rounded" />
+            <div
+              key={index}
+              className={`${styles.cartItem} flex items-center justify-between border-b py-2`}
+            >
+              <img
+                src={produ.imagen[0]}
+                alt={produ.nombre}
+                className="w-24  object-cover rounded"
+              />
               <div className="flex-1 ml-4">
                 <div className="font-semibold">{produ.nombre}</div>
-                <div className="font-semibold">Talle: {produ.talle}</div> 
+                <div className="font-semibold">Talle: {produ.talle}</div>
                 <div>Precio: ${produ.precio}</div>
                 <div>
-                  <button onClick={() => decrementarCantidad(produ)}> restar </button>
+                  <button onClick={() => decrementarCantidad(produ)}>
+                    {" "}
+                    restar{" "}
+                  </button>
                   &nbsp;&nbsp;{cantidadProductos[produ.uuid] || 1}&nbsp;&nbsp;
-                  <button onClick={() => incrementarCantidad(produ)}> sumar </button>
+                  <button onClick={() => incrementarCantidad(produ)}>
+                    {" "}
+                    sumar{" "}
+                  </button>
                 </div>
               </div>
-              <button onClick={() => quitarProducto(produ.uuid)} className="text-red-500 font-bold ml-4">Quitar</button>
+              <button
+                onClick={() => quitarProducto(produ.uuid)}
+                className="text-red-500 font-bold ml-4"
+              >
+                Quitar
+              </button>
             </div>
           ))}
           <br></br>
-          <div className="font-bold text-red-600 text-xl mb-4">Total: ${calcularTotal()}</div>
-          <RedirectButton mostrarCarro={mostrarCarro} mostrarUser={mostrarUser} />
-          <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-
-          <button className=" text-black py-2 rounded-md mt-2" onClick={() => mostrarCarro(false)}> Seguir comprando</button>
+          <div className="font-bold text-red-600 text-xl mb-4">
+            Total: ${calcularTotal()}
+          </div>
+          <RedirectButton
+            mostrarCarro={mostrarCarro}
+            mostrarUser={mostrarUser}
+          />
           <br></br>
-          <p>Las promociones y costo de envío lo verás aplicado en el checkout</p>
-        </div>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
 
+          <button
+            className=" text-black py-2 rounded-md mt-2"
+            onClick={() => mostrarCarro(false)}
+          >
+            Seguir comprando
+          </button>
+          <br></br>
+          <p>
+            Las promociones y costo de envío lo verás aplicado en el checkout
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -212,4 +258,3 @@ export default MenuCarro;
 // };
 
 // export default MenuCarro;
-

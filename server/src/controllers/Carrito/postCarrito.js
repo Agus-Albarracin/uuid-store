@@ -88,6 +88,9 @@ const postOrden = async (req, res) => {
 
         Podes seguir estado de tu compra en el siguiente link: http://localhost:5173/success/${carrito.idDeCompra}
       `;
+     //Podes seguir estado de tu compra en el siguiente link: https://uuid-store-production.up.railway.app/success/${carrito.idDeCompra}
+
+      
 
       enviarCorreo(email, "Gracias por su compra!", contenidoCorreo);
 

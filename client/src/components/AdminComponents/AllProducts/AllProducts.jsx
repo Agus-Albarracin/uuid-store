@@ -6,6 +6,9 @@ import UpdateProduct from "./UpdateProduct/UpdateProduct";
 const AllProducts = () => {
     const dispatch = useDispatch();
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const productsPerPage = 10;
+
     useEffect(() => {
         // Llamar a la acción getProductos cuando el componente monta
         dispatch(getProductos());
@@ -13,7 +16,7 @@ const AllProducts = () => {
 
     const productos = useSelector((state) => state.allProductos);
 
-    
+
 
 
     const [editMode, setEditMode] = useState(false);
@@ -30,7 +33,7 @@ const AllProducts = () => {
     };
 
     const handleFormSubmit = (formData) => {
-        
+
         dispatch(updateProducto(formData));
         setEditMode(false);
         setSelectedProductId(null);
@@ -39,8 +42,12 @@ const AllProducts = () => {
     if (!Array.isArray(productos)) {
         dispatch(getProductos());
         return <p>Productos no es un array</p>;
-        
+
     }
+
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = productos.slice(indexOfFirstProduct, indexOfLastProduct);
 
     // Renderizar productos si es un array
     return (
@@ -65,7 +72,7 @@ const AllProducts = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {productos?.map((producto) => (
+                    {currentProducts?.map((producto) => (
                         <tr key={producto?.id}>
                             <td>{producto?.id}</td>
                             <td>{producto?.codigo}</td>
@@ -88,6 +95,21 @@ const AllProducts = () => {
                     ))}
                 </tbody>
             </table>
+
+            <div className="pagination flex justify-center mt-4">
+                {Array.from({ length: Math.ceil(productos.length / productsPerPage) }).map((_, index) => (
+                    <button
+                        key={index}
+                        onClick={() => setCurrentPage(index + 1)}
+                        className={`px-3 py-2 mx-1 text-gray-800 rounded focus:outline-none focus:bg-gray-400 ${currentPage === index + 1 ? 'bg-gray-300' : 'bg-gray-200'
+                            }`}
+                    >
+                        <span className="text-gray-300">{index + 1}</span>
+                    </button>
+                ))}
+            </div>
+
+
 
             {editMode && (
                 <UpdateProduct

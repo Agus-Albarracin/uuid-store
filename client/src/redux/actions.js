@@ -36,10 +36,11 @@ import {
 } from "./action-types";
 
 import axios from "axios";
-const BACK_URL = import.meta.env.VITE_VERCEL_BACKURL
-process.env.VITE_VERCEL_BACKURL
 
-axios.defaults.baseURL = BACK_URL
+const BACK_URL = import.meta.env.VITE_VERCEL_BACKURL;
+
+axios.defaults.baseURL = BACK_URL;
+
 
 
 // TRAER TODOS LOS PRODUCTOS

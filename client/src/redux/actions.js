@@ -363,11 +363,10 @@ export const deleteProducto = (id) => {
   };
 };
 
-
 export const updateProducto = (id) => {
   return {
-      type: UPDATE_PRODUCTO,
-      payload: null
+    type: UPDATE_PRODUCTO,
+    payload: null,
   };
 };
 
@@ -411,14 +410,22 @@ export const enviarMailPassword = (email) => {
 export const cambiarPassword = (token, newPassword) => {
   try {
     return async function (dispatch) {
-      await axios.post(`/change-password?${token}`, { token, newPassword });
+      const response = await axios.post(
+        `/change-password`,
+        { token, newPassword },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
       return dispatch({
         type: CAMBIAR_PASSWORD,
-        payload: { token, newPassword },
+        payload: response.data,
       });
     };
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
-

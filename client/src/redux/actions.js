@@ -36,9 +36,11 @@ import {
 } from "./action-types";
 
 import axios from "axios";
+const BACK_URL = import.meta.env.VITE_VERCEL_deploy_baseURL
+process.env.VITE_VERCEL_
 
 const API_BASE_URL = "";
-axios.defaults.baseURL = "https://uuid-store-production.up.railway.app";
+axios.defaults.baseURL = BACK_URL
 
 
 // TRAER TODOS LOS PRODUCTOS

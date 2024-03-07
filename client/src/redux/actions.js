@@ -31,7 +31,8 @@ import {
 import axios from "axios";
 
 const API_BASE_URL = "";
-axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "https://uuid-store-production.up.railway.app";
+
 
 // TRAER TODOS LOS PRODUCTOS
 export const getProductos = () => {

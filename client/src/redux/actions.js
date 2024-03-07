@@ -25,7 +25,14 @@ import {
   DELETE_USERS,
   ADMIN_USERS,
   ESTADO_ORDEN,
+  CLEAR_CART,
+  CLEAR_COMPRA,
+  GET_DETALLE_DE_COMPRA,
+  CLEAR_DETALLE_DE_COMPRA,
   DELETE_PRODUCTO,
+  UPDATE_PRODUCTO,
+  ENVIAR_MAIL_PASSWORD,
+  CAMBIAR_PASSWORD,
 } from "./action-types";
 
 import axios from "axios";
@@ -249,6 +256,13 @@ export const autoSetCarro = (carro) => {
   };
 };
 
+export const clearCart = () => {
+  return {
+    type: CLEAR_CART,
+    payload: [],
+  };
+};
+
 export const allUsers = () => {
   try {
     return async function (dispatch) {
@@ -266,31 +280,27 @@ export const allUsers = () => {
 // DELETE USER
 export const deleteUser = (email) => {
   return async function (dispatch) {
-
     try {
       const response = await axios.delete("/deleteuser", { data: { email } });
       return dispatch({
         type: DELETE_USERS,
         payload: email,
       });
-
-    } catch (error) {console.log(error); }
-
+    } catch (error) {
+      console.log(error);
+    }
   };
-}
+};
 
 export const accessAdminUser = (email) => {
   return async function () {
     try {
       const response = await axios.put("/adminaccess", { email });
-
     } catch (error) {
       console.error("Error al acceder al usuario administrador:", error);
     }
   };
 };
-
-
 
 // CREAR TICKET DE COMPRA
 
@@ -305,6 +315,13 @@ export const createTicket = (data) => {
     } catch (error) {
       console.log(error);
     }
+  };
+};
+
+export const clearCompra = () => {
+  return {
+    type: CLEAR_COMPRA,
+    payload: {},
   };
 };
 
@@ -323,24 +340,105 @@ export const getOrdenes = () => {
 };
 
 export const putStateOrdens = (idDeCompra, email, ordenState) => {
-  try{
-
+  try {
     return async function (dispatch) {
-
-      const response = await axios.put("/stateOrden", {idDeCompra, email, estadoDelPedido: ordenState});
+      const response = await axios.put("/stateOrden", {
+        idDeCompra,
+        email,
+        estadoDelPedido: ordenState,
+      });
       return dispatch({
         type: ESTADO_ORDEN,
-        payload: response.data
-      })
-      
+        payload: response.data,
+      });
     };
-
-  }catch(error){ console.log(error) }
-}
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const deleteProducto = (id) => {
   return {
-      type: DELETE_PRODUCTO,
-      payload: id
+    type: DELETE_PRODUCTO,
+    payload: id,
   };
+};
+
+
+
+export const updateProducto = (formData) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(`/updateproductos/${formData.id}`, formData);
+      
+      dispatch({
+        type: UPDATE_PRODUCTO,
+        payload: response.data // Puedes ajustar esto según la respuesta de tu API
+      });
+    } catch (error) {
+      // Manejo de errores aquí
+      console.error('Error al actualizar el producto:', error);
+    }
+
+  };
+};
+
+export const getDetalleDeCompra = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/getOrdenbyid?idDeCompra=${id}`);
+      return dispatch({
+        type: GET_DETALLE_DE_COMPRA,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const clearDetalleDeCompra = () => {
+  return {
+    type: CLEAR_DETALLE_DE_COMPRA,
+    payload: {},
+  };
+};
+
+//CAMBIO DE PASSWORD
+
+export const enviarMailPassword = (email) => {
+  try {
+    return async function (dispatch) {
+      const response = await axios.post("/recovery", { email });
+      return dispatch({
+        type: ENVIAR_MAIL_PASSWORD,
+        payload: response.data,
+      });
+    };
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const cambiarPassword = (token, newPassword) => {
+  try {
+    return async function (dispatch) {
+      const response = await axios.post(
+        `/change-password`,
+        { token, newPassword },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return dispatch({
+        type: CAMBIAR_PASSWORD,
+        payload: response.data,
+      });
+    };
+  } catch (error) {
+    console.log(error);
+  }
 };

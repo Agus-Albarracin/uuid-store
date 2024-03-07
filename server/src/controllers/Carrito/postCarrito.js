@@ -23,12 +23,12 @@ const postOrden = async (req, res) => {
   } = req.body;
 
   try {
-    if (emailStorage) {
+    if (nombre) {
       let total = 0;
 
       productos.forEach(async (produ) => {
         let producto = await Productos.findByPk(produ.id);
-        // producto.quantitysold = (producto.quantitysold || 0) + 1;
+        producto.quantitysold = (producto.quantitysold || 0) + 1;
         producto.stock[produ.talle] -= 1;
         total += produ.precio;
         await producto.save();
@@ -86,7 +86,9 @@ const postOrden = async (req, res) => {
         \n
         uuid.
 
-        Podes seguir estado de tu compra en el siguiente link: http://localhost:5173/success/${carrito.idDeCompra}
+        Podes seguir estado de tu compra en el siguiente link: http://localhost:5173/success/${
+          carrito.idDeCompra
+        }
       `;
      //Podes seguir estado de tu compra en el siguiente link: https://uuid-store-production.up.railway.app/success/${carrito.idDeCompra}
 

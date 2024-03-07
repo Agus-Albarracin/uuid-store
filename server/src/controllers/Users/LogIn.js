@@ -125,7 +125,7 @@ const cambioPassword = async (req, res) => {
       { recoveryToken: null, password: hash, rPassword: hash },
       { where: { id: user.id } }
     );
-    res.status(200).json({ message: "password changed" });
+    res.status(200).send("Contraseña actualizada correctamente!");
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

@@ -23,7 +23,14 @@ import {
   CREATE_TICKET,
   GET_ORDENES,
   DELETE_USERS,
+  CLEAR_CART,
+  CLEAR_COMPRA,
+  GET_DETALLE_DE_COMPRA,
+  CLEAR_DETALLE_DE_COMPRA,
   DELETE_PRODUCTO,
+  UPDATE_PRODUCTO,
+  ENVIAR_MAIL_PASSWORD,
+  CAMBIAR_PASSWORD,
 } from "./action-types";
 
 const initialState = {
@@ -37,7 +44,8 @@ const initialState = {
   messageToUser: "",
   cart: [],
   compraActual: {},
-  allOrdenes:[],
+  allOrdenes: [],
+  token: {},
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -56,12 +64,14 @@ const rootReducer = (state = initialState, { type, payload }) => {
         allUsers: payload,
       };
 
-      case DELETE_USERS:
-        const updatedUsers = state.allUsers.filter((user) => user.email !== payload);
-        return {
-          ...state,
-          allUsers: updatedUsers,
-        }
+    case DELETE_USERS:
+      const updatedUsers = state.allUsers.filter(
+        (user) => user.email !== payload
+      );
+      return {
+        ...state,
+        allUsers: updatedUsers,
+      };
 
     case GET_NAME:
       return {
@@ -229,24 +239,66 @@ const rootReducer = (state = initialState, { type, payload }) => {
         compraActual: payload,
       };
 
+    case CLEAR_COMPRA:
+      return {
+        ...state,
+        compraActual: payload,
+      };
+
     case GET_ORDENES:
       return {
-         ...state,
-         allOrdenes: payload,
+        ...state,
+        allOrdenes: payload,
       };
 
     case DELETE_PRODUCTO:
       return {
-          ...state,
-          allProductos: state.allProductos.filter(producto => producto.id !== payload)
+        ...state,
+        allProductos: state.allProductos.filter(
+          (producto) => producto.id !== payload
+        ),
       };
 
-
-
-    default:
+    case CLEAR_CART:
       return {
         ...state,
+        cart: payload,
       };
+
+    case GET_DETALLE_DE_COMPRA:
+      return {
+        ...state,
+        compraActual: payload,
+      };
+
+    case CLEAR_DETALLE_DE_COMPRA:
+      return {
+        ...state,
+        compraActual: payload,
+      };
+
+    case ENVIAR_MAIL_PASSWORD:
+      return {
+        ...state,
+        actualUser: { ...actualUser, recoveryToken: payload },
+        token: payload,
+      };
+
+
+    case UPDATE_PRODUCTO:
+      return {
+        ...state,
+        allProductos: payload,
+      };
+
+    case CAMBIAR_PASSWORD:
+      return {
+        ...state,
+        messageToUser: payload,
+      };
+
+    default:
+      return state;
   }
 };
 

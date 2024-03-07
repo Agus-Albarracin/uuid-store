@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getProductos, deleteProducto } from '../../../redux/actions';
+import { getProductos, deleteProducto, updateProducto } from '../../../redux/actions';
+import UpdateProduct from "./UpdateProduct/UpdateProduct";
 
 const AllProducts = () => {
     const dispatch = useDispatch();
@@ -11,14 +12,30 @@ const AllProducts = () => {
     }, [dispatch]);
 
     const productos = useSelector((state) => state.allProductos);
-    console.log(productos);
+
+    const [editMode, setEditMode] = useState(false);
+    const [selectedProductId, setSelectedProductId] = useState(null);
 
     const handleDelete = (id) => {
         dispatch(deleteProducto(id));
     };
 
+    const handleUpdate = (id) => {
+        setEditMode(true);
+        setSelectedProductId(id);
+        console.log("Hola",editMode)
+    };
+
+    const handleFormSubmit = (formData) => {
+        // Implementa la lógica de actualización del producto
+        // Puedes enviar una solicitud al backend para actualizar el producto
+        setEditMode(false);
+        setSelectedProductId(null);
+    };
+
     return (
         <div className="contenedor-table">
+            
             <table>
                 <thead>
                     <tr>
@@ -50,17 +67,29 @@ const AllProducts = () => {
                             <td>{producto.marca}</td>
                             <td>
                                 {producto.imagen ? (
-                                    <img src={producto.imagen} alt={producto.nombre} style={{ }} />
+                                    <img src={producto.imagen} alt={producto.nombre} style={{}} />
                                 ) : null}
                             </td>
                             <td>{producto.descuento}</td>
                             <td>{producto.estado}</td>
-                            <td><button>Editar</button></td>
+                            <td><button onClick={() => handleUpdate(producto.id)}>Editar</button></td>
                             <td><button onClick={() => handleDelete(producto.id)}>Eliminar</button></td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+
+            {editMode && (
+                <UpdateProduct
+                    productId={selectedProductId}
+                    onCancel={() => {
+                        setEditMode(false);
+                        setSelectedProductId(null);
+                    }}
+                    onSubmit={handleFormSubmit}
+                />
+            )}
+
         </div>
     );
 };

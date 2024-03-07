@@ -24,6 +24,7 @@ import {
   GET_ORDENES,
   DELETE_USERS,
   DELETE_PRODUCTO,
+  UPDATE_PRODUCTO,
 } from "./action-types";
 
 const initialState = {
@@ -37,7 +38,7 @@ const initialState = {
   messageToUser: "",
   cart: [],
   compraActual: {},
-  allOrdenes:[],
+  allOrdenes: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -56,12 +57,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
         allUsers: payload,
       };
 
-      case DELETE_USERS:
-        const updatedUsers = state.allUsers.filter((user) => user.email !== payload);
-        return {
-          ...state,
-          allUsers: updatedUsers,
-        }
+    case DELETE_USERS:
+      const updatedUsers = state.allUsers.filter((user) => user.email !== payload);
+      return {
+        ...state,
+        allUsers: updatedUsers,
+      }
 
     case GET_NAME:
       return {
@@ -231,14 +232,20 @@ const rootReducer = (state = initialState, { type, payload }) => {
 
     case GET_ORDENES:
       return {
-         ...state,
-         allOrdenes: payload,
+        ...state,
+        allOrdenes: payload,
       };
 
     case DELETE_PRODUCTO:
       return {
-          ...state,
-          allProductos: state.allProductos.filter(producto => producto.id !== payload)
+        ...state,
+        allProductos: state.allProductos.filter(producto => producto.id !== payload)
+      };
+
+    case UPDATE_PRODUCTO:
+      return {
+        ...state,
+        allProductos: payload,
       };
 
 

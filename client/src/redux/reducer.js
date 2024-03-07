@@ -29,6 +29,7 @@ import {
   CLEAR_DETALLE_DE_COMPRA,
   DELETE_PRODUCTO,
   UPDATE_PRODUCTO,
+  ENVIAR_MAIL_PASSWORD,
 } from "./action-types";
 
 const initialState = {

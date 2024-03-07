@@ -18,7 +18,7 @@ import ConfirmacionDeCompra from "./Views/ConfirmacionDeCompra/ConfirmacionDeCom
 import CompraConfirmada from "./Views/CompraConfirmada/CompraConfirmada";
 import DetallesDeCompra from "./Views/DetallesDeCompra/DetallesDeCompra";
 import EnvioMailCambioPassword from "./Views/EnvioMailCambioPassword/EnvioMailCambioPassword";
-import CambioDePassword from "./Views/CambioPassword/CambioPassword";
+import CambioDePassword from "./Views/CambioDePassword/CambioDePassword";
 
 //Axios
 import axios from "axios";

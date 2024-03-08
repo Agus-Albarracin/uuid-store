@@ -37,8 +37,11 @@ import {
 
 import axios from "axios";
 
-const API_BASE_URL = "";
-axios.defaults.baseURL = "http://localhost:3001";
+const BACK_URL = import.meta.env.VITE_VERCEL_BACKURL;
+
+axios.defaults.baseURL = BACK_URL;
+
+
 
 // TRAER TODOS LOS PRODUCTOS
 export const getProductos = () => {

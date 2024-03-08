@@ -10,7 +10,7 @@
     "start": "concurrently \"npm run start:css\" \"react-scripts start\"",
     "start:css": "tailwindcss -o src/tailwind.css --watch",
     "build": "npm run build:css && react-scripts build",
-    "build:css": "NODE_ENV=production tailwindcss -o src/tailwind.css -m"
+    "build:css": "set NODE_ENV=production tailwindcss -o src/tailwind.css -m"
   },
   "dependencies": {
     "@cloudinary/react": "^1.13.0",
@@ -43,6 +43,19 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "react-scripts": "^5.0.1",
     "vite": "^5.1.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

@@ -16,11 +16,12 @@ const HomePage = () => {
     }
   }, [dispatch, allProductos.length]);
 
-  const recommendedProducts = allProductos
-    .slice()
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 10);
-
+  const recommendedProducts = Array.isArray(allProductos)
+  ? allProductos
+      .slice() // Realiza una copia superficial del array
+      .sort(() => Math.random() - 0.5) // Ordena la copia superficial
+      .slice(0, 10) // Toma los primeros 10 elementos del array ordenado
+  : [];
   // console.log(allProductos);
   // console.log(recommendedProducts)
 

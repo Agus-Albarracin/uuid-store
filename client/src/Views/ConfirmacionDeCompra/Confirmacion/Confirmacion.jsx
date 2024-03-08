@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3001"
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 
 

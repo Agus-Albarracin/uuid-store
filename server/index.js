@@ -1,6 +1,8 @@
 const server = require("./src/server");
 const { conn } = require("./src/db.js");
-const PORT = 3001;
+require("dotenv").config();
+const{PORT} = process.env;
+
 const {
   dbRegisterDEMO,
   dbRegisterUsuariosDEMO,
@@ -12,7 +14,7 @@ conn
     await dbRegisterDEMO();
     await dbRegisterUsuariosDEMO();
 
-    server.listen(PORT, () => {
+    server.listen(PORT, "0.0.0.0", () => {
       console.log(`Server listening on port ${PORT}`);
     });
   })

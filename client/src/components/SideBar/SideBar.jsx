@@ -10,9 +10,9 @@ function SideBar({ handleChange, handleSubmit }) {
   const [selectedMarca, setSelectedMarca] = useState(""); // Estado para la marca seleccionada
   const [filteredModelos, setFilteredModelos] = useState([]); // Estado para los modelos filtrados
   const [selectedPrecio, setSelectedPrecio] = useState(""); // Estado para el precio seleccionado
-
-  const allMarcas = [...new Set(allProductos.map(prod => prod.marca))];
-  const allModelos = [...new Set(allProductos.map(prod => prod.modelo))];
+  
+  const allMarcas = Array.isArray(allProductos) ? [...new Set(allProductos.map(prod => prod.marca))] : [];
+  const allModelos = Array.isArray(allProductos) ? [...new Set(allProductos.map(prod => prod.modelo))] : [];
 
   function selectedfilterMarca(e) {
     const marca = e.target.value;

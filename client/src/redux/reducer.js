@@ -1,4 +1,6 @@
+import { combineReducers } from 'redux';
 import {
+  CREATE_CATEGORY,
   GET_PRODUCTOS,
   GET_NAME,
   GET_DETAIL,
@@ -34,6 +36,7 @@ import {
 } from "./action-types.js";
 
 const initialState = {
+  categoryReducer :[],
   allProductosHome: [],
   allProductos: [],
   allProductosAux: [],
@@ -48,6 +51,18 @@ const initialState = {
   token: {},
 };
 
+const categoryReducer = (state = [], action) => {
+  switch (action.type) {
+    case CREATE_CATEGORY:
+      // Agrega la nueva categoría al estado
+      return [
+        ...state,
+        action.payload // Supongamos que payload contiene los datos de la categoría creada
+      ];
+    default:
+      return state;
+  }
+};
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_PRODUCTOS:

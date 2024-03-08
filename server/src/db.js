@@ -1,4 +1,5 @@
 
+
 require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const {DB_USER, DB_PASSWORD, DB_HOST, DB_URL} = process.env;
@@ -28,10 +29,14 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Productos, Usuario, Carrito } = sequelize.models;
+const { Productos, Usuario, Carrito, Category } = sequelize.models;
 
 Usuario.hasMany(Carrito);
 Carrito.belongsTo(Usuario);
+
+Productos.belongsTo(Category);
+Category.hasMany(Productos);
+
 
 
 module.exports = {

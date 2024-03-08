@@ -1,4 +1,5 @@
 import {
+  
   GET_PRODUCTOS,
   GET_DETAIL,
   CLEAR_DETAIL,
@@ -444,17 +445,29 @@ export const cambiarPassword = (token, newPassword) => {
   }
 };
 // crear categoria
-
-export const CREATE_CATEGORY = 'CREATE_CATEGORY';
-
 export const createCategory = (categoryName) => {
   return async (dispatch) => {
     try {
       const response = await axios.post('/createCategory', { name: categoryName });
-     
+      // Aquí podrías hacer algo con la respuesta si es necesario
+      console.log('Respuesta de crear categoría:', response);
     } catch (error) {
       console.error('Error al crear la categoría:', error);
-      
+      // Puedes añadir alguna lógica para manejar el error si es necesario
     }
   };
 };
+
+export const CREATE_CATEGORY = 'CREATE_CATEGORY';
+
+// export const createCategory = (categoryName) => {
+//   return async (dispatch) => {
+//     try {
+//       const response = await axios.post('/createCategory', { name: categoryName });
+     
+//     } catch (error) {
+//       console.error('Error al crear la categoría:', error);
+      
+//     }
+//   };
+// };

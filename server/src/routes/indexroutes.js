@@ -73,4 +73,12 @@ router.delete("/deleteOrden", deleteCarrito.deleteCarrito);
 //*MercadoPago
 router.post("/create_preference", makePayment);
 
+
+// crear categoria
+const createCategory = require("../controllers/Productos/createCategorias");
+
+router.post("/createCategory", createCategory.createCategory);
+
+
+
 module.exports = router;

@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const {DB_USER, DB_PASSWORD, DB_HOST} = process.env;
@@ -37,4 +38,4 @@ module.exports = {
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
 };
 
-//asd
+// //asd

@@ -3,7 +3,6 @@ const createCategory = async (req, res) => {
   try {
     const { name } = req.body;
 
-   
     const newCategoria = new Category({ name });
     await newCategoria.save();
 

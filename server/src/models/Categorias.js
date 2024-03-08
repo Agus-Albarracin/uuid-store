@@ -8,6 +8,5 @@ module.exports = (sequelize) => {
             unique: true
         }
     });
-
     return Category;
 };

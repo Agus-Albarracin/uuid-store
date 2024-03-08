@@ -74,7 +74,7 @@ router.delete("/deleteOrden", deleteCarrito.deleteCarrito);
 router.post("/create_preference", makePayment);
 
 
-// crear categoria
+// crear categorias
 const createCategory = require("../controllers/Productos/createCategorias");
 
 router.post("/createCategory", createCategory.createCategory);

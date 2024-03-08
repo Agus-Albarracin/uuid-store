@@ -3,7 +3,6 @@ import axios from 'axios';
 
 const CreateCategoryForm = () => {
   const [categoryName, setCategoryName] = useState('');
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -15,7 +14,6 @@ const CreateCategoryForm = () => {
       alert('Error al crear la categoría. Por favor, intenta de nuevo.');
     }
   };
-
   return (
     <div>
       <h2></h2>

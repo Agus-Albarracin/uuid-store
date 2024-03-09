@@ -37,7 +37,7 @@ const MenuUser = ({ mostrarUser }) => {
       onClick={handleCloseMenu}
     >
       {Object.keys(user).length === 0 ? (
-        <div className=" absolute inset-0 bg-black bg-opacity-50">
+        <div className="absolute inset-0 bg-black bg-opacity-50">
           <div
             className="bg-white max-w-md p-4 rounded-md mx-auto"
             onClick={(e) => e.stopPropagation()}

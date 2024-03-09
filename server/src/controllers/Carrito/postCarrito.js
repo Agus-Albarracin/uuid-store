@@ -29,7 +29,7 @@ const postOrden = async (req, res) => {
       productos.forEach(async (produ) => {
         let producto = await Productos.findByPk(produ.id);
         producto.quantitysold = (producto.quantitysold || 0) + 1;
-        producto.stock[produ.talle] -= 1;
+        producto.stock[produ.talle] -= produ.cantidad;
         total += produ.precio;
         await producto.save();
       });
@@ -90,9 +90,7 @@ const postOrden = async (req, res) => {
           carrito.idDeCompra
         }
       `;
-     //Podes seguir estado de tu compra en el siguiente link: https://uuid-store-production.up.railway.app/success/${carrito.idDeCompra}
-
-      
+      //Podes seguir estado de tu compra en el siguiente link: https://uuid-store-production.up.railway.app/success/${carrito.idDeCompra}
 
       enviarCorreo(email, "Gracias por su compra!", contenidoCorreo);
 

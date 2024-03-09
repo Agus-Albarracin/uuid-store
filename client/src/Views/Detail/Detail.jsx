@@ -15,8 +15,6 @@ const Detail = () => {
   const dispatch = useDispatch(); // Cambiado a useDispatch
   const detail = useSelector((state) => state.detail);
 
-
-
   const [image, setImage] = useState(1);
   const images = [
     "https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg?auto=compress&cs=tinysrgb&w=600", // URL de la primera imagen
@@ -33,14 +31,9 @@ const Detail = () => {
     return () => dispatch(clearDetail());
   }, [dispatch, id]);
 
-  const handleTalle = (event) => {
-    setTalleSeleccionado(event.target.value);
-  };
   // const handleTalle = (event) => {
   //   setTalleSeleccionado(event.target.value);
   // }
-
-
 
   const [tallaSeleccionada, setTallaSeleccionada] = useState(null);
   const handleSeleccionarTalla = (talla) => {
@@ -56,15 +49,19 @@ const Detail = () => {
   //   console.log(`Calificación: ${value}`);
   // };
 
-
   const handleAddToCart = () => {
-
     if (tallaSeleccionada) {
       if (tallaSeleccionada && tallaSeleccionada !== "sinStock") {
         const uuid = uuidv4();
-        dispatch(addToCart({ ...detail, talle: tallaSeleccionada, uuid: uuid }));
+        dispatch(
+          addToCart({
+            ...detail,
+            talle: tallaSeleccionada,
+            cantidad: 1,
+            uuid: uuid,
+          })
+        );
       }
-
     }
   };
   return (
@@ -138,8 +135,9 @@ const Detail = () => {
                 <div key={i} className="flex-1 px-2">
                   <button
                     onClick={() => changeImage(i + 1)}
-                    className={`focus:outline-none w-full rounded-lg h-24 md:h-32 bg-gray-100 flex items-center justify-center ${image === i + 1 ? "ring-2 ring-indigo-300 ring-inset" : ""
-                      }`}
+                    className={`focus:outline-none w-full rounded-lg h-24 md:h-32 bg-gray-100 flex items-center justify-center ${
+                      image === i + 1 ? "ring-2 ring-indigo-300 ring-inset" : ""
+                    }`}
                   >
                     <img
                       src={img}
@@ -179,7 +177,7 @@ const Detail = () => {
                 <div className="rounded-lg bg-gray-100 flex py-2 px-3">
                   <span className="text-red-500 mr-1 mt-1">$</span>
                   <span className="font-bold text-red-500 text-3xl">
-                    {detail?.precio-(detail?.precio*detail?.enDescuento)}
+                    {detail?.precio - detail?.precio * detail?.enDescuento}
                   </span>
                 </div>
               </div>
@@ -203,19 +201,24 @@ const Detail = () => {
             </p>
 
             <div>
-              <p><b>Selecciona tu talla:</b></p>
+              <p>
+                <b>Selecciona tu talla:</b>
+              </p>
               <div className="flex-wrap space-x-2">
                 {typeof detail.stock === "object" ? (
-                  Object.entries(detail.stock).filter(([_, cantidad]) => cantidad > 0).length > 0 ? (
+                  Object.entries(detail.stock).filter(
+                    ([_, cantidad]) => cantidad > 0
+                  ).length > 0 ? (
                     Object.entries(detail.stock)
                       .filter(([_, cantidad]) => cantidad > 0)
                       .map(([talle], index) => (
                         <button
                           key={index}
-                          className={`py-2 px-4 m-1 focus:outline-none border border-gray-300 rounded-md transition duration-300 ease-in-out ${talle === tallaSeleccionada
-                            ? 'bg-blue-500 text-white'
-                            : 'bg-transparent text-gray-700 hover:bg-gray-200'
-                            }`}
+                          className={`py-2 px-4 m-1 focus:outline-none border border-gray-300 rounded-md transition duration-300 ease-in-out ${
+                            talle === tallaSeleccionada
+                              ? "bg-blue-500 text-white"
+                              : "bg-transparent text-gray-700 hover:bg-gray-200"
+                          }`}
                           onClick={() => handleSeleccionarTalla(talle)}
                         >
                           {talle}
@@ -239,19 +242,13 @@ const Detail = () => {
                 )}
               </div>
 
-
-
               {tallaSeleccionada && (
                 <p>Talla seleccionada: {tallaSeleccionada}</p>
               )}
             </div>
 
             <div className="flex py-4 space-x-4">
-              <div className="relative">
-
-
-
-              </div>
+              <div className="relative"></div>
 
               <button
                 type="button"
@@ -264,10 +261,9 @@ const Detail = () => {
           </div>
         </div>
       </div>
-      <ProductReview ></ProductReview>
+      <ProductReview></ProductReview>
     </div>
   );
 };
-
 
 export default Detail;

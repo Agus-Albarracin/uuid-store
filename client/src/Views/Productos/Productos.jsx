@@ -36,22 +36,31 @@ const Productos = () => {
   // Calculate products to display based on pagination
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = allProductos.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = allProductos.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   return (
     <div className="flex flex-col md:flex-row h-screen overflow-hidden">
       <div className="w-full md:w-1/6 bg-gray-200 p-4">
         <SideBar handleChange={handleChange} handleSubmit={handleSubmit} />
       </div>
-      <div className="w-full p-4 overflow-y-auto">
+      <div className="w-full overflow-y-auto">
         <Cards data={currentProducts} />
-        
+
         {/* Pagination buttons */}
         <div className="flex justify-center mt-4">
-          {Array.from({ length: Math.ceil(allProductos.length / productsPerPage) }).map((_, index) => (
+          {Array.from({
+            length: Math.ceil(allProductos.length / productsPerPage),
+          }).map((_, index) => (
             <button
               key={index}
-              className={`mx-2 px-3 py-1 border ${currentPage === index + 1 ? 'bg-gray-500 text-white' : 'bg-white'}`}
+              className={`mx-2 px-3 py-1 border ${
+                currentPage === index + 1
+                  ? "bg-gray-500 text-white"
+                  : "bg-white"
+              }`}
               onClick={() => handlePageChange(index + 1)}
             >
               {index + 1}

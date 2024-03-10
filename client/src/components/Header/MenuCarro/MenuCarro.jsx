@@ -5,66 +5,52 @@ import { removeToCart } from "../../../redux/actions";
 import RedirectButton from "./RedirectButton/RedirectButton";
 import { v4 as uuidv4 } from "uuid";
 
-const MenuCarro = ({ mostrarCarro, mostrarUser, emailLocalStorage }) => {
-  const cart = useSelector((state) => state.cart);
+const MenuCarro = ({ mostrarCarro, mostrarUser }) => {
+  const cartJSON = window.localStorage.getItem('cart');
+  const cart = JSON.parse(cartJSON);
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState("");
+  const [ actualCart , setActualCart] = useState([]);
 
   useEffect(() => {
-    const storedUser = JSON.parse(window.localStorage.getItem("user"));
-    if (storedUser && storedUser.email) {
-      setEmail(storedUser.email);
-    }
-  }, []);
+    if(cartJSON) setActualCart(cart)
+    window.localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart.length]);
 
   const quitarProducto = (item) => {
     dispatch(removeToCart(item));
   };
 
-  const [cantidadProductos, setCantidadProductos] = useState({});
-
   const incrementarCantidad = (produ) => {
-    if (cantidadProductos[produ.uuid] < produ.stock[produ.talle]) {
-      setCantidadProductos((prevCantidad) => ({
-        ...prevCantidad,
-        [produ.uuid]: (prevCantidad[produ.uuid] || 0) + 1,
-      }));
+    if (produ.cantidad < produ.stock[produ.talle]) {
+      cart.forEach((actualProdu) => {
+        if(produ.uuid === actualProdu.uuid) actualProdu.cantidad += 1;
+      })
+
+      setActualCart(cart);
+      window.localStorage.setItem('cart', JSON.stringify(cart))
     }
   };
-
+  
   const decrementarCantidad = (produ) => {
-    if (cantidadProductos[produ.uuid] > 1) {
-      setCantidadProductos((prevCantidad) => ({
-        ...prevCantidad,
-        [produ.uuid]: prevCantidad[produ.uuid] - 1,
-      }));
+    if (produ.cantidad > 1) {
+      cart.forEach((actualProdu) => {
+        if(produ.uuid === actualProdu.uuid) actualProdu.cantidad -= 1;
+      })
+      
+      setActualCart(cart);
+      window.localStorage.setItem('cart', JSON.stringify(cart))
     }
   };
-
-  useEffect(() => {
-    cart.forEach((item) => {
-      if (!cantidadProductos[item.uuid]) {
-        setCantidadProductos((prevCantidad) => ({
-          ...prevCantidad,
-          [item.uuid]: 1,
-        }));
-      }
-    });
-  }, [cart]);
 
   const calcularTotal = () => {
     let total = 0;
     cart.forEach((item) => {
-      total += item.precio * (cantidadProductos[item.uuid] || 0);
+      total += item.precio * item.cantidad;
     });
     return total;
   };
-
-  useEffect(() => {
-    window.localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart.length]);
-
+  
   return (
     <div className={styles.menuContainer}>
       <div
@@ -82,7 +68,7 @@ const MenuCarro = ({ mostrarCarro, mostrarUser, emailLocalStorage }) => {
         </button>
         <div className="w-auto bg-white p-4">
           <div className="font-bold text-red-600 text-xl  mb-4">MI COMPRA</div>
-          {cart.map((produ, index) => (
+          {actualCart.map((produ, index) => (
             <div
               key={index}
               className={`${styles.cartItem} flex items-center justify-between border-b py-2`}
@@ -97,14 +83,13 @@ const MenuCarro = ({ mostrarCarro, mostrarUser, emailLocalStorage }) => {
                 <div className="font-semibold">Talle: {produ.talle}</div>
                 <div>Precio: ${produ.precio}</div>
                 <div>
+                  Cantidad: 
                   <button onClick={() => decrementarCantidad(produ)}>
-                    {" "}
-                    restar{" "}
+                  &nbsp; - 
                   </button>
                   &nbsp;&nbsp;{produ.cantidad}&nbsp;&nbsp;
                   <button onClick={() => incrementarCantidad(produ)}>
-                    {" "}
-                    sumar{" "}
+                    +
                   </button>
                 </div>
               </div>

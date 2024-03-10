@@ -1,5 +1,4 @@
 import {
-  
   GET_PRODUCTOS,
   GET_DETAIL,
   CLEAR_DETAIL,
@@ -40,8 +39,7 @@ import axios from "axios";
 // const BACK_URL = import.meta.env.VITE_VERCEL_BACKURL;
 
 axios.defaults.baseURL = "https://uuid-store-production.up.railway.app";
-
-
+// axios.defaults.baseURL = "http://localhost:3001";
 
 // TRAER TODOS LOS PRODUCTOS
 export const getProductos = () => {
@@ -366,22 +364,22 @@ export const deleteProducto = (id) => {
   };
 };
 
-
-
 export const updateProducto = (formData) => {
   return async (dispatch) => {
     try {
-      const response = await axios.put(`/updateproductos/${formData.id}`, formData);
-      
+      const response = await axios.put(
+        `/updateproductos/${formData.id}`,
+        formData
+      );
+
       dispatch({
         type: UPDATE_PRODUCTO,
-        payload: response.data // Puedes ajustar esto según la respuesta de tu API
+        payload: response.data, // Puedes ajustar esto según la respuesta de tu API
       });
     } catch (error) {
       // Manejo de errores aquí
-      console.error('Error al actualizar el producto:', error);
+      console.error("Error al actualizar el producto:", error);
     }
-
   };
 };
 
@@ -448,26 +446,28 @@ export const cambiarPassword = (token, newPassword) => {
 export const createCategory = (categoryName) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post('/createCategory', { name: categoryName });
+      const response = await axios.post("/createCategory", {
+        name: categoryName,
+      });
       // Aquí podrías hacer algo con la respuesta si es necesario
-      console.log('Respuesta de crear categoría:', response);
+      console.log("Respuesta de crear categoría:", response);
     } catch (error) {
-      console.error('Error al crear la categoría:', error);
+      console.error("Error al crear la categoría:", error);
       // Puedes añadir alguna lógica para manejar el error si es necesario
     }
   };
 };
 
-export const CREATE_CATEGORY = 'CREATE_CATEGORY';
+export const CREATE_CATEGORY = "CREATE_CATEGORY";
 
 // export const createCategory = (categoryName) => {
 //   return async (dispatch) => {
 //     try {
 //       const response = await axios.post('/createCategory', { name: categoryName });
-     
+
 //     } catch (error) {
 //       console.error('Error al crear la categoría:', error);
-      
+
 //     }
 //   };
 // };

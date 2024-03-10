@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 import {
   CREATE_CATEGORY,
   GET_PRODUCTOS,
@@ -36,7 +36,7 @@ import {
 } from "./action-types.js";
 
 const initialState = {
-  categoryReducer :[],
+  categoryReducer: [],
   allProductosHome: [],
   allProductos: [],
   allProductosAux: [],
@@ -57,7 +57,7 @@ const categoryReducer = (state = [], action) => {
       // Agrega la nueva categoría al estado
       return [
         ...state,
-        action.payload // Supongamos que payload contiene los datos de la categoría creada
+        action.payload, // Supongamos que payload contiene los datos de la categoría creada
       ];
     default:
       return state;
@@ -110,6 +110,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         productCreated: payload,
+        messageToUser: "Producto creado correctamente!",
       };
 
     case FILTER_MARCA:
@@ -245,7 +246,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case AUTO_SET_CARRO:
       return {
         ...state,
-        cart: payload,
+        cart: [...payload],
       };
 
     case CREATE_TICKET:
@@ -298,7 +299,6 @@ const reducer = (state = initialState, { type, payload }) => {
         actualUser: { ...actualUser, recoveryToken: payload },
         token: payload,
       };
-
 
     case UPDATE_PRODUCTO:
       return {

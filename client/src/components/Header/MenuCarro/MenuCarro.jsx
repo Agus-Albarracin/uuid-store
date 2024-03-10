@@ -3,17 +3,18 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeToCart } from "../../../redux/actions";
 import RedirectButton from "./RedirectButton/RedirectButton";
+import { autoSetCarro } from "../../../redux/actions";
 import { v4 as uuidv4 } from "uuid";
 
 const MenuCarro = ({ mostrarCarro, mostrarUser }) => {
-  const cartJSON = window.localStorage.getItem('cart');
-  const cart = JSON.parse(cartJSON);
+  // const cartJSON = window.localStorage.getItem("cart");
+  // const cart = JSON.parse(cartJSON);
+
+  const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  const [ actualCart , setActualCart] = useState([]);
-
   useEffect(() => {
-    if(cartJSON) setActualCart(cart)
+    // if (cartJSON) setActualCart(cart);
     window.localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart.length]);
 
@@ -24,22 +25,26 @@ const MenuCarro = ({ mostrarCarro, mostrarUser }) => {
   const incrementarCantidad = (produ) => {
     if (produ.cantidad < produ.stock[produ.talle]) {
       cart.forEach((actualProdu) => {
-        if(produ.uuid === actualProdu.uuid) actualProdu.cantidad += 1;
-      })
+        if (produ.uuid === actualProdu.uuid) {
+          actualProdu.cantidad = actualProdu.cantidad + 1;
+        }
+      });
 
-      setActualCart(cart);
-      window.localStorage.setItem('cart', JSON.stringify(cart))
+      dispatch(autoSetCarro(cart));
+      // window.localStorage.setItem("cart", JSON.stringify(cart));
     }
   };
-  
+
   const decrementarCantidad = (produ) => {
     if (produ.cantidad > 1) {
       cart.forEach((actualProdu) => {
-        if(produ.uuid === actualProdu.uuid) actualProdu.cantidad -= 1;
-      })
-      
-      setActualCart(cart);
-      window.localStorage.setItem('cart', JSON.stringify(cart))
+        if (produ.uuid === actualProdu.uuid) {
+          actualProdu.cantidad = actualProdu.cantidad - 1;
+        }
+      });
+
+      dispatch(autoSetCarro(cart));
+      // window.localStorage.setItem("cart", JSON.stringify(cart));
     }
   };
 
@@ -50,7 +55,7 @@ const MenuCarro = ({ mostrarCarro, mostrarUser }) => {
     });
     return total;
   };
-  
+
   return (
     <div className={styles.menuContainer}>
       <div
@@ -68,7 +73,7 @@ const MenuCarro = ({ mostrarCarro, mostrarUser }) => {
         </button>
         <div className="w-auto bg-white p-4">
           <div className="font-bold text-red-600 text-xl  mb-4">MI COMPRA</div>
-          {actualCart.map((produ, index) => (
+          {cart.map((produ, index) => (
             <div
               key={index}
               className={`${styles.cartItem} flex items-center justify-between border-b py-2`}
@@ -83,14 +88,12 @@ const MenuCarro = ({ mostrarCarro, mostrarUser }) => {
                 <div className="font-semibold">Talle: {produ.talle}</div>
                 <div>Precio: ${produ.precio}</div>
                 <div>
-                  Cantidad: 
+                  Cantidad:
                   <button onClick={() => decrementarCantidad(produ)}>
-                  &nbsp; - 
+                    &nbsp; -
                   </button>
                   &nbsp;&nbsp;{produ.cantidad}&nbsp;&nbsp;
-                  <button onClick={() => incrementarCantidad(produ)}>
-                    +
-                  </button>
+                  <button onClick={() => incrementarCantidad(produ)}>+</button>
                 </div>
               </div>
               <button

@@ -270,9 +270,10 @@ const reducer = (state = initialState, { type, payload }) => {
     case DELETE_PRODUCTO:
       return {
         ...state,
-        allProductos: state.allProductos.filter(
-          (producto) => producto.id !== payload
-        ),
+        allProductos: payload
+        //allProductos: state.allProductos.filter(
+          //(producto) => producto.id !== payload
+        //),
       };
 
     case CLEAR_CART:

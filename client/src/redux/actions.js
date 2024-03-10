@@ -23,7 +23,6 @@ import {
   CREATE_TICKET,
   GET_ORDENES,
   DELETE_USERS,
-  ADMIN_USERS,
   ESTADO_ORDEN,
   CLEAR_CART,
   CLEAR_COMPRA,
@@ -33,13 +32,13 @@ import {
   UPDATE_PRODUCTO,
   ENVIAR_MAIL_PASSWORD,
   CAMBIAR_PASSWORD,
-} from "./action-types";
+} from "./action-types.js";
 
 import axios from "axios";
 
-const BACK_URL = import.meta.env.VITE_VERCEL_BACKURL;
+// const BACK_URL = import.meta.env.VITE_VERCEL_BACKURL;
 
-axios.defaults.baseURL = BACK_URL;
+axios.defaults.baseURL = "https://uuid-store-production.up.railway.app";
 
 
 

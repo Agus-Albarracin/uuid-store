@@ -20,8 +20,6 @@ import DetallesDeCompra from "./Views/DetallesDeCompra/DetallesDeCompra";
 import EnvioMailCambioPassword from "./Views/EnvioMailCambioPassword/EnvioMailCambioPassword";
 import CambioDePassword from "./Views/CambioDePassword/CambioDePassword";
 
-//Axios
-import axios from "axios";
 
 //PATHROUTES
 import PATHROUTES from "./Helpers/path";

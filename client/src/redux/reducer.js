@@ -31,7 +31,7 @@ import {
   UPDATE_PRODUCTO,
   ENVIAR_MAIL_PASSWORD,
   CAMBIAR_PASSWORD,
-} from "./action-types";
+} from "./action-types.js";
 
 const initialState = {
   allProductosHome: [],
@@ -48,7 +48,7 @@ const initialState = {
   token: {},
 };
 
-const rootReducer = (state = initialState, { type, payload }) => {
+const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_PRODUCTOS:
       return {
@@ -302,4 +302,4 @@ const rootReducer = (state = initialState, { type, payload }) => {
   }
 };
 
-export default rootReducer;
+export default reducer;

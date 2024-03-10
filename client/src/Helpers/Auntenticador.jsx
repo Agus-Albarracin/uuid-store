@@ -1,7 +1,6 @@
 import { gapi } from "gapi-script";
 import GoogleLogin from "react-google-login";
-//axios
-import axios from "axios";
+
 //hooks
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -58,23 +57,6 @@ function Autenticador({ mostrarUser, logInWhitGoogle, signUpWhitGoogle }) {
 
     mostrarUser();
 
-
-    // console.log("datos de la funcion:", userData);
-    // try {
-    //   const response = await axios.post(
-    //     "http://localhost:3001/signupgoogle",
-    //     userData
-    //   );
-
-    //   mostrarUser();
-
-    //   console.log("Información del usuario enviada al backend con éxito");
-    // } catch (error) {
-    //   console.error(
-    //     "Error al enviar información del usuario al backend:",
-    //     error.message
-    //   );
-    // }
   };
 
   return (

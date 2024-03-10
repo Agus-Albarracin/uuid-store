@@ -20,10 +20,6 @@ import DetallesDeCompra from "./Views/DetallesDeCompra/DetallesDeCompra";
 import EnvioMailCambioPassword from "./Views/EnvioMailCambioPassword/EnvioMailCambioPassword";
 import CambioDePassword from "./Views/CambioDePassword/CambioDePassword";
 
-<<<<<<< HEAD
-
-=======
->>>>>>> e43064fec92db5fa8fd2580b9497ba6c170293ee
 //PATHROUTES
 import PATHROUTES from "./Helpers/path";
 

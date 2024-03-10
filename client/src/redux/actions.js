@@ -443,3 +443,18 @@ export const cambiarPassword = (token, newPassword) => {
     console.log(error);
   }
 };
+// crear categoria
+
+export const CREATE_CATEGORY = 'CREATE_CATEGORY';
+
+export const createCategory = (categoryName) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post('/createCategory', { name: categoryName });
+     
+    } catch (error) {
+      console.error('Error al crear la categoría:', error);
+      
+    }
+  };
+};

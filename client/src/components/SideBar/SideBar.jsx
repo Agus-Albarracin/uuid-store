@@ -1,7 +1,13 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getOrder, getProductos, filterMarca, filterProducto2, filterModelo } from '../../redux/actions';
-import './SideBar.css';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getOrder,
+  getProductos,
+  filterMarca,
+  filterProducto2,
+  filterModelo,
+} from "../../redux/actions";
+import "./SideBar.css";
 
 function SideBar({ handleChange, handleSubmit }) {
   const dispatch = useDispatch();
@@ -10,9 +16,13 @@ function SideBar({ handleChange, handleSubmit }) {
   const [selectedMarca, setSelectedMarca] = useState(""); // Estado para la marca seleccionada
   const [filteredModelos, setFilteredModelos] = useState([]); // Estado para los modelos filtrados
   const [selectedPrecio, setSelectedPrecio] = useState(""); // Estado para el precio seleccionado
-  
-  const allMarcas = Array.isArray(allProductos) ? [...new Set(allProductos.map(prod => prod.marca))] : [];
-  const allModelos = Array.isArray(allProductos) ? [...new Set(allProductos.map(prod => prod.modelo))] : [];
+
+  const allMarcas = Array.isArray(allProductos)
+    ? [...new Set(allProductos.map((prod) => prod.marca))]
+    : [];
+  const allModelos = Array.isArray(allProductos)
+    ? [...new Set(allProductos.map((prod) => prod.modelo))]
+    : [];
 
   function selectedfilterMarca(e) {
     const marca = e.target.value;
@@ -22,7 +32,9 @@ function SideBar({ handleChange, handleSubmit }) {
     if (marca === "All") {
       setFilteredModelos(allModelos);
     } else {
-      const modelosByMarca = allProductos.filter(prod => prod.marca === marca).map(prod => prod.modelo);
+      const modelosByMarca = allProductos
+        .filter((prod) => prod.marca === marca)
+        .map((prod) => prod.modelo);
       setFilteredModelos([...new Set(modelosByMarca)]);
     }
 
@@ -53,7 +65,7 @@ function SideBar({ handleChange, handleSubmit }) {
       <div className="search-box mb-4">
         <form onChange={handleChange} onSubmit={handleSubmit}>
           <input
-            className="border rounded p-2 focus:outline-none focus:border-blue-500"
+            className="searchInput border rounded p-2 focus:outline-none focus:border-blue-500"
             placeholder="Buscar"
           />
           <button

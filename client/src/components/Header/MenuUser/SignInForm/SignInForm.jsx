@@ -28,14 +28,14 @@ const SignIn = ({ handleView, mostrarUser }) => {
 
   const handleSignInClick = () => {
     setShowAnimation(true);
-    
+
     // Ajusta el tiempo según la duración de tu animación CSS
     setTimeout(() => {
       setShowAnimation(false);
       handleView();
     }, 200);
   };
-  
+
   const handleExitClick = () => {
     setShowAnimation(true);
     setTimeout(() => {
@@ -59,17 +59,17 @@ const SignIn = ({ handleView, mostrarUser }) => {
       mostrarUser();
     },
   });
-  
+
   return (
     <div
-    className={`max-w-md mx-auto bg-white p-6 rounded-md shadow-md transition-opacity transform duration-500 ${
-      showAnimation ? "opacity-0" : "opacity-100"
-    }`}
+      className={`max-w-md mx-auto bg-white p-6 rounded-md shadow-md transition-opacity transform duration-500 ${
+        showAnimation ? "opacity-0" : "opacity-100"
+      }`}
     >
       <div className="text-2xl font-bold mb-6 text-gray-600">
         REGISTRARSE EN UUID STORE
       </div>
-      <form onSubmit={formik.handleSubmit} className="space-y-4">
+      <form onSubmit={formik.handleSubmit} className="flex flex-col space-y-4">
         <div>
           <label htmlFor="nombre" className="text-gray-600 block font-semibold">
             Nombre
@@ -173,7 +173,10 @@ const SignIn = ({ handleView, mostrarUser }) => {
 
         <div className="flex items-center space-x-2">
           <span className="text-gray-600">O continúa con:</span>
-          <Autenticador mostrarUser={mostrarUser} signUpWhitGoogle={signUpWhitGoogle} />
+          <Autenticador
+            mostrarUser={mostrarUser}
+            signUpWhitGoogle={signUpWhitGoogle}
+          />
         </div>
 
         <div className="flex items-center justify-between mt-4">

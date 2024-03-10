@@ -25,10 +25,12 @@ const MenuCarro = ({ mostrarCarro, mostrarUser, emailLocalStorage }) => {
   const [cantidadProductos, setCantidadProductos] = useState({});
 
   const incrementarCantidad = (produ) => {
-    setCantidadProductos((prevCantidad) => ({
-      ...prevCantidad,
-      [produ.uuid]: (prevCantidad[produ.uuid] || 0) + 1,
-    }));
+    if (cantidadProductos[produ.uuid] < produ.stock[produ.talle]) {
+      setCantidadProductos((prevCantidad) => ({
+        ...prevCantidad,
+        [produ.uuid]: (prevCantidad[produ.uuid] || 0) + 1,
+      }));
+    }
   };
 
   const decrementarCantidad = (produ) => {
@@ -99,7 +101,7 @@ const MenuCarro = ({ mostrarCarro, mostrarUser, emailLocalStorage }) => {
                     {" "}
                     restar{" "}
                   </button>
-                  &nbsp;&nbsp;{cantidadProductos[produ.uuid] || 1}&nbsp;&nbsp;
+                  &nbsp;&nbsp;{produ.cantidad}&nbsp;&nbsp;
                   <button onClick={() => incrementarCantidad(produ)}>
                     {" "}
                     sumar{" "}

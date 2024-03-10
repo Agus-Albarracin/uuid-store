@@ -61,7 +61,7 @@ const LogIn = ({ handleView, mostrarUser }) => {
       <div className="text-lg font-semibold mb-4">
         INICIA SESIÓN EN UUID STORE
       </div>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className="flex flex-col ">
         <label
           htmlFor="email"
           className="block mb-2 text-sm font-medium text-gray-600"
@@ -94,7 +94,10 @@ const LogIn = ({ handleView, mostrarUser }) => {
 
         <div className="mt-4 flex items-center">
           <span className="text-sm mr-2">O continúa con:</span>
-          <Autenticador mostrarUser={mostrarUser} logInWhitGoogle={logInWhitGoogle} />
+          <Autenticador
+            mostrarUser={mostrarUser}
+            logInWhitGoogle={logInWhitGoogle}
+          />
         </div>
 
         <div className="mt-6 flex items-center text-sm">

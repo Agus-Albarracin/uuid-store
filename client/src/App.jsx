@@ -2,7 +2,7 @@
 import styles from "./App.module.scss";
 
 // Routers
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 // Componentes
 import Nav from "./components/Header/Nav/Nav";
@@ -20,7 +20,10 @@ import DetallesDeCompra from "./Views/DetallesDeCompra/DetallesDeCompra";
 import EnvioMailCambioPassword from "./Views/EnvioMailCambioPassword/EnvioMailCambioPassword";
 import CambioDePassword from "./Views/CambioDePassword/CambioDePassword";
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e43064fec92db5fa8fd2580b9497ba6c170293ee
 //PATHROUTES
 import PATHROUTES from "./Helpers/path";
 
@@ -37,6 +40,12 @@ function App() {
   const user = useSelector((state) => state.actualUser);
   const cart = useSelector((state) => state.cart);
   const message = useSelector((state) => state.messageToUser);
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   useEffect(() => {
     if (user.token) {

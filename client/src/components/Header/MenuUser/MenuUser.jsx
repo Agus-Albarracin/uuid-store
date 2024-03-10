@@ -5,6 +5,8 @@ import LogIn from "./LogInForm/LogInForm";
 import SignIn from "./SignInForm/SignInForm";
 import { Link } from "react-router-dom";
 
+import styles from "./MenuUser.module.scss";
+
 const MenuUser = ({ mostrarUser }) => {
   const dispatch = useDispatch();
   const [logInOrSignIn, setLogInOrSignIn] = useState(false);
@@ -49,10 +51,15 @@ const MenuUser = ({ mostrarUser }) => {
         </div>
       ) : (
         <div
-          className="bg-white p-4 rounded-md"
+          className={`${styles.menuContainer} bg-white p-4 rounded-md`}
           onClick={(e) => e.stopPropagation()}
         >
           <div className="text-black">{`${user.nombre}  ${user.apellido}`}</div>
+          {user.admin && (
+            <Link to="/admin">
+              <span> Panel de Admin </span>
+            </Link>
+          )}
           <Link to="/user">
             <span
               className="cursor-pointer text-blue-500 mr-4"

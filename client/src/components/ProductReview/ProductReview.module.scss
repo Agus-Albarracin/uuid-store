@@ -1,0 +1,13 @@
+.estrellaA {
+  color: #ff0;
+  cursor: pointer;
+}
+
+.estrellaN {
+  color: #000;
+  cursor: pointer;
+
+  &:hover {
+    color: #ff0;
+  }
+}

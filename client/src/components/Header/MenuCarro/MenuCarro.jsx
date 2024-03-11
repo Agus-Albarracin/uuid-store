@@ -65,45 +65,49 @@ const MenuCarro = ({ mostrarCarro, mostrarUser }) => {
       <div
         className={`${styles.carro} absolute inset-y-0 right-0 max-w-full flex`}
       >
-        <button
+        {/* <button
           className="bg-gray-800 text-white hover:bg-gray-700"
           onClick={() => mostrarCarro(false)}
         >
           &nbsp;&nbsp;&larr;&nbsp;&nbsp;
-        </button>
-        <div className="w-auto bg-white p-4">
+        </button> */}
+        <div className="w-full bg-white p-4">
           <div className="font-bold text-red-600 text-xl  mb-4">MI COMPRA</div>
-          {cart.map((produ, index) => (
-            <div
-              key={index}
-              className={`${styles.cartItem} flex items-center justify-between border-b py-2`}
-            >
-              <img
-                src={produ.imagen[0]}
-                alt={produ.nombre}
-                className="w-24  object-cover rounded"
-              />
-              <div className="flex-1 ml-4">
-                <div className="font-semibold">{produ.nombre}</div>
-                <div className="font-semibold">Talle: {produ.talle}</div>
-                <div>Precio: ${produ.precio}</div>
-                <div>
-                  Cantidad:
-                  <button onClick={() => decrementarCantidad(produ)}>
-                    &nbsp; -
-                  </button>
-                  &nbsp;&nbsp;{produ.cantidad}&nbsp;&nbsp;
-                  <button onClick={() => incrementarCantidad(produ)}>+</button>
-                </div>
-              </div>
-              <button
-                onClick={() => quitarProducto(produ.uuid)}
-                className="text-red-500 font-bold ml-4"
+          <div className={styles.productos}>
+            {cart.map((produ, index) => (
+              <div
+                key={index}
+                className={`${styles.cartItem} flex items-center justify-between border-b py-2`}
               >
-                Quitar
-              </button>
-            </div>
-          ))}
+                <img
+                  src={produ.imagen[0]}
+                  alt={produ.nombre}
+                  className="w-24  object-cover rounded"
+                />
+                <div className="flex-1 ml-4">
+                  <div className="font-semibold">{produ.nombre}</div>
+                  <div className="font-semibold">Talle: {produ.talle}</div>
+                  <div>Precio: ${produ.precio}</div>
+                  <div>
+                    Cantidad:
+                    <button onClick={() => decrementarCantidad(produ)}>
+                      &nbsp; -
+                    </button>
+                    &nbsp;&nbsp;{produ.cantidad}&nbsp;&nbsp;
+                    <button onClick={() => incrementarCantidad(produ)}>
+                      +
+                    </button>
+                  </div>
+                </div>
+                <button
+                  onClick={() => quitarProducto(produ.uuid)}
+                  className="text-red-500 font-bold ml-4"
+                >
+                  Quitar
+                </button>
+              </div>
+            ))}
+          </div>
           <br></br>
           <div className="font-bold text-red-600 text-xl mb-4">
             Total: ${calcularTotal()}

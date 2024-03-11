@@ -16,6 +16,7 @@ const ConfirmacionDeCompra = () => {
 
   const navigate = useNavigate();
 
+  const [totalCarrito, setTotalCarrito] = useState(0);
   const [view, setView] = useState(1);
   const [userBuyData, setUserBuyData] = useState({
     nombre: "",
@@ -34,36 +35,49 @@ const ConfirmacionDeCompra = () => {
     setView(option);
   };
 
+  const calcularTotal = () => {
+    let total = 0;
+    carrito.forEach((item) => {
+      total += item.precio * item.cantidad;
+    });
+    return total;
+  };
+
   useEffect(() => {
     if (!userJSON || carrito.length === 0) navigate("/");
     window.localStorage.setItem("actualForm", JSON.stringify(userBuyData));
+
+    setTotalCarrito(calcularTotal());
   }, []);
 
   return (
     <section className={styles.container}>
       <aside className={styles.carrito}>
         <h2 className={styles.header}>Tu compra</h2>
-        {carrito.map((produ, index) => {
-          return (
-            <div className={styles.producto} key={index}>
-              <div>
-                <h2>
-                  {produ.nombre} {produ.modelo} {produ.marca}
-                </h2>
-                <div>Precio: {produ.precio}</div>
-                <span>Talle: {produ.talle}</span>
+        <div className={styles.productos}>
+          {carrito.map((produ, index) => {
+            return (
+              <div className={styles.producto} key={index}>
+                <div>
+                  <h2>
+                    {produ.nombre} {produ.modelo} {produ.marca}
+                  </h2>
+                  <h2>Precio: ${produ.precio}</h2>
+                  <h2>Talle: {produ.talle}</h2>
+                  <h2>Cantidad: {produ.cantidad}</h2>
+                </div>
+                <hr />
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
 
-        <hr />
-        <div>Total: $</div>
+        <div className={styles.total}>Total: ${totalCarrito}</div>
       </aside>
       <div className={styles.data}>
-        <div>
+        <div className={styles.index}>
           <h2>CONFIRMACION DE LA COMPRA</h2>
-          <div>
+          <div className={styles.secciones}>
             <ul>
               <li
                 className={view > 1 ? styles.disponible : styles.noDisponible}
@@ -104,34 +118,31 @@ const ConfirmacionDeCompra = () => {
           </div>
         </div>
 
-        <article>
-          <div>
-            {view === 1 && (
-              <UserData
-                userBuyData={userBuyData}
-                setUserBuyData={setUserBuyData}
-                setView={setView}
-              />
-            )}
-            {view === 2 && (
-              <DireccionDeEnvio
-                userBuyData={userBuyData}
-                setUserBuyData={setUserBuyData}
-                setView={setView}
-              />
-            )}
-            {view === 3 && (
-              <MetodoDeEnvio
-                userBuyData={userBuyData}
-                setUserBuyData={setUserBuyData}
-                setView={setView}
-              />
-            )}
-            {view === 4 && <Confirmacion userBuyData={userBuyData} />}
-          </div>
+        <article className={styles.formsContainer}>
+          {view === 1 && (
+            <UserData
+              userBuyData={userBuyData}
+              setUserBuyData={setUserBuyData}
+              setView={setView}
+            />
+          )}
+          {view === 2 && (
+            <DireccionDeEnvio
+              userBuyData={userBuyData}
+              setUserBuyData={setUserBuyData}
+              setView={setView}
+            />
+          )}
+          {view === 3 && (
+            <MetodoDeEnvio
+              userBuyData={userBuyData}
+              setUserBuyData={setUserBuyData}
+              setView={setView}
+            />
+          )}
+          {view === 4 && <Confirmacion userBuyData={userBuyData} />}
         </article>
       </div>
-      ;
     </section>
   );
 };

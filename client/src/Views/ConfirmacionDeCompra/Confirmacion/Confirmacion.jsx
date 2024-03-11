@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
-
+import styles from "./Confirmacion.module.scss";
 
 const Confirmacion = ({ userBuyData }) => {
   const cart = useSelector((state) => state.cart);
@@ -16,10 +16,7 @@ const Confirmacion = ({ userBuyData }) => {
 
   const createPreference = async () => {
     try {
-      const response = await axios.post(
-        "/create_preference",
-        { cart }
-      );
+      const response = await axios.post("/create_preference", { cart });
       const { id } = response.data;
       return id;
     } catch (error) {
@@ -76,27 +73,29 @@ const Confirmacion = ({ userBuyData }) => {
   };
 
   return (
-    <div>
-      <div>
+    <div className={styles.container}>
+      <h2>CONFIRMA TUS DATOS</h2>
+      <div className={styles.dataDelUsuario}>
         <h2> Tus Datos </h2>
-        <span> {userBuyData.nombre} </span>
-        <span> {userBuyData.apellido} </span>
-        <span> {userBuyData.email} </span>
-        <span> {userBuyData.dni} </span>
-        <span> {userBuyData.telefono} </span>
+        <span>
+          Nombre: {userBuyData.nombre} {userBuyData.apellido}
+        </span>
+        <span> Email: {userBuyData.email} </span>
+        <span> DNI: {userBuyData.dni} </span>
+        <span> Telefono: {userBuyData.telefono} </span>
       </div>
 
-      <div>
+      <div className={styles.datosDeEnvio}>
         <h2> Datos de envío </h2>
-        <span> {userBuyData.provincia} </span>
-        <span> {userBuyData.localidad} </span>
-        <span> {userBuyData.direccion} </span>
-        <span> {userBuyData.codigoPostal} </span>
-        <span> {userBuyData.metodoDeEnvio} </span>
+        <span> Dirección: {userBuyData.direccion} </span>
+        <span> Localidad: {userBuyData.localidad} </span>
+        <span> Código Postal: {userBuyData.codigoPostal} </span>
+        <span> Provincia: {userBuyData.provincia} </span>
+        <span> Método de envío: {userBuyData.metodoDeEnvio} </span>
       </div>
 
       <button
-        className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700 mt-4"
+        className={`bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700 mt-4`}
         onClick={handleBuy}
       >
         Pagar

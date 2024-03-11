@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+import styles from "./MetodoDeEnvio.module.scss";
 
 const MetodoDeEnvio = ({ userBuyData, setUserBuyData, setView }) => {
   const actualFormJSON = window.localStorage.getItem("actualForm");
@@ -25,7 +26,8 @@ const MetodoDeEnvio = ({ userBuyData, setUserBuyData, setView }) => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form className={styles.container} onSubmit={formik.handleSubmit}>
+      <h2>ELIJA UN METODO DE ENVIO</h2>
       <label htmlFor="oca">
         <input
           type="radio"
@@ -50,7 +52,12 @@ const MetodoDeEnvio = ({ userBuyData, setUserBuyData, setView }) => {
         Correo Argentino
       </label>
 
-      <button type="submit"> Confirmar </button>
+      <button
+        className="ml-2 bg-red-500 text-white p-2 rounded focus:outline-none hover:bg-red-700"
+        type="submit"
+      >
+        Confirmar
+      </button>
     </form>
   );
 };

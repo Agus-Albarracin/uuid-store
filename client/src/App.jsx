@@ -58,8 +58,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (cart) window.localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
+    if (cart.length) window.localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart, cart.length]);
 
   useEffect(() => {
     const cartJSON = window.localStorage.getItem("cart");
@@ -85,17 +85,28 @@ function App() {
         <Route path={PATHROUTES.DETAIL} element={<Detail />} />
         <Route path={PATHROUTES.HOME} element={<HomePage />} />
         <Route path={PATHROUTES.PRODUCTOS} element={<Productos />} />
-        <Route path={PATHROUTES.CONFIRMACION} element={<ConfirmacionDeCompra />} />
+        <Route
+          path={PATHROUTES.CONFIRMACION}
+          element={<ConfirmacionDeCompra />}
+        />
         <Route path={PATHROUTES.SUCCESS} element={<CompraConfirmada />} />
-        <Route path={PATHROUTES.DETALLESDECOMPRA} element={<DetallesDeCompra />} />
-        <Route path={PATHROUTES.ENVIOMAILPASSWORD} element={<EnvioMailCambioPassword />} />
-        <Route path={PATHROUTES.CAMBIOPASSWORD} element={<CambioDePassword />}/>
+        <Route
+          path={PATHROUTES.DETALLESDECOMPRA}
+          element={<DetallesDeCompra />}
+        />
+        <Route
+          path={PATHROUTES.ENVIOMAILPASSWORD}
+          element={<EnvioMailCambioPassword />}
+        />
+        <Route
+          path={PATHROUTES.CAMBIOPASSWORD}
+          element={<CambioDePassword />}
+        />
       </Routes>
 
       {message && <span className={styles.message}> {message} </span>}
 
       <Footer />
-      
     </div>
   );
 }

@@ -40,7 +40,6 @@ function Autenticador({ mostrarUser, logInWhitGoogle, signUpWhitGoogle }) {
 
     // localStorage.setItem("loggedUser", JSON.stringify(userData)); // Almacena los datos del usuario en el almacenamiento local
     setUser(userData);
-    console.log("estos son los datos:", userData);
 
     singUpUserInDb(userData);
   };
@@ -50,13 +49,11 @@ function Autenticador({ mostrarUser, logInWhitGoogle, signUpWhitGoogle }) {
   };
 
   const singUpUserInDb = async (userData) => {
-
-    logInWhitGoogle === undefined 
+    logInWhitGoogle === undefined
       ? dispatch(signUpWhitGoogle(userData))
-      : dispatch(logInWhitGoogle(userData))
+      : dispatch(logInWhitGoogle(userData));
 
     mostrarUser();
-
   };
 
   return (

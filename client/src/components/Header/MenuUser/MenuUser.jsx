@@ -57,7 +57,7 @@ const MenuUser = ({ mostrarUser }) => {
           <div className="text-black">{`${user.nombre}  ${user.apellido}`}</div>
           {user.admin && (
             <Link to="/admin">
-              <span> Panel de Admin </span>
+              <span className="text red"> Panel de Admin </span>
             </Link>
           )}
           <Link to="/user">

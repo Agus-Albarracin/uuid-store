@@ -5,6 +5,7 @@ import CreateForm from '../../components/AdminComponents/CreateForm/CreateForm';
 import OrdenCompra from '../../components/AdminComponents/OrdenCompra/OrdenCompra';
 import AllUsers from '../../components/AdminComponents/AllUsers/AllUsers';
 import AllProducts from '../../components/AdminComponents/AllProducts/AllProducts';
+import Estadisticas from '../../components/AdminComponents/Estadisticas/Estadisticas';
 import SideBar from '../../components/SideBar/SideBar';
 import { getName } from '../../redux/actions';
 import styles from './Admin.module.scss';
@@ -71,6 +72,7 @@ const Admin = () => {
                 {view === 'estadisticas' && (
                     <article className="mt-4">
                         <h2 className="text-xl font-semibold">Estadísticas de la tienda</h2>
+                        <Estadisticas />
                     </article>
                 )}
 

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductos, getName } from "../../redux/actions";
+import InfiniteScroll from "react-infinite-scroll-component";
 import SideBar from "../../components/SideBar/SideBar";
 import Cards from "../../components/Cards/Cards";
 
@@ -10,8 +12,6 @@ const Productos = () => {
   const dispatch = useDispatch();
   const allProductos = useSelector((state) => state.allProductos);
   const [searchString, setSearchString] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 10;
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -23,51 +23,49 @@ const Productos = () => {
     dispatch(getName(searchString));
   };
 
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-  };
-
   useEffect(() => {
     if (allProductos.length === 0) {
       dispatch(getProductos());
     }
   }, [dispatch, allProductos.length]);
 
-  // Calculate products to display based on pagination
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = allProductos.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
+  //Scroll
+
+  axios.defaults.baseURL = "https://uuid-store-production.up.railway.app";
+
+  const [array, setArray] = useState([]);
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    axios("/getproductos").then(({ data }) => {
+      if (data) {
+        setArray(data);
+        setItems(data.slice(0, 10));
+      }
+    });
+  }, []);
+
+  const fetchMoreData = () => {
+    setTimeout(() => {
+      const nextItems = array.slice(items.length, items.length + 10);
+      setItems((prevItems) => [...prevItems, ...nextItems]);
+    }, 2500);
+  };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen overflow-hidden">
+    <div className="flex flex-col md:flex-row h-screen overflow-y">
       <div className="w-full md:w-1/6 bg-gray-200 p-4">
         <SideBar handleChange={handleChange} handleSubmit={handleSubmit} />
       </div>
-      <div className="w-full overflow-y-auto">
-        <Cards data={currentProducts} />
 
-        {/* Pagination buttons */}
-        <div className="flex justify-center mt-4">
-          {Array.from({
-            length: Math.ceil(allProductos.length / productsPerPage),
-          }).map((_, index) => (
-            <button
-              key={index}
-              className={`mx-2 px-3 py-1 border ${
-                currentPage === index + 1
-                  ? "bg-gray-500 text-white"
-                  : "bg-white"
-              }`}
-              onClick={() => handlePageChange(index + 1)}
-            >
-              {index + 1}
-            </button>
-          ))}
-        </div>
-      </div>
+      <InfiniteScroll
+        dataLength={items.length}
+        next={fetchMoreData}
+        hasMore={items.length < array.length}
+        loader={<h4> Loading...</h4>}
+      >
+        <Cards data={items} />
+      </InfiniteScroll>
     </div>
   );
 };

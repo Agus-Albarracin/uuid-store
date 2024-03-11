@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { VictoryLine, VictoryChart, VictoryLabel } from 'victory';
-import { allUsers, getOrdenes } from '../../../redux/actions'; // Importa la acción para obtener usuarios
+import { VictoryBar, VictoryAxis, VictoryChart, VictoryLabel } from 'victory';
+import { allUsers, getOrdenes } from '../../../redux/actions';
 
 const Estadisticas = () => {
   const dispatch = useDispatch();
@@ -9,7 +9,6 @@ const Estadisticas = () => {
   const [orderStats, setOrderStats] = useState([]);
 
   useEffect(() => {
-    // Llama a las acciones para obtener usuarios y órdenes cuando el componente se monta
     dispatch(allUsers());
     dispatch(getOrdenes());
   }, [dispatch]);
@@ -18,59 +17,73 @@ const Estadisticas = () => {
   const ordenes = useSelector(state => state.allOrdenes);
 
   useEffect(() => {
-    // Procesa la información de usuarios para generar estadísticas
     if (users && users.length > 0) {
-      setUserStats(groupByDay(users));
-      console.log("Users:", users); // Agregar console.log para imprimir users en la consola
-      console.log("User Stats:", userStats); // Agregar console.log para imprimir userStats en la consola
+      setUserStats(calculateUserCountsByMonth(users));
     }
   }, [users]);
 
   useEffect(() => {
-    // Procesa la información de órdenes para generar estadísticas
     if (ordenes && ordenes.length > 0) {
-      setOrderStats(groupByDay(ordenes));
-      console.log("Ordenes:", ordenes); // Agregar console.log para imprimir ordenes en la consola
-      console.log("Order Stats:", orderStats); // Agregar console.log para imprimir orderStats en la consola
+      setOrderStats(calculateOrderCountsByMonth(ordenes));
     }
   }, [ordenes]);
 
-  // Función para agrupar la información por día y calcular el promedio
-  const groupByDay = (data) => {
-    const groupedData = {};
-    data.forEach(item => {
-      const date = new Date(item.createdAt).toLocaleDateString();
-      if (!groupedData[date]) {
-        groupedData[date] = 0;
-      }
-      groupedData[date]++;
+  const calculateUserCountsByMonth = (data) => {
+    const monthlyCounts = Array.from({ length: 12 }, () => 0);
+
+    data.forEach(user => {
+      const monthIndex = new Date(user.createdAt).getMonth();
+      monthlyCounts[monthIndex]++;
     });
 
-    const averages = [];
-    for (const date in groupedData) {
-      if (groupedData.hasOwnProperty(date)) {
-        averages.push({ x: date, y: groupedData[date] });
-      }
-    }
-    return averages;
+    return monthlyCounts;
   };
+
+  const calculateOrderCountsByMonth = (data) => {
+    const monthlyCounts = Array.from({ length: 12 }, () => 0);
+
+    data.forEach(order => {
+      const monthIndex = new Date(order.createdAt).getMonth();
+      monthlyCounts[monthIndex]++;
+    });
+
+    return monthlyCounts;
+  };
+
+  const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
   return (
     <div>
-      <h2>Promedio de Usuarios Registrados por Día</h2>
-      <VictoryChart width={400} height={400}>
-        <VictoryLine
-          data={userStats}
-          labels={({ datum }) => `${datum.x}: ${datum.y}`}
-          labelComponent={<VictoryLabel angle={45} />}
+      <h2>Número de Usuarios Registrados por Mes</h2>
+      <VictoryChart domainPadding={{ x: 20 }} height={300} width={600}>
+        <VictoryAxis
+          tickValues={monthNames.map((month, index) => index + 1)}
+          tickFormat={monthNames}
+          style={{ tickLabels: { angle: -45, textAnchor: 'end', fontSize: 8 } }}
+        />
+        <VictoryAxis dependentAxis tickFormat={(tick) => `${tick}`} tickValues={[...Array(7).keys()].map(x => x * 15)} />
+
+        <VictoryBar
+          data={monthNames.map((month, index) => ({ x: index + 1, y: userStats[index] || 0 }))}
+          labels={({ datum }) => `${datum.y}`}
+          labelComponent={<VictoryLabel dy={-5} />}
+          style={{ data: { fill: "#c43a31" } }} // Color rojo para las barras de usuarios
         />
       </VictoryChart>
-      <h2>Promedio de Compras por Día</h2>
-      <VictoryChart width={400} height={400}>
-        <VictoryLine
-          data={orderStats}
-          labels={({ datum }) => `${datum.x}: ${datum.y}`}
-          labelComponent={<VictoryLabel angle={45} />}
+      
+      <h2>Número de Órdenes Creadas por Mes</h2>
+      <VictoryChart domainPadding={{ x: 20 }} height={300} width={600}>
+        <VictoryAxis
+          tickValues={monthNames.map((month, index) => index + 1)}
+          tickFormat={monthNames}
+          style={{ tickLabels: { angle: -45, textAnchor: 'end', fontSize: 8 } }}
+        />
+        <VictoryAxis dependentAxis tickFormat={(tick) => `${tick}`} tickValues={[...Array(7).keys()].map(x => x * 15)} />
+        <VictoryBar
+          data={monthNames.map((month, index) => ({ x: index + 1, y: orderStats[index] || 0 }))}
+          labels={({ datum }) => `${datum.y}`}
+          labelComponent={<VictoryLabel dy={-5} />}
+          style={{ data: { fill: "#007acc" } }} // Color azul para las barras de órdenes
         />
       </VictoryChart>
     </div>

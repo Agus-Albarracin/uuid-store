@@ -16,9 +16,6 @@ const AllProducts = () => {
 
     const productos = useSelector((state) => state.allProductos);
 
-
-
-
     const [editMode, setEditMode] = useState(false);
     const [selectedProductId, setSelectedProductId] = useState(null);
 

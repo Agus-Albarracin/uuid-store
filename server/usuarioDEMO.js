@@ -7,7 +7,7 @@ const usuariosDemo = [
       googleId: "googleIdUsuario",
       imageUrl: "urlImagenUsuario",
       givenName: "Nombre dado",
-      admin: false,
+      admin: true,
       estadoInactividad: false,
       apellido: "Albarracin",
       direccion: "Dirección del Usuario",

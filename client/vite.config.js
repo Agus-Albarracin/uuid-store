@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import WindiCSS from 'vite-plugin-windicss';
 import fs from 'fs';
 
 // Función para verificar si un archivo existe
@@ -17,15 +18,19 @@ let indexCssImported = false;
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    WindiCSS()
+  ],
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: fileExists('/styles/index.css') && !indexCssImported ? `@import '/styles/index.css';` : '',
+        additionalData() {
+          const importIndexCss = fileExists('/styles/index.css') && !indexCssImported;
+          indexCssImported = true;
+          return importIndexCss ? `@import '/styles/index.css';` : '';
+        },
       },
     },
   },
 });
-
-// Marcar index.css como importado después de la primera importación
-indexCssImported = true;

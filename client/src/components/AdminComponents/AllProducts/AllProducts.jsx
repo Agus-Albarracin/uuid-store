@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductos, deleteProducto, updateProducto } from '../../../redux/actions';
 import UpdateProduct from "./UpdateProduct/UpdateProduct";
-
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 const AllProducts = () => {
     const dispatch = useDispatch();
 
@@ -48,46 +48,60 @@ const AllProducts = () => {
 
     // Renderizar productos si es un array
     return (
-        <div className="contenedor-table">
-
-            <table>
+        <div className="contenedor-table max-w-full mx-auto mt-8 p-4 bg-white rounded-md">
+            <table className="w-full border border-collapse">
                 <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>Codigo</th>
-                        <th>Nombre</th>
-                        <th>Modelo</th>
-                        <th>Descuento</th>
-                        <th>Precio</th>
-                        <th>Stock</th>
-                        <th>Genero</th>
-                        <th>Marca</th>
-                        <th>Imagen</th>
-                        <th>Estado</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
+                    <tr className="bg-gray-200">
+                        <th className="p-2 border">ID</th>
+                        <th className="p-2 border">Código</th>
+                        <th className="p-2 border">Nombre</th>
+                        <th className="p-2 border">Modelo</th>
+                        <th className="p-2 border">Descuento</th>
+                        <th className="p-2 border">Precio</th>
+                        <th className="p-2 border">Stock</th>
+                        <th className="p-2 border">Género</th>
+                        <th className="p-2 border">Marca</th>
+                        <th className="p-2 border">Imagen</th>
+                        <th className="p-2 border">Estado</th>
+                        <th className="p-2 border">Editar</th>
+                        <th className="p-2 border">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
                     {currentProducts?.map((producto) => (
-                        <tr key={producto?.id}>
-                            <td>{producto?.id}</td>
-                            <td>{producto?.codigo}</td>
-                            <td>{producto?.nombre}</td>
-                            <td>{producto?.modelo}</td>
-                            <td>{producto?.enDescuento}</td>
-                            <td>{producto?.precio}</td>
-                            <td>{Object.values(producto?.stock).some((value) => value !== 0) ? 'true' : 'false'}</td>
-                            <td>{producto?.genero}</td>
-                            <td>{producto?.marca}</td>
-                            <td>
+                        <tr key={producto?.id} className="hover:bg-gray-100">
+                            <td className="p-2 border">{producto?.id}</td>
+                            <td className="p-2 border">{producto?.codigo}</td>
+                            <td className="p-2 border">{producto?.nombre}</td>
+                            <td className="p-2 border">{producto?.modelo}</td>
+                            <td className="p-2 border">{producto?.enDescuento}</td>
+                            <td className="p-2 border">{producto?.precio}</td>
+                            <td className="p-2 border">{Object.values(producto?.stock).some((value) => value !== 0) ? 'true' : 'false'}</td>
+                            <td className="p-2 border">{producto?.genero}</td>
+                            <td className="p-2 border">{producto?.marca}</td>
+                            <td className="p-2 border">
                                 {producto.imagen ? (
-                                    <img src={producto?.imagen[0]} alt={producto?.nombre} style={{ maxWidth: '50px', maxHeight: '80px' }} />
+                                    <img src={producto?.imagen[0]} alt={producto?.nombre} className="w-16  object-cover" />
                                 ) : null}
                             </td>
-                            <td>{producto.estado? ('Activo') : ('Inactivo')}</td>
-                            <td><button onClick={() => handleUpdate(producto?.id)}>Editar</button></td>
-                            <td><button onClick={() => handleDelete(producto?.id)}>Eliminar</button></td>
+                            <td className="p-2 border">{producto.estado}</td>
+                            <td className="p-2 border text-center">
+                                <button
+                                    onClick={() => handleUpdate(producto?.id)}
+                                    className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-700 focus:outline-none flex items-center"
+                                >
+                                    <FaEdit className="mr-2" /><span>Editar</span>
+                                </button>
+                            </td>
+                            <td className="p-2 border">
+                                <button
+                                    onClick={() => handleDelete(producto?.id)}
+                                    className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-700 focus:outline-none flex items-center"
+                                >
+                                    <FaTrashAlt className="mr-2" /><span>Eliminar</span>
+
+                                </button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
@@ -106,8 +120,6 @@ const AllProducts = () => {
                 ))}
             </div>
 
-
-
             {editMode && (
                 <UpdateProduct
                     productId={selectedProductId}
@@ -118,7 +130,6 @@ const AllProducts = () => {
                     onSubmit={handleFormSubmit}
                 />
             )}
-
         </div>
     );
 };

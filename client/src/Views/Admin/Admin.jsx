@@ -9,6 +9,7 @@ import Estadisticas from '../../components/AdminComponents/Estadisticas/Estadist
 import SideBar from '../../components/SideBar/SideBar';
 import { getName } from '../../redux/actions';
 import styles from './Admin.module.scss';
+import { FaChartBar, FaShoppingCart, FaList, FaUsers, FaBoxes,FaPlus ,FaEdit  } from "react-icons/fa";
 
 const Admin = () => {
     const dispatch = useDispatch();
@@ -30,82 +31,82 @@ const Admin = () => {
     };
 
     return (
-        <section className="p-4">
-            {/* <h2 className="text-3xl font-bold mb-4">Hola, Admin</h2> */}
-
-            <div className="flex flex-col space-y-4">
-                <span className="cursor-pointer text-blue-500 hover:underline" onClick={() => handleView('estadisticas')}>
-                    Estadísticas
-                </span>
-
-                <span className="cursor-pointer text-blue-500 hover:underline" onClick={() => handleView('crearProducto')}>
-                    Crear un producto
-                </span>
-
-                <span className="cursor-pointer text-blue-500 hover:underline" onClick={() => handleView('crearCategoria')}>
-                    Crear un categoria
-                </span>
-
-                <span className="cursor-pointer text-blue-500 hover:underline" onClick={() => handleView('productos')}>
-                    Todos los productos
-                </span>
-
-                <span className="cursor-pointer text-blue-500 hover:underline" onClick={() => handleView('usuarios')}>
-                    Todos los usuarios
-                </span>
-
-                <span className="cursor-pointer text-blue-500 hover:underline" onClick={() => handleView('ordenCompra')}>
-                    Ordenes de Compra
-                </span>
-
-                <hr className="border-t my-4" />
+        <>
+            <div className='bg-[#6B7280]'>
+                <ul className='pl-1 flex justify-center'>
+                    {[
+                        { label: 'Estadísticas', view: 'estadisticas', icon: <FaChartBar /> },
+                        { label: 'Producto', view: 'crearProducto', icon: <FaPlus   /> },
+                        { label: 'Categoria', view: 'crearCategoria', icon: <FaBoxes /> },
+                        { label: 'Productos', view: 'productos', icon: <FaList /> },
+                        { label: 'Usuarios', view: 'usuarios', icon: <FaUsers /> },
+                        { label: 'Compras', view: 'ordenCompra', icon: <FaShoppingCart /> },
+                    ].map((item) => (
+                        <li
+                            key={item.view}
+                            className={`bg-${view === item.view ? 'green' : 'white'} m-3 p-2 flex flex-nowrap items-center rounded-md cursor-pointer`}
+                            onClick={() => handleView(item.view)}
+                        >
+                            
+                            <span className={`text-xl pb-1 pr-2 ${view === item.view ? 'text-white' : 'text-black'}`}>
+                                {item.icon}
+                            </span>
+                            <span className={`text-xl pb-1 ${view === item.view ? 'text-white' : 'text-black'}`}>
+                                {item.label}
+                            </span>
+                        </li>
+                    ))}
+                </ul>
             </div>
+            <section className="p-4">
 
-            <div className={styles.content}>
-                {view === 'crearCategoria' && (
-                    <article className="mt-4">
-                        <h2 className="text-xl font-semibold">Crear una categoría</h2>
-                        <CreateCategoryForm />
-                    </article>
-                )}
 
-                {view === 'estadisticas' && (
-                    <article className="mt-4">
-                        <h2 className="text-xl font-semibold">Estadísticas de la tienda</h2>
-                        <Estadisticas />
-                    </article>
-                )}
+                <div className={styles.content}>
+                    {view === 'crearCategoria' && (
+                        <article className="mt-4">
+                            {/* <h2 className="text-xl font-semibold">Crear una categoría</h2> */}
+                            <CreateCategoryForm />
+                        </article>
+                    )}
 
-                {view === 'crearProducto' && (
-                    <article className={styles.section}>
-                        <h2 className={styles.heading}>Crear un producto</h2>
-                        <CreateForm />
-                    </article>
-                )}
+                    {view === 'estadisticas' && (
+                        <article className="mt-4">
+                            <h2 className="text-xl font-semibold">Estadísticas de la tienda</h2>
+                        </article>
+                    )}
 
-                {view === 'ordenCompra' && (
-                    <article className={styles.section}>
-                        <h2 className={styles.heading}>Ordenes de Compra</h2>
-                        <OrdenCompra />
-                    </article>
-                )}
+                    {view === 'crearProducto' && (
+                        <article className={styles.section}>
+                            <h2 className={styles.heading}>Crear un producto</h2>
+                            <CreateForm />
+                        </article>
+                    )}
 
-                {view === 'productos' && (
-                    <article className={styles.section}>
-                        <h2 className={styles.heading}>Todos los productos</h2>
-                        <SideBar handleChange={handleChange} handleSubmit={handleSubmit} />
-                        <AllProducts />
-                    </article>
-                )}
+                    {view === 'ordenCompra' && (
+                        <article className={styles.section}>
+                            <h2 className={styles.heading}>Ordenes de Compra</h2>
+                            <OrdenCompra />
+                        </article>
+                    )}
 
-                {view === 'usuarios' && (
-                    <article className={styles.section}>
-                        <h2 className={styles.heading}>Todos los usuarios</h2>
-                        <AllUsers />
-                    </article>
-                )}
-            </div>
-        </section>
+                    {view === 'productos' && (
+                        <div>
+                            <article className="flex">
+                                <SideBar handleChange={handleChange} handleSubmit={handleSubmit} />
+                                <AllProducts />
+                            </article>
+                        </div>
+                    )}
+
+                    {view === 'usuarios' && (
+                        <article className={styles.section}>
+                            <h2 className={styles.heading}>Todos los usuarios</h2>
+                            <AllUsers />
+                        </article>
+                    )}
+                </div>
+            </section>
+        </>
     );
 };
 

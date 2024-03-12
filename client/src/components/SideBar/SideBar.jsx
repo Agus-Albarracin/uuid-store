@@ -62,15 +62,15 @@ function SideBar({ handleChange, handleSubmit }) {
 
   return (
     <div className="container-side p-4 border-r border-gray-300">
-      <div className="search-box mb-4">
-        <form onChange={handleChange} onSubmit={handleSubmit}>
+      <div className="mb-4">
+        <form className="flex flex-col sm:flex-row" onChange={handleChange} onSubmit={handleSubmit}>
           <input
-            className="searchInput border rounded p-2 focus:outline-none focus:border-blue-500"
+            className="searchInput border rounded p-2 mb-2 sm:mb-0 sm:mr-2 w-full sm:w-auto focus:outline-none focus:border-blue-500"
             placeholder="Buscar"
           />
           <button
             type="submit"
-            className="ml-2 bg-red-500 text-white p-2 rounded focus:outline-none hover:bg-red-700"
+            className="bg-red-500 text-white p-2 rounded focus:outline-none hover:bg-red-700 w-full sm:w-auto"
           >
             Buscar
           </button>
@@ -133,6 +133,7 @@ function SideBar({ handleChange, handleSubmit }) {
         </select>
       </div>
     </div>
+
   );
 }
 

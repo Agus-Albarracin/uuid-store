@@ -10,7 +10,8 @@ const createComment = async (req, res) => {
 
   if (!producto) return res.status(404).send("Producto no encontrado");
 
-  producto.puntuaciones.push(comentario);
+  console.log(producto);
+  producto.dataValues.puntuaciones = [...producto.dataValues.puntuaciones, comentario];
   producto.save();
 
   return res.status(200).send("Comentario publicado exitosamente!");

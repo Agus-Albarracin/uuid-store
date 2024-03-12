@@ -10,6 +10,7 @@ const getProdu = require("../controllers/Productos/getProductos");
 const postProdu = require("../controllers/Productos/postProductos");
 const deleteProdu = require("../controllers/Productos/deleteProductos");
 const putProdu = require("../controllers/Productos/putProductos");
+const postComment = require("../controllers/Productos/createComment");
 //Carrito
 const postCarrito = require("../controllers/Carrito/postCarrito");
 const deleteCarrito = require("../controllers/Carrito/deleteCarrito");
@@ -28,6 +29,7 @@ router.get("/getproductosON", getProdu.getProductosON); // endpoint para product
 router.get("/getproductos/:id", getProdu.getProductosById);
 router.get("/getproductosByName", getProdu.getProductosByName);
 router.get("/getproductosFilter", getProdu.getProductosFilter);
+router.post("/postcomment", postComment.createComment);
 
 //admin
 router.post("/postproductos", postProdu.postProductos);
@@ -63,9 +65,9 @@ router.post("/change-password", login.cambioPassword);
 //*Carrito
 router.post("/createOrden", postCarrito.postOrden);
 router.post("/getCarritosPrueba", postCarrito.postOrden);
-router.get("/getOrdenbyid", getCarritos.getCarritosById)
+router.get("/getOrdenbyid", getCarritos.getCarritosById);
 
-router.put("/stateOrden", putCarrito.updateStateOrden)
+router.put("/stateOrden", putCarrito.updateStateOrden);
 
 router.get("/getOrden", getCarritos.getCarritos);
 router.delete("/deleteOrden", deleteCarrito.deleteCarrito);
@@ -73,12 +75,9 @@ router.delete("/deleteOrden", deleteCarrito.deleteCarrito);
 //*MercadoPago
 router.post("/create_preference", makePayment);
 
-
 // crear categorias
 const createCategory = require("../controllers/Productos/createCategorias");
 
 router.post("/createCategory", createCategory.createCategory);
-
-
 
 module.exports = router;

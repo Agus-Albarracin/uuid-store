@@ -1,15 +1,19 @@
 {
   "builds": [
     {
-      "src": "src/index.html",
+      "src": "index.html",
       "use": "@vercel/static-build"
     },
     {
-      "src": "src/**/*.{js,jsx,ts,tsx}",
+      "src": "src/**/*.js",
       "use": "@vercel/static-build"
     },
     {
-      "src": "src/styles/main.scss",
+      "src": "src/**/*.css",
+      "use": "@vercel/static-build"
+    },
+    {
+      "src": "src/**/*.scss",
       "use": "@vercel/static-build"
     }
   ]

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductos, getName } from "../../redux/actions";
+import { getProductos, getName, filterMarca, filterModelo, filterProducto2 } from "../../redux/actions";
 import InfiniteScroll from "react-infinite-scroll-component";
 import SideBar from "../../components/SideBar/SideBar";
 import Cards from "../../components/Cards/Cards";

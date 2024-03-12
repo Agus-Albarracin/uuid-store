@@ -19,35 +19,32 @@ function DataUser(){
         <div>
             <div className="contenedor">
                 <div className="contenedor3">
-                <div className="card1">
-                    
-                    <h1>{user.nombre}</h1>
-                    <h3>{user.email}</h3>    
-
-                </div>
+                    <div className="card1">
+                        <h1>Hola</h1>
+                        <h1>{user.nombre}</h1>
+                    </div>
 
                 
-                <div className="card" onClick={() => handleView('info')}>
-                    <span >
-                        Informacion Personal
-                    </span>              
-                </div>
+                    <div className="card" onClick={() => handleView('info')}>
+                        <span >
+                            Informacion Personal
+                        </span>              
+                    </div>
                     
                 
               
-                <div className="card" onClick={() => handleView('compras')}>
-                    <span >
-                        Mis Compras
-                    </span>
-                    
-                </div>                 
+                    <div className="card" onClick={() => handleView('compras')}>
+                        <span >
+                            Mis Compras
+                        </span>
+                    </div>                 
                  
                 
-                <div className="card" onClick={() => handleView('direcciones')}>
-                    <span >
-                        Mis Direcciones
-                    </span>
-                </div>
+                    <div className="card" onClick={() => handleView('direcciones')}>
+                        <span >
+                            Mis Direcciones
+                        </span>
+                    </div>
                 </div>
 
                 {view === 'info' && (
@@ -70,8 +67,6 @@ function DataUser(){
                         <MisDirecciones />
                     </article>
                 )}
-
-                
 
             </div>
         </div>

@@ -85,7 +85,7 @@ const AllProducts = () => {
                                     <img src={producto?.imagen[0]} alt={producto?.nombre} style={{ maxWidth: '50px', maxHeight: '80px' }} />
                                 ) : null}
                             </td>
-                            <td>{producto.estado}</td>
+                            <td>{producto.estado? ('Activo') : ('Inactivo')}</td>
                             <td><button onClick={() => handleUpdate(producto?.id)}>Editar</button></td>
                             <td><button onClick={() => handleDelete(producto?.id)}>Eliminar</button></td>
                         </tr>

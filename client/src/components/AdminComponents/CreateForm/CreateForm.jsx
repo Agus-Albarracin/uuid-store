@@ -134,179 +134,185 @@ const CreateForm = () => {
   });
 
   return (
-    <form
-      onSubmit={formik.handleSubmit}
-      className=" flex flex-col  max-w-md mx-auto p-4 bg-white shadow-md rounded-md"
-    >
-      <div className="mb-4">
-        <label
-          htmlFor="nombre"
-          className="block text-sm font-medium text-gray-600"
-        >
-          Nombre
-        </label>
-        <input
-          id="nombre"
-          name="nombre"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.nombre}
-          onBlur={formik.handleBlur}
-          className="w-full p-2 border border-gray-300 rounded"
-        />
-        {formik.touched.nombre && formik.errors.nombre && (
-          <div className="text-red-500 text-sm mt-1">
-            {formik.errors.nombre}
+    <form onSubmit={formik.handleSubmit} className={styles.form}>
+      <h2>Crear un producto</h2>
+      <div className={styles.princ}>
+        <div className={styles.inputs}>
+          <div className="mb-4">
+            <label
+              htmlFor="nombre"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Nombre
+            </label>
+            <input
+              id="nombre"
+              name="nombre"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.nombre}
+              onBlur={formik.handleBlur}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            {formik.touched.nombre && formik.errors.nombre && (
+              <div className="text-red-500 text-sm mt-1">
+                {formik.errors.nombre}
+              </div>
+            )}
           </div>
-        )}
-      </div>
 
-      <div className="mb-4">
-        <label
-          htmlFor="marca"
-          className="block text-sm font-medium text-gray-600"
-        >
-          Marca
-        </label>
-        <input
-          id="marca"
-          name="marca"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.marca}
-          onBlur={formik.handleBlur}
-          className="w-full p-2 border border-gray-300 rounded"
-        />
-        {formik.touched.marca && formik.errors.marca && (
-          <div className="text-red-500 text-sm mt-1">{formik.errors.marca}</div>
-        )}
-      </div>
-
-      <div className="mb-4">
-        <label
-          htmlFor="modelo"
-          className="block text-sm font-medium text-gray-600"
-        >
-          Modelo
-        </label>
-        <input
-          id="modelo"
-          name="modelo"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.modelo}
-          onBlur={formik.handleBlur}
-          className="w-full p-2 border border-gray-300 rounded"
-        />
-        {formik.touched.modelo && formik.errors.modelo && (
-          <div className="text-red-500 text-sm mt-1">
-            {formik.errors.modelo}
+          <div className="mb-4">
+            <label
+              htmlFor="marca"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Marca
+            </label>
+            <input
+              id="marca"
+              name="marca"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.marca}
+              onBlur={formik.handleBlur}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            {formik.touched.marca && formik.errors.marca && (
+              <div className="text-red-500 text-sm mt-1">
+                {formik.errors.marca}
+              </div>
+            )}
           </div>
-        )}
-      </div>
 
-      <div className="mb-4">
-        <label
-          htmlFor="precio"
-          className="block text-sm font-medium text-gray-600"
-        >
-          Precio
-        </label>
-        <input
-          id="precio"
-          name="precio"
-          type="number"
-          onChange={formik.handleChange}
-          value={formik.values.precio}
-          onBlur={formik.handleBlur}
-          className="w-full p-2 border border-gray-300 rounded"
-        />
-        {formik.touched.precio && formik.errors.precio && (
-          <div className="text-red-500 text-sm mt-1">
-            {formik.errors.precio}
+          <div className="mb-4">
+            <label
+              htmlFor="modelo"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Modelo
+            </label>
+            <input
+              id="modelo"
+              name="modelo"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.modelo}
+              onBlur={formik.handleBlur}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            {formik.touched.modelo && formik.errors.modelo && (
+              <div className="text-red-500 text-sm mt-1">
+                {formik.errors.modelo}
+              </div>
+            )}
           </div>
-        )}
-      </div>
 
-      <div className="mb-4">
-        <label
-          htmlFor="genero"
-          className="block text-sm font-medium text-gray-600"
-        >
-          Género
-        </label>
-        <select
-          name="genero"
-          id="genero"
-          onChange={formik.handleChange}
-          value={formik.values.genero}
-          className="w-full p-2 border border-gray-300 rounded"
-        >
-          <option value="Masculino">Masculino</option>
-          <option value="femenino">Femenino</option>
-          <option value="unisex">Unisex</option>
-        </select>
-      </div>
+          <div className="mb-4">
+            <label
+              htmlFor="precio"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Precio
+            </label>
+            <input
+              id="precio"
+              name="precio"
+              type="number"
+              onChange={formik.handleChange}
+              value={formik.values.precio}
+              onBlur={formik.handleBlur}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            {formik.touched.precio && formik.errors.precio && (
+              <div className="text-red-500 text-sm mt-1">
+                {formik.errors.precio}
+              </div>
+            )}
+          </div>
 
-      <div className={`${styles.images} mb-4`}>
-        <div
-          onDrop={handleDrop}
-          onDragOver={(event) => event.preventDefault()}
-          className={`${styles.dropZone} border-dashed border-2 p-4 rounded`}
-        >
-          <p>Arrastra y suelta una o varias imágenes aquí</p>
+          <div className="mb-4">
+            <label
+              htmlFor="genero"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Género
+            </label>
+            <select
+              name="genero"
+              id="genero"
+              onChange={formik.handleChange}
+              value={formik.values.genero}
+              className="w-full p-2 border border-gray-300 rounded"
+            >
+              <option value="Masculino">Masculino</option>
+              <option value="femenino">Femenino</option>
+              <option value="unisex">Unisex</option>
+            </select>
+          </div>
         </div>
 
-        {images?.map((image, index) => (
-          <div key={index} className="mt-2">
-            <img
-              src={URL.createObjectURL(image)}
-              alt={`Imagen ${index}`}
-              className="w-16 h-16 object-cover rounded"
-            />
-            <button
-              type="button"
-              onClick={() => removeImage(index)}
-              className="ml-2 px-2 py-1 bg-red-500 text-white rounded"
-            >
-              Eliminar
-            </button>
+        <div className={`${styles.images} mb-4`}>
+          <div
+            onDrop={handleDrop}
+            onDragOver={(event) => event.preventDefault()}
+            className={`${styles.dropZone} border-dashed border-2 p-4 rounded`}
+          >
+            <p>Arrastra y suelta una o varias imágenes aquí</p>
           </div>
-        ))}
 
-        {formik.touched.imagen && formik.errors.imagen && (
-          <div className="text-red-500 text-sm mt-1">
-            {formik.errors.imagen}
+          <div>
+            {images?.map((image, index) => (
+              <div key={index} className="mt-2">
+                <img
+                  src={URL.createObjectURL(image)}
+                  alt={`Imagen ${index}`}
+                  className="w-16 h-16 object-cover rounded"
+                />
+                <button
+                  type="button"
+                  onClick={() => removeImage(index)}
+                  className="ml-2 px-2 py-1 bg-red-500 text-white rounded"
+                >
+                  Eliminar
+                </button>
+              </div>
+            ))}
           </div>
-        )}
-      </div>
 
-      <div className={`${styles.talles} mb-4`}>
-        {talles.map((talle, index) => (
-          <div key={index} className="flex items-center space-x-2">
-            <span
-              className="cursor-pointer text-blue-500"
-              onClick={() => handleStock(talle, "-")}
-            >
-              -
-            </span>
-            <span>{talle}</span>
-            <span
-              className="cursor-pointer text-blue-500"
-              onClick={() => handleStock(talle, "+")}
-            >
-              +
-            </span>
-            <span className="ml-2">
-              Cantidad en stock: {formik.values.stock[talle]}
-            </span>
-          </div>
-        ))}
+          {formik.touched.imagen && formik.errors.imagen && (
+            <div className="text-red-500 text-sm mt-1">
+              {formik.errors.imagen}
+            </div>
+          )}
+        </div>
+
+        <div className={`${styles.talles} mb-4`}>
+          {talles.map((talle, index) => (
+            <div key={index} className="flex items-center space-x-2">
+              <span
+                className="cursor-pointer text-blue-500"
+                onClick={() => handleStock(talle, "-")}
+              >
+                -
+              </span>
+              <span>{talle}</span>
+              <span
+                className="cursor-pointer text-blue-500"
+                onClick={() => handleStock(talle, "+")}
+              >
+                +
+              </span>
+              <span className="ml-2">
+                Cantidad en stock: {formik.values.stock[talle]}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
 
       <button
         type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded"
+        className={`bg-blue-500 text-white px-4 py-2 rounded ${styles.button}`}
       >
         Submit
       </button>

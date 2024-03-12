@@ -6,7 +6,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import SideBar from "../../components/SideBar/SideBar";
 import Cards from "../../components/Cards/Cards";
 
-import "./Productos.css";
+// import "./Productos.css";
 
 const Productos = () => {
   const dispatch = useDispatch();

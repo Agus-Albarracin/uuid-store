@@ -19,6 +19,7 @@ import CompraConfirmada from "./Views/CompraConfirmada/CompraConfirmada";
 import DetallesDeCompra from "./Views/DetallesDeCompra/DetallesDeCompra";
 import EnvioMailCambioPassword from "./Views/EnvioMailCambioPassword/EnvioMailCambioPassword";
 import CambioDePassword from "./Views/CambioDePassword/CambioDePassword";
+import ErrorPage from "./Views/ErrorPage/ErrorPage";
 
 //PATHROUTES
 import PATHROUTES from "./Helpers/path";
@@ -85,23 +86,12 @@ function App() {
         <Route path={PATHROUTES.DETAIL} element={<Detail />} />
         <Route path={PATHROUTES.HOME} element={<HomePage />} />
         <Route path={PATHROUTES.PRODUCTOS} element={<Productos />} />
-        <Route
-          path={PATHROUTES.CONFIRMACION}
-          element={<ConfirmacionDeCompra />}
-        />
+        <Route path={PATHROUTES.CONFIRMACION} element={<ConfirmacionDeCompra />} />
         <Route path={PATHROUTES.SUCCESS} element={<CompraConfirmada />} />
-        <Route
-          path={PATHROUTES.DETALLESDECOMPRA}
-          element={<DetallesDeCompra />}
-        />
-        <Route
-          path={PATHROUTES.ENVIOMAILPASSWORD}
-          element={<EnvioMailCambioPassword />}
-        />
-        <Route
-          path={PATHROUTES.CAMBIOPASSWORD}
-          element={<CambioDePassword />}
-        />
+        <Route path={PATHROUTES.DETALLESDECOMPRA} element={<DetallesDeCompra />}/>
+        <Route path={PATHROUTES.ENVIOMAILPASSWORD} element={<EnvioMailCambioPassword />} />
+        <Route path={PATHROUTES.CAMBIOPASSWORD} element={<CambioDePassword />} />
+        <Route path={PATHROUTES.ERROR} element={<ErrorPage/>} />
       </Routes>
 
       {message && <span className={styles.message}> {message} </span>}

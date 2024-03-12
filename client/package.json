@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "start": "concurrently \"npm run start:css\" \"react-scripts start\"",
     "start:css": "tailwindcss -o src/tailwind.css --watch",
-    "build": "npm run build:css && react-scripts build",
+    "build": "npm run build:css && vite build",
     "build:css": "set NODE_ENV=production tailwindcss -o src/tailwind.css -m"
   },
   "dependencies": {

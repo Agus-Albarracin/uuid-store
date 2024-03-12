@@ -96,7 +96,7 @@ function App() {
 
       {message && <span className={styles.message}> {message} </span>}
 
-      <Footer />
+      { pathname != '/productos' && <Footer />}
     </div>
   );
 }

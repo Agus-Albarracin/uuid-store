@@ -1,3 +1,12 @@
+.comentario {
+  display: flex;
+  flex-direction: column;
+}
+
+.estrella {
+  font-size: 2em;
+}
+
 .estrellaA {
   color: #ff0;
   cursor: pointer;
@@ -6,8 +15,4 @@
 .estrellaN {
   color: #000;
   cursor: pointer;
-
-  &:hover {
-    color: #ff0;
-  }
 }

@@ -33,6 +33,7 @@ import {
   UPDATE_PRODUCTO,
   ENVIAR_MAIL_PASSWORD,
   CAMBIAR_PASSWORD,
+  POST_COMENTARIO,
 } from "./action-types.js";
 
 const initialState = {
@@ -270,9 +271,9 @@ const reducer = (state = initialState, { type, payload }) => {
     case DELETE_PRODUCTO:
       return {
         ...state,
-        allProductos: payload
+        allProductos: payload,
         //allProductos: state.allProductos.filter(
-          //(producto) => producto.id !== payload
+        //(producto) => producto.id !== payload
         //),
       };
 
@@ -311,6 +312,16 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         messageToUser: payload,
+      };
+
+    case POST_COMENTARIO:
+      return {
+        ...state,
+        messageToUser: "Comentario agregado con éxito!",
+        detail: {
+          ...state.detail,
+          puntuaciones: [...state.detail.puntuaciones, payload],
+        },
       };
 
     default:

@@ -265,7 +265,17 @@ const Detail = () => {
               </div>
             </div>
           </div>
-          <ProductReview></ProductReview>
+          <ProductReview id={id} />
+          <div>
+            {detail.puntuaciones && detail.puntuaciones.map((review, index) => {
+              return (
+                <div key={index}>
+                  <span>{review.puntuacion}</span>
+                  <span>{review.comentario}</span>
+                </div>
+              )
+            })}
+          </div>
         </div>
       ) : (
         <span>Cargando...</span>

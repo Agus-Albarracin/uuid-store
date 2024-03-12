@@ -72,6 +72,7 @@ const Admin = () => {
                     {view === 'estadisticas' && (
                         <article className="mt-4">
                             <h2 className="text-xl font-semibold">Estadísticas de la tienda</h2>
+                            <Estadisticas />
                         </article>
                     )}
 

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Carrusel.module.scss";
-import { data } from "../../../assets/Carrusel/data";
+import { data } from "../../../assets/data.js";
 
 // ...
 

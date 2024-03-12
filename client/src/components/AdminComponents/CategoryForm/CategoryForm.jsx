@@ -24,20 +24,28 @@ const CreateCategoryForm = ({ onCategoryCreated }) => {
   };
 
   return (
-      <div>
-
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="categoryName">Nombre de la Categoría:</label>
+    <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
+      <h2 className="text-xl font-semibold mb-4">Crear Nueva Categoría</h2>
+      <form className='flex-wrap' onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label htmlFor="categoryName" className="block text-sm text-gray-600">
+            Nombre de la Categoría:
+          </label>
           <input
             type="text"
             id="categoryName"
             value={categoryName}
             onChange={(e) => setCategoryName(e.target.value)}
             required
+            className="mt-1 p-2 border rounded-md w-full focus:outline-none focus:ring focus:border-blue-500"
           />
         </div>
-        <button type="submit">Crear Categoría</button>
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+        >
+          Crear Categoría
+        </button>
       </form>
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>

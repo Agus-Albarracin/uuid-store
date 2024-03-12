@@ -32,7 +32,7 @@ const Nav = () => {
       className={`flex items-center justify-between p-4 bg-[#FF3131] text-white ${styles.nav}`}
     >
       <Link to="/">
-        <img src={logo} alt="logo" className=" h-11" />
+        <img src={logo} alt="logo" className=" h-auto" />
       </Link>
 
       <div className={`hidden md:flex space-x-4 ${styles.links}`}>

@@ -9,7 +9,7 @@ import Estadisticas from '../../components/AdminComponents/Estadisticas/Estadist
 import SideBar from '../../components/SideBar/SideBar';
 import { getName } from '../../redux/actions';
 import styles from './Admin.module.scss';
-import { FaChartBar, FaShoppingCart, FaList, FaUsers, FaBoxes,FaPlus ,FaEdit  } from "react-icons/fa";
+import { FaChartBar, FaShoppingCart, FaList, FaUsers, FaBoxes, FaPlus, FaEdit } from "react-icons/fa";
 
 const Admin = () => {
     const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const Admin = () => {
                 <ul className='pl-1 flex justify-center'>
                     {[
                         { label: 'Estadísticas', view: 'estadisticas', icon: <FaChartBar /> },
-                        { label: 'Producto', view: 'crearProducto', icon: <FaPlus   /> },
+                        { label: 'Producto', view: 'crearProducto', icon: <FaPlus /> },
                         { label: 'Categoria', view: 'crearCategoria', icon: <FaBoxes /> },
                         { label: 'Productos', view: 'productos', icon: <FaList /> },
                         { label: 'Usuarios', view: 'usuarios', icon: <FaUsers /> },
@@ -47,7 +47,7 @@ const Admin = () => {
                             className={`bg-${view === item.view ? 'green' : 'white'} m-3 p-2 flex flex-nowrap items-center rounded-md cursor-pointer`}
                             onClick={() => handleView(item.view)}
                         >
-                            
+
                             <span className={`text-xl pb-1 pr-2 ${view === item.view ? 'text-white' : 'text-black'}`}>
                                 {item.icon}
                             </span>
@@ -91,12 +91,20 @@ const Admin = () => {
                     )}
 
                     {view === 'productos' && (
-                        <div>
-                            <article className="flex">
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
+                            {/* Sidebar */}
+                            <div className="bg-gray-200 p-4 md:col-span-1 lg:col-span-1">
                                 <SideBar handleChange={handleChange} handleSubmit={handleSubmit} />
+                            </div>
+
+                            {/* Contenido principal */}
+                            <div className="bg-gray-200 p-4 md:col-span-1 lg:col-span-5">
                                 <AllProducts />
-                            </article>
+                            </div>
                         </div>
+
+
                     )}
 
                     {view === 'usuarios' && (

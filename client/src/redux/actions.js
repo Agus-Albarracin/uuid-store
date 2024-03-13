@@ -41,7 +41,6 @@ import axios from "axios";
 // const BACK_URL = import.meta.env.VITE_VERCEL_BACKURL;
 
 axios.defaults.baseURL = "https://uuid-store-production.up.railway.app";
-
 // axios.defaults.baseURL = "http://localhost:3001";
 
 // TRAER TODOS LOS PRODUCTOS
@@ -119,7 +118,7 @@ export const filterMarca = (marca) => {
 
 export const filterSearch = (searchString) => {
   return {
-    type: 'FILTER_SEARCH',
+    type: "FILTER_SEARCH",
     payload: searchString,
   };
 };
@@ -269,7 +268,7 @@ export const allUsers = () => {
   try {
     return async function (dispatch) {
       const response = await axios(`/getuser`);
-      console.log()
+      console.log();
       return dispatch({
         type: GET_USERS,
         payload: response.data,
@@ -299,11 +298,11 @@ export const accessAdminUser = (email) => {
   return async function (dispatch) {
     try {
       const response = await axios.put("/adminaccess", { email });
-      
-      return dispatch ({
+
+      return dispatch({
         type: ADMIN_ACCESS,
         payload: email,
-      })
+      });
     } catch (error) {
       console.error("Error al acceder al usuario administrador:", error);
     }
@@ -491,10 +490,9 @@ export const createCategory = (categoryName) => {
 export const postComentario = ({ id, comment }) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(
-        `/postcomment?id=${id}`,
-        comment
-      );
+      const response = await axios.post(`/postcomment?id=${id}`, {
+        comment,
+      });
 
       return dispatch({
         type: POST_COMENTARIO,

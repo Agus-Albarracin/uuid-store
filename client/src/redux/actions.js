@@ -41,7 +41,7 @@ import axios from "axios";
 // const BACK_URL = import.meta.env.VITE_VERCEL_BACKURL;
 
 // axios.defaults.baseURL = "https://uuid-store-production.up.railway.app";
-axios.defaults.baseURL = "http://localhost:3001"; 
+axios.defaults.baseURL = "http://localhost:3001";
 
 // TRAER TODOS LOS PRODUCTOS
 export const getProductos = () => {
@@ -436,16 +436,10 @@ export const enviarMailPassword = (email) => {
 export const cambiarPassword = (token, newPassword) => {
   try {
     return async function (dispatch) {
-      const response = await axios.post(
-        `/change-password`,
-        { token, newPassword },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post(`/change-password`, {
+        token,
+        newPassword,
+      });
       return dispatch({
         type: CAMBIAR_PASSWORD,
         payload: response.data,

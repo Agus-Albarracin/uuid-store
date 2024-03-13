@@ -66,7 +66,7 @@ const DetallesDeCompra = () => {
           </div>
         </div>
       ) : (
-        <div>No se encontró ninguna venta con ese ID</div>
+        <div> Cargando... </div>
       )}
     </div>
   );

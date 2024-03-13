@@ -67,7 +67,7 @@ module.exports = (sequelize) => {
       },
       puntuaciones: {
         type: DataTypes.ARRAY(DataTypes.JSONB),
-        allowNull: true,
+        allowNull: false,
         defaultValue: [],
       },
       // comentarios: {

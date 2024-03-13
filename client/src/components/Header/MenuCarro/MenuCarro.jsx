@@ -71,7 +71,7 @@ const MenuCarro = ({ mostrarCarro, mostrarUser }) => {
         >
           &nbsp;&nbsp;&larr;&nbsp;&nbsp;
         </button> */}
-        <div className="w-full bg-white p-4">
+        <div className="w-full bg-white p-4" style={{ height: "85%" }}>
           <div className="font-bold text-red-600 text-xl  mb-4">MI COMPRA</div>
           <div className={styles.productos}>
             {cart.map((produ, index) => (
@@ -116,23 +116,12 @@ const MenuCarro = ({ mostrarCarro, mostrarUser }) => {
             mostrarCarro={mostrarCarro}
             mostrarUser={mostrarUser}
           />
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-
           <button
             className=" text-black py-2 rounded-md mt-2"
             onClick={() => mostrarCarro(false)}
           >
-            Seguir comprando
+            haz click fuera del carro para seguir comprando
           </button>
-          <br></br>
           <p>
             Las promociones y costo de envío lo verás aplicado en el checkout
           </p>

@@ -6,7 +6,6 @@ import { Routes, Route, useLocation } from "react-router-dom";
 
 // Componentes
 import Nav from "./components/Header/Nav/Nav";
-import Footer from "./components/Footer/Footer";
 
 // Views
 import Admin from "./Views/Admin/Admin";
@@ -77,7 +76,7 @@ function App() {
   }, [message]);
 
   return (
-    <div className={styles.appContainer}>
+      <div className={styles.appContainer} style={{ height: "100%" }}>
       <Nav />
 
       <Routes>
@@ -96,7 +95,7 @@ function App() {
 
       {message && <span className={styles.message}> {message} </span>}
 
-      { pathname != '/productos' && <Footer />}
+     
     </div>
   );
 }

@@ -7,7 +7,7 @@ import {
   LOGIN,
   SIGNUP,
   FILTER_MARCA,
-  FILTER_PRODUCTO2,
+  FILTER_SEARCH,
   FILTER_MODELO,
   GET_ORDER,
   LOGOUT,
@@ -33,6 +33,7 @@ import {
   ENVIAR_MAIL_PASSWORD,
   CAMBIAR_PASSWORD,
   POST_COMENTARIO,
+  ADMIN_ACCESS,
 } from "./action-types.js";
 
 import axios from "axios";
@@ -115,10 +116,10 @@ export const filterMarca = (marca) => {
   };
 };
 
-export const filterProducto2 = (genero) => {
+export const filterSearch = (searchString) => {
   return {
-    type: FILTER_PRODUCTO2,
-    payload: genero,
+    type: "FILTER_SEARCH",
+    payload: searchString,
   };
 };
 
@@ -267,6 +268,7 @@ export const allUsers = () => {
   try {
     return async function (dispatch) {
       const response = await axios(`/getuser`);
+      console.log();
       return dispatch({
         type: GET_USERS,
         payload: response.data,
@@ -293,9 +295,14 @@ export const deleteUser = (email) => {
 };
 
 export const accessAdminUser = (email) => {
-  return async function () {
+  return async function (dispatch) {
     try {
       const response = await axios.put("/adminaccess", { email });
+
+      return dispatch({
+        type: ADMIN_ACCESS,
+        payload: email,
+      });
     } catch (error) {
       console.error("Error al acceder al usuario administrador:", error);
     }
@@ -483,10 +490,9 @@ export const createCategory = (categoryName) => {
 export const postComentario = ({ id, comment }) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(
-        `/postcomment?id=${id}`,
-        comment
-      );
+      const response = await axios.post(`/postcomment?id=${id}`, {
+        comment,
+      });
 
       return dispatch({
         type: POST_COMENTARIO,

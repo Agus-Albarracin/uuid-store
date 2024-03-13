@@ -44,7 +44,6 @@ router.delete("/deleteproductos/:id", deleteProdu.deleteProductos);
 //*Usuario/Cliente
 // Obtiene todos los clientes
 router.get("/getuser", getUser.getAllUsers); //endpoint para todos los clientes
-router.get("/getuser/byid", getUser.getUserById)
 // obtiene los datos desde el google
 router.post("/signupgoogle", postUser.signUpUserGoogle);
 router.post("/signup", postUser.signUpUser);
@@ -66,7 +65,7 @@ router.post("/change-password", login.cambioPassword);
 //*Carrito
 router.post("/createOrden", postCarrito.postOrden);
 router.post("/getCarritosPrueba", postCarrito.postOrden);
-router.post("/getOrdenbyid", getCarritos.getCarritos);
+router.get("/getOrdenbyid", getCarritos.getCarritosById);
 
 
 router.put("/stateOrden", putCarrito.updateStateOrden);

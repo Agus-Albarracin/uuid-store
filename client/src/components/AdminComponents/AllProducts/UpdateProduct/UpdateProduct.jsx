@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Provider, useDispatch, useSelector } from "react-redux";
+import { updateProducto } from '../../../../redux/actions';
 
 
 
@@ -10,13 +11,12 @@ const UpdateProduct = ({ productId, onCancel, onSubmit }) => {
     const talles = [36, 36.5, 37, 37.5, 38, 38.5, 39, 39.5, 40, 40.5, 41, 41.5, 42, 42.5, 43, 43.5, 44, 44.5, 45, 45.5, 46];
 
     const removeImage = (selectedImage) => {
-
-        const auxImagen = producto.imagen.filter((image) => image !== selectedImage)
-        console.log(auxImagen)
+        const auxImagen = formData.imagen.filter((image) => image !== selectedImage)
         setFormData({
             ...producto,
             imagen: auxImagen,
         });
+        
     };
 
     const handleStock = (talle, count) => {
@@ -152,11 +152,11 @@ const UpdateProduct = ({ productId, onCancel, onSubmit }) => {
                 <label htmlFor="imagenes" className="block text-sm font-medium text-gray-700">
                     Imágenes:
                 </label>
-                {producto.imagen.map((image, index) => (
+                {formData.imagen.map((image, index) => (
                     <div key={index} className="mt-2">
                         <img
                             src={image}
-                            alt={`Imagen ${index}`}
+                            alt={index}
                             className="w-16 h-16 object-cover rounded"
                         />
                         <button

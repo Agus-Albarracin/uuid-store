@@ -2,12 +2,13 @@ import { useSelector } from "react-redux";
 import { useState } from 'react';
 import InfoUser from "../../components/InfoUser/InfoUser";
 import MisCompras from "../../components/MisCompras/MisCompras";
-import MisDirecciones from "../../components/MisDireciones/MisDirecciones";
+
 import "./DataUser.css"
 
 function DataUser(){
 
     const user = useSelector((state) => state.actualUser);
+    console.log(user);
     
     const [view, setView] = useState('estadisticas')
 
@@ -20,19 +21,16 @@ function DataUser(){
             <div className="contenedor">
                 <div className="contenedor3">
                     <div className="card1">
-                        <h1>Hola</h1>
+                        <h1>HOLA</h1>
                         <h1>{user.nombre}</h1>
                     </div>
 
-                
                     <div className="card" onClick={() => handleView('info')}>
                         <span >
-                            Informacion Personal
+                            <strong>Informacion Personal</strong>
                         </span>              
                     </div>
-                    
-                
-              
+                                  
                     <div className="card" onClick={() => handleView('compras')}>
                         <span >
                             Mis Compras
@@ -40,11 +38,6 @@ function DataUser(){
                     </div>                 
                  
                 
-                    <div className="card" onClick={() => handleView('direcciones')}>
-                        <span >
-                            Mis Direcciones
-                        </span>
-                    </div>
                 </div>
 
                 {view === 'info' && (
@@ -61,12 +54,6 @@ function DataUser(){
                     </article>
                 )}
 
-                {view === 'direcciones' && (
-                    <article className="contenedor2">
-                        <h2> -MIS DIRECCIONES- </h2>
-                        <MisDirecciones />
-                    </article>
-                )}
 
             </div>
         </div>

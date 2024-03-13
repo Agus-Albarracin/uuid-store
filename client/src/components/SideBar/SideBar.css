@@ -4,11 +4,11 @@
 }
 
 .container-side span {
-  margin-bottom: 5px; /* Espacio entre cada etiqueta de texto y select */
+  margin-bottom: 5px; 
 }
 
 .container-side select {
-  margin-bottom: 10px; /* Espacio entre cada select */
+  margin-bottom: 10px; 
 }
 
 form {

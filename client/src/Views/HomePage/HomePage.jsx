@@ -31,6 +31,10 @@ const HomePage = () => {
       <div >
         <Cards data={recommendedProducts} />
       </div>
+      <br />
+      <br />
+      <div className="h-40 bg-gradient-to-t from-gray-200 to-transparent" style={{ position: "fixed", bottom: 0, width: "100%", zIndex:0 }}></div>
+
     </div>
   );
 };

@@ -33,14 +33,15 @@ function Productos() {
   }, [dispatch, allProductos.length]);
 
   return (
-    <div className="flex flex-col md:flex-row h-screen overflow-hidden">
-      <div className="w-full md:w-1/6 bg-gray-200 p-4">
+      <div className="flex flex-col md:flex-row h-screen-40 overflow-hidden">
+
+      <div className="w-full md:w-1/6 p-4" >
         <SideBar handleChange={handleChange} handleSubmit={handleSubmit} />
       </div>
       <div className="w-full p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300" style={{ scrollbarWidth: "thin", scrollbarColor: "transparent transparent" }}>
         <Cards data={allProductos.slice(0, numToShow)} />
         {numToShow < allProductos.length && (
-          <div className="flex justify-center">
+          <div className="flex justify-center  bg-gradient-to-t">
            <button onClick={handleVerMas} className="mt-4 bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
            Ver más
            </button>
@@ -48,6 +49,10 @@ function Productos() {
 
 
         )}
+           <br />
+           <br />
+      <div className="h-40 bg-gradient-to-t from-white to-transparent" style={{ position: "fixed", bottom: 0, left: 0, width: "100%", zIndex:0 }}></div>
+
       </div>
     </div>
   );

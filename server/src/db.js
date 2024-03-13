@@ -31,7 +31,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 const { Productos, Usuario, Carrito, Category } = sequelize.models;
 
-Usuario.hasMany(Carrito);
+Usuario.hasMany(Carrito, {as: "compras"});
 Carrito.belongsTo(Usuario);
 
 Productos.belongsTo(Category);

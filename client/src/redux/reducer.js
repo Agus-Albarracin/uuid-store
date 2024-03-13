@@ -34,7 +34,9 @@ import {
   ENVIAR_MAIL_PASSWORD,
   CAMBIAR_PASSWORD,
   POST_COMENTARIO,
+  ADMIN_ACCESS,
 } from "./action-types.js";
+import { allUsers } from "./actions.js";
 
 const initialState = {
   categoryReducer: [],
@@ -75,6 +77,7 @@ const reducer = (state = initialState, { type, payload }) => {
       };
 
     case GET_USERS:
+
       return {
         ...state,
         allUsers: payload,
@@ -93,6 +96,19 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         allProductos: payload,
+      };
+
+    case ADMIN_ACCESS:
+      
+      
+      const updatedUsersAdmin = state.allUsers.map(user =>
+        user.email === payload ? { ...user, admin: !user.admin } : user
+      ); 
+      
+      return {
+        ...state,
+        allUsers: updatedUsersAdmin,
+        error: null
       };
 
     case GET_DETAIL:

@@ -33,6 +33,7 @@ import {
   ENVIAR_MAIL_PASSWORD,
   CAMBIAR_PASSWORD,
   POST_COMENTARIO,
+  ADMIN_ACCESS,
 } from "./action-types.js";
 
 import axios from "axios";
@@ -267,6 +268,7 @@ export const allUsers = () => {
   try {
     return async function (dispatch) {
       const response = await axios(`/getuser`);
+      console.log()
       return dispatch({
         type: GET_USERS,
         payload: response.data,
@@ -293,9 +295,14 @@ export const deleteUser = (email) => {
 };
 
 export const accessAdminUser = (email) => {
-  return async function () {
+  return async function (dispatch) {
     try {
       const response = await axios.put("/adminaccess", { email });
+      
+      return dispatch ({
+        type: ADMIN_ACCESS,
+        payload: email,
+      })
     } catch (error) {
       console.error("Error al acceder al usuario administrador:", error);
     }

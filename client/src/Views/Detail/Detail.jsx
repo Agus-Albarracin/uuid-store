@@ -8,8 +8,11 @@ import Reviews from "../../components/ProductReview/Reviews/Reviews";
 
 import { getDetail, clearDetail, addToCart } from "../../redux/actions";
 import { v4 as uuidv4 } from "uuid";
+import Footer from "../../components/Footer/Footer"
+import cards from "../../components/Cards/Cards"
 
 import "react-image-gallery/styles/css/image-gallery.css";
+import Cards from "../../components/Cards/Cards";
 
 const Detail = () => {
   const { id } = useParams();
@@ -258,6 +261,7 @@ const Detail = () => {
                     Agregar al carrito
                   </button>
                 </div>
+                <Cards />
               </div>
             </div>
           </div>
@@ -270,8 +274,18 @@ const Detail = () => {
       ) : (
         <span>Cargando...</span>
       )}
+             <div className="text-center">
+         <img
+         id="BannerImage"
+          src="https://res.cloudinary.com/do1hcqjpe/image/upload/v1710360016/hzck6ed08ntotg6l6rnr.png"
+          alt="Imagen después de los comentarios"
+          className="mx-auto mt-4 w-full"
+        />
+      </div>
+      <Footer />
     </div>
   );
 };
+
 
 export default Detail;

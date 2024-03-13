@@ -7,7 +7,7 @@ import {
   LOGIN,
   SIGNUP,
   FILTER_MARCA,
-  FILTER_PRODUCTO2,
+  FILTER_SEARCH,
   FILTER_MODELO,
   GET_ORDER,
   LOGOUT,
@@ -117,10 +117,10 @@ export const filterMarca = (marca) => {
   };
 };
 
-export const filterProducto2 = (genero) => {
+export const filterSearch = (searchString) => {
   return {
-    type: FILTER_PRODUCTO2,
-    payload: genero,
+    type: 'FILTER_SEARCH',
+    payload: searchString,
   };
 };
 

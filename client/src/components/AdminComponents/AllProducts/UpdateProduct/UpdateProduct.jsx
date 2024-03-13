@@ -16,7 +16,7 @@ const UpdateProduct = ({ productId, onCancel, onSubmit }) => {
             ...producto,
             imagen: auxImagen,
         });
-        
+
     };
 
     const handleStock = (talle, count) => {
@@ -152,7 +152,7 @@ const UpdateProduct = ({ productId, onCancel, onSubmit }) => {
                 <label htmlFor="imagenes" className="block text-sm font-medium text-gray-700">
                     Imágenes:
                 </label>
-                {formData.imagen.map((image, index) => (
+                {formData.imagen && formData.imagen.map((image, index) => (
                     <div key={index} className="mt-2">
                         <img
                             src={image}

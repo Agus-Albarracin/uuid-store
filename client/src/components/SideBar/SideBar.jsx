@@ -4,18 +4,19 @@ import {
   getOrder,
   getProductos,
   filterMarca,
-  filterProducto2,
+  filterSearch,
   filterModelo,
 } from "../../redux/actions";
 import "./SideBar.css";
 
-function SideBar({ handleChange, handleSubmit }) {
+function SideBar() {
   const dispatch = useDispatch();
   const allProductos = useSelector((state) => state.allProductosAux);
 
   const [selectedMarca, setSelectedMarca] = useState(""); // Estado para la marca seleccionada
   const [filteredModelos, setFilteredModelos] = useState([]); // Estado para los modelos filtrados
   const [selectedPrecio, setSelectedPrecio] = useState(""); // Estado para el precio seleccionado
+  const [searchString, setSearchString] = useState("");
 
   const allMarcas = Array.isArray(allProductos)
     ? [...new Set(allProductos.map((prod) => prod.marca))]
@@ -60,21 +61,19 @@ function SideBar({ handleChange, handleSubmit }) {
     }
   }, [dispatch, allProductos.length]);
 
+  useEffect(() => {
+    dispatch(filterSearch(searchString)); // Aplicar filtro en tiempo real
+  }, [searchString, dispatch]);
+
   return (
     <div className="container-side p-4 border-r border-gray-300">
       <div className="mb-4">
-        <form className="flex flex-col sm:flex-row" onChange={handleChange} onSubmit={handleSubmit}>
-          <input
-            className="searchInput border rounded p-2 mb-2 sm:mb-0 sm:mr-2 w-full sm:w-auto focus:outline-none focus:border-blue-500"
-            placeholder="Buscar"
-          />
-          <button
-            type="submit"
-            className="bg-red-500 text-white p-2 rounded focus:outline-none hover:bg-red-700 w-full sm:w-auto"
-          >
-            Buscar
-          </button>
-        </form>
+        <input
+          className="searchInput border rounded p-2 mb-2 w-full focus:outline-none focus:border-blue-500"
+          placeholder="Buscar"
+          onChange={(e) => setSearchString(e.target.value)}
+          value={searchString}
+        />
       </div>
 
       <div className="mb-4">

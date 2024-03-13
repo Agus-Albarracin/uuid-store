@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allUsers, deleteUser, accessAdminUser } from "../../../redux/actions";
 import UserAdminSwitch from "./UserAdminSwitch";
-import Switch from "react-switch";
 
 
 const AllUsers = () => {
@@ -13,14 +12,24 @@ const AllUsers = () => {
     dispatch(allUsers());
   }, [dispatch]);
 
-  const handleDeleteUser = (email) => {
-    console.log("Correo electrónico del usuario a eliminar:", email);
-    dispatch(deleteUser(email));
+  const handleDeleteUser = async (email) => {
+    try {
+      await dispatch(deleteUser(email));
+      console.log("Correo electrónico del usuario a eliminar:", email);
+      window.location.reload();
+    } catch (error) {
+      console.error("Error al eliminar usuario:", error);
+    }
   };
-
-  const handleAdminUser = (email, admin) => {
-    console.log(`Se ha modificado el acceso admin del mail ${email}`);
-        dispatch(accessAdminUser(email));
+  
+  const handleAdminUser = async (email, admin) => {
+    try {
+      await dispatch(accessAdminUser(email));
+      console.log(`Se ha modificado el acceso admin del mail ${email}`);
+      window.location.reload();
+    } catch (error) {
+      console.error("Error al modificar los permisos de administrador:", error);
+    }
   };
 
 

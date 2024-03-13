@@ -15,7 +15,7 @@ function MisCompras() {
 
     const obtenerCarritos = (userId) => {
     console.log({id: userId})
-    axios.post("/getOrdenbyid", { id: userId }) // siempre que sea post, enviar como objeto el id
+    axios.post("/getOrden/byuserid", { id: userId }) // siempre que sea post, enviar como objeto el id
         .then(response => {
             setCompras(response.data);
         })

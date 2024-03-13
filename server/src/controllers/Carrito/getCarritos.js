@@ -15,6 +15,20 @@ const getCarritos = async (req, res) => {
 };
 
 const getCarritosById = async (req, res) => {
+  const { idDeCompra } = req.query;
+
+  try {
+    let carritoid = await Carrito.findByPk(idDeCompra);
+    if (!carritoid) return res.status(400).send("No hay carrito con ese id");
+    carritoid = carritoid.get();
+
+    return res.status(200).json(carritoid);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
+const getCarritosByUserId = async (req, res) => {
   const { id } = req.body;
 
   try {
@@ -37,4 +51,4 @@ const getCarritosById = async (req, res) => {
 };
 
 
-module.exports = { getCarritos, getCarritosById };
+module.exports = { getCarritos, getCarritosById, getCarritosByUserId };

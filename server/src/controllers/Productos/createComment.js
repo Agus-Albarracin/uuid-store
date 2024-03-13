@@ -2,7 +2,8 @@ const { Productos } = require("../../db");
 
 const createComment = async (req, res) => {
   const { id } = req.query;
-  const { comentario } = req.body;
+  const { puntuacion, comentario } = req.body;
+  const comment = { puntuacion, comentario };
 
   if (!id) return res.status(400).send("No se encontró el producto con este id");
 
@@ -10,11 +11,13 @@ const createComment = async (req, res) => {
 
   if (!producto) return res.status(404).send("Producto no encontrado");
 
+  const puntuaciones = producto.getDataValue('puntuaciones');
+  puntuaciones.push(comment); 
+  await producto.update({ puntuaciones });
+  
   console.log(producto);
-  producto.dataValues.puntuaciones = [...producto.dataValues.puntuaciones, comentario];
-  producto.save();
 
-  return res.status(200).send("Comentario publicado exitosamente!");
+  return res.status(200).json(comment);
 };
 
 module.exports = { createComment };

@@ -5,11 +5,20 @@ import Cards from "../../components/Cards/Cards";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductos } from "../../redux/actions";
 import Footer from "../../components/Footer/Footer";
+import CardsForDetail from "../../components/Cards/CardsforDetail";
+
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const allProductos = useSelector((state) => state.allProductosHome);
   const [showParagraph, setShowParagraph] = useState(true);
+
+  const recommendedProducts2 = Array.isArray(allProductos)
+    ? allProductos
+        .slice()
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 4)
+    : [];
 
   useEffect(() => {
     if (allProductos.length === 0) {
@@ -17,12 +26,9 @@ const HomePage = () => {
     }
   }, [dispatch, allProductos.length]);
 
-  const recommendedProducts = Array.isArray(allProductos)
-    ? allProductos
-        .slice()
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 8)
-    : [];
+  // Ordenar los productos por stock en orden descendente
+  const sortedProductos = allProductos.slice().sort((a, b) => b.stock - a.stock);
+  const recommendedProducts = sortedProductos.slice(0, 8);
 
   useEffect(() => {
     function handleScroll() {
@@ -55,7 +61,7 @@ const HomePage = () => {
       <br />
       <div
         className="h-40 bg-gradient-to-t from-gray-200 to-transparent"
-        style={{ position: "fixed", bottom: 0, width: "100%", zIndex: 0 }}
+        style={{ position: "fixed", bottom: 0, width: "100%" }}
       >
         <p
           style={{
@@ -70,10 +76,12 @@ const HomePage = () => {
           TOP DROPS OF THE WEEK
         </p>
       </div>
-      <Carrusel2 />
-    <div style={{ paddingBottom: "30%" }}>
-      <Footer />
-</div>
+      <Carrusel2  />
+      <div style={{ width: "150px", height: "300px", border: "1px solid #ccc" }}></div>
+      <CardsForDetail data={recommendedProducts2} style={{ width: "150px", height: "200px", border: "1px solid #ccc" }}/>
+      <div style={{ paddingBottom: "1%" }}>
+        <Footer />
+      </div>
     </div>
   );
 };

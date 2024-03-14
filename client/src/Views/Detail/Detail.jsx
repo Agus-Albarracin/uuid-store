@@ -19,7 +19,7 @@ const Detail = () => {
   const dispatch = useDispatch(); // Cambiado a useDispatch
   const detail = useSelector((state) => state.detail);
   const user = useSelector((state) => state.actualUser);
-  const allProductos = useSelector((state) => state.allProductosHome);
+  const allProductos = useSelector((state) => state.allProductosDetail);
 
 
   const [image, setImage] = useState(1);

@@ -23,9 +23,9 @@ const makePayment = require("../controllers/PasarelaDePagos/makePayment");
 const router = Router();
 
 //*Productos
-router.get("/getproductos", getProdu.getProductos);
+router.get("/getproductos", getProdu.getProductosON);// endpoint para productos activos
 router.get("/getproductosmv", getProdu.getProductosSeleccionados);
-router.get("/getproductosON", getProdu.getProductosON); // endpoint para productos activos
+router.get("/getproductos/all", getProdu.getProductos); 
 router.get("/getproductos/:id", getProdu.getProductosById);
 router.get("/getproductosByName", getProdu.getProductosByName);
 router.get("/getproductosFilter", getProdu.getProductosFilter);

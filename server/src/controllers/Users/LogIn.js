@@ -103,7 +103,7 @@ const mailPassword = async (req, res) => {
       html: `<b>Ingresa a este link para cambiar la contraseña:${link}</b>`,
     });
 
-    res.status(200).json(token);
+    res.status(200).json({ token });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

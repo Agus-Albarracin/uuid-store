@@ -40,6 +40,7 @@ import { allUsers } from "./actions.js";
 const initialState = {
   categoryReducer: [],
   allProductosHome: [],
+  allProductosDetail:[],
   allProductos: [],
   allProductosAux: [],
   allUsers: [],
@@ -71,6 +72,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         allProductosHome: payload,
+        allProductosDetail: payload,
         allProductos: payload,
         allProductosAux: payload,
       };

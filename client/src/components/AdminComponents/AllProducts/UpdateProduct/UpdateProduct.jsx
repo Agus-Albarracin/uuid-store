@@ -49,6 +49,7 @@ const UpdateProduct = ({ productId, onCancel, onSubmit }) => {
                 modelo: producto.modelo,
                 precio: producto.precio,
                 stock: producto.stock,
+                estado: producto.estado,
                 genero: producto.genero,
                 imagen: producto.imagen,
                 enDescuento: producto.enDescuento,
@@ -59,14 +60,16 @@ const UpdateProduct = ({ productId, onCancel, onSubmit }) => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        const newValue = name === 'estado' ? value === 'true' : value;  
         setFormData((prevData) => ({
             ...prevData,
-            [name]: value,
+            [name]: newValue,
         }));
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log('Estado enviado:', formData)
         onSubmit(formData);
     };
 
@@ -86,115 +89,111 @@ const UpdateProduct = ({ productId, onCancel, onSubmit }) => {
     return (
 
         <div className="bg-white max-w-full h-full p-4 rounded-md mx-auto grid grid-cols-5 gap-4">
-            <form onSubmit={handleSubmit} className="col-span-3 space-y-4 flex-col">
-                {/* Campos de formulario */}
-                {[
-                    { label: 'Nombre', name: 'nombre' },
-                    { label: 'Marca', name: 'marca' },
-                    { label: 'Modelo', name: 'modelo' },
-                    { label: 'Comentario', name: 'comentario' },
-                    { label: 'Precio', name: 'precio' },
-                    { label: 'Genero', name: 'genero', type: 'select', options: ['Masculino', 'Femenino', 'Unisex'] },
-                    { label: 'Descuento', name: 'descuento' },
-                    // Resto de tus campos...
-                ].map((field) => (
-                    <div key={field.name} className="mb-4">
-                        <label htmlFor={field.name} className="block text-sm font-medium text-gray-700">
-                            {field.label}:
-                        </label>
-                        {field.type === 'select' ? (
-                            <select
-                                name={field.name}
-                                id={field.name}
-                                onChange={handleChange}
-                                defaultValue={producto[field.name]}
-                                className="mt-1 p-2 border rounded-md w-full sm:w-96 focus:outline-none focus:border-blue-500"
-                            >
-                                {field.options.map((option) => (
-                                    <option key={option} value={option}>
-                                        {option}
-                                    </option>
-                                ))}
-                            </select>
-                        ) : (
-                            <input
-                                type="text"
-                                id={field.name}
-                                name={field.name}
-                                value={formData[field.name] || ''}
-                                onChange={handleChange}
-                                className="mt-1 p-2 border rounded-md w-full sm:w-96 focus:outline-none focus:border-blue-500"
-                            />
-                        )}
-                    </div>
-                ))}
+        <form onSubmit={handleSubmit} className="col-span-3 space-y-4 flex-col">
+            {[
+                { label: 'Nombre', name: 'nombre' },
+                { label: 'Marca', name: 'marca' },
+                { label: 'Modelo', name: 'modelo' },
+                { label: 'Comentario', name: 'comentario' },
+                { label: 'Precio', name: 'precio' },
+                { label: 'Estado', name: 'estado' },
+                { label: 'Genero', name: 'genero', type: 'select', options: ['Masculino', 'Femenino', 'Unisex'] },
+                { label: 'Descuento', name: 'descuento' },
+                
+            ].map((field) => (
+                <div key={field.name} className="mb-4">
+                    <label htmlFor={field.name} className="block text-sm font-medium text-gray-700">
+                        {field.label}:
+                    </label>
+                    {field.name === 'estado' ? ( // Verificamos si es el campo "estado"
+                        <select
+                            name={field.name}
+                            id={field.name}
+                            onChange={handleChange}
+                            value={String(formData[field.name])}
+                            className="mt-1 p-2 border rounded-md w-full sm:w-96 focus:outline-none focus:border-blue-500"
+                        >
+                            <option value="true">On</option>
+                            <option value="false">Off</option>
+                        </select>
+                    ) : (
+                        <input
+                            type="text"
+                            id={field.name}
+                            name={field.name}
+                            value={formData[field.name] || ''}
+                            onChange={handleChange}
+                            className="mt-1 p-2 border rounded-md w-full sm:w-96 focus:outline-none focus:border-blue-500"
+                        />
+                    )}
+                </div>
+            ))}
 
-                {/* Botones de enviar y cancelar */}
-                <div className="flex space-x-4">
-                    <button
-                        type="submit"
-                        className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 focus:outline-none transition duration-300 ease-in-out"
-                    >
-                        Guardar cambios
-                    </button>
+            {/* Botones de enviar y cancelar */}
+            <div className="flex space-x-4">
+                <button
+                    type="submit"
+                    className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 focus:outline-none transition duration-300 ease-in-out"
+                >
+                    Guardar cambios
+                </button>
+                <button
+                    type="button"
+                    onClick={onCancel}
+                    className="bg-gray-300 text-gray-700 p-2 rounded-md hover:bg-gray-400 focus:outline-none transition duration-300 ease-in-out"
+                >
+                    Cancelar
+                </button>
+            </div>
+        </form>
+
+        <div className="col-span-0.5">
+            {/* Imágenes */}
+            <label htmlFor="imagenes" className="block text-sm font-medium text-gray-700">
+                Imágenes:
+            </label>
+            {formData.imagen && formData.imagen.map((image, index) => (
+                <div key={index} className="mt-2">
+                    <img
+                        src={image}
+                        alt={index}
+                        className="w-16 h-16 object-cover rounded"
+                    />
                     <button
                         type="button"
-                        onClick={onCancel}
-                        className="bg-gray-300 text-gray-700 p-2 rounded-md hover:bg-gray-400 focus:outline-none transition duration-300 ease-in-out"
+                        onClick={() => removeImage(image)}
+                        className="ml-2 px-2 py-1 bg-red-500 text-white rounded focus:outline-none"
                     >
-                        Cancelar
+                        Eliminar
                     </button>
                 </div>
-            </form>
-
-            <div className="col-span-0.5">
-                {/* Imágenes */}
-                <label htmlFor="imagenes" className="block text-sm font-medium text-gray-700">
-                    Imágenes:
-                </label>
-                {formData.imagen && formData.imagen.map((image, index) => (
-                    <div key={index} className="mt-2">
-                        <img
-                            src={image}
-                            alt={index}
-                            className="w-16 h-16 object-cover rounded"
-                        />
-                        <button
-                            type="button"
-                            onClick={() => removeImage(image)}
-                            className="ml-2 px-2 py-1 bg-red-500 text-white rounded focus:outline-none"
-                        >
-                            Eliminar
-                        </button>
-                    </div>
-                ))}
-            </div>
-
-            <div className="col-span-1.5">
-                <label htmlFor="talles" className="block text-sm font-medium text-gray-700">
-                    Talles y stock:
-                </label>
-                {talles.map((talle, index) => (
-                    <div key={index} className="flex items-center space-x-2">
-                        <button
-                            className="text-blue-500 focus:outline-none"
-                            onClick={() => handleStock(talle, '-')}
-                        >
-                            -
-                        </button>
-                        <span>{talle}</span>
-                        <button
-                            className="text-blue-500 focus:outline-none"
-                            onClick={() => handleStock(talle, '+')}
-                        >
-                            +
-                        </button>
-                        <span className="ml-2">Cantidad en stock: {producto.stock[talle]}</span>
-                    </div>
-                ))}
-            </div>
+            ))}
         </div>
-    );
-};
 
+        <div className="col-span-1.5">
+            <label htmlFor="talles" className="block text-sm font-medium text-gray-700">
+                Talles y stock:
+            </label>
+            {talles.map((talle, index) => (
+                <div key={index} className="flex items-center space-x-2">
+                    <button
+                        className="text-blue-500 focus:outline-none"
+                        onClick={() => handleStock(talle, '-')}
+                    >
+                        -
+                    </button>
+                    <span>{talle}</span>
+                    <button
+                        className="text-blue-500 focus:outline-none"
+                        onClick={() => handleStock(talle, '+')}
+                    >
+                        +
+                    </button>
+                    <span className="ml-2">Cantidad en stock: {producto.stock[talle]}</span>
+                </div>
+            ))}
+        </div>
+    </div>
+);
+};
 export default UpdateProduct;

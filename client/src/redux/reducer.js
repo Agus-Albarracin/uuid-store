@@ -296,12 +296,6 @@ const reducer = (state = initialState, { type, payload }) => {
         token: payload,
       };
 
-    case UPDATE_PRODUCTO:
-      return {
-        ...state,
-        allProductos: payload,
-      };
-
     case CAMBIAR_PASSWORD:
       return {
         ...state,

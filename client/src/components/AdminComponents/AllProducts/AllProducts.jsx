@@ -35,6 +35,7 @@ const AllProducts = () => {
         dispatch(updateProducto(formData));
         setEditMode(false);
         setSelectedProductId(null);
+        window.location.reload();
     };
 
     if (!Array.isArray(productos)) {

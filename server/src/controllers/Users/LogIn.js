@@ -83,7 +83,7 @@ const mailPassword = async (req, res) => {
     };
 
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "10min" });
-    const link = `http://localhost:3000/recovery?${token}`;
+    const link = `http://localhost:5173/change-password?${token}`;
     await Usuario.update({ recoveryToken: token }, { where: { id: user.id } });
 
     const transporter = nodemailer.createTransport({
@@ -103,7 +103,7 @@ const mailPassword = async (req, res) => {
       html: `<b>Ingresa a este link para cambiar la contraseña:${link}</b>`,
     });
 
-    res.status(200).json(token);
+    res.status(200).json({ token });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -111,7 +111,11 @@ const mailPassword = async (req, res) => {
 
 const cambioPassword = async (req, res) => {
   try {
-    const { token, newPassword } = req.body;
+    const recoveryToken = req.body.token;
+    const newPassword = req.body.newPassword.newPassword;
+
+    const token = recoveryToken.token;
+
     const payload = jwt.verify(token, JWT_SECRET);
 
     const user = await Usuario.findOne({ where: { id: payload.id } });

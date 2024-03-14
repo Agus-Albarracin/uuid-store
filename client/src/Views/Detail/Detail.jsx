@@ -6,19 +6,21 @@ import { useSelector, useDispatch } from "react-redux"; // Cambiado a useDispatc
 import ProductReview from "../../components/ProductReview/ProductReview";
 import Reviews from "../../components/ProductReview/Reviews/Reviews";
 
-import { getDetail, clearDetail, addToCart } from "../../redux/actions";
+import { getDetail, clearDetail, addToCart, getProductos } from "../../redux/actions";
 import { v4 as uuidv4 } from "uuid";
 import Footer from "../../components/Footer/Footer"
-import cards from "../../components/Cards/Cards"
+
 
 import "react-image-gallery/styles/css/image-gallery.css";
-import Cards from "../../components/Cards/Cards";
+import CardsForDetail from "../../components/Cards/CardsforDetail";
 
 const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch(); // Cambiado a useDispatch
   const detail = useSelector((state) => state.detail);
   const user = useSelector((state) => state.actualUser);
+  const allProductos = useSelector((state) => state.allProductosHome);
+
 
   const [image, setImage] = useState(1);
   const images = [
@@ -36,6 +38,18 @@ const Detail = () => {
     return () => dispatch(clearDetail());
   }, [dispatch, id]);
 
+  useEffect(() => {
+    if (allProductos.length === 0) {
+      dispatch(getProductos());
+    }
+  }, [dispatch, allProductos.length]);
+
+  const recommendedProducts = Array.isArray(allProductos)
+    ? allProductos
+        .slice()
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 4)
+    : [];
   // const handleTalle = (event) => {
   //   setTalleSeleccionado(event.target.value);
   // }
@@ -261,9 +275,10 @@ const Detail = () => {
                     Agregar al carrito
                   </button>
                 </div>
-                <Cards />
+
               </div>
             </div>
+        <CardsForDetail data={recommendedProducts} style={{ width: "150px", height: "200px", margin: "10px", padding: "10px", border: "1px solid #ccc" }}/>
           </div>
           {Object.keys(user).length > 0 && <ProductReview id={id} />}
 

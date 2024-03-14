@@ -40,6 +40,27 @@ const usuariosDemo = [
       telefono: "123456789",
       genero: "Masculino",
       notificaciones: true
+    },
+    {
+      id: 334,
+      nombre: "Milton",
+      email: "milthon.g@gmail.com",
+      password: "contraseña",
+      googleId: "googleIdUsuario",
+      imageUrl: "urlImagenUsuario",
+      givenName: "Nombre dado",
+      admin: true,
+      estadoInactividad: false,
+      apellido: "Darkox",
+      direccion: "Dirección del Usuario",
+      provincia: "Provincia del Usuario",
+      localidad: "Localidad del Usuario",
+      codigoPostal: "12345",  
+      dni: "12345678",
+      numeroTramite: 222325996,
+      telefono: "123456789",
+      genero: "Masculino",
+      notificaciones: true
     }
   ];
   

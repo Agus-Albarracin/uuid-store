@@ -65,7 +65,9 @@ router.post("/change-password", login.cambioPassword);
 //*Carrito
 router.post("/createOrden", postCarrito.postOrden);
 router.post("/getCarritosPrueba", postCarrito.postOrden);
-router.get("/getOrdenbyid", getCarritos.getCarritosById);
+router.post("/getOrden/byuserid", getCarritos.getCarritosByUserId);
+router.get("/getOrdenbyid", getCarritos.getCarritosById)
+
 
 router.put("/stateOrden", putCarrito.updateStateOrden);
 

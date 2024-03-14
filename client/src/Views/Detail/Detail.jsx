@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux"; // Cambiado a useDispatch
 
 import ProductReview from "../../components/ProductReview/ProductReview";
+import Reviews from "../../components/ProductReview/Reviews/Reviews";
 
 import { getDetail, clearDetail, addToCart } from "../../redux/actions";
 import { v4 as uuidv4 } from "uuid";
@@ -14,6 +15,7 @@ const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch(); // Cambiado a useDispatch
   const detail = useSelector((state) => state.detail);
+  const user = useSelector((state) => state.actualUser);
 
   const [image, setImage] = useState(1);
   const images = [
@@ -198,12 +200,6 @@ const Detail = () => {
                   </div>
                 </div>
 
-                <p className="text-gray-500">
-                  Lorem ipsum, dolor sit, amet consectetur adipisicing elit.
-                  Vitae exercitationem porro saepe ea harum corrupti vero id
-                  laudantium enim, libero blanditiis expedita cupiditate a est.
-                </p>
-
                 <div>
                   <p>
                     <b>Selecciona tu talla:</b>
@@ -265,17 +261,11 @@ const Detail = () => {
               </div>
             </div>
           </div>
-          <ProductReview id={id} />
-          <div>
-            {detail.puntuaciones && detail.puntuaciones.map((review, index) => {
-              return (
-                <div key={index}>
-                  <span>{review.puntuacion}</span>
-                  <span>{review.comentario}</span>
-                </div>
-              )
-            })}
-          </div>
+          {Object.keys(user).length > 0 && <ProductReview id={id} />}
+
+          {detail.puntuaciones && (
+            <Reviews puntuaciones={detail.puntuaciones} />
+          )}
         </div>
       ) : (
         <span>Cargando...</span>

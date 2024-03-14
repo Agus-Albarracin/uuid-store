@@ -2,17 +2,25 @@ import { useFormik } from "formik";
 import styles from "./ProductReview.module.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { postComentario } from "../../redux/actions";
+import validate from "./validate";
 
 const ProductReview = ({ id }) => {
   const user = useSelector((state) => state.actualUser);
   const dispatch = useDispatch();
+
+  const onSubmit = (values) => {
+    const usuario = `${user.nombre} ${user.apellido}`;
+    const comment = { ...values, usuario };
+    dispatch(postComentario({ id, comment }));
+  };
 
   const formik = useFormik({
     initialValues: {
       puntuacion: 0,
       comentario: "",
     },
-    onSubmit: (values) => dispatch(postComentario({ id, values })),
+    validate,
+    onSubmit: (values) => onSubmit(values),
   });
 
   const handleRating = (value) => {
@@ -41,7 +49,7 @@ const ProductReview = ({ id }) => {
             value={formik.values.comentario}
             onChange={formik.handleChange}
             rows="4"
-            className="mt-1 p-2 w-full border rounded-md"
+            className={`mt-1 p-2 w-full border rounded-md ${styles.textarea}`}
           ></textarea>
         </div>
         <div className="mb-4">

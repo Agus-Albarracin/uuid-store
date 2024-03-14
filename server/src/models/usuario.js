@@ -120,12 +120,6 @@ module.exports = (sequelize) => {
         default: false,
         allowNull: true,
       },
-
-      compras: {
-        type: DataTypes.JSONB,
-        allowNull: true,
-        defaultValue: [],
-      },
     },
     { timestamps: false }
   );

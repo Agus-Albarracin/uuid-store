@@ -63,8 +63,7 @@ const postOrden = async (req, res) => {
         },
       });
 
-      usuario.compras.push(carrito.dataValues);
-      await usuario.save();
+      await usuario.addCompra(carrito);
 
       const contenidoCorreo = `
         GRACIAS POR SU COMPRA!\n

@@ -28,48 +28,7 @@ const Confirmacion = ({ userBuyData }) => {
     const id = await createPreference();
     if (id) {
       setPreferenceId(id);
-
-      try {
-        //CHEKEO DE SI CAPTURA EL VALOR DESDE EL LOCALSTORAGE
-        console.log("Datos a enviar:", {
-          email,
-        });
-
-        await axios.post("/createOrden", {
-          // Datos del cliente
-          emailStorage: email,
-          email: email,
-          nombre: "John",
-          apellido: "Doe",
-          dni: "12345678",
-          numeroTramite: "ABCD1234",
-          telefono: "123456789",
-          genero: "Masculino",
-          notificaciones: true,
-          provincia: "Buenos Aires",
-          direccion: "Calle Falsa 123",
-          localidad: "Springfield",
-          codigoPostal: "1234",
-
-          // Información del producto
-          productos: cart, // Carrito de compras
-
-          // Información del pedido
-          total: calcularTotal(), // Total de la compra
-          estadoDelPedido: "Pendiente", // Estado del pedido
-        });
-      } catch (error) {
-        console.error("Error al enviar la solicitud al controlador:", error);
-      }
     }
-  };
-
-  const calcularTotal = () => {
-    let total = 0;
-    cart.forEach((item) => {
-      total += item.precio;
-    });
-    return total;
   };
 
   return (
@@ -104,7 +63,7 @@ const Confirmacion = ({ userBuyData }) => {
       {preferenceId && (
         <Wallet initialization={{ preferenceId: preferenceId }} />
       )}
-      <Link to="/success">simular confirmar</Link>
+      {/* <Link to="/success">simular confirmar</Link> */}
     </div>
   );
 };

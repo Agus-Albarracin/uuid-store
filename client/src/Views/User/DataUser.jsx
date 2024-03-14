@@ -21,8 +21,7 @@ function DataUser(){
             <div className="contenedor">
                 <div className="contenedor3">
                     <div className="card1">
-                        <h1>HOLA</h1>
-                        <h1>{user.nombre}</h1>
+                        <h1>Hola!{" "}{user.nombre}</h1>
                     </div>
 
                     <div className="card" onClick={() => handleView('info')}>
@@ -33,27 +32,24 @@ function DataUser(){
                                   
                     <div className="card" onClick={() => handleView('compras')}>
                         <span >
-                            Mis Compras
+                            <strong>Mis compras</strong>
                         </span>
                     </div>                 
-                 
-                
                 </div>
 
                 {view === 'info' && (
                     <article className="contenedor2">
-                        <h1> -INFORMACION PERSONAL- </h1>
+                        <strong><h1> -INFORMACION PERSONAL- </h1></strong>
                         <InfoUser />
                     </article>
                 )}
 
                 {view === 'compras' && (
                     <article className="contenedor2">
-                        <h2> -MIS COMPRAS- </h2>
+                        <strong><h2> MIS COMPRAS </h2></strong>
                         <MisCompras />
                     </article>
                 )}
-
 
             </div>
         </div>

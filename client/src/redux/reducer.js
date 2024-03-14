@@ -9,7 +9,7 @@ import {
   LOGIN,
   GET_ORDER,
   FILTER_MARCA,
-  FILTER_PRODUCTO2,
+  FILTER_SEARCH,
   FILTER_MODELO,
   SIGNUP,
   LOGOUT,
@@ -34,7 +34,9 @@ import {
   ENVIAR_MAIL_PASSWORD,
   CAMBIAR_PASSWORD,
   POST_COMENTARIO,
+  ADMIN_ACCESS,
 } from "./action-types.js";
+import { allUsers } from "./actions.js";
 
 const initialState = {
   categoryReducer: [],
@@ -75,6 +77,7 @@ const reducer = (state = initialState, { type, payload }) => {
       };
 
     case GET_USERS:
+
       return {
         ...state,
         allUsers: payload,
@@ -93,6 +96,19 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         allProductos: payload,
+      };
+
+    case ADMIN_ACCESS:
+      
+      
+      const updatedUsersAdmin = state.allUsers.map(user =>
+        user.email === payload ? { ...user, admin: !user.admin } : user
+      ); 
+      
+      return {
+        ...state,
+        allUsers: updatedUsersAdmin,
+        error: null
       };
 
     case GET_DETAIL:
@@ -132,23 +148,15 @@ const reducer = (state = initialState, { type, payload }) => {
         allProductos: filteredMarca,
       };
 
-    case FILTER_PRODUCTO2:
-      const copyCont2 = [...state.allProductosAux];
-      if (payload === "All") {
-        return {
-          ...state,
-          allProductos: copyCont2,
-        };
-      }
-
-      let filteredGenero = copyCont2.filter(function (filtroCont) {
-        return filtroCont.genero === payload;
+    case FILTER_SEARCH:
+      const filteredProductos = state.allProductosAux.filter(producto => {
+        // Aplica el filtro en función del término de búsqueda
+        return producto.nombre.toLowerCase().includes(payload.toLowerCase());
       });
-
       return {
         ...state,
-        allProductos: filteredGenero,
-      };
+        allProductos: filteredProductos,
+    };
 
     case FILTER_MODELO:
       const copyCont3 = [...state.allProductosAux];

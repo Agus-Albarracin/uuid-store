@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { enviarMailPassword } from "../../redux/actions";
 
 const EnvioMailCambioPassword = () => {
-  // axios.defaults.baseURL = "https://uuid-store-production.up.railway.app";
-  axios.defaults.baseURL = "http://localhost:3001";
   const token = useSelector((state) => state.token);
 
   const dispatch = useDispatch();

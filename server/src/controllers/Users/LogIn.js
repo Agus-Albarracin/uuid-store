@@ -111,7 +111,11 @@ const mailPassword = async (req, res) => {
 
 const cambioPassword = async (req, res) => {
   try {
-    const { token, newPassword } = req.body;
+    const recoveryToken = req.body.token;
+    const newPassword = req.body.newPassword.newPassword;
+
+    const token = recoveryToken.token;
+
     const payload = jwt.verify(token, JWT_SECRET);
 
     const user = await Usuario.findOne({ where: { id: payload.id } });

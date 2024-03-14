@@ -10,7 +10,7 @@ const getProdu = require("../controllers/Productos/getProductos");
 const postProdu = require("../controllers/Productos/postProductos");
 const deleteProdu = require("../controllers/Productos/deleteProductos");
 const putProdu = require("../controllers/Productos/putProductos");
-const postComment = require("../controllers/Productos/createComment");
+const comments = require("../controllers/Productos/comment");
 //Carrito
 const postCarrito = require("../controllers/Carrito/postCarrito");
 const deleteCarrito = require("../controllers/Carrito/deleteCarrito");
@@ -29,7 +29,8 @@ router.get("/getproductos/all", getProdu.getProductos);
 router.get("/getproductos/:id", getProdu.getProductosById);
 router.get("/getproductosByName", getProdu.getProductosByName);
 router.get("/getproductosFilter", getProdu.getProductosFilter);
-router.post("/postcomment", postComment.createComment);
+router.post("/postcomment", comments.createComment);
+router.put("/deletecomment", comments.deleteComment);
 
 //admin
 router.post("/postproductos", postProdu.postProductos);

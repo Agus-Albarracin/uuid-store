@@ -34,6 +34,7 @@ function CardForDetail({ producto }) {
             alt="Imagen 2"
           />
         </div>
+          
       </Link>
     </div>
   );

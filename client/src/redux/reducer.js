@@ -78,7 +78,6 @@ const reducer = (state = initialState, { type, payload }) => {
       };
 
     case GET_USERS:
-
       return {
         ...state,
         allUsers: payload,
@@ -137,14 +136,14 @@ const reducer = (state = initialState, { type, payload }) => {
       };
 
     case FILTER_SEARCH:
-      const filteredProductos = state.allProductosAux.filter(producto => {
+      const filteredProductos = state.allProductosAux.filter((producto) => {
         // Aplica el filtro en función del término de búsqueda
         return producto.nombre.toLowerCase().includes(payload.toLowerCase());
       });
       return {
         ...state,
         allProductos: filteredProductos,
-    };
+      };
 
     case FILTER_MODELO:
       const copyCont3 = [...state.allProductosAux];
@@ -294,7 +293,6 @@ const reducer = (state = initialState, { type, payload }) => {
     case ENVIAR_MAIL_PASSWORD:
       return {
         ...state,
-        actualUser: { ...actualUser, recoveryToken: payload },
         token: payload,
       };
 

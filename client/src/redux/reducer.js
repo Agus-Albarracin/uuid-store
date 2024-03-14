@@ -34,13 +34,14 @@ import {
   ENVIAR_MAIL_PASSWORD,
   CAMBIAR_PASSWORD,
   POST_COMENTARIO,
+  DELETE_COMENTARIO,
 } from "./action-types.js";
 import { allUsers } from "./actions.js";
 
 const initialState = {
   categoryReducer: [],
   allProductosHome: [],
-  allProductosDetail:[],
+  allProductosDetail: [],
   allProductos: [],
   allProductosAux: [],
   allUsers: [],
@@ -309,6 +310,16 @@ const reducer = (state = initialState, { type, payload }) => {
         detail: {
           ...state.detail,
           puntuaciones: [...state.detail.puntuaciones, payload],
+        },
+      };
+
+    case DELETE_COMENTARIO:
+      return {
+        ...state,
+        messageToUser: payload,
+        detail: {
+          ...state.detail,
+          puntuaciones: payload,
         },
       };
 

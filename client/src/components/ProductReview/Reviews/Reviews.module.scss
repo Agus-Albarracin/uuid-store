@@ -1,5 +1,6 @@
 .reviews {
   width: 100%;
+  position: relative;
 
   .review {
     display: flex;
@@ -15,6 +16,13 @@
 
     h2 {
       align-self: flex-start;
+    }
+
+    .borrar {
+      position: absolute;
+      color: #f00;
+      align-self: flex-end;
+      cursor: pointer;
     }
   }
 }

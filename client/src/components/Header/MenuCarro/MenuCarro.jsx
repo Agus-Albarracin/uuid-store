@@ -5,6 +5,7 @@ import { removeToCart } from "../../../redux/actions";
 import RedirectButton from "./RedirectButton/RedirectButton";
 import { autoSetCarro } from "../../../redux/actions";
 import { v4 as uuidv4 } from "uuid";
+import { IoTrash } from "react-icons/io5";
 
 const MenuCarro = ({ mostrarCarro, mostrarUser }) => {
   // const cartJSON = window.localStorage.getItem("cart");
@@ -65,14 +66,10 @@ const MenuCarro = ({ mostrarCarro, mostrarUser }) => {
       <div
         className={`${styles.carro} absolute inset-y-0 right-0 max-w-full flex`}
       >
-        {/* <button
-          className="bg-gray-800 text-white hover:bg-gray-700"
-          onClick={() => mostrarCarro(false)}
-        >
-          &nbsp;&nbsp;&larr;&nbsp;&nbsp;
-        </button> */}
-        <div className="w-full bg-white p-4" style={{ height: "85%" }}>
-          <div className="font-bold text-red-600 text-xl  mb-4">MI COMPRA</div>
+        <div className="w-full bg-white p-3 " style={{ height: "85%" }}>
+          <div className="font-bold text-red-600 text-xl justify-between flex mb-4">
+            <span>MI COMPRA</span>
+          </div>
           <div className={styles.productos}>
             {cart.map((produ, index) => (
               <div
@@ -85,25 +82,36 @@ const MenuCarro = ({ mostrarCarro, mostrarUser }) => {
                   className="w-24  object-cover rounded"
                 />
                 <div className="flex-1 ml-4">
-                  <div className="font-semibold">{produ.nombre}</div>
-                  <div className="font-semibold">Talle: {produ.talle}</div>
-                  <div>Precio: ${produ.precio}</div>
-                  <div>
+                  <div className="font-bold text-[#0C78BF]">{produ.nombre}</div>
+                  <div className="font-bold text-[#65B44D]">Talle:
+                    <span className="font-bold text-[#374151] px-2">
+                      {produ.talle}
+                    </span>
+                  </div>
+                  <div className="font-bold text-[#65B44D]">Precio:
+                    <span className="font-bold text-[#374151] px-2">
+                      $ {produ.precio}
+                    </span>
+                  </div>
+                  <div className="font-bold text-[#65B44D]">
                     Cantidad:
-                    <button onClick={() => decrementarCantidad(produ)}>
-                      &nbsp; -
-                    </button>
-                    &nbsp;&nbsp;{produ.cantidad}&nbsp;&nbsp;
-                    <button onClick={() => incrementarCantidad(produ)}>
-                      +
-                    </button>
+                    <span className="px-1">
+                      <button className="px-1 text-[#0C78BF]" onClick={() => decrementarCantidad(produ)}>
+                        -
+                      </button>
+                      <span className="px-1 text-[#374151]">
+                        {produ.cantidad}
+                      </span>
+                      <button className="px-1 text-[#0C78BF]" onClick={() => incrementarCantidad(produ)}>
+                        +
+                      </button>
+                    </span>
                   </div>
                 </div>
-                <button
-                  onClick={() => quitarProducto(produ.uuid)}
-                  className="text-red-500 font-bold ml-4"
+                <button onClick={() => quitarProducto(produ.uuid)}
+                  className="text-red-500 font-bold text-3xl ml-4"
                 >
-                  Quitar
+                  <IoTrash />
                 </button>
               </div>
             ))}

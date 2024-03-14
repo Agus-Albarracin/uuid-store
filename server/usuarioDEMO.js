@@ -42,7 +42,7 @@ const usuariosDemo = [
       notificaciones: true
     },
     {
-      id: 334,
+      id: 330,
       nombre: "Milton",
       email: "milthon.g@gmail.com",
       password: "contraseña",

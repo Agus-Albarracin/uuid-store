@@ -7,12 +7,14 @@ const Estadisticas = () => {
   const dispatch = useDispatch();
   const [userStats, setUserStats] = useState([]);
   const [orderStats, setOrderStats] = useState([]);
+  
+  const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
   useEffect(() => {
-    dispatch(allUsers());
-    dispatch(getOrdenes());
+    dispatch(allUsers())
+        dispatch(getOrdenes());
   }, [dispatch]);
-
+  
   const users = useSelector(state => state.allUsers);
   const ordenes = useSelector(state => state.allOrdenes);
 
@@ -29,13 +31,18 @@ const Estadisticas = () => {
   }, [ordenes]);
 
   const calculateUserCountsByMonth = (data) => {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth();
     const monthlyCounts = Array.from({ length: 12 }, () => 0);
-
+  
     data.forEach(user => {
-      const monthIndex = new Date(user.createdAt).getMonth();
-      monthlyCounts[monthIndex]++;
+      const userDate = new Date(user.createdAt);
+      const userMonth = userDate.getMonth();
+      if (userDate.getFullYear() === currentDate.getFullYear()) {
+        monthlyCounts[userMonth]++;
+      }
     });
-
+  
     return monthlyCounts;
   };
 
@@ -47,10 +54,9 @@ const Estadisticas = () => {
       monthlyCounts[monthIndex]++;
     });
 
+
     return monthlyCounts;
   };
-
-  const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
   return (
     <div>
@@ -67,7 +73,7 @@ const Estadisticas = () => {
           data={monthNames.map((month, index) => ({ x: index + 1, y: userStats[index] || 0 }))}
           labels={({ datum }) => `${datum.y}`}
           labelComponent={<VictoryLabel dy={-5} />}
-          style={{ data: { fill: "#c43a31" } }} // Color rojo para las barras de usuarios
+          style={{ data: { fill: "#c43a31" } }} 
         />
       </VictoryChart>
       
@@ -83,7 +89,7 @@ const Estadisticas = () => {
           data={monthNames.map((month, index) => ({ x: index + 1, y: orderStats[index] || 0 }))}
           labels={({ datum }) => `${datum.y}`}
           labelComponent={<VictoryLabel dy={-5} />}
-          style={{ data: { fill: "#007acc" } }} // Color azul para las barras de órdenes
+          style={{ data: { fill: "#007acc" } }} 
         />
       </VictoryChart>
     </div>

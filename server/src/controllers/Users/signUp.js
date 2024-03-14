@@ -53,8 +53,6 @@ const signUpUser = async (req, res) => {
 const signUpUserGoogle = async (req, res) => {
   const { email, nombre, googleId, imageUrl, givenName, apellido } = req.body;
   try {
-    if (!email || !nombre || !apellido || !googleId || !imageUrl || !givenName)
-      return res.status(400).send("Faltan ingresar datos.");
 
     let [user, seCreoUser] = await Usuario.findOrCreate({
       where: { email },

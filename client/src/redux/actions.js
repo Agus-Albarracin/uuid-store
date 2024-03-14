@@ -40,14 +40,28 @@ import axios from "axios";
 
 // const BACK_URL = import.meta.env.VITE_VERCEL_BACKURL;
 
-// axios.defaults.baseURL = "https://uuid-store-production.up.railway.app";
-axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "https://uuid-store-production.up.railway.app";
+// axios.defaults.baseURL = "http://localhost:3001";
 
 // TRAER TODOS LOS PRODUCTOS
 export const getProductos = () => {
   try {
     return async function (dispatch) {
       const response = await axios(`/getproductos`);
+      return dispatch({
+        type: GET_PRODUCTOS,
+        payload: response.data,
+      });
+    };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getProductosAll = () => {
+  try {
+    return async function (dispatch) {
+      const response = await axios(`/getproductos/all`);
       return dispatch({
         type: GET_PRODUCTOS,
         payload: response.data,

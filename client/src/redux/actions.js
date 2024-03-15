@@ -42,8 +42,8 @@ import axios from "axios";
 
 // const BACK_URL = import.meta.env.VITE_VERCEL_BACKURL;
 
-// axios.defaults.baseURL = "https://uuid-store-production.up.railway.app";
-axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "https://uuid-store-production.up.railway.app";
+// axios.defaults.baseURL = "http://localhost:3001";
 
 // TRAER TODOS LOS PRODUCTOS
 export const getProductos = () => {

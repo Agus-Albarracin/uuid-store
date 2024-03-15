@@ -95,12 +95,11 @@ const reducer = (state = initialState, { type, payload }) => {
       };
 
     case UPDATE_USER:
-      console.log(payload.usuario)
+      console.log(payload.usuario);
       return {
         ...state,
         actualUser: payload.usuario,
-        
-      }
+      };
 
     case GET_NAME:
       return {
@@ -330,6 +329,12 @@ const reducer = (state = initialState, { type, payload }) => {
           ...state.detail,
           puntuaciones: payload,
         },
+      };
+
+    case UPDATE_PRODUCTO:
+      return {
+        ...state,
+        messageToUser: payload,
       };
 
     default:

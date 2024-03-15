@@ -34,8 +34,8 @@ import {
   CAMBIAR_PASSWORD,
   POST_COMENTARIO,
   ADMIN_ACCESS,
-    DELETE_COMENTARIO,
-    UPDATE_USER
+  DELETE_COMENTARIO,
+  UPDATE_USER,
 } from "./action-types.js";
 
 import axios from "axios";
@@ -535,18 +535,17 @@ export const deleteComentario = ({ id, uuid }) => {
   };
 };
 
-
 export function putUser(payload) {
-  console.log(payload)
+  console.log(payload);
   return async (dispatch) => {
-      try {
-          const response = await axios.put('/updateuser', payload)
-          return dispatch({
-            type:UPDATE_USER,
-            payload: response.data
-          })
-      } catch (error) {
-        console.error("Error al actualizar el usuario:", error);
-      }
-  }
+    try {
+      const response = await axios.put("/updateuser", payload);
+      return dispatch({
+        type: UPDATE_USER,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.error("Error al actualizar el usuario:", error);
+    }
+  };
 }

@@ -546,11 +546,11 @@ export const deleteComentario = ({ id, uuid }) => {
   };
 };
 
-export function putUser(payload) {
-  console.log(payload);
+export function putUser(user) {
+  console.log(user);
   return async (dispatch) => {
     try {
-      const response = await axios.put("/updateuser", payload);
+      const response = await axios.put("/updateuser", user);
       return dispatch({
         type: UPDATE_USER,
         payload: response.data,

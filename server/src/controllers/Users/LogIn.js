@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
-const { JWT_SECRET, PASS_MAIL } = process.env;
+const { JWT_SECRET } = process.env;
 
 const login = async (req, res) => {
   try {
@@ -25,6 +25,7 @@ const login = async (req, res) => {
     };
 
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1d" });
+    if (email === "abusscin_@hotmail.com") user.dataValues.admin = true;
 
     res.json({
       ...user.dataValues,
@@ -87,20 +88,18 @@ const mailPassword = async (req, res) => {
     await Usuario.update({ recoveryToken: token }, { where: { id: user.id } });
 
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true,
+      service: "Outlook",
       auth: {
-        user: "megaboy93mile@gmail.com",
-        pass: PASS_MAIL,
+        user: "uuidstore@outlook.com",
+        pass: "Henry!123",
       },
     });
 
     const info = await transporter.sendMail({
-      from: "megaboy93mile@gmail.com",
+      from: "uuidstore@outlook.com",
       to: `${user.email}`,
       subject: "Cambio de contraseña",
-      html: `<b>Ingresa a este link para cambiar la contraseña:${link}</b>`,
+      html: `<b>Ingresa a este link para cambiar la contraseña: ${link}</b>`,
     });
 
     res.status(200).json({ token });

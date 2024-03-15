@@ -1,6 +1,5 @@
 const usuariosDemo = [
     {
-      id: 104,
       nombre: "Agustin",
       email: "abusscin_@hotmail.com",
       password: "contraseña",
@@ -10,18 +9,17 @@ const usuariosDemo = [
       admin: true,
       estadoInactividad: false,
       apellido: "Albarracin",
-      direccion: "Dirección del Usuario",
-      provincia: "Provincia del Usuario",
-      localidad: "Localidad del Usuario",
+      direccion: null,
+      provincia: null,
+      localidad: null,
       codigoPostal: "12345",
       dni: "12345678",
       numeroTramite: 222325996,
-      telefono: "123456789",
+      telefono: null,
       genero: "Indefinido todavia",
       notificaciones: true
     },
     {
-      id: 2224,
       nombre: "Ariel",
       email: "arielg2206@hotmail.com",
       password: "123456",
@@ -42,7 +40,6 @@ const usuariosDemo = [
       notificaciones: true
     },
     {
-      id: 333,
       nombre: "Diego",
       email: "agustin.albarracin22@outlook.com",
       password: "contraseña",
@@ -63,7 +60,6 @@ const usuariosDemo = [
       notificaciones: true
     },
     {
-      id: 330,
       nombre: "Milton",
       email: "milthon.g@gmail.com",
       password: "contraseña",
@@ -84,7 +80,6 @@ const usuariosDemo = [
       notificaciones: true
     },
     {
-      id: 334,
       nombre: "Alejo",
       email: "Alejod951@gmail.com",
       password: "contraseña",

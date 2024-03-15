@@ -38,7 +38,6 @@ import {
   UPDATE_USER,
   UPDATE_CART,
 } from "./action-types.js";
-import { allUsers } from "./actions.js";
 
 const initialState = {
   categoryReducer: [],

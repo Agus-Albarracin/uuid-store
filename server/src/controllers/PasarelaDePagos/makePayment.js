@@ -1,6 +1,6 @@
 require("dotenv").config();
 const { MercadoPagoConfig, Preference } = require("mercadopago");
-const { TOKEN_MP, KEY_Makepayment} = process.env;
+const { TOKEN_MP, KEY_Makepayment } = process.env;
 
 const client = new MercadoPagoConfig({ accessToken: TOKEN_MP });
 
@@ -8,7 +8,7 @@ const makePayment = async (req, res) => {
   try {
     const items = req.body.cart.map((ele) => ({
       title: ele.nombre,
-      quantity: 1,
+      quantity: ele.cantidad,
       unit_price: Number(ele.precio),
       currency_id: "ARS",
     }));

@@ -3,35 +3,41 @@ import { useSelector, useDispatch } from "react-redux";
 import { putUser } from "../../redux/actions";
 import "./ActualizarData.css";
 
+
 function ActualizarData() {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.actualUser);
-  const [userData, setUserData] = useState({
-    nombre: user.nombre,
-    apellido: user.apellido,
-    dni: user.dni,
-    direccion: user.direccion,
-    localidad: user.localidad,
-    provincia: user.provincia,
-    email: user.email,
-    telefono: user.telefono,
-  });
-  const [mostrarDiv, setMostrarDiv] = useState(false);
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.actualUser);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserData({
-      ...userData,
-      [name]: value,
+    const [userData, setUserData] = useState({
+      nombre: user.nombre,
+      apellido: user.apellido,
+      dni: user.dni,
+      direccion: user.direccion,
+      localidad: user.localidad,
+      provincia: user.provincia,
+      email: user.email,
+      telefono: user.telefono,
     });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    dispatch(putUser(userData));
-    setMostrarDiv(true); // Mostrar el div después de actualizar
-    //navigate('/user');
-  };
+    const [mostrarDiv, setMostrarDiv] = useState(false);
+  
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setUserData({
+        ...userData,
+        [name]: value,
+      });
+    };
+  
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      console.log(userData)
+      try {
+        await dispatch(putUser(userData)); // Esperar a que la acción se complete
+        setMostrarDiv(true); // Mostrar el div después de actualizar
+      } catch (error) {
+        console.error("Error al actualizar el usuario:", error);
+      }
+    };
 
   return (
     <div className="contenedor-user">
@@ -115,7 +121,6 @@ function ActualizarData() {
       {mostrarDiv && (
         <div className="mensaje">
           <p>¡Datos actualizados correctamente!</p>
-          {/* Agrega aquí cualquier otro contenido que desees mostrar después de actualizar */}
         </div>
       )}
     </div>

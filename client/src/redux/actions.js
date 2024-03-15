@@ -35,6 +35,7 @@ import {
   POST_COMENTARIO,
   ADMIN_ACCESS,
     DELETE_COMENTARIO,
+    UPDATE_USER
 } from "./action-types.js";
 
 import axios from "axios";
@@ -42,7 +43,7 @@ import axios from "axios";
 // const BACK_URL = import.meta.env.VITE_VERCEL_BACKURL;
 
 axios.defaults.baseURL = "https://uuid-store-production.up.railway.app";
-//axios.defaults.baseURL = "http://localhost:3001";
+// axios.defaults.baseURL = "http://localhost:3001";
 
 // TRAER TODOS LOS PRODUCTOS
 export const getProductos = () => {
@@ -537,10 +538,13 @@ export const deleteComentario = ({ id, uuid }) => {
 
 export function putUser(payload) {
   console.log(payload)
-  return async function () {
+  return async (dispatch) => {
       try {
-          const res = await axios.put('/updateuser', payload)
-          return res;
+          const response = await axios.put('/updateuser', payload)
+          return dispatch({
+            type:UPDATE_USER,
+            payload: response.data
+          })
       } catch (error) {
         console.error("Error al actualizar el usuario:", error);
       }

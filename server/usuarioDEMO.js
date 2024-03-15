@@ -38,7 +38,7 @@ const usuariosDemo = [
       dni: "12345678",
       numeroTramite: 222325996,
       telefono: "12223344",
-      genero: "Masculino",
+      genero: "Bisexual pasivo",
       notificaciones: true
     },
     {

@@ -31,8 +31,8 @@ const UserData = ({ userBuyData, setUserBuyData, setView }) => {
       telefono: actualForm
         ? actualForm.telefono
         : user.telefono
-        ? user.telefono
-        : "",
+          ? user.telefono
+          : "",
     },
     validate,
     onSubmit: (values) => handleSubmitAndView(values),

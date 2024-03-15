@@ -32,39 +32,55 @@ const Confirmacion = ({ userBuyData }) => {
   };
 
   return (
-    <div className={styles.container}>
-      <h2>CONFIRMA TUS DATOS</h2>
-      <div className={styles.dataDelUsuario}>
-        <h2> Tus Datos </h2>
-        <span>
-          Nombre: {userBuyData.nombre} {userBuyData.apellido}
+    <div className="bg-white p-6 rounded-lg shadow-md">
+      <h2 className="text-xl font-semibold mb-4">CONFIRMA TUS DATOS</h2>
+
+      <div className="mb-8">
+        <h2 className="text-lg font-semibold mb-2">Tus Datos</h2>
+        <span className="block mb-2">
+          <span className="text-lg font-bold mx-2">Nombre:</span>
+          {userBuyData.nombre} {userBuyData.apellido}
         </span>
-        <span> Email: {userBuyData.email} </span>
-        <span> DNI: {userBuyData.dni} </span>
-        <span> Telefono: {userBuyData.telefono} </span>
+        <span className="block mb-2">
+          <span className="text-lg font-bold mx-2">Email:</span>
+          {userBuyData.email}</span>
+        <span className="block mb-2">
+          <span className="text-lg font-bold mx-2">DNI:</span>
+          {userBuyData.dni}</span>
+        <span className="block mb-2">
+          <span className="text-lg font-bold mx-2">Telefono:</span>
+          {userBuyData.telefono}</span>
       </div>
 
-      <div className={styles.datosDeEnvio}>
-        <h2> Datos de envío </h2>
-        <span> Dirección: {userBuyData.direccion} </span>
-        <span> Localidad: {userBuyData.localidad} </span>
-        <span> Código Postal: {userBuyData.codigoPostal} </span>
-        <span> Provincia: {userBuyData.provincia} </span>
-        <span> Método de envío: {userBuyData.metodoDeEnvio} </span>
+      <div className="mb-8">
+        <h2 className="text-lg font-semibold mb-2">Datos de Envío</h2>
+        <span className="block mb-2">
+          <span className="text-lg font-bold mx-2">Dirección:</span>
+          {userBuyData.direccion}</span>
+        <span className="block mb-2">
+          <span className="text-lg font-bold mx-2">Localidad:</span>
+          {userBuyData.localidad}</span>
+        <span className="block mb-2">
+          <span className="text-lg font-bold mx-2">Código Postal:</span>
+          {userBuyData.codigoPostal}</span>
+        <span className="block mb-2">
+          <span className="text-lg font-bold mx-2">Provincia:</span>
+          {userBuyData.provincia}</span>
+        <span className="block mb-2">
+          <span className="text-lg font-bold mx-2">Método de envío:</span>
+          {userBuyData.metodoDeEnvio}</span>
       </div>
 
       <button
-        className={`bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700 mt-4`}
+        className="bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-700 mt-4 focus:outline-none"
         onClick={handleBuy}
       >
         Pagar
       </button>
 
-      {preferenceId && (
-        <Wallet initialization={{ preferenceId: preferenceId }} />
-      )}
-      {/* <Link to="/success">simular confirmar</Link> */}
+      {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} />}
     </div>
+
   );
 };
 

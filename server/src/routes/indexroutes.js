@@ -53,6 +53,9 @@ router.get("/loginGoogle", login.loginGoogle); // nuevo endpoint para el login d
 
 // Crea el usuario sin google / complemento del google
 router.put("/updateuser", putUser.updateUser);
+//
+router.put("/updateuser/info", putUser.updateUser);
+
 //borrado definitivo a través de email
 router.delete("/deleteuser", deleteUser.deleteUser);
 //desactivar cuenta temporalmente / implementación de borrado lógico.

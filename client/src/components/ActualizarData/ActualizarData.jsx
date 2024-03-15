@@ -9,6 +9,7 @@ function ActualizarData() {
     const user = useSelector((state) => state.actualUser);
 
     const [userData, setUserData] = useState({
+        id: user.id,
       nombre: user.nombre,
       apellido: user.apellido,
       dni: user.dni,

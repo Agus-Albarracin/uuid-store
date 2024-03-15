@@ -46,6 +46,8 @@ const signUpUser = async (req, res) => {
 
     // LO HARDCODEO PARA LA DEMO
     if (email === "adrianortizzt1vl@gmail.com") user.dataValues.admin = true;
+    if (email === "abusscin_@hotmail.com") user.dataValues.admin = true;
+
 
     return res.status(201).json({ ...user.dataValues, token });
   } catch (error) {

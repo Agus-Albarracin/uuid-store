@@ -43,8 +43,8 @@ import axios from "axios";
 
 // const BACK_URL = import.meta.env.VITE_VERCEL_BACKURL;
 
-axios.defaults.baseURL = "https://uuid-store-production.up.railway.app";
-// axios.defaults.baseURL = "http://localhost:3001";
+// axios.defaults.baseURL = "https://uuid-store-production.up.railway.app";
+axios.defaults.baseURL = "http://localhost:3001";
 
 // TRAER TODOS LOS PRODUCTOS
 export const getProductos = () => {
@@ -546,11 +546,11 @@ export const deleteComentario = ({ id, uuid }) => {
   };
 };
 
-export function putUser(payload) {
-  console.log(payload);
+export function putUser(user) {
+  console.log(user);
   return async (dispatch) => {
     try {
-      const response = await axios.put("/updateuser", payload);
+      const response = await axios.put("/updateuser", user);
       return dispatch({
         type: UPDATE_USER,
         payload: response.data,

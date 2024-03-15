@@ -6,12 +6,15 @@ const client = new MercadoPagoConfig({ accessToken: TOKEN_MP });
 
 const makePayment = async (req, res) => {
   try {
-    const items = req.body.cart.map((ele) => ({
-      title: ele.nombre,
-      quantity: Number(ele.cantidad),
-      unit_price: Number(ele.precio),
-      currency_id: "ARS",
-    }));
+    const items = req.body.cart.map((ele) => {
+      const total = ele.precio * ele.cantidad;
+      return {
+        title: ele.nombre,
+        quantity: 1,
+        unit_price: Number(total),
+        currency_id: "ARS",
+      };
+    });
     const body = {
       items,
       back_urls: {

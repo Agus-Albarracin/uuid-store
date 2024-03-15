@@ -35,6 +35,7 @@ import {
   CAMBIAR_PASSWORD,
   POST_COMENTARIO,
   DELETE_COMENTARIO,
+  UPDATE_USER,
 } from "./action-types.js";
 import { allUsers } from "./actions.js";
 
@@ -92,6 +93,14 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         allUsers: updatedUsers,
       };
+
+    case UPDATE_USER:
+      console.log(payload.usuario)
+      return {
+        ...state,
+        actualUser: payload.usuario,
+        
+      }
 
     case GET_NAME:
       return {

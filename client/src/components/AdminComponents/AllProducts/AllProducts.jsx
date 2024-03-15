@@ -11,7 +11,8 @@ const AllProducts = () => {
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 10;
+  
+  const productsPerPage = 7;
 
   useEffect(() => {
     // Llamar a la acción getProductos cuando el componente monta

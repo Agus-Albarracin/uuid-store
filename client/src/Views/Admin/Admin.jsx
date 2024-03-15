@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import CreateCategoryForm from "../../components/AdminComponents/CategoryForm/CategoryForm";
+// import CreateCategoryForm from "../../components/AdminComponents/CategoryForm/CategoryForm";
 import CreateForm from "../../components/AdminComponents/CreateForm/CreateForm";
 import OrdenCompra from "../../components/AdminComponents/OrdenCompra/OrdenCompra";
 import AllUsers from "../../components/AdminComponents/AllUsers/AllUsers";
@@ -57,7 +57,7 @@ const Admin = () => {
               icon: <FaChartBar />,
             },
             { label: "Producto", view: "crearProducto", icon: <FaPlus /> },
-            { label: "Categoria", view: "crearCategoria", icon: <FaBoxes /> },
+            // { label: "Categoria", view: "crearCategoria", icon: <FaBoxes /> },
             { label: "Productos", view: "productos", icon: <FaList /> },
             { label: "Usuarios", view: "usuarios", icon: <FaUsers /> },
             { label: "Compras", view: "ordenCompra", icon: <FaShoppingCart /> },
@@ -89,12 +89,11 @@ const Admin = () => {
       </div>
       <section className="p-4">
         <div className={styles.content}>
-          {view === "crearCategoria" && (
+          {/* {view === "crearCategoria" && (
             <article className="mt-4">
-              {/* <h2 className="text-xl font-semibold">Crear una categoría</h2> */}
               <CreateCategoryForm />
             </article>
-          )}
+          )} */}
 
           {view === "estadisticas" && (
             <article className="mt-4">

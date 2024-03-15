@@ -254,7 +254,6 @@ export const autoLogin = (user) => {
 //BOTON DE DETAIL
 
 export const addToCart = (product, cart) => {
- 
   return {
     type: ADD_TO_CART,
     payload: product,
@@ -262,13 +261,11 @@ export const addToCart = (product, cart) => {
 };
 
 export const updateCart = (updatedCart) => {
-  
   return {
     type: UPDATE_CART,
     payload: updatedCart,
   };
 };
-
 
 export const removeToCart = (productIndex) => {
   return {
@@ -558,5 +555,12 @@ export function putUser(user) {
     } catch (error) {
       console.error("Error al actualizar el usuario:", error);
     }
+  };
+}
+
+export function generarMensaje(mensaje) {
+  return {
+    type: MESSAGE_TO_USER,
+    payload: mensaje,
   };
 }

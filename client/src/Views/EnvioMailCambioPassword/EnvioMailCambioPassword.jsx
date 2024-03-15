@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { enviarMailPassword } from "../../redux/actions";
+import {
+  enviarMailPassword,
+  allUsers,
+  generarMensaje,
+} from "../../redux/actions";
 
 const EnvioMailCambioPassword = () => {
   const token = useSelector((state) => state.token);
+  const usersall = useSelector((state) => state.allUsers);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,16 +41,31 @@ const EnvioMailCambioPassword = () => {
     window.localStorage.setItem("recoveryToken", JSON.stringify(token));
   }, [token]);
 
+  useEffect(() => {
+    dispatch(allUsers());
+  }, [usersall.length]);
+
+  const tieneEmail = (mail) => {
+    for (let i = 0; i < usersall.length; i++) {
+      if (usersall[i].email === mail) {
+        return true;
+      }
+    }
+    return false;
+  };
+
   const handleSendMail = async (event) => {
     event.preventDefault();
-    if (Object.keys(errors).length === 0) {
-      try {
-        await dispatch(enviarMailPassword(email));
-        setEnvio(true);
-        setEmail("");
-      } catch (error) {
-        window.alert("Usuario no encontrado. Por favor, regístrate.");
-      }
+
+    if (Object.keys(errors).length === 0 && tieneEmail(email)) {
+      await dispatch(enviarMailPassword(email));
+      setEnvio(true);
+      setEmail("");
+    } else {
+      await dispatch(
+        generarMensaje("Usuario no encontrado. Por favor, regístrate.")
+      );
+      // window.alert("Usuario no encontrado. Por favor, regístrate.");
     }
   };
 

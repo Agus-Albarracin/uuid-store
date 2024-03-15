@@ -97,7 +97,7 @@ const CambioDePassword = () => {
       ) : (
         <>
           <h1>El cambio se realizó con éxito</h1>
-          <button className="mt-4 px-4 py-2 rounded bg-blue-500 text-white" onClick={handleToHome}>Volver al Home</button>
+          <button className="mt-4 px-4 py-2 rounded bg-red-500 text-white hover:bg-red-700" onClick={handleToHome}>Volver al Home</button>
         </>
       )}
     </div>

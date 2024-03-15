@@ -1,72 +1,86 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { cambiarPassword } from "../../redux/actions";
 
 const CambioDePassword = () => {
-  const token = useSelector((state) => state.token);
-  const user = useSelector((state) => state.actualUser);
+  const tokenStorage = localStorage.getItem("recoveryToken") || "";
+  const token = JSON.parse(tokenStorage);
+
   const dispatch = useDispatch();
-  console.log(token);
+  const navigate = useNavigate();
 
   const [newPassword, setNewPassword] = useState({});
-  // const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
+  const [confirm, setConfirm] = useState(false);
 
-  // const validacion = (data) => {
-  //   let errors = {};
+  const validacion = (data) => {
+    let errors = {};
 
-  //   if (data.newPassword && data.newPassword.length < 6) {
-  //     errors = {
-  //       ...errors,
-  //       errorP1: "La contraseña debe tener mínimo 6 carcteres",
-  //     };
-  //   }
-  //   if (data.repeatNewPassword && data.repeatNewPassword.length < 6) {
-  //     errors = {
-  //       ...errors,
-  //       errorP2: "La contraseña debe tener mínimo 6 carcteres",
-  //     };
-  //   }
-  //   if (data.newPassword.length > 6 && data.repeatNewPassword.length > 6) {
-  //     if (data.newPassword !== data.repeatNewPassword) {
-  //       errors = { ...errors, error: "Las contraseñas no coinciden" };
-  //     }
-  //   }
+    if (data.newPassword.length < 6) {
+      errors.error = "La contraseña debe tener mínimo 6 caracteres.";
+    }
 
-  //   return errors;
-  // };
+    if (data.newPassword !== data.repeatNewPassword) {
+      errors.error2 = "Las contraseñas no coinciden.";
+    }
+
+    return errors;
+  };
 
   const handleChange = (event) => {
     const property = event.target.name;
     const value = event.target.value;
-    const objeto = { [property]: value };
+    const objeto = { ...newPassword, [property]: value };
 
     setNewPassword({ ...newPassword, [property]: value });
-    console.log(user);
-    console.log(token);
+    setErrors(validacion(objeto));
   };
 
-  const confirmarCambio = () => {
-    dispatch(cambiarPassword(token, newPassword));
+  const confirmarCambio = (event) => {
+    event.preventDefault();
+    if (Object.keys(errors).length === 0) {
+      dispatch(cambiarPassword(token, newPassword));
+      setNewPassword({ newPassword: "", repeatNewPassword: "" });
+      setConfirm(true);
+    }
+  };
+
+  const handleToHome = () => {
+    navigate("/");
   };
 
   return (
     <div>
-      <h1>Introduce tu nueva contraseña</h1>
-      <label>Nueva contraseña</label>
-      <input
-        type="text"
-        name="newPassword"
-        value={newPassword.newPassword}
-        onChange={handleChange}
-      />
-      <label>Repetir contraseña</label>
-      <input
-        type="text"
-        name="repeatNewPassword"
-        value={newPassword.repeatNewPassword}
-        onChange={handleChange}
-      />
-      <button onClick={confirmarCambio}>confirmar</button>
+      {confirm === false ? (
+        <>
+          <h1>Introduce tu nueva contraseña</h1>
+          {errors.error && <h1>{errors.error}</h1>}
+          {!errors.error ? <h1>{errors.error2}</h1> : false}
+          <form>
+            <label>Nueva contraseña</label>
+            <input
+              type="text"
+              name="newPassword"
+              value={newPassword.newPassword}
+              onChange={handleChange}
+            />
+            <label>Repetir contraseña</label>
+            <input
+              type="text"
+              name="repeatNewPassword"
+              value={newPassword.repeatNewPassword}
+              onChange={handleChange}
+            />
+            <button onClick={confirmarCambio}>confirmar</button>
+          </form>
+        </>
+      ) : (
+        <>
+          <h1>El cambio se realizó con éxito</h1>
+          <button onClick={handleToHome}>volver al home</button>
+        </>
+      )}
     </div>
   );
 };

@@ -19,4 +19,6 @@ const deleteProductos = async (req, res) => {
   }
 };
 
+//Se debe cambiar el delete por un put.
+
 module.exports = { deleteProductos };

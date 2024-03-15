@@ -34,13 +34,13 @@ import {
   ENVIAR_MAIL_PASSWORD,
   CAMBIAR_PASSWORD,
   POST_COMENTARIO,
-  ADMIN_ACCESS,
 } from "./action-types.js";
 import { allUsers } from "./actions.js";
 
 const initialState = {
   categoryReducer: [],
   allProductosHome: [],
+  allProductosDetail:[],
   allProductos: [],
   allProductosAux: [],
   allUsers: [],
@@ -72,12 +72,12 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         allProductosHome: payload,
+        allProductosDetail: payload,
         allProductos: payload,
         allProductosAux: payload,
       };
 
     case GET_USERS:
-
       return {
         ...state,
         allUsers: payload,
@@ -96,19 +96,6 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         allProductos: payload,
-      };
-
-    case ADMIN_ACCESS:
-      
-      
-      const updatedUsersAdmin = state.allUsers.map(user =>
-        user.email === payload ? { ...user, admin: !user.admin } : user
-      ); 
-      
-      return {
-        ...state,
-        allUsers: updatedUsersAdmin,
-        error: null
       };
 
     case GET_DETAIL:
@@ -149,14 +136,14 @@ const reducer = (state = initialState, { type, payload }) => {
       };
 
     case FILTER_SEARCH:
-      const filteredProductos = state.allProductosAux.filter(producto => {
+      const filteredProductos = state.allProductosAux.filter((producto) => {
         // Aplica el filtro en función del término de búsqueda
         return producto.nombre.toLowerCase().includes(payload.toLowerCase());
       });
       return {
         ...state,
         allProductos: filteredProductos,
-    };
+      };
 
     case FILTER_MODELO:
       const copyCont3 = [...state.allProductosAux];
@@ -306,14 +293,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case ENVIAR_MAIL_PASSWORD:
       return {
         ...state,
-        actualUser: { ...actualUser, recoveryToken: payload },
         token: payload,
-      };
-
-    case UPDATE_PRODUCTO:
-      return {
-        ...state,
-        allProductos: payload,
       };
 
     case CAMBIAR_PASSWORD:

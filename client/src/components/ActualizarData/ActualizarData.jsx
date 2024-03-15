@@ -28,7 +28,7 @@ function ActualizarData(){
       const handleSubmit = (event) => {
         event.preventDefault();
         dispatch(putUser(userData));
-        navigate('/user');
+        //navigate('/user');
       };
 
     return(
@@ -106,7 +106,7 @@ function ActualizarData(){
                     onChange={handleChange}
                     />
                 </label>
-                <button type="submit">Actualizar</button>
+                <button type="submit" onClick={() => handleSubmit}>Actualizar</button>
             </form>
         </div>
     )

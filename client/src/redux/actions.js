@@ -58,6 +58,20 @@ export const getProductos = () => {
   }
 };
 
+export const getProductosAll = () => {
+  try {
+    return async function (dispatch) {
+      const response = await axios(`/getproductos/all`);
+      return dispatch({
+        type: GET_PRODUCTOS,
+        payload: response.data,
+      });
+    };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getName = (nombre) => {
   try {
     return async function (dispatch) {
@@ -298,7 +312,6 @@ export const accessAdminUser = (email) => {
   return async function (dispatch) {
     try {
       const response = await axios.put("/adminaccess", { email });
-
       return dispatch({
         type: ADMIN_ACCESS,
         payload: email,
@@ -437,16 +450,10 @@ export const enviarMailPassword = (email) => {
 export const cambiarPassword = (token, newPassword) => {
   try {
     return async function (dispatch) {
-      const response = await axios.post(
-        `/change-password`,
-        { token, newPassword },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post(`/change-password`, {
+        token,
+        newPassword,
+      });
       return dispatch({
         type: CAMBIAR_PASSWORD,
         payload: response.data,
@@ -510,10 +517,10 @@ export const postComentario = ({ id, comment }) => {
 
 
 export function putUser(payload) {
-
+  console.log(payload)
   return async function () {
       try {
-          const res = await axios.post('/updateuser', payload)
+          const res = await axios.put('/updateuser', payload)
           return res;
       } catch (error) {
         console.error("Error al actualizar el usuario:", error);

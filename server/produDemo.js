@@ -14,7 +14,7 @@ const productos =
         "https://res.cloudinary.com/djd7b0upe/image/upload/v1709006175/uuid_store/x5eogdbe1unfqjydhz85.webp",
         "https://res.cloudinary.com/djd7b0upe/image/upload/v1709006176/uuid_store/hjjqgw7qkbjkhoavkwjc.webp"
       ],
-      "estado": true,
+      "estado": false ,
       "codigo": "A1B2C3"
     },
     {
@@ -31,7 +31,7 @@ const productos =
         "https://res.cloudinary.com/djd7b0upe/image/upload/v1709006175/uuid_store/x5eogdbe1unfqjydhz85.webp",
         "https://res.cloudinary.com/djd7b0upe/image/upload/v1709006176/uuid_store/hjjqgw7qkbjkhoavkwjc.webp"
       ],
-      "estado": true,
+      "estado": false,
       "codigo": "D4E5F6"
     },
     {
@@ -82,7 +82,7 @@ const productos =
         "https://res.cloudinary.com/djd7b0upe/image/upload/v1709006175/uuid_store/x5eogdbe1unfqjydhz85.webp",
         "https://res.cloudinary.com/djd7b0upe/image/upload/v1709006176/uuid_store/hjjqgw7qkbjkhoavkwjc.webp"
       ],
-      "estado": false,
+      "estado": true,
       "codigo": "M4N5O6"
     },
     {
@@ -116,7 +116,7 @@ const productos =
         "https://res.cloudinary.com/djd7b0upe/image/upload/v1709006175/uuid_store/x5eogdbe1unfqjydhz85.webp",
         "https://res.cloudinary.com/djd7b0upe/image/upload/v1709006176/uuid_store/hjjqgw7qkbjkhoavkwjc.webp"
       ],
-      "estado": false,
+      "estado": true,
       "codigo": "S1T2U3"
     },
     {
@@ -167,7 +167,7 @@ const productos =
         "https://res.cloudinary.com/djd7b0upe/image/upload/v1709006175/uuid_store/x5eogdbe1unfqjydhz85.webp",
         "https://res.cloudinary.com/djd7b0upe/image/upload/v1709006176/uuid_store/hjjqgw7qkbjkhoavkwjc.webp"
       ],
-      "estado": false,
+      "estado": true,
       "codigo": "B1C2D3"
     },
     {
@@ -292,7 +292,7 @@ const productos =
         "https://res.cloudinary.com/djd7b0upe/image/upload/v1709006175/uuid_store/x5eogdbe1unfqjydhz85.webp",
         "https://res.cloudinary.com/djd7b0upe/image/upload/v1709006176/uuid_store/hjjqgw7qkbjkhoavkwjc.webp"
       ],
-      "estado": false,
+      "estado": true,
       "talle": null,
       "quantitysold": null,
       "enDescuento": null

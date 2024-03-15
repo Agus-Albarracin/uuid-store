@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getProductos, deleteProducto, updateProducto } from '../../../redux/actions';
+import { getProductosAll, deleteProducto, updateProducto } from '../../../redux/actions';
 import UpdateProduct from "./UpdateProduct/UpdateProduct";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 const AllProducts = () => {
@@ -11,10 +11,11 @@ const AllProducts = () => {
 
     useEffect(() => {
         // Llamar a la acción getProductos cuando el componente monta
-        dispatch(getProductos());
+        dispatch(getProductosAll());
     }, [dispatch]);
 
     const productos = useSelector((state) => state.allProductos);
+    console.log(productos)
 
     const [editMode, setEditMode] = useState(false);
     const [selectedProductId, setSelectedProductId] = useState(null);
@@ -34,10 +35,11 @@ const AllProducts = () => {
         dispatch(updateProducto(formData));
         setEditMode(false);
         setSelectedProductId(null);
+        window.location.reload();
     };
 
     if (!Array.isArray(productos)) {
-        dispatch(getProductos());
+        dispatch(getProductosAll());
         return <p>Productos no es un array</p>;
 
     }
@@ -85,8 +87,15 @@ const AllProducts = () => {
                                         <img src={producto?.imagen[0]} alt={producto?.nombre} className="w-16  object-cover" />
                                     ) : null}
                                 </td>
-                                <td className="p-2 border">{producto.estado}</td>
-                                <td className="p-2 border text-center">
+                                <td className="p-2 border">
+                                    {producto?.estado ? (
+                                      <span style={{ backgroundColor: 'green', color: 'white', padding: '2px 5px', borderRadius: '3px' }}>on</span>
+                                    ) : (
+                                      <span style={{ backgroundColor: 'red', color: 'white', padding: '2px 5px', borderRadius: '3px' }}>off</span>
+                                    )}
+                                </td>
+
+                       <td className="p-2 border text-center">
                                     <button
                                         onClick={() => handleUpdate(producto?.id)}
                                         className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-700 focus:outline-none flex items-center"

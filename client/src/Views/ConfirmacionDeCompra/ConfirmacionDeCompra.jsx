@@ -62,9 +62,9 @@ const ConfirmacionDeCompra = () => {
                   <h2>
                     {produ.nombre} {produ.modelo} {produ.marca}
                   </h2>
-                  <h2>Precio: ${produ.precio}</h2>
-                  <h2>Talle: {produ.talle}</h2>
-                  <h2>Cantidad: {produ.cantidad}</h2>
+                  <h2><span className="font-bold">Precio:</span> ${produ.precio}</h2>
+                  <h2><span className="font-bold">Talle:</span> {produ.talle}</h2>
+                  <h2><span className="font-bold">Cantidad:</span> {produ.cantidad}</h2>
                 </div>
                 <hr />
               </div>

@@ -57,10 +57,12 @@ const MenuUser = ({ mostrarUser }) => {
           <div className="text-black">{`${user.nombre}  ${user.apellido}`}</div>
           {user.admin && (
             <Link to="/admin">
-              <span 
-              className="cursor-pointer text-blue-500 mr-4"
-              
-              > Panel de Admin </span>
+              <span
+                className="cursor-pointer text-blue-500 mr-4"
+                onClick={handleCloseMenu}
+              >
+                Panel de Admin
+              </span>
             </Link>
           )}
           <Link to="/user">

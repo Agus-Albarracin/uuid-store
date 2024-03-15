@@ -26,13 +26,16 @@ const postOrden = async (req, res) => {
     if (nombre) {
       let total = 0;
 
-      productos.forEach(async (produ) => {
+      for (const produ of productos) {
         let producto = await Productos.findByPk(produ.id);
-        producto.quantitysold = (producto.quantitysold || 0) + 1;
-        producto.stock[produ.talle] -= produ.cantidad;
-        total += produ.precio;
-        await producto.save();
-      });
+        console.log(producto.dataValues);
+        let stock = producto.getDataValue("stock");
+        stock[produ.talle] -= produ.cantidad;
+        await producto.update({ stock });
+
+        console.log(producto.dataValues);
+        total += produ.precio * produ.cantidad;
+      }
 
       let usuario = await Usuario.findOne({ where: { email: emailStorage } });
 
@@ -81,11 +84,10 @@ const postOrden = async (req, res) => {
         Dirección: ${carrito.datosDeEnvio.direccion}
         Localidad: ${carrito.datosDeEnvio.localidad}
         Código Postal: ${carrito.datosDeEnvio.codigoPostal}
-        Método de Envío: ${carrito.datosDeEnvio.metodoDeEnvio}
         \n
         uuid.
 
-        Podes seguir estado de tu compra en el siguiente link: http://localhost:5173/success/${
+        Podes seguir estado de tu compra en el siguiente link: https://uuid-store.vercel.app/success/${
           carrito.idDeCompra
         }
       `;

@@ -50,31 +50,46 @@ const EnvioMailCambioPassword = () => {
   };
 
   return (
-    <div>
+    <div
+      style={{ backgroundColor: "#d9d9d9" }}
+      className="max-w-md mx-auto bg-white p-6 rounded-md shadow-md transition-opacity transform duration-500"
+    >
       {envio === false ? (
         <>
-          <h1>RECUPERAR CONTRASEÑA</h1>
-          <h2>
+          <div className="text-2xl font-bold mb-6 text-gray-600">
+            RECUPERAR CONTRASEÑA
+          </div>
+          <div className="text-1xl font-bold mb-6 text-gray-600">
             Ingresá tu mail para que te enviemos un correo para que puedas crear
             una nueva contraseña
-          </h2>
+          </div>
           <div>
-            <form>
-              <label>Email: </label>
+            <form className="flex flex-col space-y-4">
+              <label className="text-gray-600 block font-semibold">
+                Email:{" "}
+              </label>
               <input
                 type="text"
                 placeholder="Ej: nombre@email.com"
                 value={email}
                 onChange={handleChange}
+                className="w-full border rounded px-3 py-2 mt-1 text-black"
               />
-              <button onClick={handleSendMail}>Enviar correo</button>
-              {errors.error && <span>{errors.error}</span>}
+              {errors.error && (
+                <span className="text-red-500">{errors.error}</span>
+              )}
+              <button
+                className="px-4 py-2 bg-blue-500 text-white rounded"
+                onClick={handleSendMail}
+              >
+                Enviar correo
+              </button>
             </form>
           </div>
         </>
       ) : (
         <>
-          <h1>El corro fue enviado con éxito</h1>
+          <h1>El correo fue enviado con éxito</h1>
           <button onClick={handleToHome}>volver al home</button>
         </>
       )}

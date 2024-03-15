@@ -36,6 +36,7 @@ import {
   ADMIN_ACCESS,
   DELETE_COMENTARIO,
   UPDATE_USER,
+  UPDATE_CART,
 } from "./action-types.js";
 
 import axios from "axios";
@@ -252,12 +253,22 @@ export const autoLogin = (user) => {
 
 //BOTON DE DETAIL
 
-export const addToCart = (product) => {
+export const addToCart = (product, cart) => {
+ 
   return {
     type: ADD_TO_CART,
     payload: product,
   };
 };
+
+export const updateCart = (updatedCart) => {
+  
+  return {
+    type: UPDATE_CART,
+    payload: updatedCart,
+  };
+};
+
 
 export const removeToCart = (productIndex) => {
   return {

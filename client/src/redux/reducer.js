@@ -36,6 +36,7 @@ import {
   POST_COMENTARIO,
   DELETE_COMENTARIO,
   UPDATE_USER,
+  UPDATE_CART,
 } from "./action-types.js";
 import { allUsers } from "./actions.js";
 
@@ -240,6 +241,15 @@ const reducer = (state = initialState, { type, payload }) => {
         cart: [...state.cart, payload],
         messageToUser: "Producto agregado al carrito!",
       };
+
+    case UPDATE_CART:
+     
+      return {
+        ...state,
+        cart: payload,
+        messageToUser: "Se agrego otro zapato a tu carrito!",
+      };
+
 
     case REMOVE_TO_CART:
       const cartFilter = state.cart.filter((item) => item.uuid !== payload);

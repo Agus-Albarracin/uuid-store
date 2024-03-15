@@ -10,6 +10,7 @@ import {
   getDetail,
   clearDetail,
   addToCart,
+  updateCart,
   getProductos,
 } from "../../redux/actions";
 import { v4 as uuidv4 } from "uuid";
@@ -24,6 +25,7 @@ const Detail = () => {
   const detail = useSelector((state) => state.detail);
   const user = useSelector((state) => state.actualUser);
   const allProductos = useSelector((state) => state.allProductosDetail);
+  const cart = useSelector((state) => state.cart);
 
   const [image, setImage] = useState(1);
   const images = [
@@ -73,16 +75,33 @@ const Detail = () => {
 
   const handleAddToCart = () => {
     if (tallaSeleccionada) {
-      if (tallaSeleccionada && tallaSeleccionada !== "sinStock") {
+      if (tallaSeleccionada !== "sinStock") {
         const uuid = uuidv4();
-        dispatch(
-          addToCart({
-            ...detail,
-            talle: tallaSeleccionada,
-            cantidad: 1,
-            uuid: uuid,
-          })
-        );
+        const existingProductIndex = cart.findIndex(item => item.id === detail.id && item.talle === tallaSeleccionada);
+  
+        if (existingProductIndex !== -1) {
+          const updatedCart = cart.map((item, index) => {
+            if (index === existingProductIndex) {
+              return {
+                ...item,
+                cantidad: item.cantidad + 1
+              };
+            }
+            return item;
+          });
+  
+          dispatch(updateCart(updatedCart));
+          
+        } else {
+          dispatch(
+            addToCart({
+              ...detail,
+              talle: tallaSeleccionada,
+              cantidad: 1,
+              uuid: uuid,
+            }, cart)
+          );
+        }
       }
     }
   };

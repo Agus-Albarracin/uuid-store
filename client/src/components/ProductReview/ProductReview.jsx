@@ -3,6 +3,7 @@ import styles from "./ProductReview.module.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { postComentario } from "../../redux/actions";
 import validate from "./validate";
+import { v4 as uuidv4 } from "uuid";
 
 const ProductReview = ({ id }) => {
   const user = useSelector((state) => state.actualUser);
@@ -10,7 +11,11 @@ const ProductReview = ({ id }) => {
 
   const onSubmit = (values) => {
     const usuario = `${user.nombre} ${user.apellido}`;
-    const comment = { ...values, usuario };
+    const userID = user.id;
+    const uuid = uuidv4();
+    const productId = id;
+
+    const comment = { ...values, usuario, userID, productId, uuid };
     dispatch(postComentario({ id, comment }));
   };
 
@@ -51,6 +56,9 @@ const ProductReview = ({ id }) => {
             rows="4"
             className={`mt-1 p-2 w-full border rounded-md ${styles.textarea}`}
           ></textarea>
+          {formik.touched.comentario && formik.errors.comentario && (
+            <div className={styles.error}> {formik.errors.comentario} </div>
+          )}
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-600">

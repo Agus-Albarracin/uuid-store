@@ -7,7 +7,7 @@ const validate = (valores) => {
     errors.nombre = "Campo obligatorio";
   } else if (!regexCaracteres.test(valores.nombre)) {
     errors.nombre = "Campo invalido";
-  } else if (valores.nombre.length > 15) {
+  } else if (valores.nombre.length > 30) {
     errors.nombre = "El nombre puede contener 15 caracteres como máximo";
   }
 
@@ -15,7 +15,7 @@ const validate = (valores) => {
     errors.marca = "Campo obligatorio";
   } else if (!regexCaracteres.test(valores.marca)) {
     errors.marca = "Campo invalido";
-  } else if (valores.marca.length > 15) {
+  } else if (valores.marca.length > 30) {
     errors.marca = "La marca puede contener 15 caracteres como máximo";
   }
 
@@ -23,7 +23,7 @@ const validate = (valores) => {
     errors.modelo = "Campo obligatorio";
   } else if (!regexCaracteres.test(valores.modelo)) {
     errors.modelo = "Campo invalido";
-  } else if (valores.modelo.length > 15) {
+  } else if (valores.modelo.length > 30) {
     errors.modelo = "El modelo puede contener 15 caracteres como máximo";
   }
 

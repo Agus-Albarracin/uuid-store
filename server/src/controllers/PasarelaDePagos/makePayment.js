@@ -8,7 +8,7 @@ const makePayment = async (req, res) => {
   try {
     const items = req.body.cart.map((ele) => ({
       title: ele.nombre,
-      quantity: ele.cantidad,
+      quantity: Number(ele.cantidad),
       unit_price: Number(ele.precio),
       currency_id: "ARS",
     }));

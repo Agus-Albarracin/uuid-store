@@ -84,6 +84,9 @@ const signUpUserGoogle = async (req, res) => {
 
     const token = jwt.sign(payload, JWT_SECRET);
 
+    // LO HARDCODEO PARA LA DEMO
+    if (email === "adrianortizzt1vl@gmail.com") user.dataValues.admin = true;
+
     return res.status(201).json({ ...user.dataValues, token });
   } catch (error) {
     return res.status(500).send(error.message);

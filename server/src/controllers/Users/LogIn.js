@@ -24,7 +24,7 @@ const login = async (req, res) => {
       admin: user.admin,
     };
 
-    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "2min" });
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1d" });
 
     res.json({
       ...user.dataValues,
@@ -55,7 +55,7 @@ const loginGoogle = async (req, res) => {
       admin: user.admin,
     };
 
-    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "2min" }); //No estoy seguro de esto, deberia devolverte el toquen?
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1d" }); //No estoy seguro de esto, deberia devolverte el toquen?
 
     res.status(200).json({
       ...user.dataValues, //DataValues devuelve todos los valores del registro del usuario que pases por email!
@@ -83,7 +83,7 @@ const mailPassword = async (req, res) => {
     };
 
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "10min" });
-    const link = `http://localhost:5173/change-password?${token}`;
+    const link = `https://uuid-store.vercel.app/change-password?${token}`;
     await Usuario.update({ recoveryToken: token }, { where: { id: user.id } });
 
     const transporter = nodemailer.createTransport({

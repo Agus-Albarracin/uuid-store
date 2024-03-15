@@ -7,12 +7,14 @@ import Autenticador from "../../../../Helpers/Auntenticador";
 // HOOKS
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 // ACTIONS
 import { logIn, logInWhitGoogle } from "../../../../redux/actions";
 
 const LogIn = ({ handleView, mostrarUser }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showAnimation, setShowAnimation] = useState(true);
 
   useEffect(() => {
@@ -39,6 +41,18 @@ const LogIn = ({ handleView, mostrarUser }) => {
       mostrarUser();
       // Agrega aquí cualquier lógica adicional que necesites al salir del componente
     }, 200);
+  };
+
+  const handleRecoveryPassword = () => {
+    setShowAnimation(true);
+    setTimeout(() => {
+      setShowAnimation(false);
+      mostrarUser();
+      // Agrega aquí cualquier lógica adicional que necesites al salir del componente
+    }, 100);
+    setTimeout(() => {
+      navigate("/recovery");
+    }, 900);
   };
 
   const formik = useFormik({
@@ -119,6 +133,13 @@ const LogIn = ({ handleView, mostrarUser }) => {
           >
             Salir
           </span>
+          <span
+            className="text-red-500 cursor-pointer focus:outline-none"
+            onClick={handleRecoveryPassword}
+          >
+            olvidé mi contraseña
+          </span>
+
           <button
             type="submit"
             className="px-4 py-2 bg-blue-500 text-white rounded"

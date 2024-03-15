@@ -53,10 +53,7 @@ const CambioDePassword = () => {
   };
 
   return (
-    <div
-      style={{ backgroundColor: "#d9d9d9" }}
-      className="max-w-md mx-auto bg-white p-6 rounded-md shadow-md transition-opacity transform duration-500"
-    >
+    <div className="max-w-md mx-auto bg-white p-6 rounded-md shadow-md transition-opacity transform duration-500" style={{ backgroundColor: "#d9d9d9" }}>
       {confirm === false ? (
         <>
           <div className="text-2xl font-bold mb-6 text-gray-600">
@@ -90,21 +87,22 @@ const CambioDePassword = () => {
               className="w-full border rounded px-3 py-2 mt-1 text-black"
             />
             <button
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
               onClick={confirmarCambio}
             >
-              confirmar
+              Confirmar
             </button>
           </form>
         </>
       ) : (
         <>
           <h1>El cambio se realizó con éxito</h1>
-          <button onClick={handleToHome}>volver al home</button>
+          <button className="mt-4 px-4 py-2 rounded bg-blue-500 text-white" onClick={handleToHome}>Volver al Home</button>
         </>
       )}
     </div>
   );
+  
 };
 
 export default CambioDePassword;

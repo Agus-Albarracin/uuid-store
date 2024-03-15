@@ -126,7 +126,7 @@ const LogIn = ({ handleView, mostrarUser }) => {
           </span>
         </div>
 
-        <div className="mt-8 flex justify-between">
+        <div className="mt-8 flex justify-between items-center">
           <span
             className="text-red-500 cursor-pointer focus:outline-none"
             onClick={handleExitClick}
@@ -134,6 +134,7 @@ const LogIn = ({ handleView, mostrarUser }) => {
             Salir
           </span>
           <span
+            style={{ color: "#615e5e" }}
             className="text-red-500 cursor-pointer focus:outline-none"
             onClick={handleRecoveryPassword}
           >

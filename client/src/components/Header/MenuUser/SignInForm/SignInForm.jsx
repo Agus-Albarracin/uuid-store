@@ -179,17 +179,19 @@ const SignIn = ({ handleView, mostrarUser }) => {
           />
         </div>
 
-        <div className="flex items-center justify-between mt-4">
-          <span
-            className={`text-blue-500 cursor-pointer ${
-              showAnimation ? "animate-bounce" : ""
-            }`}
-            onClick={handleSignInClick}
-          >
-            ¿Ya tenés cuenta? ¡Inicia sesión!
-          </span>
+        <div>
+          <div className="text-center">
+            <span
+              className={`text-blue-500 cursor-pointer ${
+                showAnimation ? "animate-bounce" : ""
+              }`}
+              onClick={handleSignInClick}
+            >
+              ¿Ya tenés cuenta? ¡Inicia sesión!
+            </span>
+          </div>
 
-          <div className="mt-8 flex justify-between">
+          <div className="mt-2 flex justify-between">
             <button
               className="text-red-500 cursor-pointer focus:outline-none"
               onClick={handleExitClick}

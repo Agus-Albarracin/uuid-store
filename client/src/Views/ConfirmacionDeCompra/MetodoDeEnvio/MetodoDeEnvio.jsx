@@ -37,7 +37,7 @@ const MetodoDeEnvio = ({ userBuyData, setUserBuyData, setView }) => {
           onChange={formik.handleChange}
           checked={formik.values.metodoDeEnvio === "OCA"}
         />
-        Oca
+        <span>Oca</span>
       </label>
 
       <label htmlFor="correoArgentino">
@@ -49,7 +49,8 @@ const MetodoDeEnvio = ({ userBuyData, setUserBuyData, setView }) => {
           onChange={formik.handleChange}
           checked={formik.values.metodoDeEnvio === "Correo Argentino"}
         />
-        Correo Argentino
+        <span>Correo Argentino</span>
+        
       </label>
 
       <button

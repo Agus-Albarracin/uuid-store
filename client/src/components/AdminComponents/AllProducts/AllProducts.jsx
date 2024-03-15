@@ -6,7 +6,6 @@ import {
   updateProducto,
 } from "../../../redux/actions";
 import UpdateProduct from "./UpdateProduct/UpdateProduct";
-import UpdateProduct2 from "./UpdateProduct/UpdateProduct";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 const AllProducts = () => {
   const dispatch = useDispatch();

@@ -26,14 +26,30 @@ const postOrden = async (req, res) => {
     if (nombre) {
       let total = 0;
 
+      // for (const produ of productos) {
+      //   let producto = await Productos.findByPk(produ.id);
+      //   let stock = producto.getDataValue("stock");
+      //   stock = {
+      //     ...stock,
+      //     [produ.talle]: (stock[produ.talle] -= produ.cantidad),
+      //   };
+
+      //   await producto.update({ stock });
+      //   total += produ.precio * produ.cantidad;
+
+      // }
+
       for (const produ of productos) {
         let producto = await Productos.findByPk(produ.id);
-        console.log(producto.dataValues);
         let stock = producto.getDataValue("stock");
-        stock[produ.talle] -= produ.cantidad;
-        await producto.update({ stock });
 
-        console.log(producto.dataValues);
+        // Construir un objeto que refleje la actualización del stock
+        let updatedStock = { ...stock };
+        updatedStock[produ.talle] -= produ.cantidad;
+
+        // Actualizar el stock en la base de datos
+        await producto.update({ stock: updatedStock });
+
         total += produ.precio * produ.cantidad;
       }
 

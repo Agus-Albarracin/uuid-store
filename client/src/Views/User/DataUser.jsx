@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import InfoUser from "../../components/InfoUser/InfoUser";
 import MisCompras from "../../components/MisCompras/MisCompras";
 
@@ -7,9 +8,13 @@ import "./DataUser.css";
 
 function DataUser() {
   const user = useSelector((state) => state.actualUser);
-  console.log(user);
+  const navigate = useNavigate();
 
   const [view, setView] = useState("info");
+
+  useEffect(() => {
+    if (!Object.keys(user).length) navigate("/");
+  }, [user]);
 
   const handleView = (option) => {
     setView(option);

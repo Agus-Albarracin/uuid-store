@@ -39,9 +39,13 @@ const EnvioMailCambioPassword = () => {
   const handleSendMail = async (event) => {
     event.preventDefault();
     if (Object.keys(errors).length === 0) {
-      dispatch(enviarMailPassword(email));
-      setEnvio(true);
-      setEmail("");
+      try {
+        await dispatch(enviarMailPassword(email));
+        setEnvio(true);
+        setEmail("");
+      } catch (error) {
+        window.alert("Usuario no encontrado. Por favor, regístrate.");
+      }
     }
   };
 
@@ -87,13 +91,16 @@ const EnvioMailCambioPassword = () => {
       ) : (
         <>
           <h1>El correo fue enviado con éxito</h1>
-          <button className="mt-4 mx-auto px-4 py-2 rounded bg-red-500 text-white" onClick={handleToHome}>Volver al Home</button>
-
+          <button
+            className="mt-4 mx-auto px-4 py-2 rounded bg-red-500 text-white"
+            onClick={handleToHome}
+          >
+            Volver al Home
+          </button>
         </>
       )}
     </div>
   );
-
 };
 
 export default EnvioMailCambioPassword;

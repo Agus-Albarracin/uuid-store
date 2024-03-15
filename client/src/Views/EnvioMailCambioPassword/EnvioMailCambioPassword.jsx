@@ -50,10 +50,7 @@ const EnvioMailCambioPassword = () => {
   };
 
   return (
-    <div
-      style={{ backgroundColor: "#d9d9d9" }}
-      className="max-w-md mx-auto bg-white p-6 rounded-md shadow-md transition-opacity transform duration-500"
-    >
+    <div className="max-w-md mx-auto bg-white p-6 rounded-md shadow-md transition-opacity transform duration-500">
       {envio === false ? (
         <>
           <div className="text-2xl font-bold mb-6 text-gray-600">
@@ -79,7 +76,7 @@ const EnvioMailCambioPassword = () => {
                 <span className="text-red-500">{errors.error}</span>
               )}
               <button
-                className="px-4 py-2 bg-blue-500 text-white rounded"
+                className="h-14 px-6 py-2 font-semibold rounded-xl bg-red-500 hover:bg-red-400 text-white"
                 onClick={handleSendMail}
               >
                 Enviar correo
@@ -90,11 +87,13 @@ const EnvioMailCambioPassword = () => {
       ) : (
         <>
           <h1>El correo fue enviado con éxito</h1>
-          <button onClick={handleToHome}>volver al home</button>
+          <button className="mt-4 mx-auto px-4 py-2 rounded bg-red-500 text-white" onClick={handleToHome}>Volver al Home</button>
+
         </>
       )}
     </div>
   );
+
 };
 
 export default EnvioMailCambioPassword;

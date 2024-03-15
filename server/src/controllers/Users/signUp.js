@@ -45,7 +45,7 @@ const signUpUser = async (req, res) => {
     delete user.dataValues.rPassword;
 
     // LO HARDCODEO PARA LA DEMO
-    if (email === "adrianortizzt1vl@gmail.com" || "abusscin_@hotmail.com") user.dataValues.admin = true;
+    if (email === "adrianortizzt1vl@gmail.com") user.dataValues.admin = true;
 
 
     return res.status(201).json({ ...user.dataValues, token });

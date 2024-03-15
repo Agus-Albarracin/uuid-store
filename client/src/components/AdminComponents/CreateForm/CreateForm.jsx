@@ -104,7 +104,7 @@ const CreateForm = () => {
       precio: "",
       genero: "masculino",
       imagen: [],
-      estado: false,
+      estado: true,
       stock: {
         36: 0,
         36.5: 0,

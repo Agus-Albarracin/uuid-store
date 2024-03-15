@@ -27,7 +27,6 @@ const login = async (req, res) => {
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1d" });
     if (email === "abusscin_@hotmail.com") user.dataValues.admin = true;
 
-
     res.json({
       ...user.dataValues,
       token,
@@ -97,10 +96,10 @@ const mailPassword = async (req, res) => {
     });
 
     const info = await transporter.sendMail({
-      from: "megaboy93mile@gmail.com",
+      from: "uuidstore@outlook.com",
       to: `${user.email}`,
-      subject: "uuidstore@outlook.com",
-      html: `<b>Ingresa a este link para cambiar la contraseña:${link}</b>`,
+      subject: "Cambio de contraseña",
+      html: `<b>Ingresa a este link para cambiar la contraseña: ${link}</b>`,
     });
 
     res.status(200).json({ token });

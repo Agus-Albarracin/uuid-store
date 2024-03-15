@@ -1,115 +1,125 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { putUser } from "../../redux/actions";
-import "./ActualizarData.css"
+import "./ActualizarData.css";
 
-function ActualizarData(){
-    const dispatch = useDispatch();
-    const user = useSelector((state) => state.actualUser);
-    const [userData, setUserData] = useState({
-        nombre:user.nombre,
-        apellido: user.apellido,        
-        dni: user.dni,
-        direccion: user.direccion,
-        localidad: user.localidad,
-        provincia: user.provincia,
-        email: user.email,
-        telefono: user.telefono,
-      });
-    
-      const handleChange = (e) => {
-        const { name, value } = e.target;
-        setUserData({
-          ...userData,
-          [name]: value,
-        });
-      };
+function ActualizarData() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.actualUser);
+  const [userData, setUserData] = useState({
+    nombre: user.nombre,
+    apellido: user.apellido,
+    dni: user.dni,
+    direccion: user.direccion,
+    localidad: user.localidad,
+    provincia: user.provincia,
+    email: user.email,
+    telefono: user.telefono,
+  });
+  const [mostrarDiv, setMostrarDiv] = useState(false);
 
-      const handleSubmit = (event) => {
-        event.preventDefault();
-        dispatch(putUser(userData));
-        //navigate('/user');
-      };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserData({
+      ...userData,
+      [name]: value,
+    });
+  };
 
-    return(
-        <div className="contenedor-user">
-            <form>
-                <label>
-                    Nombre:
-                    <input
-                    type="text"
-                    name="nombre"
-                    value={userData.nombre}
-                    onChange={handleChange}
-                    />
-                </label>
-                <label>
-                    Apellido:
-                    <input
-                    type="text"
-                    name="apellido"
-                    value={userData.apellido}
-                    onChange={handleChange}
-                    />
-                </label>
-                <label>
-                    Dni:
-                    <input
-                    type="text"
-                    name="dni"
-                    value={userData.dni}
-                    onChange={handleChange}
-                    />
-                </label>
-                <label>
-                    Direccion:
-                    <input
-                    type="text"
-                    name="direccion"
-                    value={userData.direccion}
-                    onChange={handleChange}
-                    />
-                </label>
-                <label>
-                    Provincia:
-                    <input
-                    type="text"
-                    name="provincia"
-                    value={userData.provincia}
-                    onChange={handleChange}
-                    />
-                </label>
-                <label>
-                    Localidad:
-                    <input
-                    type="text"
-                    name="localidad"
-                    value={userData.localidad}
-                    onChange={handleChange}
-                    />
-                </label>
-                <label>
-                    Email:
-                    <input
-                    type="email"
-                    name="email"
-                    value={userData.email}
-                    onChange={handleChange}
-                    />
-                </label>
-                <label>
-                    Teléfono:
-                    <input
-                    type="text"
-                    name="telefono"
-                    value={userData.telefono}
-                    onChange={handleChange}
-                    />
-                </label>
-                <button type="submit" onClick={() => handleSubmit}>Actualizar</button>
-            </form>
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(putUser(userData));
+    setMostrarDiv(true); // Mostrar el div después de actualizar
+    //navigate('/user');
+  };
+
+  return (
+    <div className="contenedor-user">
+      <form>
+        <label>
+          Nombre:
+          <input
+            type="text"
+            name="nombre"
+            value={userData.nombre}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Apellido:
+          <input
+            type="text"
+            name="apellido"
+            value={userData.apellido}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Dni:
+          <input
+            type="text"
+            name="dni"
+            value={userData.dni}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Direccion:
+          <input
+            type="text"
+            name="direccion"
+            value={userData.direccion}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Provincia:
+          <input
+            type="text"
+            name="provincia"
+            value={userData.provincia}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Localidad:
+          <input
+            type="text"
+            name="localidad"
+            value={userData.localidad}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Email:
+          <input
+            type="email"
+            name="email"
+            value={userData.email}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Teléfono:
+          <input
+            type="text"
+            name="telefono"
+            value={userData.telefono}
+            onChange={handleChange}
+          />
+        </label>
+        <button type="submit" onClick={handleSubmit}>
+          Actualizar
+        </button>
+      </form>
+      {mostrarDiv && (
+        <div className="mensaje">
+          <p>¡Datos actualizados correctamente!</p>
+          {/* Agrega aquí cualquier otro contenido que desees mostrar después de actualizar */}
         </div>
-    )
+      )}
+    </div>
+  );
 }
 
 export default ActualizarData;

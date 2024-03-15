@@ -34,7 +34,7 @@ import {
   CAMBIAR_PASSWORD,
   POST_COMENTARIO,
   ADMIN_ACCESS,
-  DELETE_COMENTARIO,
+    DELETE_COMENTARIO,
 } from "./action-types.js";
 
 import axios from "axios";
@@ -504,6 +504,25 @@ export const postComentario = ({ id, comment }) => {
 
       return dispatch({
         type: POST_COMENTARIO,
+        payload: response.data,
+      });
+    } catch (error) {
+      return dispatch({
+        type: MESSAGE_TO_USER,
+        payload: error.message,
+      });
+    }
+  };
+};
+
+// CREAR UN COMENTARIO
+export const deleteComentario = ({ id, uuid }) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(`/deletecomment?id=${id}&uuid=${uuid}`);
+
+      return dispatch({
+        type: DELETE_COMENTARIO,
         payload: response.data,
       });
     } catch (error) {

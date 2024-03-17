@@ -17,6 +17,7 @@ const CompraConfirmada = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("cargo la pagina")
     if (Object.keys(infoDeCompra).length == 0) {
       const formUserJSON = window.localStorage.getItem("actualForm");
       const formUser = JSON.parse(formUserJSON);
@@ -40,6 +41,7 @@ const CompraConfirmada = () => {
   useEffect(() => {
     if (infoDeCompra) {
       dispatch(createTicket(infoDeCompra));
+      console.log("se envio ticketdecompra", infoDeCompra)
     }
 
     return () => {
@@ -49,7 +51,7 @@ const CompraConfirmada = () => {
         window.localStorage.setItem("cart", JSON.stringify([]));
         window.localStorage.removeItem("actualForm");
       }
-    };
+    };      
   }, [infoDeCompra]);
 
   return (

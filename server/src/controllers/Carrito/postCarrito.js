@@ -41,7 +41,8 @@ const postOrden = async (req, res) => {
 
         // Actualizar el stock en la base de datos
         await producto.update({ stock: updatedStock });
-
+        await producto.update({quantitysold: updateSold});
+        
         total += produ.precio * produ.cantidad;
       }
 

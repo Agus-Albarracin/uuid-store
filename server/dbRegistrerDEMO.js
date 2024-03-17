@@ -18,6 +18,7 @@ const dbRegisterDEMO = async () => {
         estado: producto.estado,
         codigo: producto.codigo,
         keyBorradoLogico: producto.keyBorradoLogico,
+        quantitysold: producto.quantitysold,
       };
     });
 

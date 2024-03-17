@@ -82,15 +82,28 @@ const Estadisticas = () => {
   return (
     <div>
       <br /><br /><br /><br />
+
+<h2 style={{ fontWeight: "bold", fontSize: "40px", color:"purple" }}>Top 10 de Productos Más Vendidos</h2>
+      <VictoryPie
+        data={chartData}
+        colorScale="qualitative"
+        labels={({ datum }) => `${datum.x}: ${datum.y}`}
+        labelComponent={<VictoryLabel dy={0} />}
+        height={400}
+        width={600}
+        labelIndicator={(props) => renderCustomLabelIndicator(props)} // Utiliza tu función de renderizado personalizado
+      />
+
+      <br /><br /><br /><br />
       <h2 style={{fontWeight: "bold", fontSize: "40px", color: "green"}}>Dinero Total Recibido por Mes</h2>
-      <VictoryChart domainPadding={{ x: 20 }} height={300} width={600}>
+      <VictoryChart domainPadding={{ x: 20 }} height={500} width={600}>
         <VictoryAxis
           tickValues={monthNames.map((month, index) => index + 1)}
           tickFormat={monthNames}
           style={{ tickLabels: { angle: -45, textAnchor: 'end', fontSize: 8 } }}
         />
 
-        <VictoryAxis dependentAxis tickFormat={(tick) => `$${tick}`} tickValues={[...Array(7).keys()].map(x => x * 1000)} />
+        <VictoryAxis dependentAxis tickFormat={(tick) => `$${tick}`} tickValues={[...Array(10).keys()].map(x => x * 1000)} />
         <VictoryBar
           data={monthNames.map((month, index) => ({ x: index + 1, y: orderStats[index]?.total || 0 }))}
           labels={({ datum }) => `$${datum.y}`}
@@ -137,16 +150,7 @@ const Estadisticas = () => {
         />
       </VictoryChart>
 
-      <h2 style={{ fontWeight: "bold", fontSize: "40px", color: "#007acc" }}>Top 10 de Productos Más Vendidos</h2>
-      <VictoryPie
-        data={chartData}
-        colorScale="qualitative"
-        labels={({ datum }) => `${datum.x}: ${datum.y}`}
-        labelComponent={<VictoryLabel dy={0} />}
-        height={400}
-        width={600}
-        labelIndicator={(props) => renderCustomLabelIndicator(props)} // Utiliza tu función de renderizado personalizado
-      />
+
     </div>
   );
 };

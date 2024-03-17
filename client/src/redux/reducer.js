@@ -42,6 +42,7 @@ import {
 const initialState = {
   categoryReducer: [],
   allProductosHome: [],
+  allProductosAdmin: [],
   allProductosDetail: [],
   allProductos: [],
   allProductosAux: [],
@@ -77,6 +78,7 @@ const reducer = (state = initialState, { type, payload }) => {
         allProductosDetail: payload,
         allProductos: payload,
         allProductosAux: payload,
+        allProductosAdmin: payload,
       };
 
     case GET_USERS:

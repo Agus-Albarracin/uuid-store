@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.UUIDV4, // Establece un valor predeterminado utilizando UUIDV4
       },
       total: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       estadoDelPedido: {

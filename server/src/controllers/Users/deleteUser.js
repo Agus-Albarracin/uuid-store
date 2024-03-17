@@ -2,7 +2,7 @@ const { Usuario } = require("../../db");
 
 const deleteUser = async (req, res) => {
   try {
-    const { email } = req.query;
+    const { email } = req.body;
     if(!email){ return res.status(404).json("Se necesita el email para poder eliminar el usuario.")}
     
     const usuario = await Usuario.findOne({where: {email}});

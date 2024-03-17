@@ -305,6 +305,7 @@ export const allUsers = () => {
 
 // DELETE USER
 export const deleteUser = (email) => {
+  console.log("llego el email",email)
   return async function (dispatch) {
     try {
       const response = await axios.delete("/deleteuser", { data: { email } });

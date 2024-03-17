@@ -87,15 +87,6 @@ const reducer = (state = initialState, { type, payload }) => {
         allUsers: payload,
       };
 
-    case DELETE_USERS:
-      const updatedUsers = state.allUsers.filter(
-        (user) => user.email !== payload
-      );
-      return {
-        ...state,
-        allUsers: updatedUsers,
-      };
-
     case UPDATE_USER:
       console.log(payload.usuario);
       return {

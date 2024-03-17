@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { VictoryBar, VictoryAxis, VictoryChart, VictoryLabel, VictoryPie } from 'victory';
-import { allUsers, getOrdenes, getProductosAll } from '../../../redux/actions';
+import { allUsers, getOrdenes } from '../../../redux/actions';
 
 const Estadisticas = () => {
   const dispatch = useDispatch();
   const [userStats, setUserStats] = useState([]);
   const [orderStats, setOrderStats] = useState([]);
-  const [produStats, setProduStats] = useState([]);
   
   const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
@@ -15,7 +14,6 @@ const Estadisticas = () => {
     const fetchData = async () => {
       await dispatch(allUsers());
       await dispatch(getOrdenes());
-      await dispatch(getProductosAll());
     };
   
     fetchData();
@@ -23,16 +21,20 @@ const Estadisticas = () => {
   
   const users = useSelector(state => state.allUsers);
   const ordenes = useSelector(state => state.allOrdenes);
-  const allprodu = useSelector(state => state.allProductosAdmin)
-  console.log(allprodu)
+  console.log(ordenes.total);
   
   useEffect(() => {
-    if (users && users.length > 0 && ordenes && ordenes.length > 0) {
+    if (users && users.length > 0) {
       setUserStats(calculateUserCountsByMonth(users));
+    }
+  
+    if (ordenes && ordenes.length > 0) {
       setOrderStats(calculateOrderCountsByMonth(ordenes));
     }
   }, [users, ordenes]);
   
+  
+
   const calculateUserCountsByMonth = (data) => {
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth();

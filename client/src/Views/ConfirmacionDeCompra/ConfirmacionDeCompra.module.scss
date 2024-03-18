@@ -15,26 +15,44 @@
 
     .header {
       margin: 10px;
+    background-color: red;
+    color: white;
     }
 
     .productos {
       max-height: 85%;
       overflow: hidden;
       overflow-y: auto;
+      display: flex;
+      flex-direction: column;
 
       .producto {
         display: flex;
-        flex-direction: column;
         align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 8em;
+        justify-content: space-between; /* Distribuir elementos horizontalmente */
+        padding: 1rem; /* Agregar espacio alrededor de los elementos */
+        border-bottom: 1px solid #ccc; /* Agregar una línea divisoria entre los productos */
+
+        img {
+          max-width: 100px; /* Establecer un ancho máximo para las imágenes */
+          margin-left: 1rem; /* Añadir margen a la izquierda de la imagen para separarla del texto */
+        }
 
         hr {
           font-size: 10px;
           color: #000;
           width: 80%;
         }
+      }
+
+      /* Estilos para el scrollbar */
+      &::-webkit-scrollbar {
+        width: 12px; /* ancho del scrollbar */
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: red; /* color del scrollbar */
+        border-radius: 6px; /* radio de borde del scrollbar */
       }
     }
 

@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allUsers, deleteUser, accessAdminUser } from "../../../redux/actions";
 import UserAdminSwitch from "./UserAdminSwitch";
 
-
 const AllUsers = () => {
+  const [searchEmail, setSearchEmail] = useState("");
+  const [searchDNI, setSearchDNI] = useState("");
   const users = useSelector((state) => state.allUsers);
   const dispatch = useDispatch();
 
@@ -14,7 +15,7 @@ const AllUsers = () => {
 
   const handleDeleteUser = async (email) => {
     try {
-    await dispatch(deleteUser(email));
+      await dispatch(deleteUser(email));
       console.log("Correo electrónico del usuario a eliminar:", email);
       window.location.reload();
     } catch (error) {
@@ -31,36 +32,69 @@ const AllUsers = () => {
     }
   };
 
-
+  const filteredUsers = users.filter((user) => {
+    const emailMatch = user.email.toLowerCase().includes(searchEmail.toLowerCase());
+    const dniMatch = user.dni.toString().includes(searchDNI);
+    return emailMatch && dniMatch;
+  });
 
   return (
-    <div className="contenedor-table">
-      <table>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Eliminar</th>
-            <th>Permisos de admin</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            
-            <tr key={user.id}>
-              <td>{user.nombre}</td>
-              <td>{user.email}</td>
-              <td>
-                <button onClick={() => handleDeleteUser(user.email)} style={{background:"red", color: "white",padding: "2px 5px", borderRadius: "5px", }}>Eliminar </button>
-              </td>
-              <td>
-                <button onClick={() => handleAdminUser(user.email , user.admin)}><UserAdminSwitch isAdmin={user.admin}></UserAdminSwitch></button>
-
-              </td>
+    <div className="container mx-auto mt-8 flex justify-center">
+      <div className="overflow-x-auto">
+        <div className="flex mb-4">
+          <div>
+            <input
+              type="text"
+              placeholder="Buscar DNI"
+              value={searchDNI}
+              onChange={(e) => setSearchDNI(e.target.value)}
+              className="border px-2 py-2 mr-4"
+              style={{ width: "12ch" }}
+            />
+            <input
+              type="text"
+              placeholder="Buscar por email"
+              value={searchEmail}
+              onChange={(e) => setSearchEmail(e.target.value)}
+              className="border px-3 py-2"
+            />
+          </div>
+        </div>
+        <table className="table-auto min-w-full">
+          <thead>
+            <tr className="bg-red-500 text-white">
+              <th className="px-4 py-2">DNI</th>
+              <th className="px-4 py-2">Email</th>
+              <th className="px-4 py-2">Eliminar</th>
+              <th className="px-4 py-2">Permisos de admin</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredUsers.map((user) => (
+              <tr key={user.id}>
+                <td className="border px-4 py-2">{user.dni}</td>
+                <td className="border px-4 py-2">{user.email}</td>
+                <td className="border px-4 py-2">
+                  <button
+                    onClick={() => handleDeleteUser(user.email)}
+                    className="bg-red-500 text-white px-3 py-1 rounded"
+                  >
+                    Eliminar
+                  </button>
+                </td>
+                <td className="border px-4 py-2">
+                  <button
+                    onClick={() => handleAdminUser(user.email, user.admin)}
+                    className="px-3 py-1 rounded mx-auto"
+                  >
+                    <UserAdminSwitch isAdmin={user.admin}></UserAdminSwitch>
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

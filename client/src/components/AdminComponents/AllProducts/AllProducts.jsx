@@ -59,14 +59,12 @@ const AllProducts = () => {
         <table className="w-full border border-collapse">
           <thead>
             <tr className="bg-gray-200">
-              <th className="p-2 border">ID</th>
               <th className="p-2 border">Código</th>
               <th className="p-2 border">Nombre</th>
               <th className="p-2 border">Modelo</th>
-              <th className="p-2 border">Descuento</th>
               <th className="p-2 border">Precio</th>
+              <th className="p-2 border">Descuento</th>
               <th className="p-2 border">Stock</th>
-              <th className="p-2 border">Género</th>
               <th className="p-2 border">Marca</th>
               <th className="p-2 border">Imagen</th>
               <th className="p-2 border">Estado</th>
@@ -77,18 +75,38 @@ const AllProducts = () => {
           <tbody>
             {currentProducts?.map((producto) => (
               <tr key={producto?.id} className="hover:bg-gray-100">
-                <td className="p-2 border">{producto?.id}</td>
                 <td className="p-2 border">{producto?.codigo}</td>
                 <td className="p-2 border">{producto?.nombre}</td>
                 <td className="p-2 border">{producto?.modelo}</td>
-                <td className="p-2 border">{producto?.enDescuento}</td>
                 <td className="p-2 border">{producto?.precio}</td>
+                <td className="p-2 border">{producto?.descuento}</td>
                 <td className="p-2 border">
                   {Object.values(producto?.stock).some((value) => value !== 0)
-                    ? "true"
-                    : "false"}
+                    ?  (
+                      <span
+                        style={{
+                          backgroundColor: "green",
+                          color: "white",
+                          padding: "2px 5px",
+                          borderRadius: "3px",
+                        }}
+                      >
+                        Si
+                      </span>
+                    )
+                    :  (
+                      <span
+                        style={{
+                          backgroundColor: "red",
+                          color: "white",
+                          padding: "2px 5px",
+                          borderRadius: "3px",
+                        }}
+                      >
+                        No
+                      </span>
+                    )}
                 </td>
-                <td className="p-2 border">{producto?.genero}</td>
                 <td className="p-2 border">{producto?.marca}</td>
                 <td className="p-2 border">
                   {producto.imagen ? (

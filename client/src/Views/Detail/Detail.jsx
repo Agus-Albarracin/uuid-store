@@ -18,6 +18,7 @@ import Footer from "../../components/Footer/Footer";
 
 import "react-image-gallery/styles/css/image-gallery.css";
 import CardsForDetail from "../../components/Cards/CardsforDetail";
+import SignInForm from "../../components/Header/MenuUser/SignInForm/SignInForm";
 
 const Detail = () => {
   const { id } = useParams();
@@ -105,6 +106,19 @@ const Detail = () => {
       }
     }
   };
+  const [showSignIn, setShowSignIn] = useState(false);
+
+  const handleClickBanner = () => {
+    setShowSignIn(true); 
+    
+  };
+
+  const [userDisplay, setUserDisplay] = useState(false);
+  const mostrarUser = () => {
+    setUserDisplay(!userDisplay);
+    setShowSignIn(false)
+  };
+  
   return (
     <div>
       {Object.keys(detail).length > 0 ? (
@@ -308,6 +322,13 @@ const Detail = () => {
               }}
             />
           </div>
+          <div className="scroll-container" style={{ maxWidth:"90%", margin: "0 auto", maxHeight: "400px", overflowY: "auto",
+            WebkitOverflowScrolling: "touch", 
+            scrollbarWidth: "thin", 
+            scrollbarColor: "red transparent", 
+            WebkitBorderRadius: "10px", 
+            border: "1px solid #ccc" 
+        }}>
           {Object.keys(user).length > 0 &&
             detail.puntuaciones &&
             !detail.puntuaciones.some(
@@ -317,16 +338,27 @@ const Detail = () => {
           {detail.puntuaciones && (
             <Reviews puntuaciones={detail.puntuaciones} />
           )}
+            </div>
         </div>
       ) : (
         <span>Cargando...</span>
       )}
-      <div className="text-center">
+      
+      <div className="text-center" >
+      {showSignIn && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded-md">
+            <SignInForm mostrarUser={mostrarUser} />
+          </div>
+        </div>
+      )}
         <img
           id="BannerImage"
           src="https://res.cloudinary.com/do1hcqjpe/image/upload/v1710360016/hzck6ed08ntotg6l6rnr.png"
           alt="Imagen después de los comentarios"
-          className="mx-auto mt-4 w-full"
+          className="mx-auto mt-4 w-full cursor-pointer"
+          onClick={handleClickBanner}
+          
         />
       </div>
       <Footer />

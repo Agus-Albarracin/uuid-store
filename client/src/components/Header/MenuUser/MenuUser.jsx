@@ -11,7 +11,7 @@ const MenuUser = ({ mostrarUser }) => {
   const dispatch = useDispatch();
   const [logInOrSignIn, setLogInOrSignIn] = useState(false);
 
-  const user = useSelector((state) => state.actualUser);
+  const user = useSelector((state) => state.actualUser);  
 
   useEffect(() => {
     user.nombre === "" ? setLogInOrSignIn(true) : setLogInOrSignIn(false);

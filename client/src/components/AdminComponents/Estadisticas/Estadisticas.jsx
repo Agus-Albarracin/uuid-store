@@ -89,7 +89,7 @@ const Estadisticas = () => {
         colorScale="qualitative"
         labels={({ datum }) => `${datum.x}: ${datum.y}`}
         labelComponent={<VictoryLabel dy={0} />}
-        height={400}
+        height={350}
         width={600}
         labelIndicator={(props) => renderCustomLabelIndicator(props)} // Utiliza tu función de renderizado personalizado
       />

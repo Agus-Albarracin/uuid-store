@@ -14,7 +14,7 @@ const AllUsers = () => {
 
   const handleDeleteUser = async (email) => {
     try {
-      await dispatch(deleteUser(email));
+    await dispatch(deleteUser(email));
       console.log("Correo electrónico del usuario a eliminar:", email);
       window.location.reload();
     } catch (error) {
@@ -26,7 +26,6 @@ const AllUsers = () => {
     try {
       await dispatch(accessAdminUser(email));
       console.log(`Se ha modificado el acceso admin del mail ${email}`);
-      window.location.reload();
     } catch (error) {
       console.error("Error al modificar los permisos de administrador:", error);
     }
@@ -52,7 +51,7 @@ const AllUsers = () => {
               <td>{user.nombre}</td>
               <td>{user.email}</td>
               <td>
-                <button onClick={() => handleDeleteUser(user.email)}>Eliminar</button>
+                <button onClick={() => handleDeleteUser(user.email)} style={{background:"red", color: "white",padding: "2px 5px", borderRadius: "5px", }}>Eliminar </button>
               </td>
               <td>
                 <button onClick={() => handleAdminUser(user.email , user.admin)}><UserAdminSwitch isAdmin={user.admin}></UserAdminSwitch></button>

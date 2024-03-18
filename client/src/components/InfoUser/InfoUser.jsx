@@ -6,11 +6,15 @@ import './infoUser2.css';
 function InfoUser(){
 
     const user = useSelector((state) => state.actualUser);
-    const [view, setView] = useState('')
+    const [view, setView] = useState(false);
 
     const handleView = (option) => {
         setView(option);
-    }
+    };
+
+    const handleUpdateComplete = () => {
+        setView(false); 
+    };
 
     return(
         <div>
@@ -24,18 +28,33 @@ function InfoUser(){
                 <div className="card1">
                     <h1> Email: {user.email}</h1>
                 </div>
-                <button className="btn" onClick={() => handleView('actualizar')}>ACTUALIZAR DATOS</button>
+                <div className="card1">
+                    <h1> Telefono: {user.telefono}</h1>
+                </div>
+                <div className="card1">
+                    <h1> DNI: {user.dni}</h1>
+                </div>
+                <div className="card1">
+                    <h1> Dirección: {user.direccion}</h1>
+                </div>
+                <div className="card1">
+                    <h1> Provicia: {user.provincia}</h1>
+                </div>
+                <div className="card1">
+                    <h1> Localidad: {user.localidad}</h1>
+                </div>
+                <button className="btn" onClick={() => handleView(true)}>ACTUALIZAR DATOS</button>
                 
             </div>
 
-            {view === 'actualizar' && (
-                        <article className="contenedor2">
-                            <h2> -MIS DATOS- </h2>
-                            <ActualizarData />
-                        </article>
-                )}
+            {view === true && (
+                <article className="contenedor2">
+                    <h2> MIS DATOS </h2>
+                    <ActualizarData onUpdateComplete={handleUpdateComplete} />
+                </article>
+            )}
         </div>
-    )
+    );
 }
 
 export default InfoUser;

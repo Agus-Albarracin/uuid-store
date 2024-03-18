@@ -3,42 +3,45 @@ import { useSelector, useDispatch } from "react-redux";
 import { putUser } from "../../redux/actions";
 import "./ActualizarData.css";
 
+function ActualizarData({ onUpdateComplete }) {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.actualUser);
 
-function ActualizarData() {
-    const dispatch = useDispatch();
-    const user = useSelector((state) => state.actualUser);
+  const [userData, setUserData] = useState({
+    id: user.id,
+    nombre: user.nombre,
+    apellido: user.apellido,
+    dni: user.dni,
+    direccion: user.direccion,
+    localidad: user.localidad,
+    provincia: user.provincia,
+    email: user.email,
+    telefono: user.telefono,
+  });
+  const [mostrarDiv, setMostrarDiv] = useState(false);
 
-    const [userData, setUserData] = useState({
-        id: user.id,
-      nombre: user.nombre,
-      apellido: user.apellido,
-      dni: user.dni,
-      direccion: user.direccion,
-      localidad: user.localidad,
-      provincia: user.provincia,
-      email: user.email,
-      telefono: user.telefono,
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserData({
+      ...userData,
+      [name]: value,
     });
-    const [mostrarDiv, setMostrarDiv] = useState(false);
-  
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setUserData({
-        ...userData,
-        [name]: value,
-      });
-    };
-  
-    const handleSubmit = async (event) => {
-      event.preventDefault();
-      console.log(userData)
-      try {
-        await dispatch(putUser(userData)); // Esperar a que la acción se complete
-        setMostrarDiv(true); // Mostrar el div después de actualizar
-      } catch (error) {
-        console.error("Error al actualizar el usuario:", error);
-      }
-    };
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log(userData);
+    try {
+      await dispatch(putUser(userData));
+      setMostrarDiv(true);
+      setTimeout(() => {
+        onUpdateComplete();
+      }, 2000);
+      
+    } catch (error) {
+      console.error("Error al actualizar el usuario:", error);
+    }
+  };
 
   return (
     <div className="contenedor-user">
@@ -129,3 +132,4 @@ function ActualizarData() {
 }
 
 export default ActualizarData;
+

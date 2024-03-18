@@ -96,7 +96,7 @@ const Estadisticas = () => {
 
       <br /><br /><br /><br />
       <h2 style={{fontWeight: "bold", fontSize: "40px", color: "green"}}>Dinero Total Recibido por Mes</h2>
-      <VictoryChart domainPadding={{ x: 20 }} height={500} width={600}>
+      <VictoryChart domainPadding={{ x: 20 }} height={350} width={600}>
         <VictoryAxis
           tickValues={monthNames.map((month, index) => index + 1)}
           tickFormat={monthNames}

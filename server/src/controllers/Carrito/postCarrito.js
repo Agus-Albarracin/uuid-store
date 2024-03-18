@@ -35,14 +35,13 @@ const postOrden = async (req, res) => {
         let updatedStock = { ...stock };
         updatedStock[produ.talle] -= produ.cantidad;
 
-        // Contar la cantidad de ventas por productos
-        let updateSold = {...quantitysold};
-        updateSold[produ.quantitysold] += produ.quantitysold;
-
         // Actualizar el stock en la base de datos
         await producto.update({ stock: updatedStock });
-        await producto.update({quantitysold: updateSold});
-        
+
+       // Actualizar la cantidad vendida en la base de datos
+       let newQuantitySold = quantitysold + produ.cantidad;
+       await producto.update({ quantitysold: newQuantitySold });
+
         total += produ.precio * produ.cantidad;
       }
 

@@ -7,20 +7,19 @@ import {
 } from "../../../redux/actions";
 import UpdateProduct from "./UpdateProduct/UpdateProduct";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
+
 const AllProducts = () => {
   const dispatch = useDispatch();
-
   const [currentPage, setCurrentPage] = useState(1);
-  
+  const [filter, setFilter] = useState("all");
+  const [searchTerm, setSearchTerm] = useState(""); // Nuevo estado para el término de búsqueda
   const productsPerPage = 7;
 
   useEffect(() => {
-    // Llamar a la acción getProductos cuando el componente monta
     dispatch(getProductosAll());
-  }, [dispatch]);
+  }, [dispatch, currentPage]);
 
   const productos = useSelector((state) => state.allProductos);
-
   const [editMode, setEditMode] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
 
@@ -37,7 +36,6 @@ const AllProducts = () => {
     dispatch(updateProducto(formData));
     setEditMode(false);
     setSelectedProductId(null);
-    window.location.reload();
   };
 
   if (!Array.isArray(productos)) {
@@ -45,20 +43,64 @@ const AllProducts = () => {
     return <p>Productos no es un array</p>;
   }
 
+  const filteredProducts = filter === "all"
+    ? productos
+    : productos.filter((producto) => producto.estado === (filter === "on"));
+
+  const filteredAndSearchedProducts = filteredProducts.filter((producto) =>
+    producto.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = productos.slice(
+  const currentProducts = filteredAndSearchedProducts.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
 
-  // Renderizar productos si es un array
+  const totalPages = Math.ceil(filteredAndSearchedProducts.length / productsPerPage);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <div className="contenedor-table max-w-full mx-auto mt-8 p-4 bg-white rounded-md">
+      <div className="flex justify-center mb-4">
+        <button
+          className={`px-4 py-2 mx-2 bg-gray-200 rounded ${
+            filter === "all" ? "bg-gray-400" : ""
+          }`}
+          onClick={() => setFilter("all")}
+        >
+          Todos
+        </button>
+        <button
+          className={`px-4 py-2 mx-2 bg-green-500 text-white rounded ${
+            filter === "on" ? "bg-green-600" : ""
+          }`}
+          onClick={() => setFilter("on")}
+        >
+          On
+        </button>
+        <button
+          className={`px-4 py-2 mx-2 bg-red-500 text-white rounded ${
+            filter === "off" ? "bg-red-600" : ""
+          }`}
+          onClick={() => setFilter("off")}
+        >
+          Off
+        </button>
+      </div>
+
+
+
       <div className="overflow-x-auto">
         <table className="w-full border border-collapse">
+          {/* Cabecera de la tabla */}
           <thead>
-            <tr className="bg-gray-200">
+            <tr className="bg-orange-500">
+              {/* Encabezados de columnas */}
               <th className="p-2 border">Código</th>
               <th className="p-2 border">Nombre</th>
               <th className="p-2 border">Modelo</th>
@@ -73,79 +115,39 @@ const AllProducts = () => {
             </tr>
           </thead>
           <tbody>
-            {currentProducts?.map((producto) => (
-              <tr key={producto?.id} className="hover:bg-gray-100">
-                <td className="p-2 border">{producto?.codigo}</td>
-                <td className="p-2 border">{producto?.nombre}</td>
-                <td className="p-2 border">{producto?.modelo}</td>
-                <td className="p-2 border">{producto?.precio}</td>
-                <td className="p-2 border">{producto?.descuento}</td>
+            {/* Renderizar filas de productos */}
+            {currentProducts.map((producto) => (
+              <tr key={producto.id} className="hover:bg-gray-100">
+                {/* Datos de producto */}
+                <td className="p-2 border">{producto.codigo}</td>
+                <td className="p-2 border">{producto.nombre}</td>
+                <td className="p-2 border">{producto.modelo}</td>
+                <td className="p-2 border">{producto.precio}</td>
+                <td className="p-2 border">{producto.descuento}</td>
                 <td className="p-2 border">
-                  {Object.values(producto?.stock).some((value) => value !== 0)
-                    ?  (
-                      <span
-                        style={{
-                          backgroundColor: "green",
-                          color: "white",
-                          padding: "2px 5px",
-                          borderRadius: "3px",
-                        }}
-                      >
-                        Si
-                      </span>
-                    )
-                    :  (
-                      <span
-                        style={{
-                          backgroundColor: "red",
-                          color: "white",
-                          padding: "2px 5px",
-                          borderRadius: "3px",
-                        }}
-                      >
-                        No
-                      </span>
-                    )}
+                  {Object.values(producto.stock).some((value) => value !== 0) ? (
+                    <span className="bg-green-500 text-white px-2 py-1 rounded">Si</span>
+                  ) : (
+                    <span className="bg-red-500 text-white px-2 py-1 rounded">No</span>
+                  )}
                 </td>
-                <td className="p-2 border">{producto?.marca}</td>
+                <td className="p-2 border">{producto.marca}</td>
                 <td className="p-2 border">
                   {producto.imagen ? (
-                    <img
-                      src={producto?.imagen[0]}
-                      alt={producto?.nombre}
-                      className="w-16  object-cover"
-                    />
+                    <img src={producto.imagen[0]} alt={producto.nombre} className="w-16  object-cover" />
                   ) : null}
                 </td>
                 <td className="p-2 border">
-                  {producto?.estado ? (
-                    <span
-                      style={{
-                        backgroundColor: "green",
-                        color: "white",
-                        padding: "2px 5px",
-                        borderRadius: "3px",
-                      }}
-                    >
-                      on
-                    </span>
+                  {producto.estado ? (
+                    <span className="bg-green-500 text-white px-2 py-1 rounded">On</span>
                   ) : (
-                    <span
-                      style={{
-                        backgroundColor: "red",
-                        color: "white",
-                        padding: "2px 5px",
-                        borderRadius: "3px",
-                      }}
-                    >
-                      off
-                    </span>
+                    <span className="bg-red-500 text-white px-2 py-1 rounded">Off</span>
                   )}
                 </td>
-
+                {/* Botones de editar y eliminar */}
                 <td className="p-2 border text-center">
                   <button
-                    onClick={() => handleUpdate(producto?.id)}
+                    onClick={() => handleUpdate(producto.id)}
                     className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-700 focus:outline-none flex items-center"
                   >
                     <FaEdit className="mr-2" />
@@ -154,7 +156,7 @@ const AllProducts = () => {
                 </td>
                 <td className="p-2 border">
                   <button
-                    onClick={() => handleDelete(producto?.id)}
+                    onClick={() => handleDelete(producto.id)}
                     className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-700 focus:outline-none flex items-center"
                   >
                     <FaTrashAlt className="mr-2" />
@@ -167,13 +169,12 @@ const AllProducts = () => {
         </table>
       </div>
 
+      {/* Paginación */}
       <div className="pagination flex justify-center mt-4">
-        {Array.from({
-          length: Math.ceil(productos.length / productsPerPage),
-        }).map((_, index) => (
+        {Array.from({ length: totalPages }).map((_, index) => (
           <button
             key={index}
-            onClick={() => setCurrentPage(index + 1)}
+            onClick={() => paginate(index + 1)}
             className={`px-3 py-2 mx-1 text-gray-800 rounded focus:outline-none focus:bg-gray-400 ${
               currentPage === index + 1 ? "bg-gray-300" : "bg-gray-200"
             }`}
@@ -183,6 +184,7 @@ const AllProducts = () => {
         ))}
       </div>
 
+      {/* Componente de actualización de producto */}
       {editMode && (
         <UpdateProduct
           productId={selectedProductId}

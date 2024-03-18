@@ -1,42 +1,49 @@
 .contenedor {
-    display: flex;
-    margin-bottom: 10px;
-    margin-top: 10px;
-  }
-  
+  display: flex;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+
 .card {
-    background: #f0f0f0;
-    padding: 20px;
-    margin-bottom: 10px;
-    text-align: center;
-    cursor: pointer;
-    -moz-osx-font-smoothing: grayscale;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-    transition: transform 0.25s ease-out;
-    height: 70px;
-    width: 95%;
+  background: #f0f0f0;
+  padding: 20px;
+  margin-bottom: 10px;
+  border-radius: 5%;
+  text-align: center;
+  cursor: pointer;
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: transform 0.25s ease-out;
+  height: 70px;
+  width: 95%;
 }
 
 .card1 {
-    background: #f0f0f0;
-    padding: 20px;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    text-align: center;
-    cursor: pointer;
-    -moz-osx-font-smoothing: grayscale;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-    transition: transform 0.25s ease-out;
-    height: 70px;
-    width: 95%;
-    font-weight: bold;
-    font-size: 24px;
+  background: #f0f0f0;
+  padding: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  text-align: center;
+  cursor: pointer;
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: transform 0.25s ease-out;
+  height: 70px;
+  width: 95%;
+  font-weight: bold;
+  font-size: 24px;
 }
 
 .card:hover {
   transform: scale(1.05);
+  background-color: #cc0000;
+}
+
+.card:hover strong {
+  color: #fafafa; /* Cambia a rojo claro en hover */
 }
 
 .contenedor2 {
@@ -48,9 +55,13 @@
   background: #f0f0f0;
   padding: 20px;
 }
-  
+
+.contenedor2 strong {
+  font-size: 32px; /* Tamaño grande */
+  color: #cc0000; /* Rojo oscuro */
+}
+
 .contenedor3 {
-  flex: 0 0 15%; 
+  flex: 0 0 15%;
   padding-left: 10px;
 }
-  

@@ -44,7 +44,7 @@ function DataUser() {
         {view === "info" && (
           <article className="contenedor2">
             <strong>
-              <h1> -INFORMACION PERSONAL- </h1>
+              <h1> INFORMACION PERSONAL </h1>
             </strong>
             <InfoUser />
           </article>

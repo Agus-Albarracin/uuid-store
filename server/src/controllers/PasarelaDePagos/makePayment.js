@@ -18,9 +18,9 @@ const makePayment = async (req, res) => {
     const body = {
       items,
       back_urls: {
-        success: "https://uuid-store.vercel.app/success",
-        failure: "https://uuid-store.vercel.app",
-        pending: "https://uuid-store.vercel.app",
+        success: "https://uuid-store-rho.vercel.app/success",
+        failure: "https://uuid-store-rho.vercel.app",
+        pending: "https://uuid-store-rho.vercel.app",
       },
       // back_urls: {
       //   success: "http://localhost:5173/success",

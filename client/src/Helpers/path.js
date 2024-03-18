@@ -10,6 +10,7 @@ const PATHROUTES = {
   DETALLESDECOMPRA: "/success/:idDeCompra",
   ENVIOMAILPASSWORD: "/recovery",
   CAMBIOPASSWORD: "/change-password",
+  ERROR: "*"
 };
 
 export default PATHROUTES;

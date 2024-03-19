@@ -59,13 +59,14 @@ const CompraConfirmada = () => {
       {Object.keys(compra).length !== 0 ? (
         <div className={styles.confirmada}>
           <h2 className={styles.titulo}>Muchas gracias por tu compra!</h2>
-          <h2>id de tu compra: {compra.idDeCompra}</h2>
-
+          <h2 style={{backgroundColor: 'red', color: 'white'}}>Id de tu compra: {compra.idDeCompra}</h2>
           <div className={styles.compra}>
             <h2>Compraste:</h2>
             <ul className={styles.productos}>
               {compra.productos.map((produ, index) => (
-                <li key={index}>{`${produ.nombre} ${produ.modelo}`}</li>
+                <li key={index}>{produ.nombre}
+                <img src={produ.imagen[0]} alt="producto"></img>
+                </li>
               ))}
             </ul>
           </div>

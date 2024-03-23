@@ -96,14 +96,23 @@ const MenuCarro = ({ mostrarCarro, mostrarUser }) => {
                   <div className="font-bold text-[#65B44D]">
                     Cantidad:
                     <span className="px-1">
-                      <button className="px-1 text-[#0C78BF]" onClick={() => decrementarCantidad(produ)}>
-                        -
-                      </button>
+                    <button className="px-1 text-[#0C78BF]" onClick={() => decrementarCantidad(produ)}>
+                       <img 
+                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAglJREFUSEvF1kuoTXEUx/HPRQbkEUooj0LEwEQYUaYMTFBKRpSBlBSZyatLSkZMpJQoGWBmQCnyKDMkrzzzGFAmymOv2vt27P7n7L3PPaf7H53dWWt911qt/3/9BozQGRghrqbg0ViJuZiRJ/0Br3Afv+sWUhe8APuxAZPbBP+GqziKl1UJVIHH4Rh2Iqqtc37hOA4ifidPJ/Ac3MCSOrSEzQOsy5L+nPJvB16MO5jSJbRwe49VeFuOkwJPxyPMGia0cH+SdW45frbGS4EvYWOPoEWYU9jdCbwIkWGvTwxZXMGPReByxeezq7C119Q83hEcSIHH4ism9An8GvNS4LW42SdoEXYhnsdHa6u34VwC/B2PGya0DJMSPutxvQzei8GE8W2saQi+hdUJn5jsmPD/Kt6DE30GB+NkGbwZF/vc6k24XAbHurvbsKVNzeMFe1gGx6B9wdSm0Wraf8JM/C2D4/sMttcM1NTsNHa1e7nm41m2S0c1jVphH8okHo+hLZVaEheyS76lx+Cz2Tu9ozVmCjwNscTjUe/FeYoV+FEFjv9DY93rgRAIIRjQd+UKOkmfqPgalnZZdoiJeCKHVmGdigub8TiUT2PdgYvdGwLxcLdirzXBEAj7cnk7sU0HQt5eQezdN1VdqpK3Zf8xuXibXRL0L/KB/FMFbHeP6/oN265pxcMGFgH+AY5VUR8prDrsAAAAAElFTkSuQmCC"
+                         style={{ width: '23px', height: '23px', marginTop: '4px', marginLeft: '4px' }}
+
+                         alt="Icono" 
+                       />
+                     </button>
+
                       <span className="px-1 text-[#374151]">
-                        {produ.cantidad}
+                       {" "} {produ.cantidad} {" "}
                       </span>
                       <button className="px-1 text-[#0C78BF]" onClick={() => incrementarCantidad(produ)}>
-                        +
+                      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAiNJREFUSEvF1kvoTVEUx/HPHxmQRyihPAoRAxNhRJkyMKKUjCQDKSkyk1dIZGQkpUjJADMDSpFHmSF55ZnHgDJRHnfVOf+O0zl3n3v+/9t/j+7trLW/e61+e6/fgBFaAyPE1St4NFZiLmZkh/6AV7iP300LaQpegH3YgMk1m3/DVRzBy9QBUuBxOIodiGqbrF84jgOI35WrG3gObmBJE1pFzAOs6xz6c1V+HXgx7mBKS2ie9h6r8La8TxV4Oh5h1hChefqTTueW42dxvyrwJWxMQL/jcRazDJMS8aexqxt4UQcaJ0yt21iTBd3C6kRCiCyu4Mc8rlzx+c5V2JKioldwbHkY+6vAY/EVE/oEfo15VeC1uNkAGiFtKo68hXgeP4qt3opzFeCikPLPIaxcLKcQAiuuOsGtx/UyeA+OVYCL1TVsiDrBxWFD4f9VvBsn+gwOxskyeBMu9rnV8T5cLoNj3N1t2Mu24ooX7GEZHEL7gqkN4G3AnzATf8vg+H8W2/oEPoOddS/XfDzrzNJRCXivFYczicdjcEpVDYkLnUu+OQHudUhEJ7cX96wCT0MM8XjUh2M9xQr8SIHje3ise8NgBMIIBvRduYJu1icqvoalLcsOMxFP5OAobFJxHjMeBzM1pgSX58TsDYN4qK3ZKx4wDMLezN5OrOlA2Nsr2dx9k+pSyt6W88dk5m12ydC/yAT5JwWsu8dN84Yc12vFQwbmG/wDmONpH9S+OtIAAAAASUVORK5CYII="
+                          style={{ width: '23px', height: '23px', marginTop: '4px', marginLeft: '4px'  }} 
+                          alt="Icono" 
+                          />
                       </button>
                     </span>
                   </div>

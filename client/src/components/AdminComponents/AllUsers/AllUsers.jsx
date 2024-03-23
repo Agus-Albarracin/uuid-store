@@ -5,10 +5,11 @@ import UserAdminSwitch from "./UserAdminSwitch";
 
 const AllUsers = () => {
   const [searchEmail, setSearchEmail] = useState("");
-  const [searchDNI, setSearchDNI] = useState("");
+  const [searchID, setsearchID] = useState("");
   const users = useSelector((state) => state.allUsers);
   const dispatch = useDispatch();
 
+  console.log(users)
   useEffect(() => {
     dispatch(allUsers());
   }, [dispatch]);
@@ -34,8 +35,8 @@ const AllUsers = () => {
 
   const filteredUsers = users.filter((user) => {
     const emailMatch = user.email.toLowerCase().includes(searchEmail.toLowerCase());
-    const dniMatch = user.dni.toString().includes(searchDNI);
-    return emailMatch && dniMatch;
+    const nombreMatch = user.nombre !== null && user.nombre.toLowerCase().toString().includes(searchID);
+    return emailMatch && nombreMatch;
   });
 
   return (
@@ -45,25 +46,25 @@ const AllUsers = () => {
           <div>
             <input
               type="text"
-              placeholder="Buscar DNI"
-              value={searchDNI}
-              onChange={(e) => setSearchDNI(e.target.value)}
+              placeholder="Buscar nombre"
+              value={searchID}
+              onChange={(e) => setsearchID(e.target.value)}
               className="border px-2 py-2 mr-4"
-              style={{ width: "12ch" }}
+              style={{ width: "15ch" }}
             />
             <input
               type="text"
               placeholder="Buscar por email"
               value={searchEmail}
               onChange={(e) => setSearchEmail(e.target.value)}
-              className="border px-3 py-2"
+              className="border px-3  py-2"
             />
           </div>
         </div>
         <table className="table-auto min-w-full">
           <thead>
             <tr className="bg-red-500 text-white">
-              <th className="px-4 py-2">DNI</th>
+              <th className="px-4 py-2">nombre</th>
               <th className="px-4 py-2">Email</th>
               <th className="px-4 py-2">Eliminar</th>
               <th className="px-4 py-2">Permisos de admin</th>
@@ -72,7 +73,7 @@ const AllUsers = () => {
           <tbody>
             {filteredUsers.map((user) => (
               <tr key={user.id}>
-                <td className="border px-4 py-2">{user.dni}</td>
+                <td className="border px-4 py-2">{user.nombre}</td>
                 <td className="border px-4 py-2">{user.email}</td>
                 <td className="border px-4 py-2">
                   <button

@@ -82,30 +82,30 @@ const MenuCarro = ({ mostrarCarro, mostrarUser }) => {
                   className="w-24  object-cover rounded"
                 />
                 <div className="flex-1 ml-4">
-                  <div className="font-bold text-[#0C78BF]">{produ.nombre}</div>
-                  <div className="font-bold text-[#65B44D]">Talle:
+                  <div className="font-bold text-red-700 text-xl">{produ.nombre}</div>
+
+                  <div className="font-bold text-gray-600">Talle:
                     <span className="font-bold text-[#374151] px-2">
                       {produ.talle}
                     </span>
                   </div>
-                  <div className="font-bold text-[#65B44D]">Precio:
+                  <div className="font-bold text-gray-600">Precio:
                     <span className="font-bold text-[#374151] px-2">
                       $ {produ.precio}
                     </span>
                   </div>
-                  <div className="font-bold text-[#65B44D]">
-                    Cantidad:
+                  <div className="font-bold text-gray-600">Cantidad:
                     <span className="px-1">
                     <button className="px-1 text-[#0C78BF]" onClick={() => decrementarCantidad(produ)}>
                        <img 
                          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAglJREFUSEvF1kuoTXEUx/HPRQbkEUooj0LEwEQYUaYMTFBKRpSBlBSZyatLSkZMpJQoGWBmQCnyKDMkrzzzGFAmymOv2vt27P7n7L3PPaf7H53dWWt911qt/3/9BozQGRghrqbg0ViJuZiRJ/0Br3Afv+sWUhe8APuxAZPbBP+GqziKl1UJVIHH4Rh2Iqqtc37hOA4ifidPJ/Ac3MCSOrSEzQOsy5L+nPJvB16MO5jSJbRwe49VeFuOkwJPxyPMGia0cH+SdW45frbGS4EvYWOPoEWYU9jdCbwIkWGvTwxZXMGPReByxeezq7C119Q83hEcSIHH4ism9An8GvNS4LW42SdoEXYhnsdHa6u34VwC/B2PGya0DJMSPutxvQzei8GE8W2saQi+hdUJn5jsmPD/Kt6DE30GB+NkGbwZF/vc6k24XAbHurvbsKVNzeMFe1gGx6B9wdSm0Wraf8JM/C2D4/sMttcM1NTsNHa1e7nm41m2S0c1jVphH8okHo+hLZVaEheyS76lx+Cz2Tu9ozVmCjwNscTjUe/FeYoV+FEFjv9DY93rgRAIIRjQd+UKOkmfqPgalnZZdoiJeCKHVmGdigub8TiUT2PdgYvdGwLxcLdirzXBEAj7cnk7sU0HQt5eQezdN1VdqpK3Zf8xuXibXRL0L/KB/FMFbHeP6/oN265pxcMGFgH+AY5VUR8prDrsAAAAAElFTkSuQmCC"
-                         style={{ width: '23px', height: '23px', marginTop: '4px', marginLeft: '4px' }}
+                         style={{ width: '23px', height: '23px', marginTop: '4px'}}
 
                          alt="Icono" 
                        />
                      </button>
 
-                      <span className="px-1 text-[#374151]">
+                      <span className="px-1 text-[#374151]" style={{  position: 'relative', top: '-5px' }}>
                        {" "} {produ.cantidad} {" "}
                       </span>
                       <button className="px-1 text-[#0C78BF]" onClick={() => incrementarCantidad(produ)}>

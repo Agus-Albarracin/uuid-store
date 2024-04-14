@@ -31,6 +31,7 @@ function SideBar() {
     setSelectedPrecio(""); // Reinicia el precio seleccionado
     
     if (marca === "All") {
+      setFilteredModelos(allModelos);
       setSelectedModelo("All")
 
     } else {

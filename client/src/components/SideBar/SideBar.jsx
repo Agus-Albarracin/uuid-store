@@ -29,8 +29,8 @@ function SideBar() {
     const marca = e.target.value;
     setSelectedMarca(marca); // Actualiza la marca seleccionada
     setSelectedPrecio(""); // Reinicia el precio seleccionado
-    setSelectedModelo("")
-
+    setSelectedModelo("All")
+    
     if (marca === "All") {
       setFilteredModelos(allModelos);
     } else {
